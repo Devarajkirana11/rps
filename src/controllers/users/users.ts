@@ -99,7 +99,7 @@ export default class Users {
                 if(response.success == true){
                     req.session.user = response.data;
                     res.status(200);
-                    res.redirect('/admin/dashboard');
+                    res.redirect('/orders/import');
                 } else {
                     res.status(400);
                     res.render('login',{errors:response.message});

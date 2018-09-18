@@ -33,17 +33,17 @@ const ordersmanager_1 = require("./controllers/orders/ordersmanager");
 class Core {
     static injectRoutes() {
         Core.app.use('/', index_1.default.routes);
-        Core.app.use('/admin', permission_1.default.access_control, admin_1.default.routes);
+        Core.app.use('/admin', permission_1.default.admin_access_control, admin_1.default.routes);
         Core.app.use('/admin-manager', adminmanager_1.default.routes);
-        Core.app.use('/user', permission_1.default.access_control, users_1.default.routes);
+        Core.app.use('/user', permission_1.default.manager_access_control, users_1.default.routes);
         Core.app.use('/user-manager', usermanager_1.default.routes);
-        Core.app.use('/cde', permission_1.default.access_control, cde_1.default.routes);
+        Core.app.use('/cde', permission_1.default.manager_access_control, cde_1.default.routes);
         Core.app.use('/cde-manager', cdemanager_1.default.routes);
-        Core.app.use('/vans', permission_1.default.access_control, vans_1.default.routes);
+        Core.app.use('/vans', permission_1.default.manager_access_control, vans_1.default.routes);
         Core.app.use('/vans-manager', vansmanager_1.default.routes);
-        Core.app.use('/dc', permission_1.default.access_control, dc_1.default.routes);
+        Core.app.use('/dc', permission_1.default.manager_access_control, dc_1.default.routes);
         Core.app.use('/dc-manager', dcmanager_1.default.routes);
-        Core.app.use('/orders', permission_1.default.access_control, orders_1.default.routes);
+        Core.app.use('/orders', permission_1.default.cde_access_control, orders_1.default.routes);
         Core.app.use('/orders-manager', ordersmanager_1.default.routes);
     }
     static init() {

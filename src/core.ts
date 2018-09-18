@@ -48,17 +48,17 @@ export default class Core {
 
 	private static injectRoutes() {
 		Core.app.use('/', IndexController.routes);
-		Core.app.use('/admin', PermissionValidator.access_control, AdminController.routes);
+		Core.app.use('/admin', PermissionValidator.admin_access_control, AdminController.routes);
 		Core.app.use('/admin-manager', AdminManagerController.routes);
-		Core.app.use('/user', PermissionValidator.access_control, UserController.routes);
+		Core.app.use('/user', PermissionValidator.manager_access_control, UserController.routes);
 		Core.app.use('/user-manager', UserManagerController.routes);
-		Core.app.use('/cde', PermissionValidator.access_control, CDEController.routes);
+		Core.app.use('/cde', PermissionValidator.manager_access_control, CDEController.routes);
 		Core.app.use('/cde-manager', CDEManagerController.routes);
-		Core.app.use('/vans', PermissionValidator.access_control, VansController.routes);
+		Core.app.use('/vans', PermissionValidator.manager_access_control, VansController.routes);
 		Core.app.use('/vans-manager', VansManagerController.routes);
-		Core.app.use('/dc', PermissionValidator.access_control, DcController.routes);
+		Core.app.use('/dc', PermissionValidator.manager_access_control, DcController.routes);
 		Core.app.use('/dc-manager', DcManagerController.routes);
-		Core.app.use('/orders', PermissionValidator.access_control, OrdersController.routes);
+		Core.app.use('/orders', PermissionValidator.cde_access_control, OrdersController.routes);
 		Core.app.use('/orders-manager', OrdersManagerController.routes);
 	}
 

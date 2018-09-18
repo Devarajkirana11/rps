@@ -44,7 +44,7 @@ let environments = {
     },
     production: {
         region: Zone.INDIA,
-        mongoDBUrl: 'mongodb://superadmin:superadmin123$$@127.0.0.1:27017/route',
+        mongoDBUrl: 'mongodb://admin:ave11nue456!@127.0.0.1:27017/route',
         baseURLconfig: {
             host: 'localhost',
             port: 3000,

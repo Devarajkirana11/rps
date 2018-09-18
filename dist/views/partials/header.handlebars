@@ -5,6 +5,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+        {{#in '1' user_details.roles }} 
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
           <a class="nav-link" href="/admin/dashboard">
             <i class="fa fa-fw fa-dashboard"></i>
@@ -25,7 +26,6 @@
             </li>
             </ul>
         </li>
-
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#CDEComponents" data-parent="#exampleAccordion">
             <i class="fa fa-user" aria-hidden="true"></i>
@@ -88,7 +88,71 @@
             </li>
           </ul>
         </li>
+        {{/in}}
+        {{#in '4' user_details.roles }}
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#CDEComponents" data-parent="#exampleAccordion">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <span class="nav-link-text"> CDE Management</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="CDEComponents">
+            <li>
+              <a href="/cde/list">List</a>
+            </li>
+            <li>
+              <a href="/cde/create">Add</a>
+            </li>
+          </ul>
+        </li>
 
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#VansComponents" data-parent="#exampleAccordion">
+            <i class="fa fa-truck"></i>
+            <span class="nav-link-text"> Van Management</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="VansComponents">
+            <li>
+              <a href="/vans/list">List</a>
+            </li>
+            <li>
+              <a href="/vans/create">Add</a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#DcComponents" data-parent="#exampleAccordion">
+            <i class="fa fa-align-center" aria-hidden="true"></i>
+            <span class="nav-link-text"> DC Management</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="DcComponents">
+            <li>
+              <a href="/dc/list">List</a>
+            </li>
+            <li>
+              <a href="/dc/create">Add</a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#OrdersComponents" data-parent="#exampleAccordion">
+            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+            <span class="nav-link-text"> Order Management</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="OrdersComponents">
+            <li>
+              <a href="/orders/import">Import</a>
+            </li>
+            <li>
+              <a href="/orders/list">List</a>
+            </li>
+            <li>
+              <a href="/orders/map-view">Map</a>
+            </li>
+          </ul>
+        </li>
+        {{/in}}
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#reportsComponents" data-parent="#exampleAccordion">
             <i class="fa fa-file" aria-hidden="true"></i>

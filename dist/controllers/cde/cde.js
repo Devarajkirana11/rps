@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const request_1 = require("../../helpers/request");
 const express = require("express");
+const bcrypt = require("bcrypt-nodejs");
 var session = require("express-sessions");
 var LocalStrategy = require('passport-local').Strategy;
 var ObjectId = require('mongodb').ObjectID;
@@ -41,10 +42,17 @@ class cde {
             let age = req.body.age;
             let employee_id = req.body.employee_id;
             let joining_date = req.body.joining_date;
+            let password;
+            if (req.body.password) {
+                password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10), null);
+            }
+            else {
+                password = req.body.pass_hidden;
+            }
             let postValues = {
                 first_name: firstName,
                 last_name: lastName,
-                password: "123456",
+                password: password,
                 email: email,
                 mobile: phone,
                 age: age,
@@ -92,7 +100,13 @@ class cde {
             let uuid = req.params.id;
             let respond;
             let email = req.body.email;
-            let password = req.body.pass_hidden;
+            let password;
+            if (req.body.password) {
+                password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10), null);
+            }
+            else {
+                password = req.body.pass_hidden;
+            }
             let editCDE = {
                 first_name: req.body.firstname,
                 last_name: req.body.lastname,

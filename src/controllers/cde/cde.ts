@@ -50,12 +50,19 @@ export default class cde {
             let phone = req.body.phone;
 			let age = req.body.age;
 			let employee_id = req.body.employee_id;
-			let joining_date = req.body.joining_date;
+            let joining_date = req.body.joining_date;
+            let password: any;
+
+            if(req.body.password){
+                password =  bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10), null);
+            } else {
+                password = req.body.pass_hidden;
+            }
 
             let postValues = {
                 first_name : firstName,
                 last_name : lastName,
-                password : "123456",
+                password : password,
                 email : email,
 				mobile : phone,
 				age : age,
@@ -113,7 +120,13 @@ export default class cde {
             let uuid:string = req.params.id;
             let respond: any;
             let email = req.body.email;
-            let password = req.body.pass_hidden;
+            let password: any;
+
+            if(req.body.password){
+                password =  bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10), null);
+            } else {
+                password = req.body.pass_hidden;
+            }
  
 			let editCDE = {
                 first_name: req.body.firstname,
