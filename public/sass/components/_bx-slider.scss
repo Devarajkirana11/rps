@@ -1,0 +1,10 @@
+.bx-wrapper {
+    margin: 0;
+    border: none !important;
+
+    .bx-controls {
+        .bx-pager {
+            display: none !important;
+        }
+    }
+}

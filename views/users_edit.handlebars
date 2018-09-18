@@ -1,0 +1,80 @@
+{{> header }}
+
+<section>
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="/">Edit User</a>
+        </li>
+        <li class="breadcrumb-item active">Edit User</li>
+      </ol>
+      <div class="row mx-3">
+        <div class="col-12">
+                <h1>Edit User</h1>
+                <form name="registration" id="user_register" action="/admin/user/{{ output.uuid }}/edit" data-toggle="validator" method="POST">
+                <input type="hidden" name="user_id" value="{{ output.user_id }}">
+                <div class="form-group required">
+                    <label class="control-label">First Name</label>
+                    <input class="form-control" value="{{ output.first_name }}" name="firstname" id="first_name" type="text" placeholder="First Name" required>
+                    <p class="help-block text-danger"></p>
+                </div>
+                
+                <div class="form-group required">
+                    <label class="control-label">Last Name</label>
+                    <input class="form-control" value="{{ output.last_name }}" name="lastname" id="last_name" type="text" placeholder="Last Name" required>
+                    <p class="help-block text-danger"></p>
+                </div>
+                              
+                <div class="form-group required">
+                    <label class="control-label">User Name</label>
+                    <input class="form-control" value="{{ output.username }}" name="username" id="username" type="text" placeholder="Username" required>
+                    <p class="help-block text-danger"></p>
+                </div>
+                
+                <div class="form-group">
+                    <label>Password</label>
+                    <input class="form-control" value="" name="password" id="password" type="password" placeholder="Password">
+                    <input class="form-control" value="{{ output.password }}" name="pass_hiden" id="pass_hidden" type="hidden" placeholder="Password" required>
+                    <p class="help-block text-danger"></p>
+                </div>
+                
+                <div class="form-group required">
+                    <label class="control-label">Email</label>
+                    <input class="form-control" value="{{ output.email }}" name="email" id="email" type="email" placeholder="Email Address" required>
+                    <p class="help-block text-danger"></p>
+                </div>
+                                
+                <div class="form-group required">
+                    <label class="control-label">Phone Number</label>
+                    <input class="form-control" value="{{ output.mobile }}" name="phone" id="phone" type="tel" placeholder="Phone Number" required>
+                    <p class="help-block text-danger"></p>
+                </div>
+                                
+                <div class="col-md-12">
+                    <div class="form-group required">
+                        <label  class="control-label" for="roles">Roles</label>
+                    </div>
+                    <div class="checkbox-inline">
+                        <input {{#in '1' output.roles }} checked="checked" {{/in}} type="checkbox" name="roles[]" value="1" id="user-create--administrator">
+                        <label for="user-create--administrator">Administrator</label>
+                    </div>
+                    <div class="checkbox-inline">
+                        <input {{#in '2' output.roles }} checked="checked" {{/in}} type="checkbox" name="roles[]" value="2" id="user-create--customer">
+                        <label for="user-create--customer">Customer</label>
+                    </div>
+                </div>
+                
+                <div id="success"></div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-xl">Submit</button>
+                </div>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{> footer }}

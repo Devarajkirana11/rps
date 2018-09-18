@@ -1,0 +1,11 @@
+S.No,Order ID,CDE Name,Vechile No,Delivery Date,Slot Timings,Address,Customer Name,Mobile,Order Total
+1,219817,CDE1,Van 1 KA 147258,2018-07-26,09am - 11.30am,"HAL 2nd Stage, Kodihalli, Bengaluru, Karnataka 560008, India",Vimala,9980349588,"20,200.00"
+2,219712,CDE1,Van 1 KA 147258,2018-07-26,09am - 11.30am,"Orix Auto Infrastuctures Service Ltd, Sir CV Raman Rd, HAL 2nd Stage, Kodihalli, Bengaluru, Karnataka 560008, India",rasool,9739729519,"5,900.00"
+3,219805,CDE1,Van 1 KA 147258,2018-07-26,09am - 11.30am,"Orix Auto Infrastuctures Service Ltd, Sir CV Raman Rd, HAL 2nd Stage, Kodihalli, Bengaluru, Karnataka 560008, India",VINOD KUMAR,9443125205,"5,000.00"
+5,220383,CDE1,Van 1 KA 147258,2018-07-26,09am - 11.30am,"133, 9th Cross Rd, HAL 3rd Stage, Kodihalli, Bengaluru, Karnataka 560008, India",sunesh,9986210530,39.00
+1,219817,CDE1,Van 1 KA 147258,2018-07-26,09am - 11.30am,"HAL 2nd Stage, Kodihalli, Bengaluru, Karnataka 560008, India",Vimala,9980349588,"20,200.00"
+2,219712,CDE1,Van 1 KA 147258,2018-07-26,09am - 11.30am,"Orix Auto Infrastuctures Service Ltd, Sir CV Raman Rd, HAL 2nd Stage, Kodihalli, Bengaluru, Karnataka 560008, India",rasool,9739729519,"5,900.00"
+3,219805,CDE1,Van 1 KA 147258,2018-07-26,09am - 11.30am,"Orix Auto Infrastuctures Service Ltd, Sir CV Raman Rd, HAL 2nd Stage, Kodihalli, Bengaluru, Karnataka 560008, India",VINOD KUMAR,9443125205,"5,000.00"
+5,220383,CDE1,Van 1 KA 147258,2018-07-26,09am - 11.30am,"133, 9th Cross Rd, HAL 3rd Stage, Kodihalli, Bengaluru, Karnataka 560008, India",sunesh,9986210530,39.00
+1,220495,CDE1,Van 1 KA 147258,2018-07-26,11.30am - 02pm,"Orix Auto Infrastuctures Service Ltd, Sir CV Raman Rd, HAL 2nd Stage, Kodihalli, Bengaluru, Karnataka 560008, India",rasool,9739729519,900.00
+2,219794,CDE1,Van 1 KA 147258,2018-07-26,11.30am - 02pm,"133, 9th Cross Rd, HAL 3rd Stage, Kodihalli, Bengaluru, Karnataka 560008, India",sunesh,9986210530,"5,000.00"

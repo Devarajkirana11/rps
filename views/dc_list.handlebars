@@ -1,0 +1,57 @@
+{{> header }}
+<script>
+    $(function(){
+        var filtersFirstInitialized = false;
+        var oTable = $('#dc_list').DataTable( {
+            "order": [[1, "desc"]],
+            dom: '<"#add.row selectWrapper m-lg-b">frtlip',
+            processing: true,
+		})
+    });
+</script>
+<section>
+  <div class="content-wrapper">
+    <div class="container-fluid">
+            <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> DC List</div>
+        <div class="card-body">
+          <div class="table-responsive">
+                <div class="text-right"><a href="/dc/create" class="float-left btn btn-primary btn-rounded w-175 text-left">Add DC <i class="fa fa-plus-circle fa-fw pull-right"></i></a>
+                <table  id="dc_list"  cellspacing="0" class="table table-striped" border="1" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>City</th>
+                            <th>State</th>
+                            <th>Status</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each output.data }}
+                            <tr>
+                                <td><a href="/dc/{{ this.uuid }}/view">{{ this.name }}</a></td>
+                                <td>{{ this.address_1 }} {{ this.address_2 }}</td>
+                                <td>{{ this.city }}</td>
+                                <td>{{ this.state }}</td>
+                                <td>
+                                    {{#in '1' this.status }} Active<br/> {{/in}}
+                                    {{#in '0' this.status }} InActive<br/> {{/in}}
+                                </td>
+                                <td><a class="btn btn-success" href="/dc/{{ this.uuid }}/edit">Edit</a></td>
+                                <td><span class="btn btn-danger dc-delete" data-uuid="{{ this.uuid }}" >Delete</span></td>
+                                </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+<script src="/js/jquery-ui.js"></script>
+{{> footer}}

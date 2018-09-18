@@ -1,0 +1,76 @@
+#banner-container {
+  position: relative;
+  .banner-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    object-position: 50% 45%;
+  }
+  .banner-content-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .overlay-content {
+      text-transform: uppercase;
+    }
+  }
+}
+
+#no-res {
+  height: 500px;
+  padding-top: 200px;
+  padding-bottom: 200px;
+  line-height: 100px;
+}
+
+#map {
+  width: 100%;
+  height: 600px;
+}
+
+.hotels-container {
+  position: relative;
+  height: auto;
+  overflow: hidden;
+
+  & > img {
+    // width: 100%;
+    height: 100%;
+    float:left;
+    object-fit: cover;
+    object-position: center;
+  }
+  .overlay-texts {
+    .hotel-location {
+      h2 {
+        a {
+          color: $white;
+        }
+      }
+      h4 {
+        a {
+          color: #eaff00;
+        }
+      }
+      p {
+        a {
+          color: $white;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 460px) {
+  .hotels-container {
+    & > img {
+      height: 300px;
+    }
+  }
+}

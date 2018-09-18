@@ -1,0 +1,49 @@
+{{> header }}
+
+<section>
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="/">Van Details</a>
+        </li>
+        <li class="breadcrumb-item active">Van Details</li>
+      </ol>
+      <div class="row mx-3">
+        <div class="col-12">
+                <h1>Van Details</h1>
+            <div class="col-md-12">
+                <strong>Vechile Make</strong>
+                {{ output.make }}
+            </div>
+            <div class="col-md-12">
+                <strong>Vechile Reg No</strong>
+                {{ output.reg_no }}
+            </div>
+            <div class="col-md-12">
+                <strong>Vechile Type</strong>
+                {{ output.type }}
+            </div>
+            <div class="col-md-12">
+                <strong>Vechile Capacity</strong>
+                {{ output.capacity }}
+            </div>
+            <div class="col-md-12">
+                <strong>Vechile Provider</strong>
+                {{ output.provider }}
+            </div>
+
+            <div class="action-items">
+                <a href="/vans/{{ output.uuid }}/edit" class="btn btn-success">Edit</a>
+                <span class="van-delete btn btn-danger" data-uuid="{{ output.uuid }}">Delete</span>
+            </div>
+
+        </div>
+    </div>
+    </div>
+</section>
+
+<script src="/js/jquery-ui.js"></script>
+
+{{> footer}}

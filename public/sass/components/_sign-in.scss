@@ -1,0 +1,69 @@
+.triangle {
+	position: absolute;
+	height: 100vh;
+	width: 200vw;
+	background: rgba(0, 0, 0, 0.02);
+	z-index: 1;
+	transform: rotate(-45deg);
+	border-top-right-radius: 50px;
+	// left: -50%;
+}
+
+.login-wrapper {
+	height: 100vh !important;
+	display: table;
+	table-layout: fixed;
+	width: 100%;
+	background: $white;
+	position: relative;
+	overflow: hidden;
+
+	.login-form-container {
+		display: table-cell;
+		vertical-align: middle;
+		position: relative;
+		z-index: 10;
+
+		img {
+			margin-bottom: 25px;
+		}
+
+		.login-form {
+			width: 400px;
+			margin: 0 auto;
+		}
+
+		.or-text {
+			position: relative;
+			z-index: 10;
+
+			small {
+				background: $white;
+				padding: 0 20px;
+			}
+
+			&:before {
+				content: '';
+				display: block;
+				height: 1px;
+				width: 100%;
+				background: rgba(0, 0, 0, 0.4);
+				position: absolute;
+				top: 50%;
+				left: 0;
+				right: 0;
+				z-index: -1;
+			}
+		}
+
+		.social-sign-in {
+			margin: 0 -5px 20px;
+
+			.social-button {
+				float: left;
+				width: 50%;
+				padding: 0 5px;
+			}
+		}
+	}
+}

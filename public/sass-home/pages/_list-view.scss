@@ -1,0 +1,524 @@
+// .amenities-icon-container,
+// .amenities-name-container {
+// 	display: inline-block;
+// 	vertical-align: middle;
+// 	margin-bottom: 20px;
+// }
+
+// .amenities-icon-container {
+// 	// margin: 0;
+
+// 	i {
+// 		width: 1.28571429em;
+// 		color: $danger;
+// 		fill: $danger;
+
+// 		&.fa-2x {
+// 			// font-size: 1.5em;
+// 		}
+// 	}
+// }
+
+// Nav pills Nida color
+
+.nida-red {
+  .active {
+    a {
+	  background-color: $danger !important;
+	  
+	  .badge {
+		  background: $white;
+	  }
+      &:active {
+        background-color: $danger;
+      }
+      &:focus {
+        background-color: $danger;
+      }
+      &:hover {
+        background-color: $danger;
+      }
+    }
+  }
+
+  li {
+	  a {
+		  .badge {
+			background-color: #e9e9e9;
+		  }
+	  }
+  }
+}
+
+// NIDACASH PAGE START
+.ncashContainer {
+  @media (max-width: 767px) {
+    padding: 5% 0;
+    position: absolute;
+    z-index: 100;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+  @media (min-width: 768px) {
+    position: absolute;
+    z-index: 100;
+    top: 30%;
+    margin-left: 15%;
+    padding: 2% 0;
+  }
+}
+.frontpage-nidacash {
+  padding: 5% 0;
+}
+.frontpage-nidacash, .ncashContainer {
+  width: 350px;
+  height: auto;
+  max-width: 530px;
+  background-color: rgba(0,0,0,0.46);
+  -webkit-border-radius: 26px;
+  -moz-border-radius: 26px;
+  border-radius: 26px;
+  ul {
+    list-style: none;
+    color: #fff;
+    font-family: "Open Sans", "Helvetica Neue", sans-serif;
+    font-weight: 600;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 35px;
+    margin: 5% 0 0 0;
+  }
+  img {
+    width: 80% !important;
+    height: auto !important;
+    margin: 0 10% !important;
+  }
+  a {
+    width: 80%;
+    margin: 10%;
+    text-align: center !important;
+  }
+}
+.nidacash-card {
+  text-align: center;
+  margin: 20px;
+  img {
+    width: 100px;
+    height: auto;
+  }
+}
+.nidacash-bag-icon {
+  width: 80px !important;
+  height: auto;
+}
+// NIDACASH END
+.full-width {
+  width: 100%;
+}
+.directions-container {
+	max-height: 54px;
+	overflow: hidden;
+	position: relative;
+	@include transition(max-height 0.35s);
+
+	&:after {
+		content: '';
+		display: block;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 75px;
+		width: 100%;
+		position: absolute;
+		background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #f5f5f5 100%);
+		@include transition(opacity 0.35s);
+	}
+
+	&.content-expanded {
+		max-height: 1500px;
+		overflow: hidden;
+		@include transition(max-height 0.35s);
+
+		&:after {
+			opacity: 0;
+		}
+
+		& + a {
+			.fa-angle-down {
+				@include rotate2d(180deg);
+			}
+		}
+	}
+}
+
+
+.list-view-container {
+
+	.slider-container {
+		position: relative;
+		margin-bottom: 25px;
+		overflow: hidden;
+
+		.hotel-preview-image-container {
+			width: 65%;
+			float: left;
+
+			img {
+				width: 100%;
+				max-height: 600px;
+			}
+		}
+		.hotel-preview-image-container-preload {
+			width: 65%;
+			float: left;
+			min-height: 100%;
+			background-color: #e0e0e0;
+		}
+		.hotel-preview-map-container-preload {
+			width: 100%;
+			float: left;
+			min-height: 100%;
+			background-color: #e0e0e0;
+		}
+		.hotel-preview-map-container {
+			width: 35%;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			max-height: 600px;
+			z-index: 9990;
+			right: 0;
+			@include transition(width 0.35s);
+
+			&.map-expanded {
+				width: 70%;
+				
+				.map-expand-button {
+					@include rotate2d(-180deg);
+				}
+			}
+	
+			.map-expand-button {
+				position: absolute;
+				top: 0;
+				left: -16px;
+				bottom: 0;
+				margin: auto;
+				z-index: 9999;
+				height: 40px;
+				width: 40px;
+				line-height: 40px;
+				display: block;
+				background: $white;
+				color: $black;
+				font-size: 20px;
+				text-align: center;
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+				border-radius: 50%;
+				cursor: pointer;
+				@include rotate2d(0deg);
+				@include transition(transform 0.35s);
+
+				i {
+					line-height: 40px;
+				}
+			}
+		}
+
+	}
+	
+	
+
+	.hotel-feature-header {
+		position: relative;
+		margin-top: 40px;
+		margin-bottom: 30px;
+
+		&:before {
+			content: '';
+			display: block;
+			height: 1px;
+			width: 100%;
+			top: 0;
+			bottom: 0;
+			right: 0;
+			left: 0;
+			position: absolute;
+			margin: auto;
+			background: #ddd;
+			z-index: -1;
+		}
+
+		small {
+			background: $white;
+			padding: 0 15px;
+		}
+	}
+
+	.hotel-list-container {
+		.hotel-list-item {
+			background: #fff;
+			border: solid 1px #ddd;
+			margin-bottom: 10px;
+			box-shadow: 0 10px 10px -7px rgba(0, 0, 0, 0.20);
+			// border-radius: 10px;
+			padding: 15px 15px 0 15px;
+			min-height: 160px;
+
+			.notavailableclass  {
+				margin: 9%;
+			}
+
+			.modal-button-container {
+				background: #f1f1f1;
+				height: 40px;
+
+				a {
+					display: block;
+					font-size: 12px;
+					height: 40px;
+					line-height: 40px;
+				}
+			}
+
+			.media {
+				.media-body {
+					padding: 0 15px;
+				}
+			}
+
+			.amenities-container {
+				&.amenities-hidden {
+					display: none;
+				}
+			}
+
+			.amenities-icon-container,
+			.amenities-name-container {
+				display: inline-block;
+				vertical-align: middle;
+				margin-bottom: 20px;
+			}
+
+			.amenities-icon-container {
+				// margin: 0;
+
+				i {
+					width: 1.28571429em;
+					color: $danger;
+
+					&.fa-2x {
+						font-size: 1.5em;
+					}
+				}
+			}
+
+			.amenities-name-container {
+				// font-size: 16px;
+			}
+		}
+	}
+
+    .nidaCash-summary {
+        padding: 0 25px;
+    }
+    .hotel-list-summary {
+        padding: 25px;
+    }
+    .hotel-list-summary, .nidaCash-summary {
+        background: #fff;
+        margin-bottom: 25px;
+        border: solid 1px #ddd;
+        box-shadow: 0 10px 10px -7px rgba(0, 0, 0, 0.20);
+        // border-radius: 10px;
+
+        .learn-more {
+            padding: 0 10px 0 10px;
+            font-size: 12px;
+        }
+    }
+
+}
+.sub-sections-preload {
+	min-height: 100vh;
+	width: 100%;
+}
+
+.nidacash-booking-summary {
+  padding: 0 25px;
+}
+.detailed-booking-summary {
+  padding: 25px;
+}
+.booking-summary {
+	background: #fff;
+	margin-bottom: 25px;
+	border: solid 1px #ddd;
+	box-shadow: 0 10px 10px -7px rgba(0, 0, 0, 0.20);
+	// border-radius: 10px;
+}
+
+.room-type-modal {
+	.modal-dialog {
+		// position: fixed;
+		// top: 0;
+		// right: 0;
+		// left: 0;
+		// bottom: 0;
+		// background: transparent;
+		// box-shadow: none;
+		height: 100%;
+		width: 100%;
+		
+		.modal-content {
+			background: transparent;
+			height: 100%;
+
+			.modal-body {
+				height: 100%;
+				padding: 0;
+			}
+		}
+
+		.room-type-slider-container {
+			width: 65%;
+			height: 100%;
+			float: left;
+			// background: rgba(0, 0, 0, 0.9);
+			background: rgba(55, 58, 71, 0.9);
+			margin: 0;
+			position: absolute;
+
+			.room-type-carousel {
+				// width: 90%;
+				// margin: auto;
+				// height: auto;
+			}
+
+			.slick-next,
+			.slick-prev {
+				z-index: 10010;
+				
+				&:before {
+					font-size: 22px;
+				}
+			}
+
+			.slick-prev {
+				left: 25px;;
+			}
+
+			.slick-next {
+				right: 25px;;
+			}
+		}
+
+		.toggle-room-amenities {
+			position: fixed;
+			top: 25px;
+			right: 25px;
+			z-index: 10120;
+			color: $black;
+			opacity: 0.75;
+		}
+
+		.close {
+			color: $black;
+			position: fixed;
+			top: 25px;
+			right: calc(35% + 25px);
+			opacity: 0.75;
+
+			i {
+				font-size: 22px;
+				color: $black;
+			}
+		}
+
+		.amenities-container {
+			width: 35%;
+			height: 100%;
+			float: right;
+			background: $white;
+			padding: 25px;
+			overflow-y: scroll;
+
+			i {
+				&:before {
+					color: $black;
+				}
+			}
+		}
+	}
+}
+
+.room-type-list-slider {
+	margin-bottom: 40px !important;
+
+	.slick-next,
+	.slick-prev {
+		bottom: -40px;
+		top: auto;
+
+		&:before {
+			font-family: 'themify';
+		}
+	}
+
+	.slick-next {
+		right: 40%;
+
+		&:before {
+			content: "\e628";
+		}
+	}
+
+	.slick-prev {
+		left: 40%;
+
+		&:before {
+			content: "\e629";
+		}
+	}
+
+	.slick-list {
+		padding: 0 !important;
+	}
+	
+	.col-md-6 {
+		padding: 0 5px !important;
+	}
+}
+
+
+#refer-and-earn-modal {
+	.or-container {
+		position: relative;
+		text-align: center;
+		text-transform: uppercase;
+		margin: 15px 0;
+
+		&:before {
+			content: '';
+			display: block;
+			border-top: solid 1px #ddd;
+			position: absolute;
+			left: 0;
+			right: 0;
+			width: 100%;
+			top: 50%;
+		}
+
+		span {
+			background: $white;
+			padding: 0 15px;
+			position: relative;
+			z-index: 1;
+		}
+	}
+}

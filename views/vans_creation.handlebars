@@ -1,0 +1,110 @@
+{{> header }}
+
+<section>
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="/">Van Creation</a>
+        </li>
+        <li class="breadcrumb-item active">Create a Van</li>
+      </ol>
+      <div class="row mx-3">
+        <div class="col-12">
+                <h1>Create Van</h1>
+                <form name="vancreation"  enctype="multipart/form-data" id="van_create" action="/vans/create" data-toggle="validator" method="POST">
+                
+                <div class="form-group required">
+                    <label class="control-label">Make</label>
+                    <input class="form-control" name="make" id="make" type="text" placeholder="Vechile Make" required>
+                    <p class="help-block text-danger"></p>
+                </div>
+                
+                <div class="form-group required">
+                    <label class="control-label">Reg No</label>
+                    <input class="form-control" name="reg_no" id="reg_no" type="text" placeholder="Vechile Reg No" required>
+                    <p class="help-block text-danger"></p>
+                </div>
+                              
+                <div class="form-group required">
+                    <label class="control-label">Type</label>
+                    <input class="form-control" name="type" id="type" type="text" placeholder="Vechile Type" required>
+                    <p class="help-block text-danger"></p>
+                </div>
+                                
+                <div class="form-group required">
+                    <label class="control-label">Capacity</label>
+                    <input class="form-control" name="capacity" id="capacity" type="text" placeholder="Capacity" required>
+                    <p class="help-block text-danger"></p>
+                </div>
+
+                <div class="form-group required">
+                    <label class="control-label">Provider</label>
+                    <input class="form-control" name="provider" id="provider" type="text" placeholder="Vechile Provider" required>
+                    <p class="help-block text-danger"></p>
+                </div>
+
+                <div class="form-group required">
+                    <label class="control-label">GPS Tracking ID</label>
+                    <input class="form-control" name="gps_tracking_id" id="gps_tracking_id" type="text" placeholder="GPS Tracking ID" required>
+                    <p class="help-block text-danger"></p>
+                </div>
+
+                <div class="form-group required">
+                    <label class="control-label">Upload Documents</label>
+                    <input class="form-control" id="documents" name="documents" placeholder="Upload Documents" type="file"/>
+                    <p class="help-block text-danger"></p>
+                </div>
+
+                <div class="form-group required">
+                    <label class="control-label">DC Name</label>
+                    <select class="form-control" id="dc_uuid" name="dc_uuid">
+                        <option value="">Select</option>
+                        {{#each dc.data }}
+                            <option value="{{ this.uuid }}">{{ this.name }}</option>
+                        {{/each}}
+                    </select>
+                </div>
+
+                <input type="hidden" id="dc_name" name="dc_name" value="">
+
+                <div class="form-group required">
+                    <label class="control-label">Color</label>
+                    <select class="form-control" name="color_code">
+                        <option value="800000">Maroon</option>
+                        <option value="FF0000">Red</option>
+                        <option value="FFA500">Orange</option>
+                        <option value="FFFF00">Yellow</option>
+                        <option value="0000FF">Blue</option>
+                        <option value="008000">Green</option>
+                        <option value="C0C0C0">Silver</option>
+                        <option value="FFFFFF">White</option>
+                        <option value="000000">Black</option>
+                        <option value="808000">Olive</option>
+                        <option value="00FFFF">Aqua</option>
+                    </select>
+                </div>
+
+                <div class="form-group required">
+                    <label class="control-label">Status</label>
+                    <div class="radio">
+                    <label><input type="radio" value="1" name="status"> Active</label>
+                    </div>
+                    <div class="radio">
+                    <label><input type="radio" value="0" name="status"> InActive</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-xl">Submit</button>
+                </div>
+                
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{> footer }}

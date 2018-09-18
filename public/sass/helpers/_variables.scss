@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700');
+
+
+// ====== Typography ===== 
+// ------------------------------------------------------------
+$font-family:			'Open Sans', 'Helvetica Neue', sans-serif !default;
+$header-font-family:    'Montserrat', sans-serif;
+$font-size:				14px !default;
+$font-color:			#505050 !default;
+
+
+// ====== Font Sizing ====== 
+// ------------------------------------------------------------------------------
+$font-size-xl:			$font-size * 1.75 !default;
+$font-size-lg:			$font-size * 1.25 !default;
+$font-size-md:			$font-size !default;
+$font-size-sm:			$font-size * 0.85 !default;
+$font-size-xs:			$font-size * 0.75 !default;
+
+// ====== Font Weight ====== 
+// ------------------------------------------------------------------------------
+$fw-lgt:				300 !default;
+$fw-nml:				400 !default;
+$fw-semi-thk:			600 !default;
+$fw-thk:				700 !default;
+$fw-thkr:				800 !default;
+
+// ====== Base Colors ====== 
+// ------------------------------------------------------------------------------
+$primary:				#7266ba !default;
+$success:				#27c24c !default;
+$info:					#00abe8 !default;
+$warning:				#ff9c00 !default;
+$danger:				#f93926 !default;
+
+$white:					#ffffff !default;
+$grey:					#656565 !default;
+$black:					#0b1115 !default;
+
+$primary-dark:			darken($primary, 10%) !default;
+$success-dark:			darken($success, 10%) !default;
+$info-dark:				darken($info, 5%) !default;
+$warning-dark:			darken($warning, 10%) !default;
+$danger-dark:			darken($danger, 10%) !default;
+$grey-dark:				darken($grey, 10%) !default;
+
+$primary-light:			lighten($primary, 10%) !default;
+$success-light:			lighten($success, 10%) !default;
+$info-light:			lighten($info, 10%) !default;
+$warning-light:			lighten($warning, 10%) !default;
+$danger-light:			lighten($danger, 10%) !default;
+$grey-light:			darken($grey, 10%) !default;
+
+// ====== Brand Colors ====== 
+// ------------------------------------------------------------------------------
+$facebook:				#3b5998 !default;
+$twitter:				#00aced !default;
+$google-plus:			#dd4b39 !default;
+$youtube:				#bb0000 !default;
+$linkedin:				#007bb6 !default;
+$instagram:				#8a3ab9 !default;
+$pintrest:				#cb2027 !default;
+$vine:					#00bf8f !default;
+$tumblr:				#35465c !default;
+$dribbble:				#ea4c89 !default;
+$dropbox:				#007ee5 !default;
+
+
+// ====== Pallete 1 ====== 
+// ------------------------------------------------------------------------------
+$main-1:				#F93926 !default;
+$raisin-black-1:		#232323 !default;
+$white-1:				#FFFFFF !default;
+$verdi-1:				#41A7B5 !default;
+$aqua-1:				#78D3AD !default;
+
+
+// ====== Room Status ====== 
+// ------------------------------------------------------------------------------
+$available:             #2ecc71 !default;
+$checkin:               #ADD96C !default;
+$checkout:              #D4001A !default;
+$on-hold:               #ED6F19 !default;
+$confirmed:             #16a085 !default;
+$occupied:              #0084BC !default;
+$blocked:               #7f8c8d !default;
+$vacated:               #000000 !default;
+$no-show:               #FF5B00 !default;

@@ -1,0 +1,52 @@
+{{> header }}
+<script>
+    $(function(){
+        var filtersFirstInitialized = false;
+        var oTable = $('#orders_list').DataTable( {
+            "order": [[1, "desc"]],
+            dom: '<"#add.row selectWrapper m-lg-b">frtlip',
+            processing: true,
+		})
+    });
+</script>
+<section>
+  <div class="content-wrapper">
+    <div class="container-fluid">
+            <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Orders List</div>
+        <div class="card-body">
+          <div class="table-responsive">
+                
+                <table  id="orders_list"  cellspacing="0" class="table table-striped" border="1" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer Name</th>
+                            <th>Delivery Date</th>
+                            <th>Slot</th>
+                            <th>Payment Method</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each output.data }}
+                            <tr>
+                                <td>{{ this.order_id }}</td>
+                                <td>{{ this.customer_name }}</td>
+                                <td>{{ this.delivery_date }}</td>
+                                <td>{{ this.slot }}</td>
+                                <td>{{ this.payment_method }}</td>
+                                <td>{{ this.status }}</td>
+                                </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+<script src="/js/jquery-ui.js"></script>
+{{> footer}}

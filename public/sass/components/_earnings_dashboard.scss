@@ -1,0 +1,94 @@
+@media (max-width: 991px) {
+  .earnings-item {
+    .row {
+      .col-md-4:not(:first-child) {
+        padding-top: 10px;
+      }
+    }
+  }
+}
+
+.earnings-item {
+    border-radius: 5px; 
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+.earnings-shared-hotels {
+    background: $white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 10px;
+
+    .hotel-content { 
+        h4 {
+            height: 35px;
+        }
+
+        div {
+            .share_earn_modal {
+                margin-top: 10px;
+            }
+        }
+    }
+}
+
+.referral-message-container {
+    background: $white;
+    position: fixed;
+    bottom: 15px;
+    left: 15px;
+    text-align: center;
+    width: 220px;
+    overflow: hidden;
+    border-radius: 10px;
+    z-index: 9999;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+
+    .referral-header {
+        background: $danger;
+        color: $white;
+        padding: 10px;
+    }
+
+    .referral-body {
+        padding: 10px;
+    }
+}
+
+#refer-and-earn-modal {
+    .input-group .input-group-btn .btn {
+        height: 45px;
+        padding: 10px 15px;
+        line-height: 25px;
+        border-top-right-radius: 50px;
+        border-bottom-right-radius: 50px;
+        width: 9vw;
+    }
+}
+
+#refer-and-earn-modal {
+    .or-container  {
+        &:before {
+            content: '';
+            display: block;
+            border-top: solid 1px #ddd;
+            position: absolute;
+            left: 0;
+            right: 0;
+            width: 100%;
+            top: 50%;
+        }
+        position: relative;
+        text-align: center;
+        text-transform: uppercase;
+        margin: 15px 0;
+        span {
+            background: #ffffff;
+            padding: 0 15px;
+            position: relative;
+            z-index: 1;
+        }
+    }
+}

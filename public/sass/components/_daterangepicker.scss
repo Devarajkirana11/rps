@@ -1,0 +1,151 @@
+.daterangepicker {
+    padding: 15px;
+    z-index: 10000;
+
+    .calendar {
+        margin: 0;
+
+        // &.left {
+        //     margin-right: 15px;
+
+        //     table {
+        //         thead {
+        //             tr {
+        //                 th {
+        //                    &.month {
+        //                        text-align: left;
+        //                    } 
+        //                 }  
+        //             }
+        //         }
+        //     }
+        // }
+
+        // &.right {
+        //     // margin-right: 15px;
+
+        //     table {
+        //         thead {
+        //             tr {
+        //                 th {
+        //                    &.month {
+        //                        text-align: right;
+        //                    } 
+        //                 }  
+        //             }
+        //         }
+        //     }
+        // }
+
+        .daterangepicker_input {
+            display: none;
+        }
+
+        .calendar-table {
+            table {
+                thead {
+                    tr {
+                        th {
+                            font-weight: normal;
+                            font-family: $font-family;
+                            // padding: 8px;
+                            color: $black;
+                            height: 35px;
+                            min-width: 35px;
+                        }
+                    }
+    
+                    tr:nth-child(2) {
+                        th {
+                            text-transform: uppercase;
+                            font-family: $header-font-family;
+                            color: #777;
+                            font-size: 11px;
+                        }
+                    }
+                }
+
+                tbody {
+                    tr {
+                        td {
+                            // padding: 8px;
+                            color: $black;
+                            height: 35px;
+                            min-width: 35px;
+
+                            &.off {
+                                color: #c7c7c7;
+                                // display: none;
+
+                                &.off {
+                                    // display: none;
+                                }
+                            }
+
+                            &.prev-month {
+                                opacity: 0;
+                            }
+
+                            &.disabled {
+                                text-decoration: none;
+                            }
+
+                            &.active {
+                                background: $danger;
+                                border-radius: 50%;
+                            }
+
+                            &.start-date.end-date {
+                                border-radius: 50%;
+                            }
+
+                            &.start-date {
+                                border-radius: 50px 0 0 50px;
+                                background: $danger !important;
+                                color: $white;
+                            }
+
+                            &.end-date {
+                                border-radius: 0 50px 50px 0;
+                                background: $danger !important;
+                                color: $white;
+                            }
+
+                            &.in-range {
+                                background: #e1e1e1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .ranges {
+        ul {
+            li {
+                color: $font-color;
+                padding: 7px 15px;
+                background: #f9f9f9;
+                border: solid 1px #ddd;
+
+                &.active {
+                    background: $danger;
+                    color: $white;
+                    border-color: $danger;
+                }
+            }
+        }
+
+        .range_inputs {
+            button {
+                border-radius: 50px;
+            }
+
+            .applyBtn {
+                background: $danger;
+                border-color: $danger;
+            }
+        }
+    }
+}

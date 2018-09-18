@@ -1,0 +1,210 @@
+/* ====== Font Weight ===== 
+------------------------------------------------------------ */
+.fw-lgt {font-weight: $fw-lgt;}
+.fw-nml {font-weight: $fw-nml;}
+.fw-semi-thk {font-weight: $fw-semi-thk;}
+.fw-thk {font-weight: $fw-thk;}
+.fw-thkr {font-weight: $fw-thkr;}
+
+/* ====== Font Alignment ===== 
+------------------------------------------------------------ */
+.text-right {text-align: right !important;}
+.text-center {text-align: center !important;}
+.text-left {text-align: left !important;}
+
+/* ====== Font Color ===== 
+------------------------------------------------------------ */
+@include text-variant(text-default, $font-color);
+@include text-variant(text-primary, $primary);
+@include text-variant(text-success, $success);
+@include text-variant(text-info, $info);
+@include text-variant(text-warning, $warning);
+@include text-variant(text-danger, $danger);
+@include text-variant(text-white, $white);
+@include text-variant(text-grey, $grey);
+@include text-variant(text-black, $black);
+
+/* ====== Font Size ===== 
+------------------------------------------------------------ */
+.fs-xs {font-size: $font-size-xs;}
+.fs-sm {font-size: $font-size-sm;}
+.fs-md {font-size: $font-size-md;}
+.fs-lg {font-size: $font-size-lg;}
+.fs-xl {font-size: $font-size-xl;}
+.fs-36 {font-size: 36px;}
+.fs-20 {font-size: 20px;}
+.fs-48 {font-size: 48px;}
+.fs-56 {font-size: 56px;}
+.fs-72 {font-size: 72px;}
+.fs-96 {font-size: 96px;}
+.fs-128 {font-size: 128px;}
+
+/* ====== Padding ===== 
+------------------------------------------------------------ */
+.p-n {@include remove-padding();}
+.p-xs {@include padding(5px);}
+.p-sm {@include padding(10px);}
+.p-md {@include padding(15px);}
+.p-lg {@include padding(20px);}
+.p-xl {@include padding(40px);}
+
+/* ====== Margin ===== 
+------------------------------------------------------------ */
+.m-n {@include remove-margin();}
+.m-xs {@include margin(5px);}
+.m-sm {@include margin(10px);}
+.m-md {@include margin(15px);}
+.m-lg {@include margin(20px);}
+.m-xl {@include margin(40px);}
+.m-a {@include margin(auto);}
+
+/* ====== Letter Spacing ===== 
+------------------------------------------------------------ */
+.ls-xs {letter-spacing: 1px;}
+.ls-sm {letter-spacing: 2px;}
+.ls-md {letter-spacing: 3px;}
+.ls-lg {letter-spacing: 4px;}
+.ls-xl {letter-spacing: 5px;}
+
+
+/* ====== Background ===== 
+------------------------------------------------------------ */
+@include bg-variant(bg-primary, $primary);
+@include bg-variant(bg-success, $success);
+@include bg-variant(bg-info, $info);
+@include bg-variant(bg-warning, $warning);
+@include bg-variant(bg-danger, $danger);
+@include bg-variant(bg-white, $white);
+@include bg-variant(bg-black, $black);
+@include bg-variant(bg-grey, $grey);
+@include bg-variant(bg-facebook, $facebook);
+@include bg-variant(bg-youtube, $youtube);
+@include bg-variant(bg-instagram, $instagram);
+@include bg-variant(bg-twitter, $twitter);
+@include bg-variant(bg-linkedin, $linkedin);
+@include bg-variant(bg-google-plus, $google-plus);
+@include bg-variant(bg-transparent, transparent);
+
+/* ====== Row ===== 
+------------------------------------------------------------ */
+.row {
+	&.row-xs {
+		margin: 0 -5px;
+
+		> div {
+			padding: 0 5px;
+		}
+	}
+	&.row-sm {
+		margin: 0 -10px;
+
+		> div {
+			padding: 0 10px;
+		}
+	}
+	&.row-md {
+		margin: 0 -15px;
+
+		> div {
+			padding: 0 15px;
+		}
+	}
+	&.row-lg {
+		margin: 0 -20px;
+
+		> div {
+			padding: 0 20px;
+		}
+	}
+	&.row-xl {
+		margin: 0 -25px;
+
+		> div {
+			padding: 0 25px;
+		}
+	}
+}
+
+/* ====== Overflow ===== 
+------------------------------------------------------------ */
+.of-v {overflow: visible !important;}
+.of-h {overflow: hidden !important;}
+.of-s {overflow: scroll !important;}
+.of-a {overflow: auto !important;}
+.of-in {overflow: initial !important;}
+.of-ih {overflow: inherit !important;}
+
+/* ====== Height ===== 
+------------------------------------------------------------ */
+.h-10 {height: 10px !important;}
+.h-20 {height: 20px !important;}
+.h-30 {height: 30px !important;}
+.h-40 {height: 40px !important;}
+.h-50 {height: 50px !important;}
+.h-75 {height: 75px !important;}
+.h-100 {height: 100px !important;}
+.h-125 {height: 125px !important;}
+.h-150 {height: 150px !important;}
+.h-175 {height: 175px !important;}
+.h-200 {height: 200px !important;}
+.h-225 {height: 225px !important;}
+.h-250 {height: 250px !important;}
+.h-275 {height: 275px !important;}
+.h-300 {height: 300px !important;}
+.h-350 {height: 350px !important;}
+.h-400 {height: 400px !important;}
+.h-450 {height: 450px !important;}
+.h-500 {height: 500px !important;}
+.h-full {height: 100% !important;}
+
+/* ====== Width ===== 
+------------------------------------------------------------ */
+.w-10 {width: 10px;}
+.w-20 {width: 20px;}
+.w-30 {width: 30px;}
+.w-40 {width: 40px;}
+.w-50 {width: 50px;}
+.w-75 {width: 75px;}
+.w-100 {width: 100px;}
+.w-125 {width: 125px;}
+.w-150 {width: 150px;}
+.w-175 {width: 175px;}
+.w-200 {width: 200px;}
+.w-225 {width: 225px;}
+.w-250 {width: 250px;}
+.w-275 {width: 275px;}
+.w-300 {width: 300px;}
+.w-400 {width: 400px;}
+.w-500 {width: 500px;}
+.w-100p {width: 100%}
+
+/* ====== Line Height ===== 
+------------------------------------------------------------ */
+.lh-10 {line-height: 10px;}
+.lh-20 {line-height: 20px;}
+.lh-30 {line-height: 30px;}
+.lh-40 {line-height: 40px;}
+.lh-50 {line-height: 50px;}
+.lh-75 {line-height: 75px;}
+.lh-100 {line-height: 100px;}
+.lh-125 {line-height: 125px;}
+.lh-150 {line-height: 150px;}
+.lh-175 {line-height: 175px;}
+.lh-200 {line-height: 200px;}
+.lh-225 {line-height: 225px;}
+.lh-250 {line-height: 250px;}
+.lh-275 {line-height: 275px;}
+.lh-300 {line-height: 300px;}
+.lh-350 {line-height: 350px;}
+.lh-400 {line-height: 400px;}
+.lh-450 {line-height: 450px;}
+.lh-500 {line-height: 500px;}
+
+
+/* ====== Font Awesome ===== 
+------------------------------------------------------------ */
+.fa-6x {font-size: 6em;}
+.fa-7x {font-size: 7em;}
+.fa-8x {font-size: 8em;}
+.fa-9x {font-size: 9em;}
+.fa-10x {font-size: 10em;}
