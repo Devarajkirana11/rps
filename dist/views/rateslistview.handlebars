@@ -1,0 +1,61 @@
+{{> nav}}
+{{> header}}
+<main id="page-content">
+	<div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Room Rates</h3>
+        </div>
+    </div>
+	<div class="page-container">
+		<div class="row row-xl">
+			<div class="col-md-12">
+				{{#if errors}}
+					<div class="alert alert-danger"> {{ errors }}</div>
+				{{/if}}
+				<div class="tab-content">
+					<div id="cost-rate" class="tab-pane fade in active">
+						<div class="row row-xl">
+							<div class="col-md-12">
+								<div class="table-responsive">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th>Room Type</th>
+												<th>Occupancy</th>
+												<th>Default Rate</th>
+												<th>Rate Configured</th>
+											</tr>
+										</thead>
+										<tbody>
+											{{#each output}}
+												<tr>
+													{{#notequal this.type 'Default'}}
+														{{#notequal this.type 'Default'}}
+														<td>
+														<a href="/hotels/rates/markup?hotel_id={{ ../hotel_id }}&room_type={{ this.type }}">
+														{{ this.name }}
+														</a>
+														</td>
+														{{/notequal}}
+													<td>{{ this.occupancy }}</td>
+													<td>{{ this.rate }}</td>
+													{{#if this.configured }}
+														<td>Yes</td>
+													{{ else }}
+														<td>No</td>
+													{{/if}}
+													{{/notequal}}
+													</tr>
+											{{/each}}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>		
+			</div>
+		</div>
+	</div>
+</main>
+{{> footer}}

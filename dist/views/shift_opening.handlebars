@@ -1,0 +1,91 @@
+{{> nav this}}
+
+{{> header}}
+
+<!-- Begin Page Content -->
+<main id="page-content">
+	<div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Shift Opening</h3>
+        </div>
+    </div>
+
+	<div class="page-container">
+		<div class="row row-xl">
+			<div class="col-md-12">
+				{{#if errors}}
+					<div class="alert alert-danger"> {{ errors }}</div>
+				{{/if}}
+				{{#if message}}
+					<div class="alert alert-success"> {{ message }}</div>
+				{{/if}}
+			</div>
+		</div>
+
+		<!-- Begin Hotels View -->
+		<div class="row row-xl">
+			<div class="col-md-12">
+				<div class="filter-form">
+
+					{{#if openedBy }}
+						{{#if openedBy }}
+							<div class="opened-by text-center m-xl-t m-xl-b">
+								<p class="text-uppercase">Shift Opened By</p>
+								<h2 class="m-n text-black text-uppercase fw-semi-thk">{{ openedBy }} <br> <small class="fs-md">at {{#countrycustomDateFormatwithTime  openedTime country_name }}{{/countrycustomDateFormatwithTime}}</small></h2> 
+							</div>
+						{{/if}}
+						<div class="row">
+							<div class="col-md-offset-2 col-md-8">
+								<div class="alert alert-danger text-center text-uppercase">Shift Already Running. So please proceed next steps</div>
+							</div>
+						</div>
+					{{ else }}
+						<div class="alert alert-success"> Please start the shift</div>
+						<div class="shift-opening-form">
+							<form class="" action='/pms/shift/opening?hotel_id={{ hotel_id }}' method="POST">
+
+								<div class="welcome-text m-lg-b">
+									<h4 class="text-black fw-semi-thk fs-20"></h4>
+								</div>
+								<input type="hidden" name="user_uuid" value="{{ user_details._user_id }}" id="user_id" class="">
+								<input type="hidden" name="hotel_id" value="{{ hotel_id }}" id="hotel_id" class="">
+
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Opening Balance</label>
+											<input class="form-control" type="text" value="{{#round openingBalance }}{{/round}}" readonly="true" name="opening_balance" id="opening_balance">
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Top Up</label>
+											<input class="form-control" type="text" value="" name="top_up_float" id="top_up_float">
+										</div>
+									</div>
+								</div>
+
+								<div class="row row-xl m-xl-b">
+									<div class="col-md-12">
+										<button class="btn btn-danger btn-rounded w-150"  name="Submit" value="Start Shift" type="Submit">Start Shift</button>
+										<span class="btn btn-default btn-rounded w-150"><a href="#" class="text-default">Cancel</a></span>
+									</div>
+								</div>
+							</form>
+						</div>
+
+					{{/if}}
+
+				</div>
+			</div>
+		</div>
+		<!-- End Hotels View -->
+
+	</div>
+</main>
+
+<!-- End Page Content -->
+
+
+{{> footer}}

@@ -1,0 +1,868 @@
+* {
+    outline: 0 !important;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    font-family: $font-family;
+    font-size: $font-size;
+    color: $font-color;
+    overflow-x: hidden;
+    background: transparent;
+    // -webkit-font-smoothing: antialised;
+}
+
+
+/* ====== Buttons ===== 
+------------------------------------------------------------ */
+button:focus {
+    outline: none!important;
+}
+
+/* ============================
+    Override Default Styles
+============================ */
+.btn {
+    font-weight: 300;
+    border: 1px solid #f0f0f0;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    white-space: initial;
+    line-height: 1.8;
+    border-radius: 3px;
+    background-image: none !important;
+    background-color: #ffffff;
+    color: $font-color;
+    text-shadow: none;
+    box-shadow: none;
+    padding: 5px 15px;
+    @include transition(color 0.2s linear 0s);
+    @include transition(background-color 0.2s linear 0s);
+
+    &:hover {
+        background-color: #fafafa;
+        border: 1px solid rgba(98,98,98,0.27);
+    }
+
+    i.pull-right,
+    i.pull-left {
+        line-height: 1.9;
+    }
+
+    
+
+    &.active {
+        border-color:#e6e6e6;
+        background:#fff;
+    }
+
+    &:focus,
+    &:active:focus,
+    &.active:focus {
+        outline: none!important;
+        outline-style: none;
+    }
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.active,
+    &.disabled,
+    &[disabled] {
+        box-shadow: none;
+    }
+}
+
+/* ============================
+    Buttons - Default
+============================ */
+.btn-default,
+.btn-default:focus {
+    color: #5e5e5e;
+    background-color: #ffffff;
+    border-color: #f0f0f0;
+}
+
+.btn-default.active,
+.btn-default:active,
+.btn-default.active:focus,
+.btn-default:active:focus,
+.btn-default:active:hover {
+    background-color: #f0f0f0;
+    border-color: #e6e6e6;
+    color: #2c2c2c;
+}
+
+.btn-default.hover,
+.btn-default:hover {
+    background-color: #fafafa;
+    border-color: rgba(98, 98, 98, 0.27);
+    color: #1a1a1a;
+}
+
+.btn-default.active:hover {
+    background: #f0f0f0;
+}
+
+/* ============================
+    Rounded Buttons
+============================ */
+.btn-rounded {
+    @include border-radius(50px);
+}
+
+/* ============================
+    Circle Buttons
+============================ */
+.btn-circle {
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    padding: 0;
+    font-size: 16px;
+    @include border-radius(50%);   
+}
+
+/* ============================
+    Buttons Variant
+============================ */
+@include btn-variant(primary, $primary);
+@include btn-variant(success, $success);
+@include btn-variant(info, $info);
+@include btn-variant(warning, $warning);
+@include btn-variant(danger, $danger);
+@include btn-variant(facebook, $facebook);
+@include btn-variant(google-plus, $google-plus);
+@include btn-variant(twitter, $twitter);
+
+/* ============================
+    Transparent Buttons Variant
+============================ */
+@include btn-transparent-variant(primary, $primary);
+@include btn-transparent-variant(success, $success);
+@include btn-transparent-variant(info, $info);
+@include btn-transparent-variant(warning, $warning);
+@include btn-transparent-variant(danger, $danger);
+@include btn-transparent-variant(white, $white);
+@include btn-transparent-variant(black, $black);
+@include btn-transparent-variant(grey, $grey);
+
+/* ====== Dropdown ===== 
+------------------------------------------------------------ */
+.btn-group {
+    
+    /* ============================
+        Adding Transition to Dropdown
+    ============================ */
+    > .dropdown-menu {
+        @include transform-origin(top);
+        @include animation-fill-mode(forwards);
+        @include scale2d(1, 0);
+        @include transition(all 0.2s ease-out);
+        display: block;
+    }
+
+    &.dropup {
+
+        > .dropdown-menu {
+            @include transform-origin(bottom);
+        }
+    }
+
+    &.open {
+
+        > .dropdown-toggle {
+            box-shadow: none;
+        }
+
+        > .dropdown-menu {
+            -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+        }
+        
+        /* ============================
+            Dropdown - Default
+        ============================ */
+        .btn-default,
+        .btn-default:focus {
+            color: #5e5e5e;
+            background-color: #f0f0f0;
+            border-color:rgba(98, 98, 98, 0.27);
+        }
+        
+        /* ============================
+            Dropdown - Primary
+        ============================ */
+        .btn-primary,
+        .btn-primary:focus {
+            color: $white;
+            background-color: darken($primary, 12%);
+            border-color: darken($primary, 12%);
+        }
+    
+        /* ============================
+            Dropdown - Success
+        ============================ */
+        .btn-success,
+        .btn-success:focus {
+            color: $white;
+            background-color: darken($success, 12%);
+            border-color: darken($success, 12%);
+        }
+        
+        /* ============================
+            Dropdown - Info
+        ============================ */
+        .btn-info,
+        .btn-info:focus {
+            color: $white;
+            background-color: darken($info, 12%);
+            border-color: darken($info, 12%);
+        }
+        
+        /* ============================
+            Dropdown - Warning
+        ============================ */
+        .btn-warning,
+        .btn-warning:focus {
+            color: $white;
+            background-color: darken($warning, 12%);
+            border-color: darken($warning, 12%);
+        }
+    
+        /* ============================
+            Dropdown - Danger
+        ============================ */
+        .btn-danger,
+        .btn-danger:focus {
+            color: $white;
+            background-color: darken($danger, 12%);
+            border-color: darken($danger, 12%);
+        }
+    }
+    
+
+    /* ============================
+        Override Default Styles
+    ============================ */
+    .dropdown-menu {
+        padding: 0;
+        margin: 0;
+        border-color: rgba(0, 0, 0, 0.07);
+        box-shadow: 0 1px 0px #ddd;
+        background-clip: initial;
+        @include border-radius(3px);
+
+        > li {
+
+            > a {
+                padding: 10px 10px;
+                color: #757474;
+                @include transition(color 0.2s ease-in);
+
+                &:hover {
+                    color: $font-color;
+                    background: transparent;
+                }
+            }
+        }
+    }
+}
+
+.dropdown {
+    .dropdown-menu {
+        padding: 0;
+        margin: 0;
+        border-color: rgba(0, 0, 0, 0.07);
+        box-shadow: 0 1px 0px #ddd;
+        background-clip: initial;
+        @include border-radius(3px);
+
+        > li {
+
+            > a {
+                padding: 10px 10px;
+                color: #757474;
+                @include transition(color 0.2s ease-in);
+
+                &:hover {
+                    color: $font-color;
+                    background: transparent;
+                }
+            }
+        }
+    }
+}
+
+/* ====== Form Group ===== 
+------------------------------------------------------------ */
+.form-group {
+    label {
+        color: #626262;
+        font-family: $font-family;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 11px;
+        letter-spacing: 0.04em;
+        padding-left: 20px;
+    }
+
+    textarea {
+        border-radius: 10px !important;
+    }
+
+    .input-group {
+        &.input-group-addon-right {
+            input {
+                border-right: none;
+            }
+
+            .input-group-addon {
+                border: solid 1px #e5e5e5;
+                border-left: none;
+                border-top-right-radius: 50px;
+                border-bottom-right-radius: 50px;
+            }
+
+            i {
+                font-size: 16px;
+                color: $danger;
+            }
+            
+        }
+
+        &.input-group-addon-left {
+            input {
+                border-left: none;
+            }
+
+            .input-group-addon {
+                border: solid 1px #e5e5e5;
+                border-right: none;
+                border-top-left-radius: 50px;
+                border-bottom-left-radius: 50px;
+            }
+
+            i {
+                font-size: 16px;
+                color: $danger;
+            }
+        }
+
+        .input-group-addon {
+            border-width: 2px;
+            border-color: #fff;
+            background: #fff;
+        }
+    }
+}
+.form-control {
+    box-shadow: none;
+    border: 1px solid #e5e5e5;
+    padding: 10px 20px;
+    height: 45px;
+    line-height: 25px;
+    color: $font-color;
+    background: white;
+    @include appearance(none);
+    @include border-radius(50px);
+
+    &.input-lg {
+        height: 55px;
+        line-height: 35px;
+    }
+
+    &.input-sm {
+        height: 35px;
+        padding: 5px 10px;
+        line-height: 25px;
+    }
+
+    &:focus {
+        box-shadow: none;
+        border-color: #ababab;
+    }
+
+    // @include placeholder(#aaa);
+}
+
+.select-wrapper {
+    position: relative;
+
+    
+    &:after {
+        content: "\f107" !important;
+        font-family: "FontAwesome" !important;
+        // display: inline-block;
+        position: absolute;
+        top: 13px;
+        right: 20px;
+    }
+}
+
+select.input-sm {
+    line-height: 20px !important;
+}
+
+.form-inline {
+    .checkbox-default {
+        > span {
+            margin-left: 25px;
+        }
+    }
+    .form-group {
+        margin-right: 15px;
+
+        label {
+            margin-right: 5px;
+        }
+    }
+}
+
+.checkbox,
+.checkbox-inline {
+    position: relative;
+
+    input[type="checkbox"] {
+        visibility: hidden;
+        margin: 0;
+
+        &:checked + label {
+            &:before {
+                background-color: $danger;
+                border-color: $danger;
+            }
+
+            &:after {
+                opacity: 1;
+            }
+        }
+    }
+
+    label {
+        padding-left: 30px;
+        line-height: 20px;
+        font-size: 14px;
+        font-weight: normal;
+        cursor: pointer;
+
+        &:before {
+            content: '';
+            display: block;
+            background: transparent;
+            border: solid 2px #5a5a5a;
+            height: 15px;
+            width: 15px;
+            border-radius: 4px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+
+        &:after {
+            border: 2px solid #fff;
+            border-top: none;
+            border-right: none;
+            content: "";
+            height: 5px;
+            left: 3px;
+            opacity: 0;
+            position: absolute;
+            top: -1px;
+            transform: rotate(-45deg);
+            width: 10px;
+            bottom: 0;
+            margin: auto;
+        }
+    }
+}
+
+.checkbox-inline {
+    label {
+        padding-left: 5px;
+        margin-bottom: 0;
+        font-weight: normal;
+    }
+}
+
+
+hr {
+    border-top-color: #d9d9d9;
+}
+
+
+
+
+// .radio,
+// .radio-inline {
+//     position: relative;
+
+//     input[type="radio"] {
+//         visibility: hidden;
+//         margin: 0;
+
+//         &:checked + label {
+//             &:before {
+//                 background-color: $danger;
+//                 border-color: $danger;
+//             }
+
+//             &:after {
+//                 opacity: 1;
+//             }
+//         }
+//     }
+
+//     label {
+//         padding-left: 30px;
+//         line-height: 20px;
+//         font-size: 14px;
+//         font-weight: normal;
+//         cursor: pointer;
+
+//         &:before {
+//             content: '';
+//             display: block;
+//             background: transparent;
+//             border: solid 2px #aaa;
+//             height: 20px;
+//             width: 20px;
+//             border-radius: 50%;
+//             position: absolute;
+//             left: 0;
+//             top: 0;
+//             bottom: 0;
+//         }
+
+//         &:after {
+//             content: "";
+//             height: 20px;
+//             width: 20px;
+//             left: 0;
+//             top: 0;
+//             bottom: 0;
+//             opacity: 0;
+//             position: absolute;
+//             background: $danger;
+//             border-radius: 50px;
+//             @include transition(.28s ease);
+//         }
+//     }
+// }
+
+// .radio-inline {
+//     label {
+//         padding-left: 10px;
+//         font-weight: normal;
+//     }
+// }
+
+
+.radio-default {
+	/* Remove default Radio Buttons */
+	[type="radio"]:not(:checked),
+	[type="radio"]:checked {
+		position: absolute;
+		left: -9999px;
+	}
+
+	[type="radio"]:not(:checked) + label,
+	[type="radio"]:checked + label {
+		position: relative;
+		padding-left: 30px;
+		cursor: pointer;
+		display: inline-block;
+		height: 15px;
+        line-height: 15px;
+        font-weight: normal;
+		font-size: 14px;
+		@include transition(.28s ease);
+
+		-webkit-user-select: none; /* webkit (safari, chrome) browsers */
+		-moz-user-select: none; /* mozilla browsers */
+		-khtml-user-select: none; /* webkit (konqueror) browsers */
+		-ms-user-select: none; /* IE10+ */
+	}
+
+	[type="radio"] + label:before,
+	[type="radio"] + label:after {
+		content: '';
+		position: absolute;
+		left: 0px;
+        top: 0px;
+        bottom: 0;
+		margin: auto;
+		width: 15px;
+		height: 15px;
+		z-index: 0;
+		@include transition(.28s ease);
+	}
+
+	/* Unchecked styles */
+	[type="radio"]:not(:checked) + label:before {
+		border-radius: 50%;
+		border: 2px solid #5a5a5a;
+	}
+	[type="radio"]:not(:checked) + label:after {
+		border-radius: 50%;
+		border: 2px solid #5a5a5a;
+		z-index: -1;
+
+		@include transform(scale(0));
+	}
+
+	/* Checked styles */
+	[type="radio"]:checked + label:before {
+		border-radius: 50%;
+		border: 2px solid transparent;
+	}
+	[type="radio"]:checked + label:after {
+		border-radius: 50%;
+		border: 2px solid $primary;
+		background-color: $primary;
+		z-index: 0;
+		@include transform(scale(1.02));
+	}
+
+	/* Radio With gap */
+	[type="radio"].with-gap:checked + label:before {
+		border-radius: 50%;
+		border: 2px solid $primary;
+	}
+	[type="radio"].with-gap:checked + label:after {
+		border-radius: 50%;
+		border: 2px solid $primary;
+		background-color: $primary;
+		z-index: 0;
+		@include transform(scale(.5));
+	}
+
+	/* Disabled style */
+	[type="radio"]:disabled:not(:checked) + label:before,
+	[type="radio"]:disabled:checked + label:before {
+		background-color: transparent;
+		border-color: rgba(0,0,0, .26);
+	}
+	[type="radio"]:disabled + label {
+		color: rgba(0,0,0, .26);
+	}
+	[type="radio"]:disabled:not(:checked) + label:hover:before {
+		border-color: rgba(0,0,0, .26);
+	}
+
+	&.primary {
+		[type="radio"]:checked + label:after {
+			border: 2px solid $primary;
+			background-color: $primary;
+		}
+
+		/* Radio With gap */
+		[type="radio"].with-gap:checked + label:before {
+			border: 2px solid $primary;
+		}
+		[type="radio"].with-gap:checked + label:after {
+			border: 2px solid $primary;
+			background-color: $primary;
+		}
+	}
+
+	&.success {
+		[type="radio"]:checked + label:after {
+			border: 2px solid $success;
+			background-color: $success;
+		}
+
+		/* Radio With gap */
+		[type="radio"].with-gap:checked + label:before {
+			border: 2px solid $success;
+		}
+		[type="radio"].with-gap:checked + label:after {
+			border: 2px solid $success;
+			background-color: $success;
+		}
+	}
+
+	&.info {
+		[type="radio"]:checked + label:after {
+			border: 2px solid $info;
+			background-color: $info;
+		}
+
+		/* Radio With gap */
+		[type="radio"].with-gap:checked + label:before {
+			border: 2px solid $info;
+		}
+		[type="radio"].with-gap:checked + label:after {
+			border: 2px solid $info;
+			background-color: $info;
+		}
+	}
+
+	&.warning {
+		[type="radio"]:checked + label:after {
+			border: 2px solid $warning;
+			background-color: $warning;
+		}
+
+		/* Radio With gap */
+		[type="radio"].with-gap:checked + label:before {
+			border: 2px solid $warning;
+		}
+		[type="radio"].with-gap:checked + label:after {
+			border: 2px solid $warning;
+			background-color: $warning;
+		}
+	}
+
+	&.danger {
+		[type="radio"]:checked + label:after {
+			border: 2px solid $danger;
+			background-color: $danger;
+		}
+
+		/* Radio With gap */
+		[type="radio"].with-gap:checked + label:before {
+			border: 2px solid $danger;
+		}
+		[type="radio"].with-gap:checked + label:after {
+			border: 2px solid $danger;
+			background-color: $danger;
+		}
+	}
+}
+
+
+
+
+/*
+ * Alert
+ * ================================ */
+
+.alert {
+    font-family: $font-family;
+    padding: 15px 15px;
+    @include border-radius(4px);
+    border: none;
+    box-shadow: 0 7px 4px -3px rgba(0,0,0,0.3);
+
+    &.alert-primary {
+        background: lighten($primary, 35%);
+        color: darken($primary, 15%);
+
+        .close {
+            color: darken($primary, 15%);
+        }
+    }
+
+    &.alert-success {
+        background: lighten($success, 45%);
+        color: darken($success, 15%);
+
+        .close {
+            color: darken($success, 15%);
+        }
+    }
+
+    &.alert-info {
+        background: lighten($info, 45%);
+        color: darken($info, 15%);
+
+        .close {
+            color: darken($info, 15%);
+        }
+    }
+
+    &.alert-warning {
+        background: lighten($warning, 40%);
+        color: darken($warning, 15%);
+
+        .close {
+            color: darken($warning, 15%);
+        }
+    }
+
+    &.alert-danger {
+        background: lighten($danger, 36%);
+        color: darken($danger, 15%);
+
+        .close {
+            color: darken($danger, 15%);
+        }
+    }
+}
+
+
+
+
+
+
+.twitter-typeahead {
+    width: 100%;
+
+    .tt-menu {
+        width: 100%;
+        background: $white;
+        box-shadow: 0 0 8px 0 rgba(0,0,0,0.12);
+        border-radius: 5px;
+        overflow: hidden;
+
+        .tt-dataset {
+            .tt-suggestion {
+               padding: 15px;
+               border-bottom: solid 1px #f9f9f9;
+
+               &.tt-cursor {
+                   background: lighten($info, 52%);
+               }
+
+               &:hover {
+                   background: lighten($info, 52%);
+               }
+            }
+        }
+    }
+
+    .tt-hint {
+        color: #999;
+    }
+
+    .AVAILABLE {
+        color: $available;
+    }
+
+    .ON_HOLD {
+        color: $on-hold;
+    }
+
+    .CONFIRMED {
+        color: $confirmed;
+    }
+
+    .CHECK_IN {
+        color: $checkin;
+    }
+
+    .OCCUPIED {
+        color: $occupied;
+    }
+
+    .CHECK_OUT {
+        color: $checkout;
+    }
+
+    .VACATED {
+        color: $vacated;
+    }
+
+    .NO_SHOW {
+        color: $no-show;
+    }
+}

@@ -1,0 +1,272 @@
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+
+		/* start of add more field */
+
+        var max_fields      = 20;
+        var wrapper         = $(".closing-collection"); 
+        var add_button      = $("#add-more"); 
+        var x = 1; 
+        $(document).on("click","#add-more",function(e){ 
+            e.preventDefault();
+            if(x < max_fields){ 
+				var last_val = $(".first-miscellaneous").val();
+				var last_remarks = $(".first-remarks").val();
+                x++;
+                $(wrapper).append('<div class="line-items row"><div class="form-group col-md-5"><label>Miscellaneous Expenses</label><input class="form-control miscellaneous" type="text" value="'+last_val+'" name="miscellaneous[]" id="miscellaneous"></div><div class="form-group col-md-5"><label>Remarks</label><input class="form-control" type="text" value="'+last_remarks+'" name="remarks[]" id="remarks"></div><div class="col-md-2 delete m-xs-t"><a href="#" class="btn btn-danger btn-rounded w-150 m-lg-t">Delete</a></div></div>'); //add input box
+				$(".adv-open"+x).hide();
+				$(".min"+x).hide();
+				$(".first-miscellaneous").val("");
+				$(".first-remarks").val("");
+			}
+            else
+            {
+            alert('You Reached the limits')
+            }
+        });
+
+		var initial_total = $("#total-closing").val();
+		var closing_total = 0;
+
+        $(wrapper).on("click",".delete", function(e){ 
+            e.preventDefault(); $(this).parent('div').remove(); x--;
+			$(".miscellaneous").each(function(){
+				if($(this).val() > 0){
+					closing_total += parseFloat($(this).val());
+				}
+			});
+			var withdrawl = $("#withdrawl").val();
+			if(withdrawl > 0){ closing_total += parseFloat(withdrawl); }
+			var final_total = parseFloat(initial_total) - parseFloat(closing_total);
+			var final_total = parseFloat(final_total).toFixed(2);
+			$("#closingbalance").html(final_total);
+			$("#total-price").html('<h3 class="fw-thk m-xl-b text-danger">'+ final_total +'</strong></h3>');
+			closing_total = 0;
+		});
+
+		/* End of add more field */
+
+		$('#submitBtn').click(function() {
+			var place = $("#total-price").html();
+			$("#closingbalance").html(place);
+		});
+
+		$(document).on("blur",".miscellaneous",function(){
+			$(".miscellaneous").each(function(){
+				if($(this).val() > 0){
+					closing_total += parseFloat($(this).val());
+				}
+			});
+			var withdrawl = $("#withdrawl").val();
+			if(withdrawl > 0){ closing_total += parseFloat(withdrawl); }
+			var final_total = parseFloat(initial_total) - parseFloat(closing_total);
+			var final_total = parseFloat(final_total).toFixed(2);
+			$("#closingbalance").html(final_total);
+			$("#total-price").html('<h3 class="fw-thk m-xl-b text-danger">'+ final_total +'</strong></h3>');
+			closing_total = 0;
+		});
+
+		$(document).on("blur","#withdrawl",function(){
+			$(".miscellaneous").each(function(){
+				if($(this).val() > 0){
+					closing_total += parseFloat($(this).val());
+				}
+			});
+			var withdrawl = $("#withdrawl").val();
+			if(withdrawl > 0){ closing_total += parseFloat(withdrawl); }
+			var final_total = parseFloat(initial_total) - parseFloat(closing_total);
+			var final_total = parseFloat(final_total).toFixed(2);
+			$("#closingbalance").html(final_total);
+			$("#total-price").html('<h3 class="fw-thk m-xl-b text-danger">'+ final_total +'</strong></h3>');
+			closing_total = 0;
+		});
+
+		$('#submit').click(function(e){
+			if($("#acknowledge").is(':checked')){
+				$('#shift-closing-form').submit();
+				return true;
+			} else {
+				e.preventDefault();
+				alert("Please click the ackonwledge button");
+				return false;
+			}
+		});
+
+	});
+</script>
+
+
+{{> nav this}}
+
+{{> header}}
+
+<!-- Begin Page Content -->
+<main id="page-content">
+	<div class="row row-xl page-title">
+		<div class="pull-left">
+			<h3 class="text-black fw-semi-thk">Shift Closing</h3>
+		</div>
+	</div>
+
+	<div class="page-container">
+			{{#if errors}}
+				<div class="alert alert-danger"> {{ errors }}</div>
+		{{/if}}
+		{{#if message}}
+				<div class="alert alert-success"> {{ message }}</div>
+		{{/if}}
+
+		{{#if output }}
+
+		<div class="row row-xl">
+			<div class="col-md-12">
+				<div class="table-view table-responsive">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th></th>
+								<th>Cash</th>
+								<th>ONLINE</th>
+								<th>POS</th>
+								<th>City Ledger</th>
+								<th>Total</th>
+							</tr>          
+						</thead>
+						<tbody>
+							<tr><td>Opening Balance</td><td>{{#round output.openingBalance }}{{/round}}</td><td>0</td><td>0</td><td>0</td><td>{{#round output.openingBalance }}{{/round}}</td></tr>
+							<tr><td>Top Up</td><td>{{#round output.topUpFloat }}{{/round}}</td><td>0</td><td>0</td><td>0</td><td>{{#round output.topUpFloat }}{{/round}}</td></tr>
+							<tr><td>Opening Float</td><td>{{#round output.openingFloat }}{{/round}}</td><td>0</td><td>0</td><td>0</td><td>{{#round output.openingFloat }}{{/round}}</td></tr>
+							<tr><td>Walk In / Pay At Hotel</td><td>{{#round output.walkIn.cash }}{{/round}}</td><td>{{#round output.walkIn.creditCard }}{{/round}}</td><td>{{#round output.walkIn.pos }}{{/round}}</td><td>{{#round output.walkIn.cityLedger }}{{/round}}</td><td>{{#round output.walkIn.total }}{{/round}}</td></tr>
+							<tr><td>Deposit Collected</td><td>{{#round output.depositCollected.cash }}{{/round}}</td><td>{{#round output.depositCollected.creditCard }}{{/round}}</td><td>{{#round output.depositCollected.pos }}{{/round}}</td><td>{{#round output.depositCollected.cityLedger }}{{/round}}</td><td>{{#round output.depositCollected.total }}{{/round}}</td></tr>
+							<tr><td>Deposit Refund</td><td>{{#round output.depositRefund }}{{/round}}</td><td>0</td><td>0</td><td>0</td><td>{{#round output.depositRefund }}{{/round}}</td></tr>
+							<tr><td>Booking Refund</td><td>{{#round output.bookingRefund }}{{/round}}</td><td>{{#round output.bookingRefund }}{{/round}}</td><td>0</td><td>0</td><td>{{#round output.bookingRefund }}{{/round}}</td></tr>
+							<tr><td>Loss & Damages Fee</td><td>{{#round output.lossDamageFee }}{{/round}}</td><td>0</td><td>0</td><td>0</td><td>{{#round output.lossDamageFee }}{{/round}}</td></tr>
+							<tr><td>Tourism Tax</td><td>{{#round output.tourismTax.cash }}{{/round}}</td><td>{{#round output.tourismTax.creditCard }}{{/round}}</td><td>{{#round output.tourismTax.pos }}{{/round}}</td><td>{{#round output.tourismTax.cityLedger }}{{/round}}</td><td>{{#round output.tourismTax.total }}{{/round}}</td></tr>
+							<tr><td>Closing Balance</td><td>{{#round cash_total }}{{/round}}</td><td>{{#round credit_card_total }}{{/round}}</td><td>{{#round pos_total }}{{/round}}</td><td>{{#round cityLedger_total }}{{/round}}</td><td>{{#round total }}{{/round}}</td></tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		{{#if islogout }}
+		<div class="row row-xl">
+			<div class="col-md-12">
+				<div class="shift-closing-form">
+					<form id="shift-closing-form" class="" action='/pms/shift/closing?hotel_id={{ hotel_id }}' method="POST">
+						<input type="hidden" name="user_uuid" value="{{ user_details._user_id }}" id="user_id" class="">
+						<input type="hidden" name="hotel_id" value="{{ hotel_id }}" id="hotel_id" class="">
+
+						<div class="form-group col-md-5">
+							
+						</div>
+
+						<div class="form-group col-md-5">
+							
+						</div>
+
+						<div class="closing-collection" id="closing-collection">
+							<div class="line-items row m-xl-t">
+								<div class="form-group col-md-5">
+									<label>Miscellaneous Expenses</label>
+									<input class="form-control miscellaneous first-miscellaneous"  type="text" value="{{ output.miscellaneous }}" name="miscellaneous[]" id="miscellaneous">
+								</div>
+
+								<div class="form-group col-md-5">
+									<label>Remarks</label>
+									<input class="form-control first-remarks" type="text" value="" name="remarks[]" id="remarks">
+								</div>
+
+								<div class="col-md-2 m-xs-t">
+									<span class="btn btn-danger btn-rounded m-lg-t w-150" id="add-more">Add More</span>
+								</div>
+							</div>
+						</div>
+
+					
+					<div class="line-items row m-xl-t">
+						<div class="col-md-12">
+							<div class="col-md-6">
+								<label>Cash Out</label>
+								<input type="textbox" name="withdrawal" id="withdrawl" value="0" class="form-control">
+							</div>
+						</div>
+					</div>
+
+						<div class="row row-xl m-lg-t">
+							<div class="col-md-12">
+								<div class="actual-closing-balance text-center">
+									<div><span class="text-uppercase fs-sm">Final Cash Closing Balance </span></div>
+									<div id="total-price"><h1 class="fw-thk text-danger m-sm-t m-lg-b">{{#round cash_total }}{{/round}} <small class="fs-sm text-grey"> {{ paymentCurrency }}</small></h1></div>
+									<input type="hidden" value="{{ cash_total }}" name="total_closing" id="total-closing">
+								</div>
+							</div>
+						</div>
+
+						<div class="row row-xl m-xl-b">
+							<div class="col-md-12 text-center">
+								<input type="button" name="btn" value="Submit" id="submitBtn" data-toggle="modal" data-target="#confirm-submit" class="btn btn-danger w-150 btn-rounded" />
+								<span class="btn btn-default btn-rounded w-150"><a href="#" class="text-default">Cancel</a></span>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		{{else}}
+			<label>Shift Opened By :</label> {{ shiftOpenedBy }}
+		{{/if}}
+		{{/if}}
+	</div>
+</main>
+
+<!-- End Page Content -->
+
+{{> footer}}
+
+
+<div class="modal fade modal-top" id="confirm-submit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+		<div class="modal-content-container">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">×</button>
+					<h5 class="text-uppercase fw-semi-thk text-black m-n">Shift Closing Summary</h5>
+				</div>
+				<div class="modal-body p-xl-t">
+					<div class="row m-md-b">
+						<div class="col-md-12">
+							<span>Person In Charge : </span> <span class="fw-semi-thk text-black">{{ user_details._first_name }} {{ user_details._last_name }}</span>
+						</div>
+					</div>
+
+					<div class="row m-md-b">
+						<div class="col-md-6">
+							<span>Start Time :</span> <span class="fw-semi-thk text-black">{{#countrycustomDateFormatwithTime output.begin country_name }}{{/countrycustomDateFormatwithTime}}</span>
+						</div>
+						<div class="col-md-6">
+							<span>End Time : </span><span class="fw-semi-thk text-black">{{#countrycustomDateFormatwithTime output.end country_name}}{{/countrycustomDateFormatwithTime}}</span>
+						</div>
+					</div>
+
+					<div class="row m-md-b">
+						<div class="col-md-12">
+							<span>Closing Balance : </span><span class="fw-semi-thk text-black" id="closingbalance">{{ cash_total }}</span>
+						</div>
+					</div>
+					
+					<div class="checkbox">
+						<input type="checkbox" class="acknowledge" value="" id="acknowledge" name="ackonwledge">
+						<label for="acknowledge">I confirm that the above details are correct</label>
+					</div>
+
+					<div class="row m-xl-t">
+						<div class="col-md-12 text-right">
+							<button type="button" class="btn btn-default btn-rounded w-150" data-dismiss="modal">Cancel</button>
+							<a href="#" id="submit" class="btn btn-danger w-150 btn-rounded">Submit</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+</div>

@@ -1,0 +1,104 @@
+{{> header }}
+
+<section>
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="/">Edit DC</a>
+        </li>
+        <li class="breadcrumb-item active">Edit DC</li>
+      </ol>
+      <div class="row mx-3">
+        <div class="col-12">
+                <h1>Edit DC</h1>
+                <form name="dcedit" id="dc_edit" action="/dc/{{ output.uuid }}/edit" data-toggle="validator" method="POST">
+                <input type="hidden" name="uuid" value="{{ output.uuid }}">
+                <div class="form-group required">
+                    <label class="control-label">Name</label>
+                    <input class="form-control" value="{{ output.name }}" name="name" id="name" type="text" placeholder="Name" required>
+                    <p class="help-block text-danger"></p>
+                </div>
+                
+                <div class="form-group required">
+                    <label class="control-label">Address 1</label>
+                    <input class="form-control" value="{{ output.address_1 }}" name="address_1" id="address_1" type="text" placeholder="Address 1" required>
+                    <p class="help-block text-danger"></p>
+                </div>
+                              
+                <div class="form-group required">
+                    <label class="control-label">Address 2</label>
+                    <input class="form-control" value="{{ output.address_2 }}" name="address_2" id="address_2" type="text" placeholder="Address 2" required>
+                    <p class="help-block text-danger"></p>
+                </div>
+
+                <div class="form-group required">
+                    <label class="control-label">Area</label>
+                    <input class="form-control" value="{{ output.area }}" name="area" id="area" type="text" placeholder="area" required>
+                    <p class="help-block text-danger"></p>
+                </div>
+
+                <div class="form-group required">
+                    <label class="control-label">city</label>
+                    <input class="form-control" value="{{ output.city }}" name="city" id="city" type="text" placeholder="City" required>
+                    <p class="help-block text-danger"></p>
+                </div>
+                                
+                <div class="form-group required">
+                    <label class="control-label">State</label>
+                    <input class="form-control" value="{{ output.state }}" name="state" id="state" type="text" placeholder="State" required>
+                    <p class="help-block text-danger"></p>
+                </div>
+
+                <div class="form-group required">
+                    <label class="control-label">Pin Code</label>
+                    <input class="form-control" value="{{ output.pincode }}" name="pincode" id="pincode" type="text" placeholder="Pin Code" required>
+                    <p class="help-block text-danger"></p>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Full Address</label>
+                    <input class="postcode form-control" id="Postcode" name="Postcode" type="text" value="Indira Nagar, IN">
+                    <span id="findbutton" class="btn btn-primary">Find</span>
+                </div>
+        
+                <div id="map" style="width:700px; height:400px"></div>
+
+
+                <div class="form-group required">
+                    <label class="control-label">Latitude</label>
+                    <input class="form-control" value="{{ output.latitude }}" name="latitude" id="latitude" type="text" placeholder="Longitude" required>
+                    <p class="help-block text-danger"></p>
+                </div>
+                           
+                <div class="form-group required">
+                    <label class="control-label">Longitude</label>
+                    <input class="form-control" value="{{ output.longitude }}" name="longitude" id="longitude" type="text" placeholder="Longitude" required>
+                    <p class="help-block text-danger"></p>
+                </div>
+
+                <div class="form-group required">
+                    <label class="control-label">Status</label>
+                    <div class="radio">
+                    <label><input type="radio" {{#equal output.status '1' }} checked="checked" {{/equal}} value="1" name="status"> Active</label>
+                    </div>
+                    <div class="radio">
+                    <label><input type="radio" {{#equal output.status '0' }} checked="checked" {{/equal}} value="0" name="status"> InActive</label>
+                    </div>
+                </div>                      
+                
+                <div id="success"></div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-xl">Submit</button>
+                </div>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript" src="/js/geocode.js"></script>
+
+{{> footer }}

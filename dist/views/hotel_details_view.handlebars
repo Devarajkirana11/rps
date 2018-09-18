@@ -1,0 +1,269 @@
+{{> nav}}
+
+{{> header}}
+
+<main id="page-content">
+    <div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Hotel Details</h3>
+        </div>
+    </div>
+
+    <div class="page-container">
+        {{#if errors}}
+        <ul>
+            {{#each errors}}
+            <li>
+                <div class="text-danger"> {{ msg }}</div>
+            </li>
+            {{/each}}
+        </ul>
+        {{/if}}
+        {{#if success }}
+        <div class="alert alert-success">{{ message}}</div>
+        {{else if message }}
+        <div class="alert alert-danger">{{ message}}</div>
+        {{/if}}
+        {{#if data}}
+        <div class="row">
+            <div class="col-md-12 text-right m-lg-b">
+            <a href="/hotel_details/{{data._hotel_id}}/edit" class="btn btn-danger btn-rounded w-150 text-left">Edit <i class="fa fa-edit fa-fw pull-right"></i></a>                
+            </div>
+        </div>
+        <div class="row row-xl">
+            <div class="col-md-6">
+                {{!-- Begin Hotel Nida Name --}}
+                <div class="row m-sm-b">
+                    <div class="col-md-5 col-sm-6 col-xs-12">
+                        <p>Hotel NIDA Name :</p>
+                    </div>
+
+                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                        <p>{{#if data._nida_stay_name }} {{ data._nida_stay_name }} {{/if}} </p>
+                    </div>
+                </div>
+                {{!-- End Hotel Nida Name --}}
+
+                {{!-- Begin Country --}}
+                <div class="row m-sm-b">
+                    <div class="col-md-5 col-sm-6 col-xs-12">
+                        <p>Country:</p>
+                    </div>
+
+                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                        <p>{{#if data._country_id }} {{data._country_id }} {{/if}}</p>
+                    </div>
+                </div>
+                {{!-- End Country --}}
+
+                {{!-- Begin City --}}
+                <div class="row m-sm-b">
+                    <div class="col-md-5 col-sm-6 col-xs-12">
+                        <p>City:</p>
+                    </div>
+
+                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                        <p>{{#if data._city_id }} {{ data._city_id }} {{/if}}</p>
+                    </div>
+                </div>
+                {{!-- End City --}}
+
+                {{!-- Begin State --}}
+                <div class="row m-sm-b">
+                    <div class="col-md-5 col-sm-6 col-xs-12">
+                        <p>State:</p>
+                    </div>
+
+                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                        <p>{{#if data._state_id }} {{ data._state_id }} {{/if}}</p>
+                    </div>
+                </div>
+                {{!-- End State --}}
+
+                {{!-- Begin Location --}}
+                <div class="row m-sm-b">
+                    <div class="col-md-5 col-sm-6 col-xs-12">
+                        <p>Location:</p>
+                    </div>
+
+                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                        <p>{{#if data._locality_id }} {{ data._locality_id }} {{/if}}</p>
+                    </div>
+                </div>
+                {{!-- End Location --}}
+
+                {{!-- Begin Total Rooms --}}
+                <div class="row m-sm-b">
+                    <div class="col-md-5 col-sm-6 col-xs-12">
+                        <p>Total No of Rooms:</p>
+                    </div>
+
+                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                        <p>{{#if data._total_no_Of_rooms }} {{ data._total_no_Of_rooms }} {{/if}}</p>
+                    </div>
+                </div>
+                {{!-- End Total Rooms --}}
+            </div>
+
+            <div class="col-md-6">
+                {{!-- Begin Actual Hotel Name --}}
+                <div class="row m-sm-b">
+                    <div class="col-md-5 col-sm-6 col-xs-12">
+                        <p>Actual Hotel Name:</p>
+                    </div>
+
+                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                        <p>{{#if data._actual_hotel_name }} {{ data._actual_hotel_name }} {{/if}}</p>
+                    </div>
+                </div>
+                {{!-- End Actual Hotel Name --}}
+
+                {{!-- Begin Address Line 1 --}}
+                <div class="row m-sm-b">
+                    <div class="col-md-5 col-sm-6 col-xs-12">
+                        <p>Address Line 1:</p>
+                    </div>
+
+                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                        <p>{{#if data._address_line1 }} {{ data._address_line1 }} {{/if}}</p>
+                    </div>
+                </div>
+                {{!-- End Address Line 1 --}}
+
+                {{!-- Begin Address Line 2 --}}
+                <div class="row m-sm-b">
+                    <div class="col-md-5 col-sm-6 col-xs-12">
+                        <p>Address Line 2:</p>
+                    </div>
+
+                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                        <p>{{#if data._address_line2 }} {{ data._address_line2 }} {{/if}}</p>
+                    </div>
+                </div>
+                {{!-- End Address Line 2 --}}
+
+                {{!-- Begin Zip / Postal Code --}}
+                <div class="row m-sm-b">
+                    <div class="col-md-5 col-sm-6 col-xs-12">
+                        <p>Zip / Postal Code:</p>
+                    </div>
+
+                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                        <p>{{#if data._zipcode }} {{ data._zipcode }} {{/if}}</p>
+                    </div>
+                </div>
+                {{!-- End Zip / Postal Code --}}
+
+                {{!-- Begin Latitude --}}
+                <div class="row m-sm-b">
+                    <div class="col-md-5 col-sm-6 col-xs-12">
+                        <p>Latitude:</p>
+                    </div>
+
+                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                        <p>{{#if data._latitude }} {{ data._latitude }} {{/if}}</p>
+                    </div>
+                </div>
+                {{!-- End Latitude --}}
+
+                {{!-- Begin Longitude --}}
+                <div class="row m-sm-b">
+                    <div class="col-md-5 col-sm-6 col-xs-12">
+                        <p>Longitude:</p>
+                    </div>
+
+                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                        <p>{{#if data._longitude }} {{ data._longitude }} {{/if}}</p>
+                    </div>
+                </div>
+                {{!-- End Longitude --}}
+            </div>
+        </div>
+        <div class="row row-xl">
+            <div class="col-md-6">
+                <p class="row"><span class="col-md-5 text-capitalize">Hotel Type :</span><span class="col-md-7 fw-semi-thk text-black text-capitalize">{{#if data._hotel_type }} {{ data._hotel_type }} {{/if}} </span></p>
+            </div>
+            <div class="col-md-6">
+                <p class="row"><span class="col-md-5 text-capitalize">Hotel Status :</span><span class="col-md-7 fw-semi-thk text-black text-capitalize">{{#if data._status }} {{ data._status }} {{/if}} </span></p>
+            </div>
+        </div>
+        <div class="row row-xl">
+            <div class="col-md-6">
+                <p class="row"><span class="col-md-5 text-capitalize">Hotel Code :</span><span class="col-md-7 fw-semi-thk text-black text-capitalize">{{#if data._code }} {{ data._code }} {{/if}} </span></p>
+            </div>
+            <div class="col-md-6">
+                <p class="row"><span class="col-md-5 text-capitalize">Trip Advisor Rating :</span><span class="col-md-7 fw-semi-thk text-black text-capitalize">{{#if data._rating_snippet }} {{ data._rating_snippet }} {{/if}} </span></p>
+            </div>
+        </div>
+        <div class="row row-xl">
+            <div class="col-md-6">
+                <p class="row"><span class="col-md-5 text-capitalize">OTA Username:</span><span class="col-md-7 fw-semi-thk text-black text-capitalize">{{#if data._ota_username }} {{ data._ota_username }} {{/if}} </span></p>
+            </div>
+            <div class="col-md-6">
+                <p class="row"><span class="col-md-5 text-capitalize">OTA Password:</span><span class="col-md-7 fw-semi-thk text-black text-capitalize">{{#if data._ota_password }} {{ data._ota_password }} {{/if}} </span></p>
+            </div>
+        </div>
+        <div class="row row-xl">
+            <div class="col-md-6">
+                <p class="row"><span class="col-md-5 text-capitalize">OTA Hotel Code:</span><span class="col-md-7 fw-semi-thk text-black text-capitalize">{{#if data._ota_hotel_code }} {{ data._ota_hotel_code }} {{/if}} </span></p>
+            </div>
+            <div class="col-md-6">
+                <p class="row"><span class="col-md-5 text-capitalize">Deposit Amount:</span><span class="col-md-7 fw-semi-thk text-black text-capitalize">{{#if data._deposit_amount }} {{ data._deposit_amount }} {{/if}} </span></p>
+            </div>
+        </div>
+        <div class="row row-xl">
+            <div class="col-md-12">
+                <p class="row"><span class="col-md-2 text-capitalize">Trip Advisor Rating Link:</span><span class="col-md-10 fw-semi-thk text-black text-capitalize">{{#if data._rating_link }} {{ data._rating_link }} {{/if}} </span></p>
+            </div>
+        </div>
+        <div class="row row-xl">
+            <div class="col-md-12">
+                <p class="row"><span class="col-md-2 text-capitalize">Custom Rating Image Path:</span><span class="col-md-10 fw-semi-thk text-black text-capitalize">{{#if data._custom_rating_image }} {{ data._custom_rating_image }} {{/if}} </span></p>
+            </div>
+        </div>
+        <div class="row row-xl">
+            <div class="col-md-12">
+                <p class="row"><span class="col-md-2 text-capitalize">Custom Rating Image Link:</span><span class="col-md-10 fw-semi-thk text-black text-capitalize">{{#if data._custom_rating_link }} {{ data._custom_rating_link }} {{/if}} </span></p>
+            </div>
+        </div>
+        <div class="row row-xl">
+            <div class="col-md-12">
+                <p class="row"><span class="col-md-2 text-capitalize">Hotel Description :</span><span class="col-md-10 fw-semi-thk text-black text-capitalize">{{#if data._description }} {{ data._description }} {{/if}} </span></p>
+            </div>
+        </div>
+        <div class="row row-xl">
+            <div class="col-md-12">
+                <p class="row"><span class="col-md-5 text-capitalize">Hotel Images :
+                {{#if data._hotel_images }} 
+                    {{#each data._hotel_images}}
+                            {{#in 'image' this.mime}}
+                                <div class="col-sm-2"><img src="{{this.link}}" width="100px" height="100px"/></div>
+                            {{else}}
+                                <div> <a href="{{this.link}}" target="_blank">{{this.link}}</a> </div>
+                            {{/in}}
+                    {{/each}}
+                {{/if}}
+            </div>
+        </div>
+
+        <div class="row row-xl m-lg-t">
+            <div class="col-md-12">
+                <div id="map" style="width:100%;height:500px;margin:auto;"></div>      
+            </div>
+        </div>
+    {{/if}}
+    </div>
+</main>
+
+{{> footer}}
+
+<script defer type="text/javascript" src="//maps.google.com/maps/api/js?key=AIzaSyDR1iZRZ36Ew7W9UIbXAKV8AIM-OUGujbA"></script>
+<script>
+    {{#if data._locality_id }}
+        var Dlat = '{{#trim data._latitude}}{{/trim}}';
+        var Dlng = '{{#trim data._longitude}}{{/trim}}';
+    {{else}}
+        var Dlat = Dlng = undefined;
+    {{/if}}
+</script>
+<script src="/js/hotel_details.js"></script>

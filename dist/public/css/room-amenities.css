@@ -1,0 +1,647 @@
+@font-face {
+  font-family: 'room-amenities';
+  src:  url('../fonts/room-amenities.eot?1lzvdn');
+  src:  url('../fonts/room-amenities.eot?1lzvdn#iefix') format('embedded-opentype'),
+    url('../fonts/room-amenities.ttf?1lzvdn') format('truetype'),
+    url('../fonts/room-amenities.woff?1lzvdn') format('woff'),
+    url('../fonts/room-amenities.svg?1lzvdn#room-amenities') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'room-amenities' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-adapters-01:before {
+  content: "\e900";
+  color: #d3d3d3;
+}
+.icon-aircondition-01:before {
+  content: "\e901";
+  color: #d3d3d3;
+}
+.icon-alarmclock-01:before {
+  content: "\e902";
+}
+.icon-balcony-01:before {
+  content: "\e903";
+  color: #d3d3d3;
+}
+.icon-bathrobe-01:before {
+  content: "\e904";
+  color: #d3d3d3;
+}
+.icon-bathtub-01:before {
+  content: "\e905";
+  color: #d3d3d3;
+}
+.icon-bbq-01:before {
+  content: "\e906";
+  color: #d3d3d3;
+}
+.icon-bidet-01:before {
+  content: "\e907";
+  color: #d3d3d3;
+}
+.icon-boardgame-01:before {
+  content: "\e908";
+  color: #d3d3d3;
+}
+.icon-body-soap-01:before {
+  content: "\e909";
+  color: #d3d3d3;
+}
+.icon-cable-channels-01:before {
+  content: "\e90a";
+  color: #d3d3d3;
+}
+.icon-carpeted-floors-01:before {
+  content: "\e90b";
+  color: #d3d3d3;
+}
+.icon-cdplayer-01 .path1:before {
+  content: "\e90c";
+  color: rgb(211, 211, 211);
+}
+.icon-cdplayer-01 .path2:before {
+  content: "\e90d";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-cdplayer-01 .path3:before {
+  content: "\e90e";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-cdplayer-01 .path4:before {
+  content: "\e90f";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-cdplayer-01 .path5:before {
+  content: "\e910";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-cdplayer-01 .path6:before {
+  content: "\e911";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-cdplayer-01 .path7:before {
+  content: "\e912";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-champagne-01:before {
+  content: "\e913";
+  color: #d3d3d3;
+}
+.icon-cityview-01:before {
+  content: "\e914";
+  color: #d3d3d3;
+}
+.icon-cleaning-01:before {
+  content: "\e915";
+  color: #d3d3d3;
+}
+.icon-coffee-machine-01:before {
+  content: "\e916";
+  color: #d3d3d3;
+}
+.icon-computer-01:before {
+  content: "\e917";
+  color: #d3d3d3;
+}
+.icon-conditioner-01:before {
+  content: "\e918";
+  color: #d3d3d3;
+}
+.icon-cookies-01:before {
+  content: "\e919";
+  color: #d3d3d3;
+}
+.icon-crib-01:before {
+  content: "\e91a";
+  color: #d3d3d3;
+}
+.icon-desk-01:before {
+  content: "\e91b";
+  color: #d3d3d3;
+}
+.icon-dining-area-01:before {
+  content: "\e91c";
+  color: #d3d3d3;
+}
+.icon-dining-table-01:before {
+  content: "\e91d";
+  color: #d3d3d3;
+}
+.icon-dishwasher-01:before {
+  content: "\e91e";
+  color: #d3d3d3;
+}
+.icon-downfloorstair-01:before {
+  content: "\e91f";
+  color: #d3d3d3;
+}
+.icon-dryer-01:before {
+  content: "\e920";
+  color: #d3d3d3;
+}
+.icon-dvd-01:before {
+  content: "\e921";
+  color: #d3d3d3;
+}
+.icon-dvdplayer-01 .path1:before {
+  content: "\e922";
+  color: rgb(211, 211, 211);
+}
+.icon-dvdplayer-01 .path2:before {
+  content: "\e923";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-dvdplayer-01 .path3:before {
+  content: "\e924";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-dvdplayer-01 .path4:before {
+  content: "\e925";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-dvdplayer-01 .path5:before {
+  content: "\e926";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-dvdplayer-01 .path6:before {
+  content: "\e927";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-dvdplayer-01 .path7:before {
+  content: "\e928";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-dvdplayer-01 .path8:before {
+  content: "\e929";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-dvdplayer-01 .path9:before {
+  content: "\e92a";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-electric-kettle-01:before {
+  content: "\e92b";
+  color: #d3d3d3;
+}
+.icon-elevator-01:before {
+  content: "\e92c";
+  color: #d3d3d3;
+}
+.icon-extralong-bed-01:before {
+  content: "\e92d";
+  color: #d3d3d3;
+}
+.icon-fan-01:before {
+  content: "\e92e";
+  color: #d3d3d3;
+}
+.icon-fireplace-01:before {
+  content: "\e92f";
+  color: #d3d3d3;
+}
+.icon-flatscreen-01 .path1:before {
+  content: "\e930";
+  color: rgb(211, 211, 211);
+}
+.icon-flatscreen-01 .path2:before {
+  content: "\e931";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-flatscreen-01 .path3:before {
+  content: "\e932";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-flatscreen-01 .path4:before {
+  content: "\e933";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-free_toiletries-01:before {
+  content: "\e934";
+  color: #d3d3d3;
+}
+.icon-fruit-01:before {
+  content: "\e935";
+  color: #d3d3d3;
+}
+.icon-hair-dryer-01:before {
+  content: "\e936";
+  color: #d3d3d3;
+}
+.icon-heating-01:before {
+  content: "\e937";
+  color: #d3d3d3;
+}
+.icon-highchair-01:before {
+  content: "\e938";
+  color: #d3d3d3;
+}
+.icon-hypoallergenic_pillow-01 .path1:before {
+  content: "\e939";
+  color: rgb(211, 211, 211);
+}
+.icon-hypoallergenic_pillow-01 .path2:before {
+  content: "\e93a";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-hypoallergenic_pillow-01 .path3:before {
+  content: "\e93b";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-hypoallergenic_pillow-01 .path4:before {
+  content: "\e93c";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-hypoallergenic_pillow-01 .path5:before {
+  content: "\e93d";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-hypoallergenic_pillow-01 .path6:before {
+  content: "\e93e";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-hypoallergenic_pillow-01 .path7:before {
+  content: "\e93f";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-hypoallergenic_pillow-01 .path8:before {
+  content: "\e940";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-hypoallergnic-01:before {
+  content: "\e941";
+  color: #d3d3d3;
+}
+.icon-ipad-01 .path1:before {
+  content: "\e942";
+  color: rgb(211, 211, 211);
+}
+.icon-ipad-01 .path2:before {
+  content: "\e943";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-iron-01:before {
+  content: "\e944";
+  color: #d3d3d3;
+}
+.icon-ironing-facilities-01:before {
+  content: "\e945";
+  color: #d3d3d3;
+}
+.icon-kitchen-01:before {
+  content: "\e946";
+  color: #d3d3d3;
+}
+.icon-kitchenette-01:before {
+  content: "\e947";
+  color: #d3d3d3;
+}
+.icon-laptop-01:before {
+  content: "\e948";
+  color: #d3d3d3;
+}
+.icon-linens-01:before {
+  content: "\e949";
+  color: #d3d3d3;
+}
+.icon-loungeaccess-01:before {
+  content: "\e94a";
+  color: #d3d3d3;
+}
+.icon-marble-floor-01:before {
+  content: "\e94b";
+  color: #d3d3d3;
+}
+.icon-microwave-01:before {
+  content: "\e94c";
+  color: #d3d3d3;
+}
+.icon-minibar-01:before {
+  content: "\e94d";
+  color: #d3d3d3;
+}
+.icon-mosquito-net-01:before {
+  content: "\e94e";
+  color: #d3d3d3;
+}
+.icon-outdoor-dining-01:before {
+  content: "\e94f";
+  color: #d3d3d3;
+}
+.icon-outdoor-furniture-01:before {
+  content: "\e950";
+  color: #d3d3d3;
+}
+.icon-outdoor-view-01:before {
+  content: "\e951";
+  color: #d3d3d3;
+}
+.icon-oven-01:before {
+  content: "\e952";
+  color: #d3d3d3;
+}
+.icon-pajamas-01:before {
+  content: "\e953";
+  color: #d3d3d3;
+}
+.icon-pay-per-view-01:before {
+  content: "\e954";
+  color: #d3d3d3;
+}
+.icon-pool-towel-01:before {
+  content: "\e955";
+  color: #d3d3d3;
+}
+.icon-poolview-01:before {
+  content: "\e956";
+  color: #d3d3d3;
+}
+.icon-private-entrance-01:before {
+  content: "\e957";
+  color: #d3d3d3;
+}
+.icon-radio-01:before {
+  content: "\e958";
+  color: #d3d3d3;
+}
+.icon-refrigerator-01:before {
+  content: "\e959";
+  color: #d3d3d3;
+}
+.icon-safe-01:before {
+  content: "\e95a";
+  color: #d3d3d3;
+}
+.icon-sauna-01:before {
+  content: "\e95b";
+  color: #d3d3d3;
+}
+.icon-shampoo-01:before {
+  content: "\e95c";
+  color: #d3d3d3;
+}
+.icon-shower_cap-01:before {
+  content: "\e95d";
+  color: #d3d3d3;
+}
+.icon-shower-01:before {
+  content: "\e95e";
+  color: #d3d3d3;
+}
+.icon-sitting-area-01:before {
+  content: "\e95f";
+  color: #d3d3d3;
+}
+.icon-slippers-01:before {
+  content: "\e960";
+  color: #d3d3d3;
+}
+.icon-sofa-01:before {
+  content: "\e961";
+  color: #d3d3d3;
+}
+.icon-sofa-bed-01:before {
+  content: "\e962";
+  color: #d3d3d3;
+}
+.icon-soundproof-01:before {
+  content: "\e963";
+  color: #d3d3d3;
+}
+.icon-stovetop-01:before {
+  content: "\e964";
+  color: #d3d3d3;
+}
+.icon-telephone-01:before {
+  content: "\e965";
+  color: #d3d3d3;
+}
+.icon-toaster-01:before {
+  content: "\e966";
+  color: #d3d3d3;
+}
+.icon-toilet-01:before {
+  content: "\e967";
+  color: #d3d3d3;
+}
+.icon-toiletpaper-01:before {
+  content: "\e968";
+  color: #d3d3d3;
+}
+.icon-toothbrush-01:before {
+  content: "\e969";
+  color: #d3d3d3;
+}
+.icon-towels-01:before {
+  content: "\e96a";
+  color: #d3d3d3;
+}
+.icon-towel-sheets-01:before {
+  content: "\e96b";
+  color: #d3d3d3;
+}
+.icon-trash-can-01:before {
+  content: "\e96c";
+  color: #d3d3d3;
+}
+.icon-tv-01:before {
+  content: "\e96d";
+  color: #d3d3d3;
+}
+.icon-upperfloorstair-01:before {
+  content: "\e96e";
+  color: #d3d3d3;
+}
+.icon-wakeup-01:before {
+  content: "\e96f";
+  color: #d3d3d3;
+}
+.icon-walkin_shower-01 .path1:before {
+  content: "\e970";
+  color: rgb(211, 211, 211);
+}
+.icon-walkin_shower-01 .path2:before {
+  content: "\e971";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-walkin_shower-01 .path3:before {
+  content: "\e972";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-walkin_shower-01 .path4:before {
+  content: "\e973";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-walkin_shower-01 .path5:before {
+  content: "\e974";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-walkin_shower-01 .path6:before {
+  content: "\e975";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-walkin_shower-01 .path7:before {
+  content: "\e976";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-walkin_shower-01 .path8:before {
+  content: "\e977";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-walkin_shower-01 .path9:before {
+  content: "\e978";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-walkin_shower-01 .path10:before {
+  content: "\e979";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-walkin_shower-01 .path11:before {
+  content: "\e97a";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-walkin_shower-01 .path12:before {
+  content: "\e97b";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-walkin_shower-01 .path13:before {
+  content: "\e97c";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-walkin_shower-01 .path14:before {
+  content: "\e97d";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-walkin_shower-01 .path15:before {
+  content: "\e97e";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-walkin_shower-01 .path16:before {
+  content: "\e97f";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-walkin_shower-01 .path17:before {
+  content: "\e980";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-walkin_shower-01 .path18:before {
+  content: "\e981";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-walkin_shower-01 .path19:before {
+  content: "\e982";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-walkin_shower-01 .path20:before {
+  content: "\e983";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-walkin_shower-01 .path21:before {
+  content: "\e984";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-walkin_shower-01 .path22:before {
+  content: "\e985";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-walkin_shower-01 .path23:before {
+  content: "\e986";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-walkin_shower-01 .path24:before {
+  content: "\e987";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-walkin_shower-01 .path25:before {
+  content: "\e988";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-walkin_shower-01 .path26:before {
+  content: "\e989";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-wardrobe:before {
+  content: "\e98a";
+  color: #d3d3d3;
+}
+.icon-washing-machine-01:before {
+  content: "\e98b";
+  color: #d3d3d3;
+}
+.icon-water-bottle-01:before {
+  content: "\e98c";
+  color: #d3d3d3;
+}
+.icon-wheelchair-01:before {
+  content: "\e98d";
+  color: #d3d3d3;
+}
+.icon-wineglass-01:before {
+  content: "\e98e";
+  color: #d3d3d3;
+}

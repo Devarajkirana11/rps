@@ -1,0 +1,337 @@
+<main id="page-content" ng-init="search_details()">
+	<!-- Begin Content Container -->
+	<div class="content-container">
+		<div class="checkout-container m-xl-b p-xl-b">
+			<div class="page-container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="alert alert-danger" ng-if="searchdata.bookingError" ng-bind="searchdata.bookingError"></div>
+					</div>
+				</div>
+				<div class="row m-lg-b">
+					<div class="col-md-12">
+						<h3 class="fw-semi-thk text-black text-uppercase">Your Information</h3>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<form name="guest_booking" method="post" ng-submit="booking_submit(guest_booking)"/>
+							<div class="booking-information">
+								<div class="row">
+									<div class="col-md-3">
+										<div class="form-group">
+											<label for="">Title</label>
+
+											<div class="select-wrapper">
+												<select name="salutaion" id="" class="form-control" ng-model="searchdata.salutation">
+													<option value="Mr.">Mr.</option>
+													<option value="Mrs.">Mrs.</option>
+													<option value="Ms.">Ms.</option>
+													<option value="Miss.">Miss.</option>
+													<option value="Other.">Other.</option>
+												</select>
+												<span class="text-danger" ng-bind="formerror.salutation.msg"></span>
+											</div>
+										</div>
+									</div>
+									
+									<div class="col-md-9">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="">First Name</label>
+													<input type="text" class="form-control" name="firstname" ng-model="searchdata.firstname">
+													<span class="text-danger" ng-bind="formerror.firstname.msg"></span>
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="">Last Name</label>
+													<input type="text" class="form-control" name="lastname" ng-model="searchdata.lastname">
+													<span class="text-danger" ng-bind="formerror.lastname.msg"></span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label for="">Email</label>
+											<input type="email" class="form-control" name="email" ng-model="searchdata.email">
+											<span class="text-danger" ng-bind="formerror.email.msg"></span>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="">Nationality</label>
+											<div class="select-wrapper">
+												<select name="guest_nationality" id="" class="form-control" ng-model="searchdata.nationality" ng-change="nationalityChange(searchdata.nationality)" >
+													<option value="select" {{#equal requestBody.country 'select'}} selected="selected" {{/equal}}>Choose Country</option>
+													{{#if locationmasters }}
+													{{#each locationmasters }}
+													<option value="{{@key}}" {{#equal ../requestBody.country @key}} selected="selected" {{/equal}}>{{ this.name }}</option>
+													{{/each}}
+													{{/if}}
+												</select>
+												<span class="text-danger" ng-bind="formerror.nationality.msg"></span>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-md-8">
+										<div class="form-group">
+											<div>
+												<span class="col-md-4">
+													<label for="">Counrty Code</label>
+													<div class="select-wrapper">
+														<select id="mobilenumber_countrycode" name="mobilenumber_countrycode" class="form-control" ng-model="searchdata.mobileno_stdcode">
+															<option value="select" {{#equal requestBody.mobileno_stdcode 'select'}} selected="selected" {{/equal}}>Select</option>
+															{{#if country_code }}
+															{{#each country_code}}
+																{{#if this.code}}
+																	<option value="{{ this.code }}">{{ this.name }}(+{{ this.code }})</option>
+																{{/if}}
+															{{/each}}
+															{{/if}}
+														</select>
+														<span class="text-danger" ng-bind="formerror.mobileno_stdcode.msg"></span>
+													</div>
+			
+												</span>
+												<span class="col-md-8">
+													<label for="">Mobile No</label>
+													<input type="text" class="form-control" name="mobilenumber" ng-model="searchdata.mobileno">
+													<span class="text-danger" ng-bind="formerror.mobileno.msg"></span>
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-md-3">
+										<div class="form-group">
+											<label for="">Reason for your stay</label>
+										</div>
+
+										<div class="radio-inline">
+											<div class="radio-default danger">
+												<input type="radio" id="reason_to_stay_leisure" name="reason_to_stay" value = "leisure"  class="reason_to_stay"  ng-model="searchdata.reason_to_stay">
+												<label for="reason_to_stay_leisure">Leisure</label>
+											</div>
+										</div>
+
+										<div class="radio-inline">
+											<div class="radio-default danger">
+												<input type="radio" id="reason_to_stay_business" name="reason_to_stay" value = "business" class="reason_to_stay" ng-model="searchdata.reason_to_stay">
+												<label for="reason_to_stay_business">Business</label>
+											</div>
+										</div>
+										<div><span class="text-danger" ng-bind="formerror.reason_to_stay.msg"></span></div>
+									</div>
+									<div class="col-md-6" ng-if="searchdata.nationality!='217' && searchdata.nationality != '132' && searchdata.nationality != 'select' && searchdata.countryID != '217'">
+										<div class="form-group">
+											<label for="pass"><input type="checkbox" name="additional_identification" id="pass" ng-model="searchdata.additional_identification" ng-change="passID()"/>Malaysia Employment Pass / Student Pass / Dependent Visa</label>
+											<input type="text" class="form-control" name="passData" placeholder="Pass or Visa Number"  ng-disabled="!searchdata.PassAvailable" ng-model="searchdata.additional_identification_number" >
+											<span class="text-danger" ng-bind="formerror.additional_identification_number.msg"></span>
+										</div>	
+									</div>
+								</div>
+
+								{{!-- <hr class="m-xl-t m-xl-b"> --}}
+
+								<!--<div class="row">
+									<div class="col-md-12">
+										<div class="checkbox">
+											<input type="checkbox">
+											<label for="">Booking for someone else</label>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="">Name</label>
+											<input type="text" class="form-control">
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="">Country</label>
+
+											<div class="select-wrapper">
+												<select name="" id="" class="form-control">
+													<option value="">Malaysia</option>
+													<option value="">India</option>
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>-->
+
+								<div class="row hidden">
+									<div class="col-md-12 text-center">
+										<p><small class="text-uppercase fs-xs text-grey">Total Price</small></p>
+										<h3 class="text-danger fw-semi-thk m-n-t m-xl-b">{[{ searchdata.currencyCode }]} {[{searchdata.totalPriceWithTax | number: 2}]}</h3>
+									</div>
+								</div>
+
+								<div class="row m-xl-t">
+									<div class="col-md-12 text-center" ng-if="searchdata.totalPriceWithTax">
+										<div class="booknow-container">
+											<button type="submit" ng-click="searchdata.paynow=true" class="btn btn-danger w-175 btn-rounded text-uppercase fw-semi-thk" ng-disabled="pay_process"><i class="fa fa-refresh fa-spin" ng-if="searchdata.paynow"></i> Pay {[{ searchdata.currencyCode }]} {[{searchdata.totalPriceWithTax | number: 2}]}</button>
+											<button type="submit" ng-click="searchdata.payathotel=true" ng-disabled="pay_process" name="pay_at_hotel" class="btn btn-danger w-175 btn-rounded text-uppercase fw-semi-thk"><i class="fa fa-refresh fa-spin" ng-if="searchdata.payathotel"></i> Pay at Hotel</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+
+					<div class="col-md-4 hidden-sm hidden-xs">
+						<div class="booking-summary detailed-booking-summary"  ng-show="searchdata!==undefined">
+							<div class="row">
+								<div class="col-md-12">
+									<h4 class="fw-semi-thk text-black" ng-bind="details.hotel_name_with_place"></h4>
+									<p ng-bind="details.hotel_address"></p>
+								</div>
+							</div>
+
+							<div class="row m-lg-b">
+								<div class="col-xs-6">
+									<p class="m-n"><small class="fs-xs text-grey text-uppercase">Check In</small></p>
+									<p ng-show="searchdata.check_in" class="m-n"><span class="fw-semi-thk m-n text-black" >{[{ searchdata.check_in | date: 'EEE, dd MMM yyyy' }]}</span></p>
+								</div>
+
+								<div class="col-xs-6">
+									<p class="m-n"><small class="fs-xs text-grey text-uppercase">Check Out</small></p>
+									<p ng-show="searchdata.check_out" class="m-n"><span class="fw-semi-thk m-n text-black" ng-bind="searchdata.check_out | date: 'EEE, dd MMM yyyy'"></span></p>
+								</div>
+							</div>
+							
+							<div class="row m-lg-b">
+								<div class="col-xs-12 fs-sm">
+									<span class="fs-md fw-thk text-black" ng-if="searchdata.noOfNights">{[{ searchdata.noOfNights}]}</span> Night(s), <span class="fs-md fw-thk text-black" ng-bind="searchdata.totalAdults"></span>x Adult(s), <span class="fs-md fw-thk text-black" ng-bind="searchdata.totalkids"></span>x Kid(s)
+								</div>
+							</div>
+							
+
+							<div class="row m-md-b">
+								<div class="col-md-12">
+									<p><small class="text-uppercase fs-xs text-grey">Room(s)</small></p>
+
+									<p class="text-black" ng-repeat="room_type in details.room_types" ng-if="room_type.RoomsReq!=0">
+										<span class="pull-left" ng-bind="room_type.RoomsReq"></span> x <span ng-bind="room_type._type"></span>
+										<span class="pull-right fw-thk" ng-if="room_type.totalRoomPrice">{[{ searchdata.currencyCode }]} {[{room_type.totalRoomPrice | number: 2}]}</span>
+										<div class="clearfix"></div>
+									</p>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-xs-6">
+									<p><small class="text-uppercase fs-xs text-grey">Room Price</small></p>
+								</div>
+								<div class="col-xs-6">
+									<h4 class="text-black fw-semi-thk m-n text-right" ng-if="searchdata.totalPriceWithoutTax"> {[{searchdata.totalPriceWithoutTax | number: 2}]}</h4>
+								</div>
+							</div>
+							{{!--<div class="row" ng-if="searchdata.flexiAmount > 0">
+								<div class="col-xs-6">
+									<p><small class="text-uppercase fs-xs text-grey m-n">Flexi Fee</small></p>
+								</div>
+								<div class="col-xs-6">
+									<h4 class="text-black fw-semi-thk m-n text-right" ng-if="searchdata.flexiAmount">{[{searchdata.flexiAmount | number: 2}]}</h4>
+								</div>
+                            </div>--}}
+							<div class="row" ng-if="searchdata.ServiceFee > 0">
+								<div class="col-xs-6">
+									<p><small class="text-uppercase fs-xs text-grey m-n">Service</small></p>
+								</div>
+								<div class="col-xs-6">
+									<h4 class="text-black fw-semi-thk m-n text-right" ng-if="searchdata.ServiceFee" > {[{searchdata.ServiceFee | number: 2 }]}</h4>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-6">
+									<p><small class="text-uppercase fs-xs text-grey m-n">Tax</small></p>
+								</div>
+								<div class="col-xs-6">
+									<h4 class="text-black fw-semi-thk m-n text-right" ng-if="searchdata.totalTax" > {[{searchdata.totalTax | number: 2 }]}</h4>
+								</div>
+							</div>
+							<div class="row" ng-if="searchdata.tourismTax > 0">
+								<div class="col-xs-6">
+									<p><small class="text-uppercase fs-xs text-grey m-n">Tourism Tax</small></p>
+								</div>
+								<div class="col-xs-6">
+									<h4 class="text-black fw-semi-thk m-n text-right" ng-if="searchdata.tourismTax" > {[{searchdata.tourismTax | number: 2 }]}</h4>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-6">
+									<p><small class="text-uppercase fs-xs text-grey m-n">Total Price</small></p>
+								</div>
+								<div class="col-xs-6">
+									<h4 class="text-danger fw-semi-thk m-n m-xl-b text-right" ng-if="searchdata.totalPriceWithTax">{[{ searchdata.currencyCode }]} {[{searchdata.totalPriceWithTax | number: 2}]}</h4>
+								</div>
+							</div>
+							
+							{{!--<div class="row">
+								<div class="col-md-12 text-center">
+									<a href="/nidacash" class="btn btn-danger btn-block btn-rounded"> Share & Earn Cash</a>
+								</div>
+							</div>--}}
+						</div>
+						{{#if userid }}
+							<div class="booking-summary nidacash-booking-summary">
+								<img src="/images/NIDACash Logo_Final.svg" alt="" height="100" width="150">
+								{{#if userid }}
+									<div class="row" ng-if="totalRoomsAdded > 0">
+										<div class="col-xs-6">
+											<p><small class="text-uppercase fs-xs text-grey m-n">You will earn</small></p>
+										</div>
+										<div class="col-xs-6">
+											<h4 class="text-black fw-semi-thk m-n text-right" ng-if="searchdata.totalPriceWithoutTax">USD {[{ details.nidaCash | number: 2}]}</h4>
+										</div>
+									</div>
+									<hr ng-if="totalRoomsAdded > 0">
+									<div class="row learn-more" ng-if="totalRoomsAdded > 0">
+										<p>Your earned NIDACash will be paid within 3 business days after hotel checkout date. <a href="/NIDACash-faq" target="_blank">Questions?</a></p>
+									</div>
+								{{/if}}
+								<div class="text-center"><a {{#if userid }} href="javascript:void(0);" data-toggle="modal" data-target="#refer-and-earn-modal" {{ else }} href="/nidacash" {{/if}} class="btn btn-danger m-lg-b btn-rounded"><i class="fa fa-share fa-fw"></i> Share and Earn $</a></div>
+							</div>
+						{{/if}}
+					</div>
+				</div>	
+			</div>
+		</div>
+	</div>
+	<!-- End Content Container -->
+</main>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="confirm-modal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Booking Confirmation</h4>
+      </div>
+	  <div class="modal-body p-xl-t">
+	  <p>Your booking will be reserved. Please pay at the hotel upon check-in date in the hotel.</p>
+	  </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" id="modal-btn-yes">Confirm</button>
+        <button type="button" class="btn btn-primary" id="modal-btn-no">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

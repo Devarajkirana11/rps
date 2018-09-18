@@ -1,0 +1,464 @@
+{{> nav}}
+
+{{> header}}
+
+<main id="page-content">
+    <div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Bank Details</h3>
+        </div>
+    </div>
+
+    {{#if success }}
+        <div class="alert alert-success">{{ message}}</div>
+    {{else if message }}
+        <div class="alert alert-danger">{{ message}}</div>
+    {{/if}}
+
+    <div class="page-container">
+        <div class="row row-xl">
+            <div class="col-md-12 text-right">
+                <a href="/bank_details/{{data._bank_id}}/edit" class="btn btn-danger btn-rounded w-150 text-left">Edit <i class="fa fa-edit fa-fw pull-right"></i></a>
+            </div>
+        </div>
+
+        {{#if data._bankdetails}}
+            {{#each data._bankdetails}}
+                {{!-- Begin Bank Account Details --}}
+                <div class="row row-xl">
+                    <div class="col-md-12 m-lg-b m-xl-t">
+                        <h4 class="text-black fw-semi-thk fs-20">Bank Account Details</h4>
+                    </div>
+
+                    <div class="col-md-6">
+                        {{!-- Begin Bank Name --}}
+                        <div class="row row-xl m-sm-b">
+                            <div class="col-md-5 col-sm-6 col-xs-12">
+                                <p>Bank Name:</p>
+                            </div>
+                            <div class="col-md-7 text-black fw-semi-thk">
+                                <p>{{#if this._bankname}}{{ this._bankname }}{{/if}}</p>
+                            </div>
+                        </div>
+                        {{!-- End Bank Name --}}
+
+                        {{!-- Begin Bank Branch --}}
+                        <div class="row row-xl m-sm-b">
+                            <div class="col-md-5 col-sm-6 col-xs-12 text-capitalize">
+                                <p>Bank Branch:</p>
+                            </div>
+
+                            <div class="col-md-7 text-black fw-semi-thk">
+                                <p>{{#if this._bankbranch}}{{ this._bankbranch}}{{/if}}</p>
+                            </div>
+                        </div>
+                        {{!-- End Bank Branch --}}
+
+                        {{!-- Begin Bank Code --}}
+                        <div class="row row-xl m-sm-b">
+                            <div class="col-md-5 col-sm-6 col-xs-12 text-capitalize">
+                                <p>Bank Code:</p>
+                            </div>
+
+                            <div class="col-md-7 text-black fw-semi-thk">
+                                <p>{{#if this._bankcode}}{{ this._bankcode}}{{/if}}</p>
+                            </div>
+                        </div>
+                        {{!-- End Bank Code --}}
+
+                        {{!-- Begin Branch Code --}}
+                        {{!--<div class="row row-xl m-sm-b">
+                            <div class="col-md-5 col-sm-6 col-xs-12 text-capitalize">
+                                <p>Bank Branch Code:</p>
+                            </div>
+
+                            <div class="col-md-7 text-black fw-semi-thk">
+                                <p>{{#if this._bankbranchcode }}{{ this._bankbranchcode}}{{/if}}</p>
+                            </div>
+                        </div>--}}
+                        {{!-- End Branch Code --}}
+
+                        {{!-- Begin Swift Code --}}
+                        <div class="row row-xl m-sm-b">
+                            <div class="col-md-5 col-sm-6 col-xs-12 text-capitalize">
+                                <p>Bank Swift Code:</p>
+                            </div>
+
+                            <div class="col-md-7 text-black fw-semi-thk">
+                                <p>{{#if this._bankswiftcode}}{{ this._bankswiftcode}}{{/if}}</p>
+                            </div>
+                        </div>
+                        {{!-- End Swift Code --}}
+
+                        {{!-- Begin Account Number --}}
+                        <div class="row row-xl m-sm-b">
+                            <div class="col-md-5 col-sm-6 col-xs-12 text-capitalize">
+                                <p>Bank Account Number:</p>
+                            </div>
+
+                            <div class="col-md-7 text-black fw-semi-thk">
+                                <p>{{#if this._bankaccountnumber}}{{ this._bankaccountnumber}}{{/if}}</p>
+                            </div>
+                        </div>
+                        {{!-- End Account Number --}}
+                    </div>
+
+                    <div class="col-md-6">
+                        {{!-- Begin Address Line 1 --}}
+                        <div class="row row-xl m-sm-b">
+                            <div class="col-md-5 col-sm-6 col-xs-12 text-capitalize">
+                                <p>Address Line 1:</p>
+                            </div>
+
+                            <div class="col-md-7 text-black fw-semi-thk">
+                                <p>{{#if this._bankaddress._address_line1}}{{ this._bankaddress._address_line1 }}{{/if}}</p>
+                            </div>
+                        </div>
+                        {{!-- End Address Line 1 --}}
+
+                        {{!-- Begin Address Line 2 --}}
+                        <div class="row row-xl m-sm-b">
+                            <div class="col-md-5 col-sm-6 col-xs-12 text-capitalize">
+                                <p>Address Line 2:</p>
+                            </div>
+
+                            <div class="col-md-7 text-black fw-semi-thk">
+                                <p>{{#if this._bankaddress._address_line2}}{{ this._bankaddress._address_line2 }}{{/if}}</p>
+                            </div>
+                        </div>
+                        {{!-- End Address Line 2 --}}
+
+                        {{!-- Begin Country --}}
+                        <div class="row row-xl m-sm-b">
+                            <div class="col-md-5 col-sm-6 col-xs-12 text-capitalize">
+                                <p>Country:</p>
+                            </div>
+
+                            <div class="col-md-7 text-black fw-semi-thk">
+                                <p>{{#if this._bankaddress._country}}{{ this._bankaddress._country }}{{/if}}</p>
+                            </div>
+                        </div>
+                        {{!-- End Country --}}
+
+                        {{!-- Begin State --}}
+                        <div class="row row-xl m-sm-b">
+                            <div class="col-md-5 col-sm-6 col-xs-12 text-capitalize">
+                                <p>State:</p>
+                            </div>
+
+                            <div class="col-md-7 text-black fw-semi-thk">
+                                <p>{{#if this._bankaddress._state}}{{ this._bankaddress._state }}{{/if}}</p>
+                            </div>
+                        </div>
+                        {{!-- End State --}}
+
+                        {{!-- Begin City --}}
+                        <div class="row row-xl m-sm-b">
+                            <div class="col-md-5 col-sm-6 col-xs-12 text-capitalize">
+                                <p>City:</p>
+                            </div>
+
+                            <div class="col-md-7 text-black fw-semi-thk">
+                                <p>{{#if this._bankaddress._city}}{{ this._bankaddress._city }}{{/if}}</p>
+                            </div>
+                        </div>
+                        {{!-- End City --}}
+                        
+                        {{!-- Begin Zip / Postal Code --}}
+                        <div class="row row-xl m-sm-b">
+                            <div class="col-md-5 col-sm-6 col-xs-12 text-capitalize">
+                                <p>Zip / Postal Code:</p>
+                            </div>
+
+                            <div class="col-md-7 text-black fw-semi-thk">
+                                <p>{{#if this._bankaddress._zipcode}}{{ this._bankaddress._zipcode }}{{/if}}</p>
+                            </div>
+                        </div>
+                        {{!-- End Zip / Postal Code --}}
+                    </div>
+                </div>
+                {{!-- End Bank Account Details --}}
+
+
+                <hr class="m-xl-t m-xl-b">
+
+                {{!-- Begin Account Holder Details --}}
+                <div class="row row-xl">
+                    {{!-- Begin Account Holdder Details --}}
+                    <div class="col-md-12 m-lg-b m-xl-t">
+                        <h4 class="text-black fw-semi-thk fs-20">Account Holder Details</h4>
+                    </div>
+                    {{!-- End Account Holdder Details --}}
+
+                    {{!-- Begin Account Holder First Name --}}
+                    <div class="col-md-6">
+                        <div class="row row-xl">
+                            <div class="col-md-5 col-sm-6 col-xs-12">
+                                <p>Account Holder First Name:</p>
+                            </div>
+
+                            <div class="col-md-7 text-black fw-semi-thk">
+                                {{#if this._accountholderfirstname}}{{ this._accountholderfirstname}}{{/if}}
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- End Account Holder First Name --}}
+
+                    {{!-- Begin Account Holder Last Name --}}
+                    <div class="col-md-6">
+                        <div class="row row-xl">
+                            <div class="col-md-5 col-sm-6 col-xs-12">
+                                <p>Account Holder Last Name:</p>
+                            </div>
+
+                            <div class="col-md-7 text-black fw-semi-thk">
+                                {{#if this._accountholderlastname}}{{ this._accountholderlastname}}{{/if}}
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- End Account Holder Last Name --}}
+
+                    {{!-- Begin Address Line 1 --}}
+                    <div class="col-md-6">
+                        <div class="row row-xl">
+                            <div class="col-md-5 col-sm-6 col-xs-12">
+                                <p>Address Line 1:</p>
+                            </div>
+
+                            <div class="col-md-7 text-black fw-semi-thk">
+                                <p>{{#if this._bankaddress._address_line1}}{{ this._bankaddress._address_line1 }}{{/if}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- End Address Line 1 --}}
+
+                    {{!-- Begin Address Line 2 --}}
+                    <div class="col-md-6">
+                        <div class="row row-xl">
+                            <div class="col-md-5 col-sm-6 col-xs-12">
+                                <p>Address Line 2:</p>
+                            </div>
+                            
+                            <div class="col-md-7 text-black fw-semi-thk">
+                                <p>{{#if this._bankaddress._address_line2}}{{ this._bankaddress._address_line2 }}{{/if}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- End Address Line 2 --}}
+
+                    {{!-- Begin Country --}}
+                    <div class="col-md-6">
+                        <div class="row row-xl">
+                            <div class="col-md-5 col-sm-6 col-xs-12">
+                                <p>Country:</p>
+                            </div>
+
+                            <div class="col-md-7 text-capitalize">
+                                <p>{{#if this._bankaddress._country}}{{ this._bankaddress._country }}{{/if}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- End Country --}}
+
+                    {{!-- Begin State --}}
+                    <div class="col-md-6">
+                        <div class="row row-xl">
+                            <div class="col-md-5 col-sm-6 col-xs-12">
+                                <p>State:</p>
+                            </div>
+
+                            <div class="col-md-7 text-capitalize">
+                                <p>{{#if this._bankaddress._state}}{{ this._bankaddress._state }}{{/if}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- End State --}}
+
+                    {{!-- Begin City --}}
+                    <div class="col-md-6">
+                        <div class="row row-xl">
+                            <div class="col-md-5 col-sm-6 col-xs-12">
+                                <p>City:</p>
+                            </div>
+
+                            <div class="col-md-7 text-capitalize">
+                                <p>{{#if this._bankaddress._city}}{{ this._bankaddress._city }}{{/if}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- End City --}}
+
+                    {{!-- Begin Zip / Postal Code --}}
+                    <div class="col-md-6">
+                        <div class="row row-xl">
+                            <div class="col-md-5 col-sm-6 col-xs-12">
+                                <p>Zip / Postal Code:</p>
+                            </div>
+
+                            <div class="col-md-7 text-capitalize">
+                                <p>{{#if this._bankaddress._zipcode}}{{ this._bankaddress._zipcode }}{{/if}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- End Zip / Postal Code --}}
+                </div>
+                {{!-- End Account Holder Details --}}
+            {{/each}}
+        {{/if}}
+
+        <hr class="m-xl-t m-xl-b">
+
+        {{#if data._legaldetails}}
+            {{#each data._legaldetails}}
+                {{!-- Begin Legal Details --}}
+                <div class="row row-xl">
+                    {{!-- Begin Legal Details Header --}}
+                    <div class="col-md-12 m-lg-b m-xl-t">
+                        <h4 class="text-black fw-semi-thk fs-20">Legal Details</h4>
+                    </div>
+                    {{!-- End Legal Details Header --}}
+
+                    {{!-- Begin Service Tax Type --}}
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-5 text-capitalize">
+                                <p>Service Tax Type:</p>
+                            </div>
+                            <div class="col-md-7 text-black fw-semi-thk">
+                                <p>{{#if this._servicetaxtype}}{{ this._servicetaxtype}}{{/if}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- End Service Tax Type --}}
+
+                    {{!-- Begin Service Tax No --}}
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-5 text-capitalize">
+                                <p>Service Tax No:</p>
+                            </div>
+                            <div class="col-md-7 text-black fw-semi-thk">
+                                <p>{{#if this._servicetaxno}}{{ this._servicetaxno}}{{/if}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- End Service Tax No --}}
+
+                    {{!-- Begin Certificate Type --}}
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-5 text-capitalize">
+                                <p>Certificate Type:</p>
+                            </div>
+                            <div class="col-md-7 text-black fw-semi-thk">
+                                <p>{{#if this._certificatetype}}{{ this._certificatetype}}{{/if}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- End Certificate Type --}}
+
+                    {{!-- Begin Certificate No --}}
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-5 text-capitalize">
+                                <p>Certificate No:</p>
+                            </div>
+                            <div class="col-md-7 text-black fw-semi-thk">
+                                <p>{{#if this._certificateno}}{{ this._certificateno}}{{/if}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- End Certificate No --}}
+                    
+                    {{!-- Begin Copy of Legal Document --}}
+                    <div class="col-md-12">
+                        <p>Copy of Legal Document:</p>
+
+                        <p>
+                            {{#if this._legaldocument_fid}}
+                                {{#each this._legaldocument_fid}}
+                                        <div> <a href="{{this}}" target="_blank">{{this}}</a> </div>
+                                {{/each}}
+                            {{/if}}
+                        </p>
+                    </div>
+                    {{!-- Begin Copy of Legal Document --}}
+                </div>
+                {{!-- End Legal Details --}}
+
+                <hr class="m-xl-t m-xl-b">
+                
+                {{!-- Begin Registered Office Address --}}
+                <div class="row row-xl">
+                    {{!-- Begin Registered Office Address Header --}}
+                    <div class="col-md-12 m-lg-b m-xl-t">
+                        <h4 class="text-black fw-semi-thk fs-20">Registered Office Address</h4>
+                    </div>
+                    {{!-- End Registered Office Address Header --}}
+
+
+                    {{!-- Begin Address Line 1 --}}
+                    <div class="col-md-6">
+                        <div class="row row-xl m-sm-b">
+                            <div class="col-md-5 text-capitalize">Address Line 1:</div>
+                            <div class="col-md-7 text-black fw-semi-thk">{{#if this._registeredofficeaddress._address_line1}}{{ this._registeredofficeaddress._address_line1 }}{{/if}}</div>
+                        </div>
+                    </div>
+                    {{!-- End Address Line 1 --}}
+
+
+                    {{!-- Begin Address Line 2 --}}
+                    <div class="col-md-6">
+                        <div class="row row-xl m-sm-b">
+                            <div class="col-md-5 text-capitalize">Address Line 2:</div>
+                            <div class="col-md-7 text-black fw-semi-thk">{{#if this._registeredofficeaddress._address_line2}}{{ this._registeredofficeaddress._address_line2 }}{{/if}}</div>
+                        </div>
+                    </div>
+                    {{!-- End Address Line 2 --}}
+                    
+
+                    {{!-- Begin Country --}}
+                    <div class="col-md-6">
+                        <div class="row row-xl m-sm-b">
+                            <div class="col-md-5 text-capitalize">Country:</div>
+                            <div class="col-md-7 text-black fw-semi-thk">{{#if this._registeredofficeaddress._country}}{{ this._registeredofficeaddress._country }}{{/if}}</div>
+                        </div>
+                    </div>
+                    {{!-- End Country --}}
+
+
+                    {{!-- Begin State --}}
+                    <div class="col-md-6">
+                        <div class="row row-xl m-sm-b">
+                            <div class="col-md-5 text-capitalize">State:</div>
+                            <div class="col-md-7 text-black fw-semi-thk">{{#if this._registeredofficeaddress._state}}{{ this._registeredofficeaddress._state }}{{/if}}</div>
+                        </div>
+                    </div>
+                    {{!-- End State --}}
+
+
+                    {{!-- Begin City --}}
+                    <div class="col-md-6">
+                        <div class="row row-xl m-sm-b">
+                            <div class="col-md-5 text-capitalize">City:</div>
+                            <div class="col-md-7 text-black fw-semi-thk">{{#if this._registeredofficeaddress._city}}{{ this._registeredofficeaddress._city }}{{/if}}</div>
+                        </div>
+                    </div>
+                    {{!-- End City --}}
+                    
+                    {{!-- Begin Zip / Postal Code --}}
+                    <div class="col-md-6">
+                        <div class="row row-xl m-sm-b">
+                            <div class="col-md-5 text-capitalize">Zip / Postal Code:</div>
+                            <div class="col-md-7 text-black fw-semi-thk">{{#if this._registeredofficeaddress._zipcode}}{{ this._registeredofficeaddress._zipcode }}{{/if}}</div>
+                        </div>
+                    </div>
+                    {{!-- End Zip / Postal Code --}}
+                </div>
+                {{!-- End Registered Office Address --}}
+            {{/each}}
+        {{/if}}
+    </div>
+</main>
+
+{{> footer}}

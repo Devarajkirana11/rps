@@ -1,0 +1,53 @@
+<link rel="stylesheet" type="text/css" href="/css/jquery.Jcrop.min.css">
+<script type="text/javascript" src="/js/jquery.Jcrop.min.js"></script>
+<style>
+#sizeExceedfilelist ul, #Cropfilelist ul {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#sizeExceedfilelist ul li, #Cropfilelist ul li {
+    float: left;
+    padding: 5px 10px 5px 0;
+}
+
+#sizeExceedfilelist ul li a, #Cropfilelist ul li a {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+}
+
+.cropactions button {
+    margin-bottom: 10px;
+}
+</style>
+<div class="row">
+    <div id="progress_modal" class="progress">
+        <div id="file_modal" class="progress-bar progress-bar-success myprogress" role="progressbar" style="width:0%;display:none;">0%</div>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-6 well" id="sizeExceedfilelist">
+            <label>Improper Image list: </label>
+            <div></div>
+            <span>( Minimum resolution is 2048*1536 )</span>
+                <!-- list of sizeExceedFiles files will be display via jquery -->
+        </div>
+        <div class="col-md-6 well" id="Cropfilelist">
+            <label>List of Files to Crop:</label>
+            <div>No File(s) to Crop.</div>
+                <!-- list of image files will be display via jquery -->
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div id="views" class="col-md-11"></div>
+        <div class="cropactions col-md-1">
+            <button id="scalebutton" class="btn btn-primary btn-xs">Scale</button> 
+            <button id="rotatebutton" class="btn btn-primary btn-xs">Rotate</button>
+            <button id="hflipbutton" class="btn btn-primary btn-xs">H-flip</button>
+            <button id="vflipbutton" class="btn btn-primary btn-xs">V-flip</button>
+            <button id="uploadImage" class="btn btn-primary btn-xs">Crop & upload</button>
+            <span id="cropApply"></span>
+        </div>
+    </div>
+</div>

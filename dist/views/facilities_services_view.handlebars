@@ -1,0 +1,306 @@
+{{> nav}}
+
+{{> header}}
+
+<main id="page-content">
+    <div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Facilities & Services</h3>
+        </div>
+    </div>
+
+
+	{{#if errors}}
+		<ul>
+		{{#each errors}}
+			<li>
+				<div class="text-danger"> {{ msg }}</div>
+			</li>
+		{{/each}}
+		</ul>
+	{{/if}}
+	{{#if success }}
+		<div class="alert alert-success">{{ message}}</div>
+	{{else if message }}
+		<div class="alert alert-danger">{{ message}}</div>
+	{{/if}}
+
+    <div class="page-container">
+        <div class="row row-xl">
+            <div class="col-md-12 text-right m-lg-b">
+                <a href="/facilities_services/{{data._facility_id}}/edit" class="btn btn-danger btn-rounded w-150 text-left">Edit <i class="fa fa-edit fa-fw pull-right"></i></a>
+            </div>
+        </div>
+
+        <div class="row row-xl">
+            <div class="col-md-6">
+                <h4 class="text-black fw-semi-thk fs-20">Check In</h4>  
+                <div class="row row-xl">
+                    <div class="col-md-6">
+                        <p>From: </p>
+                        <p class="fw-semi-thk text-black text-capitalize">{{#if data._hotel_checks._check_in._from }} {{ data._hotel_checks._check_in._from }} {{/if}} </p>
+                    </div>
+
+                    <div class="col-md-6">
+                        <p>To:</p>
+                        <p class="fw-semi-thk text-black text-capitalize">{{#if data._hotel_checks._check_in._to }} {{ data._hotel_checks._check_in._to }} {{/if}} </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <h4 class="text-black fw-semi-thk fs-20">Check Out</h4>  
+                
+                <div class="row row-xl">
+                    <div class="col-md-6">
+                        <p>From: </p>
+                        <p class="fw-semi-thk text-black text-capitalize">{{#if data._hotel_checks._check_out._from }} {{ data._hotel_checks._check_out._from }} {{/if}} </p>
+                    </div>
+
+                    <div class="col-md-6">
+                        <p>To:</p>
+                        <p class="fw-semi-thk text-black text-capitalize">{{#if data._hotel_checks._check_out._to }} {{ data._hotel_checks._check_out._to }} {{/if}} </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="m-xl-t m-xl-b">
+
+        <div class="row row-xl">
+            <div class="col-md-12 m-lg-b">
+                <h4 class="text-black fw-semi-thk fs-20">Internet</h4>  
+            </div>
+
+            <div class="col-md-4">
+                <p>Is internet available to guests?</p>
+                <p class="fw-semi-thk text-black text-capitalize">{{#if data._internet._internet_to_guests }} {{ data._internet._internet_to_guests }} {{/if}} </p>
+            </div>
+
+            <div class="col-md-4">
+                <p>Connection type</p>
+                <p class="fw-semi-thk text-black text-capitalize">{{#if data._internet._connection_type }} {{ data._internet._connection_type }} {{/if}}</p>
+            </div>
+
+            <div class="col-md-4">
+                <p>Connection location</p>
+                <div class="row row-xl">
+                    {{>facilities_checkboxs_view checkboxarray=data._internet._connection_location }}
+                </div>
+            </div>
+        </div>
+
+        <hr class="m-xl-b m-xl-t">
+
+
+        <div class="row row-xl">
+            <div class="col-md-12 m-lg-b">
+                <h4 class="text-black fw-semi-thk fs-20">Parking</h4>  
+            </div>
+
+            <div class="col-md-12 m-md-b">
+                <p>Is parking available to guests?</p>
+
+                <div class="row row-xl">
+                    <div class="col-md-4">
+                        <p class="fw-semi-thk text-black text-capitalize">{{#if data._parking._parking_to_guests.parking }} {{ data._parking._parking_to_guests.parking }} {{/if}}</p>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="fw-semi-thk text-black text-capitalize">{{#if data._parking._parking_to_guests.parking_security }} {{data._parking._parking_to_guests.parking_security}} {{/if}}</p>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="fw-semi-thk text-black text-capitalize">{{#if data._parking._parking_to_guests.parking_boarding }} {{ data._parking._parking_to_guests.parking_boarding }} {{/if}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 m-md-b">
+                <p>Do guests need to reserve a parking </p>
+                <p class="fw-semi-thk text-black text-capitalize">{{#if data._parking._parking_guests_reservation }} {{ data._parking._parking_guests_reservation }} {{/if}}</p>
+            </div>    
+
+            <div class="col-md-12 m-md-b">
+                <p>Parking Locations</p>
+            <div class="row row-xl">
+                {{>facilities_checkboxs_view checkboxarray=data._parking._parking_facilities }}
+                </div>
+            </div>
+        </div>
+
+
+        <hr class="m-xl-b m-xl-t">
+
+
+        <div class="row row-xl">
+            <div class="col-md-12 m-lg-b">
+                <h4 class="text-black fw-semi-thk fs-20">Pets</h4>  
+            </div>
+
+            <div class="col-md-12">
+                <p>Do you allow pets?</p>
+                <p class="fw-semi-thk text-black text-capitalize">{{#if data._pets_allowed }} {{ data._pets_allowed }} {{/if}}</p>
+            </div>
+        </div>
+
+        <hr class="m-xl-b m-xl-t">
+
+        <div class="row row-xl">
+            <div class="col-md-12 m-lg-b">
+                <h4 class="text-black fw-semi-thk fs-20">Languages Spoken by Your Staff</h4>  
+            </div>
+
+            <div class="col-md-12">
+                {{#if data._languages_spoken }}
+                    <ul>
+                    {{#each data._languages_spoken}}
+                        <li class="col-sm-6 fw-semi-thk text-black text-capitalize">{{{ this }}}</li>                          
+                    {{/each}}
+                    </ul>
+                {{/if}}
+            </div>
+        </div>
+
+        <hr class="m-xl-b m-xl-t">
+
+        <div class="row row-xl">
+            <div class="col-md-12 m-lg-b">
+                <h4 class="text-black fw-semi-thk fs-20">Activities</h4>  
+            </div>
+
+            <div class="col-md-12">
+                <div class="row row-xl">
+                    {{>facilities_checkboxs_view checkboxarray=data._activities }}
+                </div>
+            </div>
+        </div>
+
+        <hr class="m-xl-b m-xl-t">
+
+        <div class="row row-xl">
+            <div class="col-md-12 m-lg-b">
+                <h4 class="text-black fw-semi-thk fs-20">Food and Drink</h4> 
+            </div>
+
+            <div class="col-md-12">
+                <div class="row row-xl">
+                    {{>facilities_checkboxs_view checkboxarray=data._food_drink }}
+                </div>
+            </div>
+        </div>
+
+        <hr class="m-xl-b m-xl-t">
+
+        <div class="row row-xl">
+            <div class="col-md-12 m-lg-b">
+                <h4 class="text-black fw-semi-thk fs-20">Pool and Spa</h4> 
+            </div>
+
+            <div class="col-md-12">
+                <div class="row row-xl">
+                    {{>facilities_checkboxs_view checkboxarray=data._pool_spa }}
+                </div>
+            </div>
+        </div>
+
+        <hr class="m-xl-b m-xl-t">
+
+        <div class="row row-xl">
+            <div class="col-md-12 m-lg-b">
+                <h4 class="text-black fw-semi-thk fs-20">Transportation</h4> 
+            </div>
+
+            <div class="col-md-12">
+                <div class="row row-xl">
+                    {{>facilities_checkboxs_view checkboxarray=data._transportation }}
+                </div>
+            </div>
+        </div>
+
+        <hr class="m-xl-b m-xl-t">
+
+
+        <div class="row row-xl">
+            <div class="col-md-12 m-lg-b">
+                <h4 class="text-black fw-semi-thk fs-20">Front Desk Services</h4> 
+            </div>
+
+            <div class="col-md-12">
+                <div class="row row-xl">
+                    {{>facilities_checkboxs_view checkboxarray=data._frontdesk_services }}
+                </div>
+            </div>
+        </div>
+
+        <hr class="m-xl-b m-xl-t">
+
+        <div class="row row-xl">
+            <div class="col-md-12 m-lg-b">
+                <h4 class="text-black fw-semi-thk fs-20">Common Area</h4> 
+            </div>
+
+            <div class="col-md-12">
+                <div class="row row-xl">
+                    {{>facilities_checkboxs_view checkboxarray=data._common_areas}}
+                </div>
+            </div>
+        </div>
+
+        <hr class="m-xl-t m-xl-b">
+
+
+        <div class="row row-xl">
+            <div class="col-md-12 m-lg-b">
+                <h4 class="text-black fw-semi-thk fs-20">Entertainment & Family Services</h4> 
+            </div>
+
+            <div class="col-md-12">
+                <div class="row row-xl">
+                    {{>facilities_checkboxs_view checkboxarray=data._entertainment_family_services}}
+                </div>
+            </div>
+        </div>
+
+        <hr class="m-xl-b m-xl-t">
+
+        <div class="row row-xl">
+            <div class="col-md-12 m-lg-b">
+                <h4 class="text-black fw-semi-thk fs-20">Cleaning Services</h4> 
+            </div>
+
+            <div class="col-md-12">
+                <div class="row row-xl">
+                    {{>facilities_checkboxs_view checkboxarray=data._cleaning_services}}
+                </div>
+            </div>
+        </div>
+
+        <hr class="m-xl-b m-xl-t">
+
+        <div class="row row-xl">
+            <div class="col-md-12 m-lg-b">
+                <h4 class="text-black fw-semi-thk fs-20">Business Facilities</h4>
+            </div>
+
+            <div class="col-md-12">
+                <div class="row row-xl">
+                    {{>facilities_checkboxs_view checkboxarray=data._business_facilities}}
+                </div>
+            </div>
+        </div>
+
+        <hr class="m-xl-b m-xl-t">
+
+        <div class="row row-xl">
+            <div class="col-md-12 m-lg-b">
+                <h4 class="text-black fw-semi-thk fs-20">Miscellaneous</h4>
+            </div>
+
+            <div class="col-md-12">
+                <div class="row row-xl">
+                    {{>facilities_checkboxs_view checkboxarray=data._miscellaneous}}
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{{> footer }}

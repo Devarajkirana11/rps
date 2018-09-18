@@ -1,0 +1,76 @@
+{{> nav}}
+
+{{> header}}
+
+<main id="page-content">
+    <div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Maintenance Block</h3>
+        </div>
+    </div>
+    {{#if success }}
+        <div class="alert alert-success">{{ message}}</div>
+    {{else if message }}
+        <div class="alert alert-danger">{{ message}}</div>
+    {{/if}}
+    <div class="page-container">
+        <div class="row row-xl">
+            <div class="col-md-12 text-right">
+                <a href="/pms/maintenance/{{data.blockid}}/edit" class="btn btn-danger btn-rounded w-150 text-left">Edit <i class="fa fa-edit fa-fw pull-right"></i></a>
+            </div>
+        </div>
+        <div class="row row-xl">
+            <div class="col-md-12">
+                {{#if data}}
+                        <div class="row row-xl">
+                            <div class="col-md-12 m-lg-b m-xl-t">
+                                <h4 class="text-black fw-semi-thk fs-20">Maintenance Block Details</h4>
+                            </div>
+                        </div>
+
+                        <div class="row row-xl">
+                            <div class="col-md-6">
+                                <p class="row"><span class="col-md-5 text-capitalize">Room:</span><span class="col-md-7 text-black fw-semi-thk">{{#if data.room_no}}{{ data.room_no }}{{/if}}</span></p>
+                            </div>
+
+                            <div class="col-md-6">
+                                <p class="row"><span class="col-md-5 text-capitalize">Block From:</span> <span class="col-md-7 text-black fw-semi-thk">{{#if data.from_date}}{{ data.from_date }}{{/if}}</span></p>
+                            </div>
+                        </div>
+
+                        <div class="row row-xl">
+                            <div class="col-md-6">
+                                <p class="row"><span class="col-md-5 text-capitalize">Block To:</span><span class="col-md-7 text-black fw-semi-thk">{{#if data.to_date}}{{ data.to_date}}{{/if}}</span></p>
+                            </div>
+
+                            <div class="col-md-6">
+                                <p class="row"><span class="col-md-5 text-capitalize">Reason:</span> <span class="col-md-7 text-black fw-semi-thk">{{#if data.reason}}{{ data.reason }}{{/if}}</span></p>
+                            </div>
+                        </div>
+
+                        <div class="row row-xl">
+                            <div class="col-md-6">
+                                <p class="row"><span class="col-md-5 text-capitalize">Status:</span><span class="col-md-7 text-black fw-semi-thk">{{#if data.status}}{{ data.status}}{{/if}}</span></p>
+                            </div>
+
+                            <div class="col-md-6">
+                                <p class="row"><span class="col-md-5 text-capitalize">Blocked by:</span> <span class="col-md-7 text-black fw-semi-thk">{{#if data.user}}{{ data.user }}{{/if}}</span></p>
+                            </div>
+                        </div>
+
+                        <div class="row row-xl">
+                            <div class="col-md-6">
+                                <p class="row"><span class="col-md-5 text-capitalize">Blocked on:</span><span class="col-md-7 text-black fw-semi-thk">{{#if data.modifiedTime }}{{ data.modifiedTime}}{{/if}}</span></p>
+                            </div>
+                        </div>
+                        <div class="row row-xl">
+                            <div class="col-md-6">
+                                <p class="row"><span class="col-md-5 text-capitalize">Blocked Status:</span><span class="col-md-7 text-black fw-semi-thk">{{#if data.blockstatus }}{{ data.blockstatus}}{{/if}}</span></p>
+                            </div>
+                        </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</main>
+{{> footer}}

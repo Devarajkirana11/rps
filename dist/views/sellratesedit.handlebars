@@ -1,0 +1,501 @@
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+
+		$(document).on("click","#check-min-stay",function(){
+			var count = $( this ).attr("data-count");
+			if($(this).is(':checked')){
+				$(".min_stay"+count).show();
+			} else {
+				$(".min_stay"+count).hide();
+			}
+		});
+
+		$("#min_stay").each(function(){
+			var vals = $(this).val();
+			if(vals > 0){
+				$(this).show();
+			} else {
+				$(this).hide();
+			}
+		});
+
+		$("#advance_booking_period").each(function(){
+			var vals = $(this).val();
+			if(vals > 0){
+				$(this).show();
+			} else {
+				$(this).hide();
+			}
+		});
+
+
+		$(document).on("click","#check-adv-stay",function(){
+			var count = $( this ).attr("data-count");
+			if($(this).is(':checked')){
+				$(".advance_booking_period"+count).show();
+			} else {
+				$(".advance_booking_period"+count).hide();
+			}
+		});
+
+		/* start of date picker */
+
+		//$( "#startDate , #endDate" ).datepicker({ dateFormat: 'dd-mm-yy' });
+
+	var searchMinDate = "m";
+
+	$("#startDate").datepicker({
+		dateFormat: "dd-mm-yy",
+		minDate: searchMinDate,
+
+		onClose: function (selectedDate) {
+			$("#startDate").datepicker('setDate', selectedDate);
+			$("#endDate").datepicker( "option", "minDate", selectedDate );
+		}
+	});
+
+	$("#endDate").datepicker({
+		dateFormat: "dd-mm-yy",
+
+		onClose: function (selectedDate) {
+			$("#endDate").datepicker('setDate', selectedDate);
+		}
+	});
+
+		/* End of date picker */
+
+		/* start of add more field */
+
+        var max_fields      = 20;
+        var wrapper         = $(".collections"); 
+        var add_button      = $("#add-more"); 
+        var x = 0; 
+        $(document).on("click","#add-more",function(e){ 
+            e.preventDefault();
+            if(x < max_fields){ 
+                x++;
+                $(wrapper).append('<div class="line-items"><div class="col-md-12"><div class="col-md-4"><div class="select-wrapper"><select name="type[]" class="form-control"><option value="">Select</option><option value="1">Percentage</option><option value="0">Flat</option></select></div></div><div class="col-md-4"><div class="select-wrapper"><select name="coating[]" class="form-control"><option value="">Select</option><option value="1">+</option><option value="0">-</option></select></div></div><div class="col-md-4"><input type="text" value="" id="value" name="value[]" placeholder="" class="form-control"></div></div><div class="condition-check"><div class="col-md-12"><input type="checkbox" data-count="'+x+'" id="check-min-stay" name="check_min_stay" value=""><label class="" for="min-stay">Minimum Stay</label><input type="text" value="" class="min'+x+' min_stay'+x+' form-control"  id="min_stay" name="min_stay" placeholder="" ></div></div><div class="col-md-12"><input type="checkbox" data-count="'+x+'" id="check-adv-stay" name="check_adv_stay" value=""><label class="" for="min-stay">Advance Booking Period</label><input type="text" value="" class="form-control adv-open'+x+' advance_booking_period'+x+'" id="advance_booking_period" name="advance_booking_period[]" placeholder=""></div><div class="col-md-3 delete"><a href="#" class="btn btn-danger">Delete</a></div></div>'); //add input box
+				$(".adv-open"+x).hide();
+				$(".min"+x).hide();
+			}
+            else
+            {
+            alert('You Reached the limits')
+            }
+        });
+
+        $(wrapper).on("click",".delete", function(e){ 
+            e.preventDefault(); $(this).parent('div').remove(); x--;
+        });
+
+		/* End of add more field */
+
+		/* start of existing channel validation */
+
+		$("#startDate").change(function(){
+
+			var startDate = $('#startDate').val();
+			var endDate = $('#endDate').val();
+			if(endDate && startDate){
+				if(endDate > startDate){
+
+					$.ajax({
+					url: "/hotels-manager/manager/rates/sell/plan/channel?hotel_id=1001&start_date="+startDate+"&end_date="+endDate,
+					type: "GET", 
+					data: { },
+					success: function(response) {
+						var myString = response.data;
+						$.each( myString, function( key, value ) {
+							$("#"+value).attr("disabled","disabled");
+						});
+					},
+					error: function(xhr) {   }
+					});
+
+				}
+			}
+
+		});
+
+		$("#endDate").change(function(){
+
+			var startDate = $('#startDate').val();
+			var endDate = $('#endDate').val();
+			if(endDate && startDate){
+				if(endDate > startDate){
+
+					$.ajax({
+					url: "/hotels-manager/manager/rates/sell/plan/channel?hotel_id=1001&start_date="+startDate+"&end_date="+endDate,
+					type: "GET", 
+					data: { },
+					success: function(response) { 
+						var myString = response.data;
+						$.each( myString, function( key, value ) {
+							$("#"+value).attr("disabled","disabled");
+						});
+					},
+					error: function(xhr) {   }
+					});
+
+				}
+			}
+
+		});
+
+		/* End of existing channel validation */
+
+	});
+
+</script>
+{{> nav this}}
+
+{{> header}}
+
+<main id="page-content">
+	<div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Edit Sell Rate</h3>
+        </div>
+    </div>
+
+	<div class="page-container">
+		<div class="row row-xl">
+			<div class="col-md-12 m-lg-b">
+				<h4 class="text-black fw-semi-thk fs-20">Edit Sell Rate</h4>
+			</div>
+		</div>
+		
+		<div class="row row-xl">
+			<div class="col-md-12">
+				<form class="" id="rate-form" action='/hotels/rates/sell/{{ hotel_id }}/edit?hotel_id={{ hotel_id }}&key_value={{ key_value }}' method="POST">
+				
+					{{#if errors}}
+						{{#each errors}}
+							<div class="alert alert-danger"> {{ msg }}</div>
+						{{/each}}
+					{{/if}}
+					
+					{{#if message}}
+							<div class="alert alert-danger"> {{ message }}</div>
+					{{/if}}
+
+					<div class="row row-xl">
+						<div class="col-md-12">
+							<div class="form-group">
+								<input type="hidden" value="{{ hotel_id }}" id="hotel_id" name="id" placeholder="" class="form-control">
+							</div>	
+						</div>
+					</div>
+					
+					<div class="row row-xl">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="" for="markupname">Markup Plan Name</label>
+								<input type="text" value="{{#if output.name }}{{ output.name }}{{/if}}" id="" name="name" placeholder="" class="form-control">
+							</div>	
+						</div>
+					</div>
+					
+					<div class="row row-xl">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="startDate">Start Date</label>
+								<input type="text" value="{{#if output.startDate }}{{#customDateFormat output.startDate }}{{/customDateFormat}}{{/if}}" id="startDate" name="startDate" placeholder="" class="form-control">
+							</div>	
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="endDate">End Date</label>
+								<input type="text" value="{{#if output.endDate }}{{#customDateFormat output.endDate }}{{/customDateFormat}}{{/if}}" id="endDate" name="endDate" placeholder="" class="form-control">
+							</div>	
+						</div>
+					</div>
+
+					<div class="row row-xl">
+						<div class="col-md-12 collections">
+							
+							<div class="line-items">
+								<div class="row row-xl">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label class="" for="channels">Type</label>
+											<div class="select-wrapper">
+												<select name="default_type" class="form-control">
+													<option value="">Select</option>
+													<option value="0" {{#equal output.markup.type '0'}} selected="selected" {{/equal}}>Percentage</option>
+													<option value="1" {{#equal output.markup.type '1'}} selected="selected" {{/equal}}>Flat</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label class="" for="channels">Markup / Markdown</label>
+											<div class="select-wrapper">
+												<select name="default_coating" class="form-control">
+													<option value="">Select</option>
+													<option value="0" {{#equal output.markup.coating '0'}} selected="selected" {{/equal}}>Markup</option>
+													<option value="1" {{#equal output.markup.coating '1'}} selected="selected" {{/equal}}>Markdown</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label class="" for="channels">Value</label>
+											<input type="text" value="{{#if output.markup.value }}{{ output.markup.value }}{{/if}}" id="value" name="default_value" placeholder="" class="form-control">
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+							{{#each output.conditions as |values keys| }}
+							<div class="line-items">
+								<div class="row row-xl">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label class="" for="channels">Type</label>
+											<div class="select-wrapper">
+												<select name="type" class="form-control">
+													<option value="">Select</option>
+													<option value="0" {{#equal values.markup.type '0'}} selected="selected" {{/equal}}>Percentage</option>
+													<option value="1" {{#equal values.markup.type '1'}} selected="selected" {{/equal}}>Flat</option>
+												</select>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-md-4">
+										<div class="form-group">
+											<label class="" for="channels">Coating</label>
+											<div class="select-wrapper">
+												<select name="coating" class="form-control">
+													<option value="">Select</option>
+													<option value="0" {{#equal values.markup.coating '0'}} selected="selected" {{/equal}}>+</option>
+													<option value="1" {{#equal values.markup.coating '1'}} selected="selected" {{/equal}}>-</option>
+												</select>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-md-4">
+										<div class="form-group">
+											<label class="" for="channels">Value</label>
+											<input type="text" value="{{#if values.markup.value }}{{ values.markup.value }}{{/if}}" id="value" name="value[]" placeholder="" class="form-control">
+										</div>
+									</div>
+								</div>
+
+								<div class="row row-xl">
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="checkbox" checked="checked" data-count="{{ keys }}" id="check-min-stay" name="check_min_stay" value="">	
+											<label class="" for="min-stay">Minimum Stay</label>
+											<input type="text" value="{{ values.minimumStay }}" id="min_stay" name="min_stay" placeholder="" class="min{{key}} min_stay{{ keys }} form-control">
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="checkbox" checked="checked" data-count="{{ keys }}" id="check-adv-stay" name="check_adv_stay" value="">
+											<label class="" for="min-stay">Advance Booking Period</label>
+											<input type="text" value="{{ values.advanceBookingPeriod }}" id="advance_booking_period" name="advance_booking_period[]" placeholder="" class="form-control adv-open{{ keys }} advance_booking_period{{ keys }}">
+										</div>
+									</div>
+									<div class="col-md-3 delete"><a href="#" class="btn btn-danger">Delete</a></div>
+								</div>
+							</div>
+							{{/each}}
+						</div>
+
+						<div class="col-md-12 m-lg-t">
+							<span id='add-more' class="btn btn-danger btn-rounded w-150">Add More</span><br><br>
+						</div>
+					</div>	
+
+
+					<div class="row row-xl">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="cancellation-policy">Cancellation Policy</label>
+								<div class="select-wrapper">
+									<select name="cancellation_policy" class="form-control">
+										<option value="">Select</option>
+										<option value="General" {{#equal output.cancellationPolicyId 'General'}} selected="selected" {{/equal}}>General</option>
+										<option value="Non-Refundable"  {{#equal output.cancellationPolicyId 'Non-Refundable'}} selected="selected" {{/equal}}>Non-Refundable</option>
+									</select>
+								</div>
+							</div>	
+						</div>
+					</div>
+
+					<div class="row row-xl">
+							<div class="col-md-12">
+							<div class="form-group">
+								<label class="" for="channels">Channels</label>
+							</div>
+
+							<div class="row row-sm">
+								<div class="col-sm-3">
+									<div class="checkbox">
+										<input type="checkbox" name="channels[]" value="WEB" id="Web" {{#each output.channels }}{{#equal this 'WEB'}} checked="checked" {{/equal}}{{/each}}>
+										<label for="Web">WEB</label>
+									</div>
+								</div>
+
+								<div class="col-sm-3">
+									<div class="checkbox">
+										<input type="checkbox" name="channels[]" value="ANDROID" id="Android"{{#each output.channels }}{{#equal this 'ANDROID'}} checked="checked" {{/equal}}{{/each}}>
+										<label for="Android">ANDRIOS</label>
+									</div>
+								</div>
+
+								<div class="col-sm-3">
+									<div class="checkbox">
+										<input type="checkbox" name="channels[]" value="IOS" id="Ios"{{#each output.channels }}{{#equal this 'IOS'}} checked="checked" {{/equal}}{{/each}}>
+										<label for="Ios">IOS</label>
+									</div>		
+								</div>
+
+								<div class="col-sm-3">
+									<div class="checkbox">
+										<input type="checkbox" name="channels[]" value="OTA" id="OTA"{{#each output.channels }}{{#equal this 'OTA'}} checked="checked" {{/equal}}{{/each}}>
+										<label for="OTA">OTA</label>
+									</div>		
+								</div>
+
+								<div class="col-sm-3">
+									<div class="checkbox">
+										<input type="checkbox" name="channels[]" value="WALK_IN" id="Walk-in"{{#each output.channels }}{{#equal this 'WALK_IN'}} checked="checked" {{/equal}}{{/each}}>
+										<label for="Walk-in">WALK IN</label>
+									</div>
+								</div>
+
+								<div class="col-sm-3">
+									<div class="checkbox">
+										<input type="checkbox" name="channels[]" value="AGODA" id="AGODA"{{#each output.channels }}{{#equal this 'AGODA'}} checked="checked" {{/equal}}{{/each}}>
+										<label for="AGODA">AGODA</label>
+									</div>
+								</div>
+
+								<div class="col-sm-3">
+									<div class="checkbox">
+										<input type="checkbox" name="channels[]" value="EXPEDIA" id="EXPEDIA"{{#each output.channels }}{{#equal this 'EXPEDIA'}} checked="checked" {{/equal}}{{/each}}>
+										<label for="EXPEDIA">EXPEDIA</label>
+									</div>
+								</div>
+
+								<div class="col-sm-3">
+									<div class="checkbox">
+										<input type="checkbox" name="channels[]" value="CTRIP" id="CTRIP"{{#each output.channels }}{{#equal this 'CTRIP'}} checked="checked" {{/equal}}{{/each}}>
+										<label for="CTRIP">CTRIP</label>
+									</div>
+								</div>
+
+								<div class="col-sm-3">
+									<div class="checkbox">
+										<input type="checkbox" name="channels[]" value="MAKEMYTRIP" id="MAKEMYTRIP"{{#each output.channels }}{{#equal this 'MAKEMYTRIP'}} checked="checked" {{/equal}}{{/each}}>
+										<label for="MAKEMYTRIP">MAKEMYTRIP</label>
+									</div>
+								</div>
+
+								<div class="col-sm-3">
+									<div class="checkbox">
+										<input type="checkbox" name="channels[]" value="PEGIPEGI" id="PEGIPEGI"{{#each output.channels }}{{#equal this 'PEGIPEGI'}} checked="checked" {{/equal}}{{/each}}>
+										<label for="PEGIPEGI">PEGIPEGI</label>
+									</div>
+								</div>
+
+								<div class="col-sm-3">
+									<div class="checkbox">
+										<input type="checkbox" name="channels[]" value="MISTERALADIN" id="MISTERALADIN"{{#each output.channels }}{{#equal this 'MISTERALADIN'}} checked="checked" {{/equal}}{{/each}}>
+										<label for="MISTERALADIN">MISTERALADIN</label>
+									</div>
+								</div>
+
+								<div class="col-sm-3">
+									<div class="checkbox">
+										<input type="checkbox" name="channels[]" value="TRAVALOKA" id="TRAVALOKA"{{#each output.channels }}{{#equal this 'TRAVALOKA'}} checked="checked" {{/equal}}{{/each}}>
+										<label for="TRAVALOKA">TRAVALOKA</label>
+									</div>
+								</div>
+
+								<div class="col-sm-3">
+									<div class="checkbox">
+										<input type="checkbox" name="channels[]" value="HOTELBEDS" id="HOTELBEDS"{{#each output.channels }}{{#equal this 'HOTELBEDS'}} checked="checked" {{/equal}}{{/each}}>
+										<label for="HOTELBEDS">HOTELBEDS</label>
+									</div>
+								</div>
+
+								<div class="col-sm-3">
+									<div class="checkbox">
+										<input type="checkbox" name="channels[]" value="BOOKING_COM" id="BOOKING_COM"{{#each output.channels }}{{#equal this 'BOOKING_COM'}} checked="checked" {{/equal}}{{/each}}>
+										<label for="BOOKING_COM">BOOKING.COM</label>
+									</div>
+								</div>
+
+								<div class="col-sm-3">
+									<div class="checkbox">
+										<input type="checkbox" name="channels[]" value="GTA" id="GTA"{{#each output.channels }}{{#equal this 'GTA'}} checked="checked" {{/equal}}{{/each}}>
+										<label for="GTA">GTA</label>
+									</div>
+								</div>
+
+								<div class="col-sm-3">
+									<div class="checkbox">
+										<input type="checkbox" name="channels[]" value="GOIBIBO" id="GOIBIBO"{{#each output.channels }}{{#equal this 'GOIBIBO'}} checked="checked" {{/equal}}{{/each}}>
+										<label for="GOIBIBO">GOIBIBO</label>
+									</div>
+								</div>
+								
+								<div class="col-sm-3">
+									<div class="checkbox">
+										<input type="checkbox" name="channels[]" value="HOTELREZ" id="HOTELREZ"{{#each output.channels }}{{#equal this 'HOTELREZ'}} checked="checked" {{/equal}}{{/each}}>
+										<label for="HOTELREZ">HOTELREZ</label>
+									</div>
+								</div>
+								
+								<div class="col-sm-3">
+									<div class="checkbox">
+										<input type="checkbox" name="channels[]" value="ASIA_TRAVEL" id="ASIA_TRAVEL"{{#each output.channels }}{{#equal this 'ASIA_TRAVEL'}} checked="checked" {{/equal}}{{/each}}>
+										<label for="ASIA_TRAVEL">ASIA_TRAVEL</label>
+									</div>
+								</div>
+
+								<div class="col-sm-3">
+									<div class="checkbox">
+										<input type="checkbox" name="channels[]" value="SAWADEE" id="SAWADEE"{{#each output.channels }}{{#equal this 'SAWADEE'}} checked="checked" {{/equal}}{{/each}}>
+										<label for="SAWADEE">SAWADEE</label>
+									</div>
+								</div>
+
+								<div class="col-sm-3">
+									<div class="checkbox">
+										<input type="checkbox" name="channels[]" value="HRS" id="HRS"{{#each output.channels }}{{#equal this 'HRS'}} checked="checked" {{/equal}}{{/each}}>
+										<label for="HRS">HRS</label>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+					<div class="row row-xl">
+						<div class="col-md-12">
+							<div class="m-xl-t text-right">
+								<button class="btn btn-danger w-100 btn-rounded m-md-b m-md-r"  name="Submit" value="Save" type="Submit">Save</button> 
+								<span class="btn btn-default w-100 btn-rounded m-md-b" onclick="history.go(-1);">Cancel </span>
+							</div>	
+						</div>
+					</div>
+
+				</form>	
+			</div>
+		</div>
+	</div>
+</main>
+
+
+{{> footer}}

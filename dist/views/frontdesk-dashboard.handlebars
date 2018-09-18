@@ -1,0 +1,84 @@
+<link rel="stylesheet" href="/scripts/plugins/nvd3/nv.d3.min.css">
+
+{{> nav this}}
+
+{{> header}}
+
+
+<main id="page-content">
+    <input type="hidden" name="hotel_uuid" id="hotel_uuid" value="{{ hotelUuid }}">
+    <div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Dashboard</h3>
+        </div>
+    </div>
+
+    <div class="page-container">
+        <div class="row row-xl">
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                <div class="room-status-container status-available text-center">
+                    <h1 class="m-n text-black">{{ output.available }}</h1>
+                    <p><small class="text-uppercase fs-xs">Available</small></p>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="room-status-container status-checkin text-center">
+                    <h1 class="m-n text-black">{{ output.checkIn }}</h1>
+                    <p><small class="text-uppercase fs-xs">Check In</small></p>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="room-status-container status-checkout text-center">
+                    <h1 class="m-n text-black">{{ output.checkOut }}</h1>
+                    <p><small class="text-uppercase fs-xs">Check Out</small></p>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="room-status-container status-occupied text-center">
+                    <h1 class="m-n text-black">{{ output.occupied }}</h1>
+                    <p><small class="text-uppercase fs-xs">Occupied</small></p>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="room-status-container status-vacated text-center">
+                    <h1 class="m-n text-black">{{ output.vacated }}</h1>
+                    <p><small class="text-uppercase fs-xs">Vacated</small></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row row-xl bg-white p-lg-t p-lg-b">
+            <div class="col-md-4">
+                <p class="fw-semi-thk text-black text-uppercase m-md-b">Revenue by channels</p>
+                <div id="revenue-pie-chart">
+                    <svg height="250"></svg>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <p class="fw-semi-thk text-black text-uppercase m-md-b">Daily Revenue by channels</p>
+                <div id="revenue-stacked-bar-chart">
+                    <svg height="250"></svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="row row-xl p-lg-t p-lg-b">
+            <div class="col-md-12">
+                <p class="fw-semi-thk text-black text-uppercase m-md-b">Daily Occupancy</p>
+                <div id="occupancy-bar-chart">
+                    <svg height="250"></svg>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+{{> footer}}
+
+
+<script src="/scripts/plugins/d3/d3.min.js"></script>
+<script src="/scripts/plugins/nvd3/nv.d3.min.js"></script>
+<script src="/js/frontdesk-dashboard.js"></script>

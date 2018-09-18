@@ -1,0 +1,49 @@
+{{> header }}
+
+<section>
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="/">DC Details</a>
+        </li>
+        <li class="breadcrumb-item active">DC Details</li>
+      </ol>
+      <div class="row mx-3">
+        <div class="col-12">
+                <h1>DC Details</h1>
+            <div class="col-md-12">
+                <strong>DC Name</strong>
+                {{ output.name }}
+            </div>
+            <div class="col-md-12">
+                <strong>Address 1</strong>
+                {{ output.address_1 }}
+            </div>
+            <div class="col-md-12">
+                <strong>Address 2</strong>
+                {{ output.address_2 }}
+            </div>
+            <div class="col-md-12">
+                <strong>City</strong>
+                {{ output.city }}
+            </div>
+            <div class="col-md-12">
+                <strong>State</strong>
+                {{ output.state }}
+            </div>
+
+            <div class="action-items">
+                <a href="/dc/{{ output.uuid }}/edit" class="btn btn-success">Edit</a>
+                <span class="dc-delete btn btn-danger" data-uuid="{{ output.uuid }}">Delete</span>
+            </div>
+
+        </div>
+    </div>
+    </div>
+</section>
+
+<script src="/js/jquery-ui.js"></script>
+
+{{> footer}}

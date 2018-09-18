@@ -1,0 +1,770 @@
+{
+	"Hotels": {
+		"_activities": [
+			{
+				"value": 1,
+				"name": "Tennis Equipment",
+				"icon": "icon-tennis-01"
+			},
+			{
+				"value": 2,
+				"name": "Badminton Equipment",
+				"icon": "icon-badminton-01"
+			},
+			{
+				"value": 3,
+				"name": "Beach",
+				"icon": "icon-beach-01"
+			},
+			{
+				"value": 4,
+				"name": "Tennis Court",
+				"icon": "icon-tennis-01"
+			},
+			{
+				"value": 5,
+				"name": "Pool Table",
+				"icon": "icon-pooltable-01"
+			},
+			{
+				"value": 6,
+				"name": "Ping-Pong",
+				"icon": "icon-pingpong-01"
+			},
+			{
+				"value": 7,
+				"name": "Darts",
+				"icon": "icon-dart-01"
+			},
+			{
+				"value": 8,
+				"name": "Racquetball",
+				"icon": "icon-Racquetball-01"
+			},
+			{
+				"value": 9,
+				"name": "Bowling",
+				"icon": "icon-bowling-01"
+			},
+			{
+				"value": 10,
+				"name": "Mini Golf",
+				"icon": "icon-minigolf-01"
+			},
+			{
+				"value": 11,
+				"name": "Golf Course (within 2 miles)",
+				"icon": "icon-golf-01"
+			},
+			{
+				"value": 12,
+				"name": "Water Park",
+				"icon": "icon-waterpark-01"
+			},
+			{
+				"value": 13,
+				"name": "Water Sports Facilities(on site)",
+				"icon": "icon-watersports-01"
+			},
+			{
+				"value": 14,
+				"name": "Windsurfing",
+				"icon": "icon-wind_surfing-01"
+			},
+			{
+				"value": 15,
+				"name": "Diving",
+				"icon": "icon-diving-01"
+			},
+			{
+				"value": 16,
+				"name": "Snorkeling",
+				"icon": "icon-snorkelling-01"
+			},
+			{
+				"value": 17,
+				"name": "Canoeing",
+				"icon": "icon-canoeing-01"
+			},
+			{
+				"value": 18,
+				"name": "Fishing",
+				"icon": "icon-fishing-01"
+			},
+			{
+				"value": 19,
+				"name": "Horseback Riding",
+				"icon": "icon-horse_riding-01"
+			},
+			{
+				"value": 20,
+				"name": "Cycling",
+				"icon": "icon-cycling-01"
+			},
+			{
+				"value": 21,
+				"name": "Hiking",
+				"icon": "icon-hiking-01"
+			},
+			{
+				"value": 22,
+				"name": "Skiing",
+				"icon": "icon-ski-01"
+			}
+		],
+		"_business_facilities": [
+			{
+				"value": 1,
+				"name": "Meeting/Banquet Facilities",
+				"icon": "icon-meetingroom-01"
+			},
+			{
+				"value": 2,
+				"name": "Business Center",
+				"icon": "icon-business center-01"
+			},
+			{
+				"value": 3,
+				"name": "Fax/Photocopying",
+				"icon": "icon-fax-01"
+			}
+		],
+		"_cleaning_services": [
+			{
+				"value": 1,
+				"name": "Dry Cleaning",
+				"icon": "icon-dry_cleaning-01"
+			},
+			{
+				"value": 2,
+				"name": "Ironing Service",
+				"icon": "icon-ironing_facilities-01"
+			},
+			{
+				"value": 3,
+				"name": "Laundry",
+				"icon": "icon-laundry-01"
+			},
+			{
+				"value": 4,
+				"name": "Daily Housekeeping",
+				"icon": "icon-housekeeping-01"
+			},
+			{
+				"value": 5,
+				"name": "Shoeshine",
+				"icon": "icon-shoeshine-01"
+			},
+			{
+				"value": 6,
+				"name": "Suit Press",
+				"icon": "icon-suit_press-01"
+			}
+		],
+		"_common_areas": [
+			{
+				"value": 1,
+				"name": "Outdoor Furniture",
+				"icon": "icon-outdoor-furniture-01"
+			},
+			{
+				"value": 2,
+				"name": "Picnic Area",
+				"icon": "icon-picnic_area-01"
+			},
+			{
+				"value": 3,
+				"name": "Outdoor Fireplace",
+				"icon": "icon-outdoor_fireplace-01"
+			},
+			{
+				"value": 4,
+				"name": "Grounds",
+				"icon": "icon-grounds-01"
+			},
+			{
+				"value": 5,
+				"name": "Terrace",
+				"icon": "icon-"
+			},
+			{
+				"value": 6,
+				"name": "Sun Deck",
+				"icon": "icon-sundeck-01"
+			},
+			{
+				"value": 7,
+				"name": "Shared Kitchen",
+				"icon": "icon-kitchen-01"
+			},
+			{
+				"value": 8,
+				"name": "Shared Lounge/TV Area",
+				"icon": "icon-shared_lounge-01"
+			},
+			{
+				"value": 9,
+				"name": "Game Room",
+				"icon": "icon-gameroom-01"
+			},
+			{
+				"value": 10,
+				"name": "Library",
+				"icon": "icon-library-01"
+			},
+			{
+				"value": 11,
+				"name": "Chapel/Shrine",
+				"icon": "icon-chapel-01"
+			}
+		],
+		"_enterainment_family_services": [
+			{
+				"value": 1,
+				"name": "Board Games/Puzzles",
+				"icon": "icon-boardgame-01"
+			},
+			{
+				"value": 2,
+				"name": "Books, DVDs, Music for kids",
+				"icon": "icon-"
+			},
+			{
+				"value": 3,
+				"name": "Indoor Play Area",
+				"icon": "icon-indoor_playarea-01"
+			},
+			{
+				"value": 4,
+				"name": "Kids' Outdoor Play Equipment",
+				"icon": "icon-outdoor_play_equipment-01"
+			},
+			{
+				"value": 5,
+				"name": "Baby Safety Gates",
+				"icon": "icon-"
+			},
+			{
+				"value": 6,
+				"name": "Kids' TV Networks",
+				"icon": "icon-kids_tv_network-01"
+			},
+			{
+				"value": 7,
+				"name": "Strollers",
+				"icon": "icon-stroller-01"
+			},
+			{
+				"value": 8,
+				"name": "Evening Entertainment",
+				"icon": "icon-evening_entertainment-01"
+			},
+			{
+				"value": 9,
+				"name": "Nightclub/DJ",
+				"icon": "icon-nightclub-01"
+			},
+			{
+				"value": 10,
+				"name": "Casino",
+				"icon": "icon-casino-01"
+			},
+			{
+				"value": 11,
+				"name": "Karoake",
+				"icon": "icon-karoke-01"
+			},
+			{
+				"value": 12,
+				"name": "Entertainment Staff",
+				"icon": "icon-entertainment_staff-01"
+			},
+			{
+				"value": 13,
+				"name": "Kids' Club",
+				"icon": "icon-"
+			},
+			{
+				"value": 14,
+				"name": "Playground",
+				"icon": "icon-playground-01"
+			},
+			{
+				"value": 15,
+				"name": "Babysitting/Child Services",
+				"icon": "icon-babysitting-01"
+			}
+		],
+		"_food_drink": [
+			{
+				"value": 1,
+				"name": "Kids' Meals",
+				"icon": "icon-kids_meal-01"
+			},
+			{
+				"value": 2,
+				"name": "Kid-Friendly Buffet",
+				"icon": "icon-kids_buffet-01"
+			},
+			{
+				"value": 3,
+				"name": "Wine/Champagne",
+				"icon": "icon-champagne-01"
+			},
+			{
+				"value": 4,
+				"name": "Bottle of Water",
+				"icon": "icon-water-bottle-01"
+			},
+			{
+				"value": 5,
+				"name": "Fruit",
+				"icon": "icon-fruit-01"
+			},
+			{
+				"value": 6,
+				"name": "Chocolate/Cookies",
+				"icon": "icon-cookies-01"
+			},
+			{
+				"value": 7,
+				"name": "On-site Coffee Shop",
+				"icon": "icon-coffeeshop"
+			},
+			{
+				"value": 8,
+				"name": "Restaurant",
+				"icon": "icon-restaurant-01"
+			},
+			{
+				"value": 9,
+				"name": "Restaurant with Dining Menu",
+				"icon": "icon-restaurent_menu-01"
+			},
+			{
+				"value": 10,
+				"name": "Bar",
+				"icon": "icon-bar-01"
+			},
+			{
+				"value": 11,
+				"name": "Snack Bar",
+				"icon": "icon-snackbar-01"
+			},
+			{
+				"value": 12,
+				"name": "Grocery Deliveries",
+				"icon": "icon-grocery_delivery-01"
+			},
+			{
+				"value": 13,
+				"name": "Packed Lunches",
+				"icon": "icon-packed_lunch-01"
+			},
+			{
+				"value": 14,
+				"name": "BBQ Facilities",
+				"icon": "icon-bbq-01"
+			},
+			{
+				"value": 15,
+				"name": "Vending Machine(Drinks)",
+				"icon": "icon-vending_machine-01"
+			},
+			{
+				"value": 16,
+				"name": "Vending Machine(Snacks)",
+				"icon": "icon-vending_machine-01"
+			},
+			{
+				"value": 17,
+				"name": "Special Diet Meals(upon request)",
+				"icon": "icon-special_diet-01"
+			},
+			{
+				"value": 18,
+				"name": "Room Service",
+				"icon": "icon-room_service-01"
+			},
+			{
+				"value": 19,
+				"name": "Breakfast in the Room",
+				"icon": "icon-breakfast_in_room-01"
+			}
+		],
+		"_frontdesk_services": [
+			{
+				"value": 1,
+				"name": "Tickets to Attractions or Shows",
+				"icon": "icon-ticket_service-01"
+			},
+			{
+				"value": 2,
+				"name": "24-Hours Front Desk",
+				"icon": "icon-24hr_frontdesk-01"
+			},
+			{
+				"value": 3,
+				"name": "Private Check-in/Check-out",
+				"icon": "icon-private_checkin-01"
+			},
+			{
+				"value": 4,
+				"name": "Express Check-in/Check-out",
+				"icon": "icon-express_checkin-01"
+			},
+			{
+				"value": 5,
+				"name": "Concierge Service",
+				"icon": "icon-concierge-01"
+			},
+			{
+				"value": 6,
+				"name": "Ticket Service",
+				"icon": "icon-ticket_service-01"
+			},
+			{
+				"value": 7,
+				"name": "Tour Desk",
+				"icon": "icon-tour_desk-01"
+			},
+			{
+				"value": 8,
+				"name": "Currency Exchange",
+				"icon": "icon-currency_exchange-01"
+			},
+			{
+				"value": 9,
+				"name": "ATM on Site",
+				"icon": "icon-atm-01"
+			},
+			{
+				"value": 10,
+				"name": "Valet Parking",
+				"icon": "icon-valet_parking-01"
+			},
+			{
+				"value": 11,
+				"name": "Baggage Storage",
+				"icon": "icon-baggage_storage-01"
+			},
+			{
+				"value": 12,
+				"name": "Lockers",
+				"icon": "icon-lockers-01"
+			},
+			{
+				"value": 13,
+				"name": "Safe",
+				"icon": "icon-safe-01"
+			},
+			{
+				"value": 14,
+				"name": "Newspapers",
+				"icon": "icon-newspaper-01"
+			}
+		],
+		"_internet._connection_location": [
+			{
+				"value": 1,
+				"name": "Public Areas",
+				"icon": "icon-public_wifi-01"
+			},
+			{
+				"value": 2,
+				"name": "Some Rooms",
+				"icon": "icon-"
+			},
+			{
+				"value": 3,
+				"name": "All Rooms",
+				"icon": "icon-"
+			},
+			{
+				"value": 4,
+				"name": "Business Centre",
+				"icon": "icon-business-center-01"
+			},
+			{
+				"value": 5,
+				"name": "Entire Property",
+				"icon": "icon-entire_property-01"
+			}
+		],
+		"_miscellaneous": [
+			{
+				"value": 1,
+				"name": "Adults Only",
+				"icon": "icon-adultsonly-01"
+			},
+			{
+				"value": 2,
+				"name": "Hypoallergenic Room Available",
+				"icon": "icon-hypoallergnic-01"
+			},
+			{
+				"value": 3,
+				"name": "All Spaces Non-Smoking(public and private)",
+				"icon": "icon-nosmoking-01"
+			},
+			{
+				"value": 4,
+				"name": "Designated Smoking Area",
+				"icon": "icon-smoking_area-01"
+			},
+			{
+				"value": 5,
+				"name": "Non-Smoking Rooms",
+				"icon": "icon-nosmoking-01"
+			},
+			{
+				"value": 6,
+				"name": "Facilities for Disabled Guests",
+				"icon": "icon-wheelchair-01"
+			},
+			{
+				"value": 7,
+				"name": "Elevator",
+				"icon": "icon-elevator-01"
+			},
+			{
+				"value": 8,
+				"name": "Family Rooms",
+				"icon": "icon-family_rooms-01"
+			},
+			{
+				"value": 9,
+				"name": "Soundproof Rooms",
+				"icon": "icon-soundproof-01"
+			},
+			{
+				"value": 10,
+				"name": "Honeymoon Suite",
+				"icon": "icon-honeymoon-01"
+			},
+			{
+				"value": 11,
+				"name": "VIP Room Facilities",
+				"icon": "icon-vip_room-01"
+			},
+			{
+				"value": 12,
+				"name": "Air Conditioning",
+				"icon": "icon-aircondition-01"
+			},
+			{
+				"value": 13,
+				"name": "Heating",
+				"icon": "icon-heating-01"
+			}
+		],
+		"_parking._parking_facilities": [
+			{
+				"value": 1,
+				"name": "Secured Parking",
+				"icon": "icon-secure_parking-01"
+			},
+			{
+				"value": 2,
+				"name": "Street Parking",
+				"icon": "icon-street_parking-01"
+			},
+			{
+				"value": 3,
+				"name": "Parking Garage",
+				"icon": "icon-parking_garage-01"
+			},
+			{
+				"value": 4,
+				"name": "Electric Vehicle Charging Station",
+				"icon": "icon-electric_vehicle_charging-01"
+			},
+			{
+				"value": 5,
+				"name": "Accessible Parking ",
+				"icon": "icon-wheelchair-01"
+			}
+		],
+		"pets": [
+			{
+				"value": 1,
+				"name": "no pets",
+				"icon": "icon-no_pets-01"
+			}
+		],
+		"_pool_spa": [
+			{
+				"value": 1,
+				"name": "Waterslide",
+				"icon": "icon-water_slide-01"
+			},
+			{
+				"value": 2,
+				"name": "Pool Towers",
+				"icon": "icon-pool-towel-01"
+			},
+			{
+				"value": 3,
+				"name": "Beach Chairs/Loungers",
+				"icon": "icon-beach_chair-01"
+			},
+			{
+				"value": 4,
+				"name": "Beach Umbrellas",
+				"icon": "icon-beach_umbrella-01"
+			},
+			{
+				"value": 5,
+				"name": "Beauty Services",
+				"icon": "icon-beauty_service-01"
+			},
+			{
+				"value": 6,
+				"name": "Spa Facilities",
+				"icon": "icon-spa_wellness-01"
+			},
+			{
+				"value": 7,
+				"name": "Steam Room",
+				"icon": "icon-"
+			},
+			{
+				"value": 8,
+				"name": "Spa Lounge/Relaxation Area",
+				"icon": "icon-shared_lounge-01"
+			},
+			{
+				"value": 9,
+				"name": "Foot Bath",
+				"icon": "icon-footbath-01"
+			},
+			{
+				"value": 10,
+				"name": "Spa/Wellness Packages",
+				"icon": "icon-spa_package-01"
+			},
+			{
+				"value": 11,
+				"name": "Massage Chair",
+				"icon": "icon-massage_chair-01"
+			},
+			{
+				"value": 12,
+				"name": "Fitness",
+				"icon": "icon-fitness-01"
+			},
+			{
+				"value": 13,
+				"name": "Yoga Classes",
+				"icon": "icon-yoga-01"
+			},
+			{
+				"value": 14,
+				"name": "Fitness Classes",
+				"icon": "icon-fitness-01"
+			},
+			{
+				"value": 15,
+				"name": "Personal Trainer",
+				"icon": "icon-personal_trainer-01"
+			},
+			{
+				"value": 16,
+				"name": "Fitness/Spa Locker Rooms",
+				"icon": "icon-spa_locker-01"
+			},
+			{
+				"value": 17,
+				"name": "Kids'Pool",
+				"icon": "icon-kids_pool-01"
+			},
+			{
+				"value": 18,
+				"name": "Swimming Pool",
+				"icon": "icon-swimming_pool-01"
+			},
+			{
+				"value": 19,
+				"name": "Spa",
+				"icon": "icon-spa_wellness-01"
+			},
+			{
+				"value": 20,
+				"name": "Sauna",
+				"icon": "icon-sauna-01"
+			},
+			{
+				"value": 21,
+				"name": "Turkish/Steam Bath",
+				"icon": "icon-steam_bath-01"
+			},
+			{
+				"value": 22,
+				"name": "Hot Tub/Jacuzzi",
+				"icon": "icon-jacuzzi-01"
+			},
+			{
+				"value": 23,
+				"name": "Fitness Centre",
+				"icon": "icon-fitness-01"
+			},
+			{
+				"value": 24,
+				"name": "Solarium",
+				"icon": "icon-solarium-01"
+			},
+			{
+				"value": 25,
+				"name": "Hot Spring Bath",
+				"icon": "icon-hot_spring-01"
+			},
+			{
+				"value": 26,
+				"name": "Massage",
+				"icon": "icon-massage-01"
+			},
+			{
+				"value": 27,
+				"name": "Open Air Bath",
+				"icon": "icon-open_bath-01"
+			},
+			{
+				"value": 28,
+				"name": "Bathhouse",
+				"icon": "icon-bathhouse-01"
+			}
+		],
+		"_transportation": [
+			{
+				"value": 1,
+				"name": "Public Transportation Tickets",
+				"icon": "icon-public_transportation_tickets-01"
+			},
+			{
+				"value": 2,
+				"name": "Shuttle Service",
+				"icon": "icon-shuttle_service-01"
+			},
+			{
+				"value": 3,
+				"name": "Bikes Available(free)",
+				"icon": "icon-bike_rental-01"
+			},
+			{
+				"value": 4,
+				"name": "Bicycle Rental(additional charge)",
+				"icon": "icon-bicycle_rental-01"
+			},
+			{
+				"value": 5,
+				"name": "Car Rental",
+				"icon": "icon-car_rental-01"
+			},
+			{
+				"value": 6,
+				"name": "Airport Shuttle",
+				"icon": "icon-airport_shuttle-01"
+			}
+		]
+	}
+}

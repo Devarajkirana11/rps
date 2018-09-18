@@ -1,0 +1,420 @@
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+		$( "#start_date , #end_date" ).datepicker();
+
+		$(document).on("click",".day-wise",function(){
+			if($(this).is(':checked')){
+				var val = $(this).val();
+				$(".selected-days").append(val+" ");
+				$( "#day-wise-form" ).append( "<input type='hidden' name='day_values[]' value='"+val+"' id='"+val+"'>" );
+			} else {
+				var val = $(this).val();
+				var str = $(".selected-days").html();
+				var new_str = str.replace(val,'');
+				$(".selected-days").html(new_str);
+				$("#"+val+"").remove();
+			}
+		});
+
+		/* validation for day use checkbox selection */
+
+		$(".daywiseedit").click(function(e){
+			var k = 0;
+			$(".day-wise").each(function( index ) {
+				if($(this).is(':checked')){
+					$k++;
+				}
+			});
+			if(k > 0){
+			} else {
+				e.preventDefault();
+				alert("Please select the days");
+				return false;
+			}
+		});
+
+		$(".datewiseedit").click(function(e){
+			var k = 0;
+			$(".date-wise-check").each(function( index ) {
+				if($(this).is(':checked')){
+					$k++;
+				}
+			});
+			if(k > 0){
+			} else {
+				e.preventDefault();
+				alert("Please select the Dates");
+				return false;
+			}
+		});
+
+		$(document).on("click",".date-wise-check",function(){
+			if($(this).is(':checked')){
+				var val = $(this).val();
+				$( "#date-wise-form" ).append( "<input type='hidden' class='model-date-wise-check' name='dates[]' value='"+val+"' id='"+val+"'>" );
+			} else {
+				var val = $(this).val();
+				$("#"+val+"").remove();
+			}
+		});
+
+		$(document).on("click","#date-select-all",function(){
+			if($(this).is(':checked')){
+				
+				$(".date-wise-check").prop("checked", true);
+				$(".date-wise-check").each(function( index ) {
+					var val = $(this).val();
+					$( "#date-wise-form" ).append( "<input type='hidden' class='model-date-wise-check' name='dates[]' value='"+val+"' id='"+val+"'>" );
+				});
+	
+			} else {
+
+				$(".date-wise-check").prop("checked", false);
+				$(".model-date-wise-check").remove();
+
+			}
+		});
+		
+
+	});
+</script>
+
+{{> nav}}
+
+{{> header}}
+
+{{!-- Begin Page Content --}}
+<main id="page-content">
+	<div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Rates</h3>
+        </div>
+    </div>
+
+
+	{{!-- Begin Page Container --}}
+	<div class="page-container">
+		<div class="row row-xl">
+			<div class="col-md-12 m-lg-b">
+				<h4 class="text-black fw-semi-thk fs-20">Base Rates</h4>
+			</div>
+		</div>
+		
+		<div class="row row-xl">
+			<div class="col-md-12">
+				<div class="tab-content">
+					<div id="manual">
+						{{!-- Begin Default Rate --}}
+						<div class="row row-xl">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="">Base Rate</label>
+									<input type="text" name="plan_name" class="form-control" value="{{ output.cost_rate }}">
+								</div>
+
+								<p class="m-lg-t"><a href="javascript:void(0)"  data-toggle="modal" data-target="#defaultrateedit" class="btn btn-danger btn-rounded w-150 text-left">Edit <i class="fa fa-edit fa-fw pull-right"></i></a></p>
+							</div>
+						</div>
+						{{!-- End Default Rate --}}
+
+							{{#if errors}}
+
+							<div class="alert alert-danger"> {{ errors }}</div>
+
+							{{/if}}
+		
+						<hr class="m-xl-b m-xl-t">
+
+						{{!-- Begin Day Wise Header --}}
+						<div class="row row-xl">
+							<div class="col-md-12 m-lg-b">
+								<h4 class="text-black fw-semi-thk fs-20">Day Wise</h4>
+							</div>
+						</div>
+						{{!-- End Day Wise Header --}}
+
+						{{!-- Begin Day Wise Table --}}
+						<div class="row row-xl">
+							<div class="col-md-12">
+								<div class="table-responsive">
+									{{!-- Begin Form --}}
+									<form id="day-wise">
+										{{!-- Begin Table --}}
+										<table class="table table-striped">
+											<thead>
+												<tr>
+													<th class="text-left">
+														<div class="checkbox m-n">
+															<input type="checkbox" class="day-wise" name="monday" value="monday" id="daywise">
+															<label for="daywise"  class="fw-semi-thk fs-sm" style="font-size: 12px; font-weight: 700;">Mon</label>
+														</div>
+													</th>
+													<th class="text-left">
+														<div class="checkbox m-n">
+															<input type="checkbox" class="day-wise" name="tuesday" value="tuesday" id="daywise1">
+															<label for="daywise1" class="fw-semi-thk fs-sm" style="font-size: 12px; font-weight: 700;">Tue</label>
+														</div>
+													</th>
+													<th class="text-left">
+														<div class="checkbox m-n">
+															<input type="checkbox" class="day-wise"  name="wednesday" value="wednesday" id="daywise2">
+															<label for="daywise2" class="fw-semi-thk fs-sm" style="font-size: 12px; font-weight: 700;">Wed</label>
+														</div>
+													</th>
+													<th class="text-left">
+														<div class="checkbox m-n">
+															<input type="checkbox" class="day-wise"  name="thursday" value="thursday" id="daywise3">
+															<label for="daywise3" class="fw-semi-thk fs-sm" style="font-size: 12px; font-weight: 700;">Thu</label>
+														</div>
+													</th>
+													<th class="text-left">
+														<div class="checkbox m-n">
+															<input type="checkbox" class="day-wise"  name="friday" value="friday" id="daywise4">
+															<label for="daywise4" class="fw-semi-thk fs-sm" style="font-size: 12px; font-weight: 700;">Fri</label>
+														</div>
+													</th>
+													<th class="text-left">
+														<div class="checkbox m-n">
+															<input type="checkbox" class="day-wise"  name="saturday" value="saturday" id="daywise5">
+															<label for="daywise5" class="fw-semi-thk fs-sm" style="font-size: 12px; font-weight: 700;">Sat</label>
+														</div>
+													</th>
+													<th class="text-left">
+														<div class="checkbox m-n">
+															<input type="checkbox" class="day-wise"  name="sunday" value="sunday" id="daywise6">
+															<label for="daywise6" class="fw-semi-thk fs-sm" style="font-size: 12px; font-weight: 700;">Sun</label>
+														</div>
+													</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td><input type="text" class="form-control" disabled="" value="{{ output.day_wise_cost.monday }}"></td>
+													<td><input type="text" class="form-control" disabled="" value="{{ output.day_wise_cost.tuesday }}"></td>
+													<td><input type="text" class="form-control" disabled="" value="{{ output.day_wise_cost.wednesday }}"></td>
+													<td><input type="text" class="form-control" disabled="" value="{{ output.day_wise_cost.thursday }}"></td>
+													<td><input type="text" class="form-control" disabled="" value="{{ output.day_wise_cost.friday }}"></td>
+													<td><input type="text" class="form-control" disabled="" value="{{ output.day_wise_cost.saturday }}"></td>
+													<td><input type="text" class="form-control" disabled="" value="{{ output.day_wise_cost.sunday }}"></td>
+												</tr>
+											</tbody>
+										</table>
+										{{!-- End Table --}}
+									</form>
+									{{!-- End Form --}}
+								</div>
+
+
+								{{!-- Edit Button --}}
+								<p class="m-lg-t"><a href="javascript:void(0)" data-toggle="modal" data-target="#daywiseedit" class="daywiseedit btn btn-danger btn-rounded w-150 text-left">Edit <i class="fa fa-edit fa-fw pull-right"></i></a></p>
+							</div>
+						</div>
+						{{!-- Begin Day Wise Table --}}
+
+						<hr class="m-xl-b m-xl-t">
+
+
+						{{!-- Begin Date Wise Header --}}
+						<div class="row row-xl">
+							<div class="col-md-12 m-lg-b">
+								<h4 class="text-black fw-semi-thk fs-20">Date Wise</h4>
+							</div>
+						</div>
+						{{!-- End Date Wise Header --}}
+
+
+						{{!-- Begin Date Wise INput --}}
+						<div class="row row-xl">
+							{{!-- Begin Start Date --}}
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for=""><i class="fa fa-calendar fa-fw m-xs-r"></i>Start Date</label>
+									<input type="text" class="form-control" name="start_date" id="start_date">
+								</div>
+							</div>
+							{{!-- End Start Date --}}
+
+							{{!-- Begin End Date --}}
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for=""><i class="fa fa-calendar fa-fw m-xs-r"></i>End Date</label>
+									<input type="text" class="form-control" name="end_date" id="end_date">
+								</div>
+							</div>
+							{{!-- End End Date --}}
+						</div>
+						{{!-- End Date Wise INput --}}
+
+
+						{{!-- Begin Date Wise Table --}}
+						<div class="row row-xl">
+							<div class="col-md-3">
+								<div class="checkbox m-lg-t m-lg-b">
+									<input type="checkbox" id="date-select-all" name="selectall" id="selectall">
+									<label for="date-select-all">Select All Dates</label>
+								</div>
+							</div>
+
+							{{!-- Begin Table Container --}}
+							<div class="col-md-12 date-wise-display">
+								<div class="table-responsive">
+									{{!-- Begin Table --}}
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th>Mon</th>
+												<th>Tue</th>
+												<th>Wed</th>
+												<th>Thu</th>
+												<th>Fri</th>
+												<th>Sat</th>
+												<th>Sun</th>
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr>
+												<td><input type="text" class="form-control" disabled=""></td>
+												<td><input type="text" class="form-control" disabled=""></td>
+												<td><input type="text" class="form-control" disabled=""></td>
+												<td><input type="text" class="form-control" disabled=""></td>
+												<td><input type="text" class="form-control" disabled=""></td>
+												<td><input type="text" class="form-control" disabled=""></td>
+												<td><input type="text" class="form-control" disabled=""></td>
+											</tr>
+										</tbody>
+									</table>
+									{{!-- End Table --}}
+								</div>
+							</div>
+							{{!-- End Table Container --}}
+
+							{{!-- Edit Button --}}
+							<div class="col-md-12">
+								<p class="m-lg-t"><a href="javascript:void(0)" data-toggle="modal" data-target="#datewiseedit" class="btn btn-danger btn-rounded w-150 text-left datewiseedit">Edit <i class="fa fa-edit fa-fw pull-right"></i></a></p>
+							</div>
+						</div>
+						{{!-- End Date Wise Table --}}
+					</div>
+					<div id="mark-up">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{!-- End Page Container --}}
+</main>
+{{!-- End Page Content --}}
+
+<div id="defaultrateedit" class="modal fade modal-top" role="dialog">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content-container">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+
+					<h5 class="text-uppercase fw-semi-thk text-black m-n">Edit Cost Rate</h5>
+				</div>
+
+				<div class="modal-body p-xl-t">
+					<form action="/hotels/rates/detail-view?hotel_id={{hotel_id}}" method="POST" id="cost-price-form">
+
+						<p class="m-lg-b">Please enter the cost rate</p>
+						
+						<input type="hidden" name="update_type" class="form-control" value="1">
+
+						<div class="form-group">
+							<label for="">New Cost Rate</label>
+							<input type="text" name="cost_rate" class="form-control" value="{{ output.cost_rate }}">
+						</div>
+
+						<input type="hidden" name="cost_currency" class="form-control" value="{{ output.cost_currency }}">
+						<input type="hidden" name="day_wise_cost" class="form-control" value='{{ output.day_wise_string }}'>
+						<input type="hidden" name="date_wise_cost" class="form-control" value='{{ output.date_wise_string }}'>
+
+						<p class="p-md-b"></p>
+
+						<button type="submit" value="Submit" class="btn btn-danger btn-rounded btn-block m-lg-t">Save</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="daywiseedit" class="modal fade modal-top" role="dialog">
+  	<div class="modal-dialog modal-sm">
+		<div class="modal-content-container">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+
+					<h5 class="text-uppercase fw-semi-thk text-black m-n">Edit Cost Rate</h5>
+				</div>
+				
+				<div class="modal-body p-xl-t">
+					<form action="/hotels/rates/detail-view?hotel_id={{hotel_id}}" method="POST" id="day-wise-form">
+						<input type="hidden" name="update_type" class="form-control" value="2">
+						<input type="hidden" name="cost_rate" class="form-control" value="{{ output.cost_rate }}">
+						<input type="hidden" name="cost_currency" class="form-control" value="{{ output.cost_currency }}">
+
+						<p class="m-lg-b">Please enter the cost rate for selected days</p>
+						<div class="selected-days"></div>
+						<div class="form-group">
+							<label for="">New Rate</label>
+							<input type="text" name="cost" value="" class="form-control">
+						</div>
+
+						<input type="hidden" name="day_wise_cost" class="form-control" value='{{ output.day_wise_string }}'>
+						<input type="hidden" name="date_wise_cost" class="form-control" value='{{ output.date_wise_string }}'>
+
+						<p class="p-md-b"></p>
+
+						<button type="submit" value="Submit" class="btn btn-danger btn-rounded btn-block m-lg-t">Save</button>
+					</form>
+				</div>
+			</div>
+		</div>
+  	</div>
+</div>
+
+<div id="datewiseedit" class="modal fade modal-top" role="dialog">
+  	<div class="modal-dialog modal-sm">
+		<div class="modal-content-container">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+
+					<h5 class="text-uppercase fw-semi-thk text-black m-n">Edit Cost Rate</h5>
+				</div>
+
+				<div class="modal-body p-xl-t">
+					<form action="/hotels/rates/detail-view?hotel_id={{hotel_id}}" method="POST" id="date-wise-form">
+						<input type="hidden" name="update_type" class="form-control" value="3">
+						<input type="hidden" name="cost_rate" id="cost-rate" class="form-control" value="{{ output.cost_rate }}">
+						<input type="hidden" name="cost_currency" class="form-control" value="{{ output.cost_currency }}">
+						<input type="hidden" name="day_wise_cost" class="form-control" value='{{ output.day_wise_string }}'>
+
+						<p>Please enter the cost rate for selected dates</p>
+
+						<div class="form-group">
+							<label for="">New Rate</label>
+							<input type="text" name="cost" value="" class="form-control">
+						</div>
+
+						<input type="hidden" name="date_wise_cost" id="date-wise-cost-value" class="form-control" value='{{ output.date_wise_string }}'>
+						<p class="p-md-b"></p>
+
+						<button type="submit" value="Submit" class="btn btn-danger btn-block btn-rounded m-lg-t">Save</button>
+					</form>
+				</div>
+			</div>
+		</div>
+  	</div>
+</div>
+
+{{> footer}}

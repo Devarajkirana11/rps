@@ -1,0 +1,25 @@
+{{#if checkboxarray }}
+    {{#each checkboxarray }}
+            <div class="col-sm-6">
+                <p class="fw-semi-thk text-capitalize text-black">
+                    {{#if this.checkbox }}
+                        {{this.checkbox}}
+                    {{/if}}
+                    {{#if this.subdropdown }}
+                        <span>({{this.subdropdown}})</span>
+                    {{/if}}
+                </p>
+                {{#if this.images}}
+                    <div> 
+                        {{#if this.images.success }} 
+                            {{#isArray this.images.data}}
+                                {{#each this.images.data}}
+                                    <a href="{{this}}" target="_blank">{{this}}</a>
+                                {{/each}}
+                            {{/isArray}}
+                        {{/if}}
+                    </div>
+                {{/if}}
+            </div>                          
+    {{/each}}
+{{/if}}

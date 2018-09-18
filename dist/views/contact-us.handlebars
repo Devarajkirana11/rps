@@ -1,0 +1,221 @@
+<!-- Begin Page Content -->
+<main id="page-content">
+  <!-- Begin Page Container -->
+  <div class="content-container">
+    <!-- Begin Page Container -->
+    <div class="page-container">
+      <div class="contact-us-container m-xl-t p-xl-t">
+        {{#if errors}} {{#each errors}}
+        <div class="alert alert-danger"> {{ msg }}</div>
+        {{/each}} {{/if}} {{#if success_msg}}
+        <div class="alert alert-success"> {{ success_msg.message }}</div>
+        {{/if}}
+        <div id="modal_contact_us" class="modal fade room-type-modal modal-center" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times-circle fs-lg"></i>
+                </button>
+
+                <p>Thank you for contacting us and we have received your inquiry!</p>
+                <p>We strive to respond to you within 24 hours.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row row-xl">
+          <div class="col-md-6 m-xl-b">
+            {{!--
+            <h3 class="fw-semi-thk text-black fs-20">More Details!</h3>
+            <p class="m-xl-b"></p> --}}
+
+            <!-- <div class="media">
+              <div class="media-left">
+                <i class="fa fa-envelope fa-fw fa-2x text-danger"></i>
+              </div>
+
+              <div class="media-body">
+                <p class="m-n">
+                  <small class="text-uppercase fs-xs">Email</small>
+                </p>
+                <p class="fw-semi-thk text-black">customercare@hotelnida.com</p>
+              </div>
+            </div> -->
+
+            <div class="faq-container">
+              <ul class="faq">
+                <li>
+                  <h3 class="fw-semi-thk text-black fs-20">Malaysia
+                    <!--<div class="plus-minus-toggle collapsed"></div> -->
+                  </h3>
+                  <div class="">
+                    <div class="media">
+                      <h4 class="text-capitalize text-black">Hotel Nida Changkat Bukit Bintang
+                      </h4>
+
+                      <!-- <div class="media-left p-n">
+                        <i class="fa fa-phone fa-fw fa-2x text-danger"></i>
+                      </div> -->
+
+                      <div class="media-body">
+                        <p class="m-n">
+                          <small class="text-uppercase fs-xs">Phone</small>
+                        </p>
+                        <p class="fw-semi-thk text-black">+60 3 2110 2527</p>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <h3 class="fw-semi-thk text-black fs-20">Thailand
+                    <!-- <div class="plus-minus-toggle collapsed"></div>-->
+                  </h3>
+                  <div class="">
+                    <div class="media">
+                      <h4 class="text-capitalize text-black">Hotel NIDA Sukhumvit Onnut</h4>
+
+                      <!-- <div class="media-left p-n">
+                        <i class="fa fa-phone fa-fw fa-2x text-danger"></i>
+                      </div> -->
+
+                      <div class="media-body">
+                        <p class="m-n">
+                          <small class="text-uppercase fs-xs">Phone</small>
+                        </p>
+                        <p class="fw-semi-thk text-black">+66 2 730 3743</p>
+                      </div>
+                    </div>
+
+                    <div class="media">
+                      <h4 class="text-capitalize text-black">Hotel NIDA Sukhumvit Prompong</h4>
+
+                      <!--<div class="media-left p-n">
+                        <i class="fa fa-phone fa-fw fa-2x text-danger"></i>
+                      </div>-->
+
+                      <div class="media-body">
+                        <p class="m-n">
+                          <small class="text-uppercase fs-xs">Phone</small>
+                        </p>
+                        <p class="fw-semi-thk text-black">+66 2 259 9480</p>
+                      </div>
+                    </div>
+
+                    {{!--
+                    <div class="media">
+                      <h4 class="text-capitalize text-black">Hotel NIDA Sukhumvit Bangna BITEC
+                      </h4>
+
+                      <!--<div class="media-left p-n">
+                        <i class="fa fa-phone fa-fw fa-2x text-danger"></i>
+                      </div>-->
+
+                      <div class="media-body">
+                        <p class="m-n">
+                          <small class="text-uppercase fs-xs">Phone</small>
+                        </p>
+                        <p class="fw-semi-thk text-black">+66 81 649 3939</p>
+                      </div>
+                    </div> --}}
+
+                    <div class="media">
+                      <h4 class="text-capitalize text-black">Hotel NIDA Ratchada Huai Khwang</h4>
+
+                      <!--<div class="media-left p-n">
+                        <i class="fa fa-phone fa-fw fa-2x text-danger"></i>
+                      </div>-->
+
+                      <div class="media-body">
+                        <p class="m-n">
+                          <small class="text-uppercase fs-xs">Phone</small>
+                        </p>
+                        <p class="fw-semi-thk text-black">+66 2 277 5279</p>
+                      </div>
+                    </div>
+
+                    <div class="media">
+                      <h4 class="text-capitalize text-black">Hotel NIDA Pattaya Jomtien Beach</h4>
+
+                      <!--<div class="media-left p-n">
+                        <i class="fa fa-phone fa-fw fa-2x text-danger"></i>
+                      </div>-->
+
+                      <div class="media-body">
+                        <p class="m-n">
+                          <small class="text-uppercase fs-xs">Phone</small>
+                        </p>
+                        <p class="fw-semi-thk text-black">+66 0 9901 03561</p>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            {{!--
+            <hr style="border-color: #eee;">
+
+
+
+
+            <p class="text-center text-uppercase m-lg-t m-md-b fw-semi-thk text-black">Follow Us</p>
+            <p class="">
+              <ul class="list-inline text-center">
+                <li><a href="javascript:void(0)"><i class="fa fa-facebook fa-fw text-facebook fa-2x"></i></a></li>
+                <li><a href="javascript:void(0)"><i class="fa fa-twitter fa-fw text-twitter fa-2x"></i></a></li>
+                <li><a href="javascript:void(0)"><i class="fa fa-instagram fa-fw text-instagram fa-2x"></i></a></li>
+              </ul>
+            </p> --}}
+          </div>
+
+          <div class="col-md-6">
+            <h3 class="fw-semi-thk text-black fs-20">Contact Us</h3>
+            <p>Please leave us your message. We will get back to you soon.</p>
+            <form action="/contact-us" method="POST" class="m-xl-b">
+              <div class="row row-xl">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="" for="first_name">First Name</label>
+                    <input type="text" id="" name="first_name" value="{{ inputs.first_name }}" placeholder="" class="form-control">
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="" for="last_name">Last Name</label>
+                    <input type="text" id="" name="last_name" value="{{ inputs.last_name }}" placeholder="" class="form-control">
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="" for="email">Email</label>
+                <input type="text" id="" name="email" value="{{ inputs.email }}" placeholder="" class="form-control">
+              </div>
+
+              <div class="form-group">
+                <label class="" for="message">Message</label>
+                <textarea name="message" id="" cols="30" rows="10" class="form-control">{{ inputs.message }}</textarea>
+              </div>
+
+              <div class="m-lg-t m-xl-b">
+                <input type="submit" name="save" value="Submit" class="btn btn-danger btn-rounded w-150" data-toggle="modal" data-target="#modal_contact_us"
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Page Container -->
+  </div>
+  <!-- End Page Container -->
+</main>
+<!-- Begin Page Content -->
+<script>
+  $('.faq li .question').click(function () {
+    $(this).find('.plus-minus-toggle').toggleClass('collapsed');
+    $(this).parent().toggleClass('active');
+  });
+
+</script>

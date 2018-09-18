@@ -1,0 +1,787 @@
+{
+    "rooms": {
+        "_room": [
+            {
+                "value": 1,
+                "name": "Childrens' Cribs",
+                "icon": "icon-crib-01"
+            },
+            {
+                "value": 2,
+                "name": "Drying Rack for Clothing",
+                "icon": "icon-"
+            },
+            {
+                "value": 3,
+                "name": "Sofa bed",
+                "icon": "icon-sofa-bed-01"
+            },
+            {
+                "value": 4,
+                "name": "Heated Pool",
+                "icon": "icon-"
+            },
+            {
+                "value": 5,
+                "name": "Plunge Pool",
+                "icon": "icon-"
+            },
+            {
+                "value": 6,
+                "name": "Pool Towels",
+                "icon": "icon-pool-towel-01"
+            },
+            {
+                "value": 7,
+                "name": "Rooftop Pool",
+                "icon": "icon-"
+            },
+            {
+                "value": 8,
+                "name": "Shallow End",
+                "icon": "icon-"
+            },
+            {
+                "value": 9,
+                "name": "Private Pool",
+                "icon": "icon-"
+            },
+            {
+                "value": 10,
+                "name": "Wardrobe/Closet",
+                "icon": "icon-wardrobe-01"
+            },
+            {
+                "value": 11,
+                "name": "Walk-in closet",
+                "icon": "icon-"
+            },
+            {
+                "value": 12,
+                "name": "Fan",
+                "icon": "icon-fan-01"
+            },
+            {
+                "value": 13,
+                "name": "Heating",
+                "icon": "icon-heating-01"
+            },
+            {
+                "value": 14,
+                "name": "Iron",
+                "icon": "icon-iron-01"
+            },
+            {
+                "value": 15,
+                "name": "Hot Tub",
+                "icon": "icon-"
+            },
+            {
+                "value": 16,
+                "name": "Private Entrance",
+                "icon": "icon-private-entrance-01"
+            },
+            {
+                "value": 17,
+                "name": "Sofa",
+                "icon": "icon-sofa-01"
+            },
+            {
+                "value": 18,
+                "name": "Sitting Area",
+                "icon": "icon-sitting-area-01"
+            },
+            {
+                "value": 19,
+                "name": "Suit Press",
+                "icon": "icon-"
+            },
+            {
+                "value": 20,
+                "name": "Hardwood/Parquet floors",
+                "icon": "icon-"
+            },
+            {
+                "value": 21,
+                "name": "Hypoallergenic",
+                "icon": "icon-hypoallergnic-01"
+            },
+            {
+                "value": 22,
+                "name": "Electric Blankets",
+                "icon": "icon-"
+            },
+            {
+                "value": 23,
+                "name": "Hypoallergenic Pillow",
+                "icon": "icon-hypoallergenic_pillow-01"
+            },
+            {
+                "value": 24,
+                "name": "Feather Pillow",
+                "icon": "icon-"
+            },
+            {
+                "value": 25,
+                "name": "Socket near the bed",
+                "icon": "icon-"
+            },
+            {
+                "value": 26,
+                "name": "Clothes Rack",
+                "icon": "icon-"
+            },
+            {
+                "value": 27,
+                "name": "Fold-up Bed",
+                "icon": "icon-"
+            },
+            {
+                "value": 28,
+                "name": "Trash Cans",
+                "icon": "icon-trash-can-01"
+            },
+            {
+                "value": 29,
+                "name": "Infinity Pool",
+                "icon": "icon-"
+            },
+            {
+                "value": 30,
+                "name": "Pool Cover",
+                "icon": "icon-"
+            },
+            {
+                "value": 31,
+                "name": "Pool with a View",
+                "icon": "icon-poolview-01"
+            },
+            {
+                "value": 32,
+                "name": "Saltwater Pool",
+                "icon": "icon-"
+            },
+            {
+                "value": 33,
+                "name": "Air Conditioning",
+                "icon": "icon-aircondition-01"
+            },
+            {
+                "value": 34,
+                "name": "Dryer",
+                "icon": "icon-dryer-01"
+            },
+            {
+                "value": 35,
+                "name": "Carpeted",
+                "icon": "icon-carpeted-floors-01"
+            },
+            {
+                "value": 36,
+                "name": "Extra Long Beds(\u003e 6.5 ft)",
+                "icon": "icon-extralong-bed-01"
+            },
+            {
+                "value": 37,
+                "name": "Fireplace",
+                "icon": "icon-fireplace-01"
+            },
+            {
+                "value": 38,
+                "name": "Interconnecting Room(s) Available",
+                "icon": "icon-"
+            },
+            {
+                "value": 39,
+                "name": "Ironing Facilities",
+                "icon": "icon-ironing-facilities-01"
+            },
+            {
+                "value": 40,
+                "name": "Mosquito net",
+                "icon": "icon-mosquito-net-01"
+            },
+            {
+                "value": 41,
+                "name": "Safe",
+                "icon": "icon-safe-01"
+            },
+            {
+                "value": 42,
+                "name": "Soundproof",
+                "icon": "icon-soundproof-01"
+            },
+            {
+                "value": 43,
+                "name": "Title / Marble Floor",
+                "icon": "icon-marble-floor-01"
+            },
+            {
+                "value": 44,
+                "name": "Washing Machine",
+                "icon": "icon-washing-machine-01"
+            },
+            {
+                "value": 45,
+                "name": "Desk",
+                "icon": "icon-desk-01"
+            },
+            {
+                "value": 46,
+                "name": "Cleaning Products",
+                "icon": "icon-cleaning-01"
+            },
+            {
+                "value": 47,
+                "name": "Pajamas",
+                "icon": "icon-pajamas-01"
+            },
+            {
+                "value": 48,
+                "name": "Adapter",
+                "icon": "icon-adapters-01"
+            },
+            {
+                "value": 49,
+                "name": "Non-Feather Pillow",
+                "icon": "icon-"
+            }
+        ],
+        "_mediaAndTechnology": [
+            {
+                "value": 1,
+                "name": "Game console - PS4",
+                "icon": "icon-"
+            },
+            {
+                "value": 2,
+                "name": "Game Console - Xbox One",
+                "icon": "icon-"
+            },
+            {
+                "value": 3,
+                "name": "Game console",
+                "icon": "icon-"
+            },
+            {
+                "value": 4,
+                "name": "Game console - PS2",
+                "icon": "icon-"
+            },
+            {
+                "value": 5,
+                "name": "Game Console - Xbox 360",
+                "icon": "icon-"
+            },
+            {
+                "value": 6,
+                "name": "iPad",
+                "icon": "icon-ipad-01"
+            },
+            {
+                "value": 7,
+                "name": "CD Player",
+                "icon": "icon-cdplayer-01"
+            },
+            {
+                "value": 8,
+                "name": "Fax",
+                "icon": "icon-fax-01"
+            },
+            {
+                "value": 9,
+                "name": "Laptop Safe",
+                "icon": "icon-safe-01"
+            },
+            {
+                "value": 10,
+                "name": "Pay-per-view channels",
+                "icon": "icon-pay-per-view-01"
+            },
+            {
+                "value": 11,
+                "name": "Satellite Channels",
+                "icon": "icon-"
+            },
+            {
+                "value": 12,
+                "name": "TV",
+                "icon": "icon-tv-01"
+            },
+            {
+                "value": 13,
+                "name": "Video Games",
+                "icon": "icon-"
+            },
+            {
+                "value": 14,
+                "name": "Game console - Wii U",
+                "icon": "icon-"
+            },
+            {
+                "value": 15,
+                "name": "Computer",
+                "icon": "icon-computer-01"
+            },
+            {
+                "value": 16,
+                "name": "Game console - Nintendo Wii",
+                "icon": "icon-"
+            },
+            {
+                "value": 17,
+                "name": "Game console - PS3",
+                "icon": "icon-"
+            },
+            {
+                "value": 18,
+                "name": "Laptop",
+                "icon": "icon-laptop-01"
+            },
+            {
+                "value": 19,
+                "name": "Cable Channel",
+                "icon": "icon-cable-channels-01"
+            },
+            {
+                "value": 20,
+                "name": "DVD Player",
+                "icon": "icon-dvdplayer-01"
+            },
+            {
+                "value": 21,
+                "name": "iPod Dock",
+                "icon": "icon-"
+            },
+            {
+                "value": 22,
+                "name": "Flat-screen TV",
+                "icon": "icon-flatscreen-01"
+            },
+            {
+                "value": 23,
+                "name": "Radio",
+                "icon": "icon-radio-01"
+            },
+            {
+                "value": 24,
+                "name": "Telephone",
+                "icon": "icon-telephone-01"
+            },
+            {
+                "value": 25,
+                "name": "Video",
+                "icon": "icon-"
+            },
+            {
+                "value": 26,
+                "name": "Blue-ray Player",
+                "icon": "icon-"
+            }
+        ],
+        "_bathroom": [
+            {
+                "value": 1,
+                "text": "Private Bathroom",
+                "icon": "icon-"
+            },
+            {
+                "value": 2,
+                "text": "Toilet Paper",
+                "icon": "icon-toiletpaper-01"
+            },
+            {
+                "value": 3,
+                "text": "Emergency Cord in Bathroom",
+                "icon": "icon-"
+            },
+            {
+                "value": 4,
+                "text": "Lower Sink",
+                "icon": "icon-"
+            },
+            {
+                "value": 5,
+                "text": "Shower Chair",
+                "icon": "icon-"
+            },
+            {
+                "value": 6,
+                "text": "Walk-in Shower",
+                "icon": "icon-walkin_shower-01"
+            },
+            {
+                "value": 7,
+                "text": "Bidet",
+                "icon": "icon-bidet-01"
+            },
+            {
+                "value": 8,
+                "text": "Bathrobe",
+                "icon": "icon-bathrobe-01"
+            },
+            {
+                "value": 9,
+                "text": "Guest Bathroom",
+                "icon": "icon-"
+            },
+            {
+                "value": 10,
+                "text": "Spa Tub",
+                "icon": "icon-bathtub-01"
+            },
+            {
+                "value": 11,
+                "text": "Sauna",
+                "icon": "icon-sauna-01"
+            },
+            {
+                "value": 12,
+                "text": "Slippers",
+                "icon": "icon-slippers-01"
+            },
+            {
+                "value": 13,
+                "text": "Additional Bathroom",
+                "icon": "icon-"
+            },
+            {
+                "value": 14,
+                "text": "Shampoo",
+                "icon": "icon-shampoo-01"
+            },
+            {
+                "value": 15,
+                "text": "Body Soap",
+                "icon": "icon-body-soap-01"
+            },
+            {
+                "value": 16,
+                "text": "Shared Bathroom",
+                "icon": "icon-"
+            },
+            {
+                "value": 17,
+                "text": "Adapted Bath",
+                "icon": "icon-"
+            },
+            {
+                "value": 18,
+                "text": "Raised Toilet",
+                "icon": "icon-"
+            },
+            {
+                "value": 19,
+                "text": "Roll-in Shower",
+                "icon": "icon-"
+            },
+            {
+                "value": 20,
+                "text": "Toilet with Grab Rails",
+                "icon": "icon-"
+            },
+            {
+                "value": 21,
+                "text": "Bathtub",
+                "icon": "icon-bathtub-01"
+            },
+            {
+                "value": 22,
+                "text": "Bathtub or Shower",
+                "icon": "icon-bathtub-01"
+            },
+            {
+                "value": 23,
+                "text": "Free Toiletries",
+                "icon": "icon-free_toiletries-01"
+            },
+            {
+                "value": 24,
+                "text": "Hairdryer",
+                "icon": "icon-hair-dryer-01"
+            },
+            {
+                "value": 25,
+                "text": "Shared Toilet",
+                "icon": "icon-"
+            },
+            {
+                "value": 26,
+                "text": "Shower",
+                "icon": "icon-shower-01"
+            },
+            {
+                "value": 27,
+                "text": "Toilet",
+                "icon": "icon-toilet-01"
+            },
+            {
+                "value": 28,
+                "text": "Toothbrush",
+                "icon": "icon-toothbrush-01"
+            },
+            {
+                "value": 29,
+                "text": "Conditioner",
+                "icon": "icon-conditioner-01"
+            },
+            {
+                "value": 30,
+                "text": "Shower Cap",
+                "icon": "icon-shower_cap-01"
+            }
+        ],
+        "_servicesAndExtras": [
+            {
+                "value": 1,
+                "name": "Executive Lounge Access",
+                "icon": "icon-loungeaccess-01"
+            },
+            {
+                "value": 2,
+                "name": "Wake-up Service",
+                "icon": "icon-wakeup-01"
+            },
+            {
+                "value": 3,
+                "name": "Linens",
+                "icon": "icon-linens-01"
+            },
+            {
+                "value": 4,
+                "name": "Towels/Sheets (extra fee)",
+                "icon": "icon-towel-sheets-01"
+            },
+            {
+                "value": 5,
+                "name": "Alarm Clock",
+                "icon": "icon-alarmclock-01"
+            },
+            {
+                "value": 6,
+                "name": "Towels",
+                "icon": "icon-towel-sheets-01"
+            }
+        ],
+        "_outdoorAndView": [
+            {
+                "value": 1,
+                "name": "Balcony",
+                "icon": "icon-balcony-01"
+            },
+            {
+                "value": 2,
+                "name": "View",
+                "icon": "icon-outdoor-view-01"
+            },
+            {
+                "value": 3,
+                "name": "City View",
+                "icon": "icon-cityview-01"
+            },
+            {
+                "value": 4,
+                "name": "Lake View",
+                "icon": "icon-"
+            },
+            {
+                "value": 5,
+                "name": "Mountain View",
+                "icon": "icon-outdoor-view-01"
+            },
+            {
+                "value": 6,
+                "name": "River View",
+                "icon": "icon-"
+            },
+            {
+                "value": 7,
+                "name": "Patio",
+                "icon": "icon-"
+            },
+            {
+                "value": 8,
+                "name": "Terrace",
+                "icon": "icon-"
+            },
+            {
+                "value": 9,
+                "name": "Garden View",
+                "icon": "icon-"
+            },
+            {
+                "value": 10,
+                "name": "Landmark View",
+                "icon": "icon-"
+            },
+            {
+                "value": 11,
+                "name": "Pool View",
+                "icon": "icon-poolview-01"
+            },
+            {
+                "value": 12,
+                "name": "Sea View",
+                "icon": "icon-"
+            }
+        ],
+        "_accessibility": [
+            {
+                "value": 1,
+                "name": "Accessible by elevator",
+                "icon": "icon-elevator-01"
+            },
+            {
+                "value": 2,
+                "name": "Room is completely wheelchair accessible",
+                "icon": "icon-wheelchair-01"
+            },
+            {
+                "value": 3,
+                "name": "Upper floors accessible by stairs only",
+                "icon": "icon-upperfloorstair-01"
+            },
+            {
+                "value": 4,
+                "name": "Room is located on the ground floor",
+                "icon": "icon-"
+            },
+            {
+                "value": 5,
+                "name": "Upper floors accessible by elevator",
+                "icon": "icon-elevator-01"
+            }
+        ],
+        "_foodAndDrink": [
+            {
+                "value": 1,
+                "name": "Dining Area",
+                "icon": "icon-dining-area-01"
+            },
+            {
+                "value": 2,
+                "name": "Wine Glasses",
+                "icon": "icon-wineglass-01"
+            },
+            {
+                "value": 3,
+                "name": "Chocolate/Cookies",
+                "icon": "icon-cookies-01"
+            },
+            {
+                "value": 4,
+                "name": "Wine/Champagne",
+                "icon": "icon-champagne-01"
+            },
+            {
+                "value": 5,
+                "name": "Oven",
+                "icon": "icon-oven-01"
+            },
+            {
+                "value": 6,
+                "name": "Toaster",
+                "icon": "icon-toaster-01"
+            },
+            {
+                "value": 7,
+                "name": "Electric Kettle",
+                "icon": "icon-electric-kettle-01"
+            }
+        ],
+        "_entertainmentAndFamilyServices": [
+            {
+                "value": 1,
+                "name": "Baby safety gates",
+                "icon": "icon-"
+            },
+            {
+                "value": 2,
+                "name": "Books, DVDs or Music for children",
+                "icon": "icon-"
+            },
+            {
+                "value": 3,
+                "name": "Board games/puzzle",
+                "icon": "icon-puzzle-01"
+            },
+            {
+                "value": 4,
+                "name": "Child safety socket covers",
+                "icon": "icon-"
+            }
+        ],
+        "_kitchen": [
+            {
+                "value": 1,
+                "name": "barbecue",
+                "icon": "icon-bbq-01"
+            },
+            {
+                "value": 2,
+                "name": "coffee machine",
+                "icon": "icon-coffee-machine-01"
+            },
+            {
+                "value": 3,
+                "name": "dining table",
+                "icon": "icon-dining-table-01"
+            },
+            {
+                "value": 4,
+                "name": "dish washer",
+                "icon": "icon-dishwasher-01"
+            },
+            {
+                "value": 5,
+                "name": "fruits",
+                "icon": "icon-fruit-01"
+            },
+            {
+                "value": 6,
+                "name": "high chair",
+                "icon": "icon-highchair-01"
+            },
+            {
+                "value": 7,
+                "name": "kitchen",
+                "icon": "icon-kitchen-01"
+            },
+            {
+                "value": 8,
+                "name": "kitchenette",
+                "icon": "icon-kitchenette-01"
+            },
+            {
+                "value": 9,
+                "name": "microwave",
+                "icon": "icon-microwave-01"
+            },
+            {
+                "value": 10,
+                "name": "mini bar",
+                "icon": "icon-minibar-01"
+            },
+            {
+                "value": 11,
+                "name": "outdoor dining",
+                "icon": "icon-outdoor-dining-01"
+            },
+            {
+                "value": 12,
+                "name": "refrigerator",
+                "icon": "icon-refrigerator-01"
+            },
+            {
+                "value": 13,
+                "name": "stovetop",
+                "icon": "icon-stovetop-01"
+            },
+            {
+                "value": 14,
+                "name": "water bottle",
+                "icon": "icon-water-bottle-01"
+            }
+        ]
+    }
+}

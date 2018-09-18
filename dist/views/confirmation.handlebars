@@ -1,0 +1,49 @@
+<main id="page-content">
+    <div class="content-container">
+       <div class="page-container">
+            <div class="row row-xl col-md-12">
+                {{#equal status '11'}}
+                    <div class="text-center p-xl-t p-xl-b m-xl-t m-xl-b">
+                        <p>
+                            <i class="fa fa-thumbs-up fa-4x text-success"></i>
+                        </p>
+                        <p>Your email has been successfully verified!!</p>
+                        {{!--<p class="text-center">
+                            <a href="/users/login" class="btn btn-danger btn-rounded w-150">Login</a>
+                        </p>--}}
+                    </div>
+                {{/equal}}
+                {{#equal status '2'}}
+                    <div class="text-center p-xl-t p-xl-b m-xl-t m-xl-b">
+                        <p>
+                            <i class="fa fa-thumbs-up fa-4x text-success"></i>
+                        </p>
+                        <p>Your email already verified!!</p>
+                        <p class="text-center">
+                            <a href="/users/login" class="btn btn-danger btn-rounded w-150">Login</a>
+                        </p>
+                    </div>
+                {{/equal}}
+                {{#equal status '3'}}
+                    <div class="text-center p-xl-t p-xl-b m-xl-t m-xl-b">
+                        <p>
+                            <i class="fa fa-exclamation-circle fa-4x text-success"></i>
+                        </p>
+                        <p>Invalid Token!!</p>
+                    </div>
+                {{/equal}}
+                {{#equal status '4'}}
+                    <div class="text-center p-xl-t p-xl-b m-xl-t m-xl-b">
+                        <p>
+                            <i class="fa fa-exclamation-circle fa-4x text-success"></i>
+                        </p>
+                        <p>Your Email Address doesn't exists</p>
+                    </div>
+                {{/equal}}
+                {{#equal status '0'}}
+                    <div class="alert alert-danger">{{message}}</div>
+                {{/equal}}
+            </div>
+        </div>
+    </div>
+</main>

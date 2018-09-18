@@ -1,0 +1,618 @@
+{{> nav}}
+
+{{> header}}
+
+<main id="page-content">
+    <div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Contact Details</h3>
+        </div>
+    </div>
+    
+    {{#if success }}
+    <div class="alert alert-success">{{ message}}</div>
+    {{else if message }}
+    <div class="alert alert-danger">{{ message}}</div>
+    {{/if}}
+
+    <div class="page-container">
+        <div class="row row-xl">
+            <div class="col-md-12">
+                {{#if contact_id}}
+                <form class="" action='/contact_details/create?contact_id={{contact_id}}' method="POST">
+                {{else}}
+                <form class="" action='/contact_details/create?hotel_id={{#if hotel_id }}{{#trim hotel_id}}{{/trim}}{{/if}}' method="POST">
+                {{/if}}
+                
+                {{#if formstatus}}
+                    <div class="row row-xl">
+                        <div class="ownercontactdetails selectWrapper">
+                            <div class="row row-xl">
+                                <div class="col-md-12 m-lg-b">
+                                    <h4 class="text-black fw-semi-thk fs-20">Owner Contact Details <span class="pull-right"><a href="#" id="ownercontactdetailsDelete" class="ownercontactdetailsDelete text-default" data-toggle="tooltip" title="Delete Row"><i class="fa fa-times-circle fa-fw"></i></a></span></h4>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="row row-xl">
+                                <div class="col-md-6">
+                                    <div class="row row-xl">
+                                        {{!-- Begin User Name --}}
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class=""  for="username_1">Username/Login ID*</label>
+                                                <input type="text" id="" name="username_1" placeholder="" class="form-control" >
+                                                <span class="text-danger">{{#if username_1 }} {{ username_1 }} {{/if}}</span>
+                                            </div>
+                                        </div>
+                                        {{!-- End User Name --}}
+
+                                        {{!-- Begin Contact Name --}}
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class=""  for="contactname_1">Contact Name*</label>
+                                                <input type="text" id="" name="contactname_1" placeholder="" class="form-control" >
+                                                <span class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        {{!-- End Contact Name --}}
+
+                                        {{!-- Begin Contact Email --}}
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class=""  for="contactemail_1">Contact Email*</label>
+                                                <input type="text" id="" name="contactemail_1" placeholder="" class="form-control" >
+                                                <span class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        {{!-- End Contact Email --}}
+
+                                        {{!-- Begin Contact Number --}}
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class=""  for="contactnumberl_1">Contact Number (L)*</label>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="select-wrapper">
+                                                            <select name="countrycodel_1" class="form-control" >
+                                                                <option value="select">Select</option>
+                                                                {{#if stdcodes}}
+                                                                {{#each stdcodes}}
+                                                                {{#equal @key "landline"}}
+                                                                {{#each this }}
+                                                                <option value="{{stdcode}}">{{@key}}</option>
+                                                                {{/each}}
+                                                                {{/equal}}
+                                                                {{/each}}
+                                                                {{/if}}
+                                                            </select>
+                                                            <span class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" id="" name="contactnumberl_1" placeholder="" class="form-control" >
+                                                        <span class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{!-- End Contact Number --}}
+
+                                        {{!-- Begin Contact Number --}}
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class=""  for="contactnumberm_1">Contact Number (M)*</label>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="select-wrapper">
+                                                            <select name="countrycodem_1" class="form-control" >
+                                                                <option value="select">Select</option>
+                                                                {{#if stdcodes}}
+                                                                {{#each stdcodes}}
+                                                                {{#equal @key "mobile"}}
+                                                                {{#each this}}
+                                                                <option value="{{stdcode}}">{{@key}}</option>
+                                                                {{/each}}
+                                                                {{/equal}}
+                                                                {{/each}}
+                                                                {{/if}}
+                                                            </select>
+                                                            <span class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" id="" name="contactnumberm_1" placeholder="" class="form-control" >
+                                                        <span class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{!-- End Contact Number --}}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="row row-xl">
+                                        {{!-- Begin Country --}}
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class=""  for="country_1">Country *</label>
+                                                <div class="select-wrapper">
+                                                    <select name="country_1" class="country form-control" >
+                                                        <option value="select">Choose Country</option>
+                                                        {{#if locationmasters }}
+                                                        {{#each locationmasters }}
+                                                        <option value="{{@key}}" {{#equal ../requestBody.country_1 @key}} selected="selected" {{/equal}}>{{ this.name }}</option>
+                                                        {{/each}}
+                                                        {{/if}}
+                                                    </select>
+                                                    <span class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{!-- End Country --}}
+
+                                        {{!-- Begin State --}}
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class=""  for="state_1">State *</label>
+                                                <div class="select-wrapper">
+                                                    <select name="state_1" class="state form-control" >
+                                                        <option value="select">Choose State</option>
+                                                        <option value="{{requestBody.state_1}}" {{#if requestBody.state_1 }} selected="selected" {{/if}}>Loading...</option>
+                                                    </select>
+                                                    <span class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{!-- End State --}}
+
+                                        {{!-- Begin City --}}
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class=""  for="city_1">City *</label>
+                                                <div class="select-wrapper">
+                                                    <select name="city_1" class="city form-control" >
+                                                        <option value="select">Choose City</option>
+                                                        <option value="{{requestBody.city_1}}" {{#if requestBody.city_1 }} selected="selected" {{/if}}>Loading...</option>
+                                                    </select>
+                                                    <span class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{!-- End City --}}
+
+                                        {{!-- Begin Address Line 1 --}}
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class=""  for="addressline1_1">Address Line 1</label>
+                                                <input type="text" id="" name="addressline1_1" placeholder="" class="form-control" >
+                                                <span class="text-danger"></span>
+                                            </div>
+                                        </div>  
+                                        {{!-- End Address Line 1 --}}
+
+                                        {{!-- Begin Address Line 2 --}}
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class=""  for="addressline2_1">Address Line 2</label>
+                                                <input type="text" id="" name="addressline2_1" placeholder="" class="form-control" >
+                                                <span class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        {{!-- End Address Line 2 --}}
+
+                                        {{!-- Begin Zip / Postal Code --}}
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class=""  for="zipcode_1">Zip/Postal Code *</label>
+                                                <input type="text" id="" name="zipcode_1" placeholder="" class="form-control" >
+                                                <span class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        {{!-- End Zip / Postal Code --}}
+                                    </div>
+                                </div>                                
+                            </div>
+                        </div>
+                        <div class="row row-xl">
+                            <div class="col-md-12 m-lg-t">
+                                <input name="ownercount" type="hidden" value="1"/>
+                                <a href="#" id="addanotherOwnercontactdetails" class="btn btn-danger btn-rounded  w-150 text-left addanotherOwnercontactdetails">Add another<i class="fa fa-plus-circle pull-right fa-fw lh-20"></i></a>
+
+                                <hr class="m-xl-t m-xl-b">
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- Begin Owner Contact Details --}}
+
+
+                    
+                    {{!-- Begin Hotel Manager Contact Details --}}
+                    <div class="hotelmanagercontactdetails">
+                        <div class="row row-xl m-lg-b">
+                            <div class="col-md-12">
+                                <h4 class="text-black fw-semi-thk fs-20">Hotel Manager Contact Details <span class="pull-right"><a href="#" id="hotelmanagercontactdetailsDelete" class="hotelmanagercontactdetailsDelete text-default" data-toggle="tooltip" title="Delete Row"><i class="fa fa-times-circle fa-fw"></i></a></span></h4>
+                            </div>
+                        </div>
+
+                        <div class="row row-xl">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class=""  for="hmcdfirstname_1">Firstname *</label>
+                                    <input type="text" id="" name="hmcdfirstname_1" placeholder="" class="form-control" >
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class=""  for="hmcdlastname_1">Lastname *</label>
+                                    <input type="text" id="" name="hmcdlastname_1" placeholder="" class="form-control" >
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-xl">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class=""  for="hmcdlandlinenumber_1">Landline Number</label>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="select-wrapper">
+                                                <select name="hmcdlandlinenumber_stdcode_1" class="form-control" >
+                                                    <option value="select">Select</option>
+                                                    {{#if stdcodes}}
+                                                    {{#each stdcodes}}
+                                                    {{#equal @key "landline"}}
+                                                    {{#each this }}
+                                                    <option value="{{stdcode}}">{{@key}}</option>
+                                                    {{/each}}
+                                                    {{/equal}}
+                                                    {{/each}}
+                                                    {{/if}}
+                                                </select>
+                                                <span class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="text" id="" name="hmcdlandlinenumber_1" placeholder="" class="form-control" >
+                                            <span class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class=""  for="hmcdmobileno_1">Mobile Number</label>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="select-wrapper">
+                                                <select name="hmcdmobilenumber_stdcode_1" class="form-control" >
+                                                    <option value="select">Select</option>
+                                                    {{#if stdcodes}}
+                                                    {{#each stdcodes}}
+                                                    {{#equal @key "mobile"}}
+                                                    {{#each this }}
+                                                    <option value="{{stdcode}}">{{@key}}</option>
+                                                    {{/each}}
+                                                    {{/equal}}
+                                                    {{/each}}
+                                                    {{/if}}
+                                                </select>
+                                                <span class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="text" id="" name="hmcdmobilenumber_1" placeholder="" class="form-control" >
+                                            <span class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-xl">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class=""  for="hmcdemail_1">Email</label>
+                                    <input type="text" id="" name="hmcdemail_1" placeholder="" class="form-control" >
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-xl">
+                            <div class="col-md-12 m-lg-t">
+                                <input name="managercount" type="hidden" value="1"/>
+                                <a href="#" id="addanotherHotelManagerdetails" class="btn btn-danger btn-rounded w-150 text-left addanotherHotelManagerdetails">Add another<i class="fa fa-plus-circle pull-right fa-fw lh-20"></i></a>
+
+                                <hr class="m-xl-t m-xl-b">
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- End Hotel Manager Contact Details --}}
+
+                    {{!-- Begin Front Desk Contact Details --}}
+                    <div class="FrontDeskContactDetails">
+                        <div class="row row-xl m-lg-b">
+                            <div class="col-md-12">
+                                <div class="checkbox">
+                                    <input type ="checkbox" name="fdfnsame" id="fdfnsame" {{#equal requestBody.fdfnsame "on"}} checked="checked" {{/equal}}/>
+                                    <label for="fdfnsame">Click here if Front desk / Finance Contact Details is same as above</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-xl m-lg-b">
+                            <div class="col-md-12">
+                                <h4 class="text-black fw-semi-thk fs-20">Front Desk Contact Details<span class="pull-right"><a href="#" id="FrontDeskContactDetailsDelete" class="FrontDeskContactDetailsDelete text-default" data-toggle="tooltip" title="Delete Row"><i class="fa fa-times-circle fa-fw"></i></a></span></h4>
+                            </div>
+                        </div>
+
+                        <div class="row row-xl">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class=""  for="fdcdfirstname_1">Firstname *</label>
+                                    <input type="text" id="" name="fdcdfirstname_1" placeholder="" class="form-control" >
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class=""  for="fdcdlastname_1">Lastname *</label>
+                                    <input type="text" id="" name="fdcdlastname_1" placeholder="" class="form-control" >
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-xl">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class=""  for="fdcdlandlinenumber_1">Landline Number</label>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="select-wrapper">
+                                                <select name="fdcdlandlinenumber_stdcode_1" class="form-control" >
+                                                    <option value="select">Select</option>
+                                                    {{#if stdcodes}}
+                                                    {{#each stdcodes}}
+                                                    {{#equal @key "landline"}}
+                                                    {{#each this }}
+                                                    <option value="{{stdcode}}">{{@key}}</option>
+                                                    {{/each}}
+                                                    {{/equal}}
+                                                    {{/each}}
+                                                    {{/if}}
+                                                </select>
+                                                <span class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="text" id="" name="fdcdlandlinenumber_1" placeholder="" class="form-control" >
+                                            <span class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class=""  for="fdcdmobileno_1">Mobile Number</label>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="select-wrapper">
+                                                <select name="fdcdmobilenumber_stdcode_1" class="form-control" >
+                                                    <option value="select">Select</option>
+                                                    {{#if stdcodes}}
+                                                    {{#each stdcodes}}
+                                                    {{#equal @key "mobile"}}
+                                                    {{#each this }}
+                                                    <option value="{{stdcode}}">{{@key}}</option>
+                                                    {{/each}}
+                                                    {{/equal}}
+                                                    {{/each}}
+                                                    {{/if}}
+                                                </select>
+                                                <span class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="text" id="" name="fdcdmobilenumber_1" placeholder="" class="form-control" >
+                                            <span class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-xl">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class=""  for="fdcdemail_1">Email</label>
+                                    <input type="text" id="" name="fdcdemail_1" placeholder="" class="form-control" >
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-xl">
+                            <div class="col-md-12 m-lg-t">
+                                <input name="frontdeskcount" type="hidden" value="1"/>
+                                <a href="#" id = "addanotherFrontDeskdetails" class="btn btn-danger btn-rounded w-150 text-left addanotherFrontDeskdetails">Add another<i class="fa fa-plus-circle pull-right fa-fw lh-20"></i></a>
+
+                                <hr class="m-xl-t m-xl-b">
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- End Front Desk Contact Details --}}
+
+                    
+                    {{!-- Begin Finance Contact Details --}}
+                    <div class="FinanceContactDetails">
+                        <div class="row row-xl">
+                            <div class="col-md-12 m-lg-b">
+                                <h4 class="text-black fw-semi-thk fs-20">Finance Contact Details<span class="pull-right"><a href="#" id="FinanceContactDetailsDelete" class="FinanceContactDetailsDelete text-default" data-toggle="tooltip" title="Delete Row"><i class="fa fa-times-circle fa-fw"></i></a></span></h4>
+                            </div>
+                        </div>
+
+                        <div class="row row-xl">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class=""  for="fncdfirstname_1">Firstname *</label>
+                                    <input type="text" id="" name="fncdfirstname_1" placeholder="" class="form-control" >
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class=""  for="fncdlastname_1">Lastname *</label>
+                                    <input type="text" id="" name="fncdlastname_1" placeholder="" class="form-control" >
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-xl">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class=""  for="fncdlandlinenumber_1">Landline Number</label>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="select-wrapper">
+                                                <select name="fncdlandlinenumber_stdcode_1" class="form-control" >
+                                                    <option value="select">Select</option>
+                                                    {{#if stdcodes}}
+                                                    {{#each stdcodes}}
+                                                    {{#equal @key "landline"}}
+                                                    {{#each this }}
+                                                    <option value="{{stdcode}}">{{@key}}</option>
+                                                    {{/each}}
+                                                    {{/equal}}
+                                                    {{/each}}
+                                                    {{/if}}
+                                                </select>
+                                                <span class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="text" id="" name="fncdlandlinenumber_1" placeholder="" class="form-control" >
+                                            <span class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class=""  for="fncdmobileno_1">Mobile Number</label>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="select-wrapper">
+                                                <select name="fncdmobilenumber_stdcode_1" class="form-control" >
+                                                    <option value="select">Select</option>
+                                                    {{#if stdcodes}}
+                                                    {{#each stdcodes}}
+                                                    {{#equal @key "mobile"}}
+                                                    {{#each this }}
+                                                    <option value="{{stdcode}}">{{@key}}</option>
+                                                    {{/each}}
+                                                    {{/equal}}
+                                                    {{/each}}
+                                                    {{/if}}
+                                                </select>
+                                                <span class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="text" id="" name="fncdmobilenumber_1" placeholder="" class="form-control" >
+                                            <span class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-xl">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class=""  for="fncdemail_1">Email</label>
+                                    <input type="text" id="" name="fncdemail_1" placeholder="" class="form-control" >
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-xl">
+                            <div class="col-md-12 m-lg-t">
+                                <input name="financecount" type="hidden" value="1"/>
+                                <a href="#" id="addanotherFinanceContactdetails" class="btn btn-danger btn-rounded w-150 text-left addanotherFinanceContactdetails">Add another<i class="fa fa-plus-circle pull-right fa-fw lh-20"></i></a>
+
+                                <hr class="m-xl-t m-xl-b">
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- End Finance Contact Details --}}
+                    
+                    <div class="row row-xl">
+                        <div class="col-md-12 m-xl-t">
+                            <div class="text-right">
+                                <input type="hidden" name="hotel_id" value="{{#if hotel_id }}{{#trim hotel_id}}{{/trim}}{{/if}}" />
+                                <input type="submit" name="save" class = "btn btn-danger btn-rounded w-150 m-md-r m-md-b" value="Save"/> 
+                                <a href="#" class="btn btn-default btn-rounded w-150 m-md-b">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</main>
+        
+
+
+{{> footer}}
+
+<script>
+    var errors = {};
+    var counts = {};
+    var reqBody = {};
+</script>
+{{#if counts }}
+    {{#each counts}}
+        <script>
+            counts['{{@key}}'] = '{{ this }}'
+        </script>
+    {{/each}}
+{{/if}}
+{{#if acutalerrors }}
+    {{#each acutalerrors}}
+        <script>
+            errors['{{param}}'] = '{{msg}}'
+        </script>
+    {{/each}}
+{{/if}}
+{{#if requestBody }}
+    {{#each requestBody}}
+        <script>
+            reqBody['{{@key}}'] = '{{ this }}'
+        </script>
+    {{/each}}
+{{/if}}
+
+<script src="/js/contact_details.js"></script>
+
+<script>
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+    })
+</script>

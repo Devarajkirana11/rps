@@ -1,0 +1,24 @@
+<div class="col-md-12">
+    <div class="col-md-12">
+        {{#if hotelcreatedid }}
+            <span><a href="/hotel_details/view?id={{hotelcreatedid}}">Hotel Information</a></span>
+        {{else}}
+            <span><a href="/hotel_details/create">Hotel Information</a></span>
+        {{/if}}
+        {{#if contact_details_created }}
+            <span><a href="/contact_details/view?id={{contact_details_created.id}}">Contact Details</a></span>
+        {{else if hotelcreatedid}}
+            <span><a href="/contact_details/create?hid={{hotelcreatedid}}">Contact Details</a></span>
+        {{/if}}
+        {{#if bank_details_created }}
+            <span><a href="/contact_details/view?id={{bank_details_created.id}}">Bank Details</a></span>
+        {{else if hotelcreatedid}}
+            <span><a href="/contact_details/create?hid={{hotelcreatedid}}">Bank Details</a></span>
+        {{/if}}
+        {{#if facilities_details_created }}
+            <span><a href="/facilities_services/view?id={{facilities_details_created.id}}">Facilities And Services</a></span>
+        {{else if hotelcreatedid}}
+            <span><a href="/facilities_services/create?hid={{hotelcreatedid}}">Facilities And Services</a></span>
+        {{/if}}
+    </div>
+</div>

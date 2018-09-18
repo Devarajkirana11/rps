@@ -1,0 +1,24 @@
+body {
+    width: 100%; margin: 0; padding: 0;
+}
+
+.container {
+    box-sizing: border-box; 
+    width: 100%; 
+    margin: 0; 
+    padding: 0 10px; 
+    background: #ddd; font-family: 
+    Roboto-Regular,'Helvetica Neue',Helvetica,Arial,sans-serif; 
+    font-size: 15px;
+}
+
+.welcome-header {
+    margin: 0; 
+    font-family: Roboto-Regular,'Helvetica Neue',Helvetica,Arial,sans-serif; 
+    font-weight: 300;
+}
+
+.footer-follow-us {
+    padding: 20px 0 0 0; 
+    text-align: center;
+}

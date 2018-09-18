@@ -1,0 +1,156 @@
+{{> nav}}
+
+{{> header}}
+
+<!-- Begin Page Content -->
+<main id="page-content">
+	<div class="page-title row row-xl">
+		<div class="col-md-12">
+			<h3 class="text-black m-n fw-semi-thk">User Management</h3>
+		</div>
+	</div>
+
+	<div class="page-container">
+		<div class="row row-xl">
+			<div class="col-md-12 m-lg-b">
+				<div class="add-button text-right">
+					<a href="/users/create" class="btn btn-danger btn-rounded w-150 btn-danger text-left">Add New User<i class="fa fa-plus-circle pull-right fa-fw lh-20"></i></a>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row row-xl">
+			<div class="col-md-12">
+				<div class="filter-form">
+					<form class="" action='/users/management' method="POST">
+						{{#if errors}}
+							{{#each errors}}
+								<div class="alert alert-danger"> {{ msg }}</div>
+							{{/each}}
+						{{/if}}
+						
+						<div class="row row-xl">
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="" for="username">Name</label>
+									<input type="text" id="" value="{{ inputs.first_name }}" name="first_name" placeholder="" class="form-control">
+								</div>	
+							</div>
+
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="" for="hotel_name">Hotel Name</label>
+										<select name="hotel_name" class="form-group form-control">
+											<option value="">Select</option>
+											{{#each hotels }}
+												<option value="{{ this._hotel_id }}"{{#equal ../inputs._hotel_name this._hotel_id }} selected="selected" {{/equal}}>{{ this._nida_stay_name }}</option>
+											{{/each}}
+										</select>
+								</div>	
+							</div>
+
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="" for="email">E-mail</label>
+									<input type="text" id="" value="{{ inputs.email }}" name="email" placeholder="" class="form-control">
+								</div>	
+							</div>
+
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class=""  for="status">Status</label>
+									<div class="select-wrapper">
+										<select name="status" class="form-group form-control">
+											<option value="">Select</option>
+											<option value="Active" {{#equal inputs.status 'Active'}} selected="selected" {{/equal}} >Active</option>
+											<option value="Inactive" {{#equal inputs.status 'Inactive'}} selected="selected" {{/equal}} >Inactive</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class=""  for="status">Roles</label>
+									<div class="select-wrapper">
+										<select name="roles" class="form-group form-control">
+											<option value="">Select</option>
+											<option value="1" {{#equal inputs.roles '1'}} selected="selected" {{/equal}} >Admin</option>
+											<option value="2" {{#equal inputs.roles '2'}} selected="selected" {{/equal}} >HQ Operation</option>
+											<option value="3" {{#equal inputs.roles '3'}} selected="selected" {{/equal}} >HQ Finance</option>
+											<option value="4" {{#equal inputs.roles '4'}} selected="selected" {{/equal}} >Owner</option>
+											<option value="5" {{#equal inputs.roles '5'}} selected="selected" {{/equal}} >Finance</option>
+											<option value="6" {{#equal inputs.roles '6'}} selected="selected" {{/equal}} >Manager</option>
+											<option value="7" {{#equal inputs.roles '7'}} selected="selected" {{/equal}} >Front Desk</option>
+											<option value="10" {{#equal inputs.roles '10'}} selected="selected" {{/equal}} >HQ Admin</option>
+											<option value="9" {{#equal inputs.roles '9'}} selected="selected" {{/equal}} >Guest</option>
+
+
+
+
+
+
+
+										</select>
+									</div>
+								</div>
+							</div>						
+						
+						</div>
+
+
+						<div class="m-lg-t m-xl-b">
+							<button class="pull-left btn btn-rounded w-150 btn-danger text-left"  name="Submit" value="Save" type="Submit">Search <i class="fa fa-search fa-fw pull-right"></i></button> 
+							<button class="pull-right btn btn-rounded search-reset w-150 btn-default text-left">Reset <i class="fa fa-refresh fa-fw pull-right"></i></button> 
+
+							<div class="clearfix"></div>
+						</div>
+
+					</form>
+				</div>
+
+				<div class="table-view">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>First name</th>
+								<th>Hotel name</th>
+								<th>Email</th>
+								<th>Roles</th>
+								<th>Status</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							{{#each output.data}}
+							<tr>
+								<td><a href="/users/{{ this._user_id }}/edit">{{ this._first_name }}</a></td>
+								<td>{{ this.hotel_name }}</td>
+								<td>{{ this._email }}</td>
+								<td>
+									{{#if this._roles  }}
+									{{#in '1' this._roles }} Admin<br/> {{/in}}
+									{{#in '2' this._roles }} HQ Operation<br/> {{/in}}
+									{{#in '3' this._roles }} HQ Finance<br/>  {{/in}}
+									{{#in '4' this._roles }} Owner<br/> {{/in}}
+									{{#in '5' this._roles }} Finance<br/> {{/in}}
+									{{#in '6' this._roles }} Manager<br/> {{/in}}
+									{{#in '7' this._roles }} Front Desk<br/> {{/in}}
+									{{#in '8' this._roles }} Operation<br/> {{/in}}
+									{{#in '9' this._roles }} Guest<br/> {{/in}}
+									{{#in '10' this._roles }} HQ Admin<br/> {{/in}}
+									{{/if}}
+								</td>
+								<td>{{ this._status }}</td>	
+								<td><a href="/users/{{ this._user_id }}/delete" class="btn btn-danger" onclick="return confirm('Are you sure to delete?')">Delete</a></td>	
+							</tr>
+							{{/each}}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+<!-- End Page Content -->
+
+{{> footer}}

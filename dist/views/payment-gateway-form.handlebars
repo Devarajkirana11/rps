@@ -1,0 +1,45 @@
+<script type='text/javascript'>
+    jQuery(document).ready(function(){
+         window.setTimeout(function() { $("#frmPayment").submit(); }, 1000);
+    });
+</script>
+
+<div style="height: 100vh; overflow: hidden; transform: translate3d(0, 0, 0)">
+	<div class="triangle"></div>
+
+	<div class="wrapper login-wrapper">
+		<div class="login-form-container">
+			<div class="login-form">
+				<p class="text-center">
+					<img src="/images/logo-small.png" alt="">
+				</p>
+
+                <h3>Please wait untill redirecting to payment page.....</h3>
+
+                <form name="frmPayment" id="frmPayment" method="post" action="{{ output.PostURL }}">
+                    <input type="hidden" name="TransactionType" value="{{ output.TransactionType }}">
+                    <input type="hidden" name="PymtMethod" value="{{ output.PymtMethod }}">
+                    <input type="hidden" name="ServiceID" value="{{ output.ServiceID }}">
+                    <input type="hidden" name="PaymentID" value="{{ output.PaymentID }}">
+                    <input type="hidden" name="OrderNumber" value="{{ output.OrderNumber }}">
+                    <input type="hidden" name="PaymentDesc" value="{{ output.PaymentDesc }}">
+                    <input type="hidden" name="MerchantName" value="{{ output.MerchantName }}">
+                    <input type="hidden" name="MerchantReturnURL" value="{{ output.MerchantReturnURL }}">
+                    <input type="hidden" name="MerchantCallBackURL" value="{{ output.MerchantCallBackURL }}">
+                    <input type="hidden" name="Amount" value={{ output.Amount }}>
+                    <input type="hidden" name="CurrencyCode" value="{{ output.CurrencyCode }}">
+                    <input type="hidden" name="CustIP" value="{{ output.CustIP }}">
+                    <input type="hidden" name="CustName" value="{{ output.CustName }}">
+                    <input type="hidden" name="CustEmail" value="{{ output.CustEmail }}">
+                    <input type="hidden" name="CustPhone" value="{{ output.CustPhone }}">
+                    <input type="hidden" name="HashValue" value="{{ output.HashValue }}">
+                    <input type="hidden" name="MerchantTermsURL" value="{{ output.MerchantTermsURL }}">
+                    <input type="hidden" name="LanguageCode" value="{{ output.LanguageCode }}">
+                    <input type="hidden" name="PageTimeout" value="{{ output.PageTimeout }}">
+                    <span style="display:none;"><input type="submit" value="Send Request"></span>
+                </form>
+
+			</div>
+		</div>			
+	</div>
+</div>

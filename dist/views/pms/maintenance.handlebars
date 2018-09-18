@@ -1,0 +1,91 @@
+{{> nav}}
+
+{{> header}}
+<main id="page-content">
+    <div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Maintenance Block</h3>
+        </div>
+    </div>
+	{{#if success }}
+		<div class="alert alert-success">{{ message}}</div>
+	{{else if message }}
+		<div class="alert alert-danger">{{ message}}</div>
+	{{/if}}
+<div class="page-container">
+    <div class="row row-xl">
+        <div class="col-md-12 m-lg-b">
+            <h4 class="text-black fw-semi-thk fs-20">Block Room</h4>
+        </div>
+    </div>
+{{#if formstatus}}
+    {{#if blockid }}
+        <form name="maintenance" action="/pms/maintenance/create?blockid={{blockid}}" method="post">
+    {{else}}
+        <form name="maintenance" action="/pms/maintenance/create" method="post">
+    {{/if}}
+        <div class="row xl">
+            <div class="form-group">
+                <label>Rooms Tags:</label><input type="text" name="room_number" id="room_number" style="display:none;"/></span>
+            </div>
+            {{#equal mode 'create'}}
+                <div class="form-group">
+                    <label>Search Room:</label><input type="text" id="rooms"/>
+                </div>
+            {{/equal}}
+            <div class="form-group">
+                <label>From Date</label><input type="text" name="from_date" value="{{#if requestBody.from_date}}{{ requestBody.from_date }}{{/if}}"/> <label> To Date </label> <input type="text" name="to_date" value="{{#if requestBody.to_date}}{{requestBody.to_date}}{{/if}}"/>
+                <span class="text-danger">{{#if from_date}} {{from_date}} {{/if}}</span>
+                <span class="text-danger">{{#if to_date}} {{to_date}} {{/if}}</span>
+           </div>
+            <div class="form-group">
+                <label>Reason</label>
+                <select name="reason" id="reason">
+                <option value="select" {{#equal requestBody.reason 'select'}} selected="selected" {{/equal}}>Select</option>
+                {{#if masters.reason }}
+                    {{#each masters.reason}}
+                        <option value="{{this.value}}" {{#equal ../requestBody.reason this.value}} selected="selected" {{/equal}} >{{this.text}}</option>
+                    {{/each}}
+                {{/if}}
+                </select>
+                <input type="text" name="other_reasons"/>
+                <span class="text-danger">{{#if reason}} {{reason}} {{/if}}</span>
+                <span class="text-danger">{{#if other_reasons}} {{other_reasons}} {{/if}}</span>
+            </div>
+            <div class="form-group">
+                <label>Status</label>
+                <select name="status">
+                    <option value="select" {{#equal requestBody.status 'select'}} selected="selected" {{/equal}}>Select</option>
+                    {{#if masters.status }}
+                        {{#each masters.status}}
+                            <option value="{{this.value}}" {{#equal ../requestBody.status this.value}} selected="selected" {{/equal}}>{{this.text}}</option>
+                        {{/each}}
+                    {{/if}}
+                </select>
+                <span class="text-danger">{{#if status}} {{status}} {{/if}}</span>
+            </div>
+
+        </div>
+            <div class="row row-xl">
+            <div class="col-md-12 m-xl-t">
+                <div class="text-right">
+                    <input type="hidden"  name="room_details"  id="room_details" value="{{#if requestBody.room_details}}{{requestBody.room_details}}{{/if}}"/>
+                    <input type="submit" name="save" class = "btn btn-danger btn-rounded w-100 m-md-b m-md-r"/> 
+                    <a href="javascript: history.go(-1)" class="btn btn-default btn-rounded w-100 m-md-b">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </form>
+{{/if}}
+</div>
+</main>
+<script src="/js/jquery-ui.js"></script>
+<script src="/js/bootstrap-tagsinput.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/jquery-ui.css"/>
+<link href="/css/bootstrap-tagsinput.css" rel="stylesheet" />
+<script>
+    var mode = "{{mode}}";
+    var hotel_id = "{{hotel_id}}";
+</script>
+<script src="/js/maintenance.js"></script>
+{{>footer}}

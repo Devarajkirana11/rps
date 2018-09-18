@@ -1,0 +1,103 @@
+{{> nav this}}
+
+{{> header}}
+
+<!-- Begin Page Content -->
+<main id="page-content">
+	<div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Stay List</h3>
+        </div>
+    </div>
+
+	<div class="page-container">
+		
+    		<!-- Begin Hotels View -->
+		<div class="row row-xl">
+			<div class="col-md-12">					
+				 <div class="table-view">
+						<div class="table-responsive">
+							<table id="stay_report" class="table table-striped">
+								<thead>
+									<tr>
+										<th>Booking ID</th>
+										<th>Room No.</th>
+										<th>Room Type</th>
+										<th>Guest Name</th>
+										<th>Phone No.</th>
+										<th>Email</th>
+										<th>No Of Guests</th>
+										<th>Check In</th>
+										<th>Check Out</th>
+										<th>Source</th>
+										<th>OTA Channel</th>
+										<th>Total Amount</th>
+										<th>Total Amount paid</th>
+										<th>Balance</th>
+										<th>Payment Type</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									{{!-- {{#each output}}
+									<tr>
+										<td><a href="/pms/booking-details?hotel_id={{this.hotel_id}}&booking_uuid={{this.bookingUuid}}" >{{this.referenceId}}</a></td>
+										<td>{{this.roomNumber}}</td>
+										<td>{{this.room_types}}</td>
+										<td>{{this.guest.firstName}}</td>
+										<td>{{this.guest.phoneNumber}}</td>
+										<td>{{this.guest.emailAddress}}</td>
+										<td>{{#customDateFormatwithTime this.time}}{{/customDateFormatwithTime}}</td>
+										<td>{{ this.checkOut}}</td>
+										<td>{{this.booking_channel}}</td>
+										<td>{{this.channel_name}}</td>
+										<td>{{this.totalAmount}}</td>
+										<td>{{this.totalAmountPaid}}</td>
+										<td>{{this.balance}}</td>
+										<td>{{this.paymentType}}</td>
+										
+										<td>{{this.status}}</td>
+										
+									</tr>
+									{{/each}} --}}
+								</tbody>
+							</table>		
+						</div>
+					</form>
+				</div>		
+			</div>
+		</div>
+	</div>
+		
+	<!-- End Hotels View -->
+</main>
+
+<!-- End Page Content -->
+{{> footer}}
+
+<script>
+$(function() {
+	var url = '/report-manager/manager/stay-report?hotel_id={{hotel_id}}'
+	var table = $('#stay_report').DataTable( {
+		ajax: url,
+		buttons: [
+			'excel', 'pdf'
+		],
+		dom: 'Bfrtip',
+		paging: true,
+		footerCallback: function (row, data, start, end, display) {
+			var api = this.api(), data;
+			// Remove the formatting to get integer data for summation
+			var intVal = function (i) {
+				return typeof i === 'string' ?
+					i.replace(/[\$,]/g, '') * 1 :
+					typeof i === 'number' ?
+						i : 0;
+			};
+		}
+	});
+	//table.buttons().container()
+    //.appendTo( $('.col-sm-6:eq(0)', table.table().container() ) );
+});
+
+</script>

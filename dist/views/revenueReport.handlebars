@@ -1,0 +1,375 @@
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="/scripts/plugins/jquery.bootstrap.wizard.min.js"></script>
+<script src="/js/jquery-ui.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        var searchMinDate = "m";
+        $("#checkin_from").datepicker({
+            dateFormat: "dd-mm-yy",
+            onClose: function (selectedDate) {
+                $("#checkin_from").datepicker('setDate', selectedDate);
+                $("#checkin_to").datepicker("option", "minDate", selectedDate);
+            }
+        });
+
+        $("#booking_from").datepicker({
+            dateFormat: "dd-mm-yy",
+            onClose: function (selectedDate) {
+                $("#booking_from").datepicker('setDate', selectedDate);
+                $("#booking_to").datepicker("option", "minDate", selectedDate);
+            }
+        });
+
+        $("#checkin_to").datepicker({ dateFormat: "dd-mm-yy" });
+        $("#booking_to").datepicker({ dateFormat: "dd-mm-yy" });
+        $("#reset").click(function () {
+            checkin_from
+            window.location.href = window.location.href;
+        });
+
+    });
+
+</script>
+{{> nav this}} {{> header}}
+
+<!-- Begin Page Content -->
+<main id="page-content">
+    <div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Revenue Report</h3>
+        </div>
+    </div>
+
+    <div class="page-container">
+        <!-- Begin Hotels View -->
+        <div class="row row-xl">
+            <div class="col-md-offset-8 col-md-4 m-md-b">
+                <div id="reportrangeRev" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                    <span></span>
+                    <b class="caret"></b>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="filter-form">
+
+                    {{#if errors}} {{#each errors}}
+                    <div class="alert alert-danger"> {{ msg }}</div>
+                    {{/each}} {{/if}}
+
+                    <div class="row row-xl">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="" for="booking_reference_id">Reference ID</label>
+                                <input type="text" id="booking_reference_id" value="{{ inputs.booking_reference_id }}" name="booking_reference_id" placeholder=""
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="" for="checkin_from">Check in From</label>
+                                <input type="text" id="checkin_from" value="{{ inputs.checkin_from }}" name="checkin_from" placeholder="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="" for="checkin_to">Check in To</label>
+                                <input type="text" id="checkin_to" value="{{ inputs.checkin_to }}" name="checkin_to" placeholder="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="" for="booking_from">Booking From</label>
+                                <input type="text" id="booking_from" value="{{ inputs.booking_from }}" name="booking_from" placeholder="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="" for="booking_to">Booking To</label>
+                                <input type="text" id="booking_to" value="{{ inputs.booking_to }}" name="booking_to" placeholder="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <button class="btn btn-rounded btn-danger w-200 text-left" id="advanced_filter">Advanced Filter <i id="filter_on" class="fa fa-plus-circle fa-fw pull-right"></i><i id="filter_off" class="fa fa-minus-circle fa-fw pull-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-xl">
+                        <div id="advanced_content" class="">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="" for="booking_source">Booking Source</label>
+                                    <div class="select-wrapper">
+                                        <select name="booking_source" id="booking_source" class="form-control">
+											<option value="">Select</option>
+											<option value="WALK_IN" {{#equal inputs.booking_source 'WALK_IN'}} selected="selected" {{/equal}}>WALK_IN</option>
+											<option value="OTA" {{#equal inputs.booking_source 'OTA'}} selected="selected" {{/equal}}>OTA</option>	
+                                            <option value="WEB" {{#equal inputs.booking_source 'WEB'}} selected="selected" {{/equal}}>WEB</option>		
+										</select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="" for="booking_channel">Booking Channel</label>
+                                    <div class="select-wrapper">
+                                        <select name="booking_channel" id="booking_channel" class="form-control">
+											<option value="">Select</option>
+											<option value="Booking.com" {{#equal inputs.booking_channel 'Booking.com'}} selected="selected" {{/equal}}>Booking.com</option>
+											<option value="Agoda" {{#equal inputs.booking_channel 'Agoda'}} selected="selected" {{/equal}}>Agoda</option>	
+                                            <option value="Expedia" {{#equal inputs.booking_channel 'Expedia'}} selected="selected" {{/equal}}>Expedia</option>
+                                            <option value="MAKEMYTRIP" {{#equal inputs.booking_channel 'MAKEMYTRIP'}} selected="selected" {{/equal}}>MAKEMYTRIP</option>
+											<option value="Pegipegi" {{#equal inputs.booking_channel 'Pegipegi'}} selected="selected" {{/equal}}>Pegipegi</option>	
+                                            <option value="Ctrip" {{#equal inputs.booking_channel 'Ctrip'}} selected="selected" {{/equal}}>Ctrip</option>	
+                                            <option value="MisterAladin" {{#equal inputs.booking_channel 'MisterAladin'}} selected="selected" {{/equal}}>MisterAladin</option>
+                                            <option value="Traveloka" {{#equal inputs.booking_channel 'Traveloka'}} selected="selected" {{/equal}}>Traveloka</option>
+											<option value="Zen Rooms" {{#equal inputs.booking_channel 'Zen Rooms'}} selected="selected" {{/equal}}>Zen Rooms</option>	
+                                            <option value="OYO Rooms" {{#equal inputs.booking_channel 'OYO Rooms'}} selected="selected" {{/equal}}>OYO Rooms</option>			
+										</select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="" for="payment_type">Payment Type</label>
+                                    <div class="select-wrapper">
+                                        <select name="payment_type" id="payment_type" class="form-control">
+											<option value="">Select</option>
+											<option value="CASH" {{#equal inputs.payment_type 'CASH'}} selected="selected" {{/equal}}>CASH</option>
+											<option value="POS" {{#equal inputs.payment_type 'POS'}} selected="selected" {{/equal}}>POS</option>	
+                                            <option value="Paid Online" {{#equal inputs.payment_type 'Paid Online'}} selected="selected" {{/equal}}>Paid Online</option>
+                                            <option value="CREDIT_CARD" {{#equal inputs.payment_type 'CREDIT_CARD'}} selected="selected" {{/equal}}>CREDIT_CARD</option>			
+										</select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="col-md-2">
+								<div class="form-group">
+									<label class="" for="payment_status">Payment Status</label>
+									<div class="select-wrapper">
+										<select name="payment_status" id="payment_status" class="form-control">
+											<option value="">Select</option>
+											<option value="ON_HOLD" {{#equal inputs.payment_status 'ON_HOLD'}} selected="selected" {{/equal}}>ON_HOLD</option>
+											<option value="CONFIRMED" {{#equal inputs.payment_status 'CONFIRMED'}} selected="selected" {{/equal}}>CONFIRMED</option>	
+                                           </select>
+									</div>
+								</div>
+							</div>-->
+                        </div>
+                    </div>
+
+                    <div class="row row-xl m-xl-b">
+                        <div class="col-md-12 text-right">
+                            <button class="btn btn-danger btn-rounded w-150 text-left" id="Submit" name="Submit" value="Save">Search <i class="fa fa-search fa-fw pull-right"></i></button>
+                            <button class="btn btn-danger btn-rounded w-150 text-left" id="reset" value="Reset">Reset <i class="fa fa-refresh fa-fw pull-right" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table" id="report-table">
+                        <thead>
+                            <tr>
+
+                                <th>Stay Date</th>
+                                <th>Booking Time</th>
+                                <th>Booking Source</th>
+                                <th>Booking Channel</th>
+                                <th>Guest Name</th>
+                                <th>Guest Nationality</th>
+                                <th>Reference ID</th>
+                                <th>Room Reservation ID</th>
+                                <th>Room Price</th>
+                                <th>Service Fee</th> 
+                                <th>GST</th> 
+                                <th>No.of Guests</th>
+                                <th>Room Type</th>
+                                <th>Room Number</th>
+                                <th>OTA Reference ID</th>
+                                <th>Check In</th>
+                                <th>Check Out</th>
+                                <th>Payment Type</th>
+                                <th>Payment Date</th>
+                                <th>Payment Status</th>
+
+                            </tr>
+                        </thead>
+                        	<tfoot>
+							<tr>
+								<th colspan="8" style="text-align:right">Total :</th>
+								<th></th>
+							</tr>
+						</tfoot>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- End Hotels View -->
+</main>
+
+<!-- End Page Content -->
+{{> footer}}
+
+
+
+<script type="text/javascript">
+    $(function () {
+        document.getElementById('advanced_content').style.display = 'none';
+        document.getElementById('filter_off').style.display = 'none';
+        var start = moment().subtract(7, 'days');
+        var end = moment();
+
+        function cb(start, end) {
+            if(!$('#stay_date').length){
+			$("<label id='stay_date'>Stay Date</label>").insertBefore("#reportrangeRev");
+			}
+            //$("<label>Stay Date</label>").insertBefore("#reportrangeRev");
+            $('#reportrangeRev span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        }
+
+        $('#reportrangeRev').daterangepicker({
+            startDate: start,
+            endDate: end,
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            }
+        }, cb);
+
+        cb(start, end);
+
+        var startDate = start.format('DD-MM-YYYY');
+        var endDate = end.format('DD-MM-YYYY');
+
+        var url = '/report-manager/manager/revenue-report?hotel_id={{hotel_id}}&start_date=' + startDate + '&end_date=' + endDate+ '&stime=yes'
+
+        // INITIALIZE DATA TABLE
+        updateTable(url);
+
+        var table;
+
+        // CREATE DATA TABLE
+        function updateTable(url) {
+            table = $('#report-table').DataTable({
+               // ajax: {
+               // url: url,
+               // timeout: 60000
+               // },
+               ajax:url,
+                buttons: [
+                    'excel', 'print'
+                ],
+                dom: 'Bfrtip',
+                paging: true,
+               // deferRender:    true,
+                //pageLength: 3,
+                	footerCallback: function (row, data, start, end, display) {
+					var api = this.api(), data;
+					//alert(api);
+					// Remove the formatting to get integer data for summation
+					var intVal = function (i) {
+						return typeof i === 'string' ?
+							i.replace(/[\$,]/g, '') * 1 :
+							typeof i === 'number' ?
+								i : 0;
+					};
+
+					// Total over all pages
+					total = api
+						.column(8)
+						.data()
+						.reduce(function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0);
+					// alert(total);
+					// Total over this page
+					pageTotal = api
+						.column(8, { page: 'current' })
+						.data()
+						.reduce(function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0);
+					//alert(pageTotal);
+					// Update footer
+					$(api.column(8).footer()).html(
+						//'$'+pageTotal +' ( $'+ total +' total)'
+						total.toFixed(2)
+					);
+				}
+              
+    });
+        }
+
+    // UPDATE DATATABLE ON DATE CHANGE
+    $('#reportrangeRev').on('apply.daterangepicker', function (ev, picker) {
+        var startDate = picker.startDate.format('DD-MM-YYYY')
+        var endDate = picker.endDate.format('DD-MM-YYYY')
+
+        var url = '/report-manager/manager/revenue-report?hotel_id={{hotel_id}}&start_date=' + startDate + '&end_date=' + endDate + '&stime=yes';
+
+        table.destroy();
+
+        updateTable(url);
+    });
+
+    $("#Submit").click(function () {
+        var startDate = $('#reportrangeRev').data('daterangepicker').startDate.format('DD-MM-YYYY');
+        var endDate = $('#reportrangeRev').data('daterangepicker').endDate.format('DD-MM-YYYY');
+        var reference_id = $('#booking_reference_id').val();
+        var checkin_from = $('#checkin_from').val();
+        var checkin_to = $('#checkin_to').val();
+        var booking_from = $('#booking_from').val();
+        var booking_to = $('#booking_to').val();
+        var booking_source = $('#booking_source').val();
+        var booking_channel = $('#booking_channel').val();
+        var payment_type = $('#payment_type').val();
+        //var payment_status= $('#payment_status').val();
+        var params = '&start_date=' + startDate + '&end_date=' + endDate;
+        if (reference_id) {
+            params += '&reference_id=' + reference_id;
+        }
+        if (checkin_from) { params += '&checkin_from=' + checkin_from; }
+        if (checkin_to) { params += '&checkin_to=' + checkin_to; }
+        if (booking_from) { params += '&booking_from=' + booking_from; }
+        if (booking_to) { params += '&booking_to=' + booking_to; }
+        if (booking_source) { params += '&booking_source=' + booking_source; }
+        if (booking_channel) { params += '&booking_channel=' + booking_channel; }
+        if (payment_type) { params += '&payment_type=' + payment_type; }
+        var url = '/report-manager/manager/revenue-report?hotel_id={{hotel_id}}' + params + '&stime=yes';
+        //var url = '/report-manager/manager/revenue-report?hotel_id={{hotel_id}}&start_date=' + startDate + '&end_date=' + endDate+ '&reference_id=' + reference_id+ '&checkin_from=' + checkin_from+ '&checkin_to=' + checkin_to+ '&booking_from=' + booking_from+ '&booking_to=' + booking_to+ '&booking_source=' + booking_source+ '&booking_channel=' + booking_channel+ '&payment_type=' + payment_type;
+
+        table.destroy();
+
+        updateTable(url);
+    });
+
+    });
+
+    var button = document.getElementById('advanced_filter');
+
+    button.onclick = function () {
+        var div = document.getElementById('advanced_content');
+        if (div.style.display !== 'none') {
+            div.style.display = 'none';
+            document.getElementById('filter_off').style.display = 'none';
+            document.getElementById('filter_on').style.display = 'block';
+        }
+        else {
+            div.style.display = 'block';
+            document.getElementById('filter_off').style.display = 'block';
+            document.getElementById('filter_on').style.display = 'none';
+        }
+    };
+
+</script>

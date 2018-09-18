@@ -1,0 +1,138 @@
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="/scripts/plugins/jquery.bootstrap.wizard.min.js"></script>
+<script src="/js/jquery-ui.js"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function () {
+		var searchMinDate = "m";
+		$("#start_date_from").datepicker({
+			dateFormat: "dd-mm-yy",
+			onClose: function (selectedDate) {
+				$("#start_date_from").datepicker('setDate', selectedDate);
+				$("#start_date_to").datepicker("option", "minDate", selectedDate);
+			}
+		});
+
+		$("#end_date_from").datepicker({
+			dateFormat: "dd-mm-yy",
+			onClose: function (selectedDate) {
+				$("#end_date_from").datepicker('setDate', selectedDate);
+				$("#end_date_to").datepicker("option", "minDate", selectedDate);
+			}
+		});
+
+		$("#start_date_to").datepicker({ dateFormat: "dd-mm-yy" });
+		$("#end_date_to").datepicker({ dateFormat: "dd-mm-yy" });
+		$("#reset").click(function () {
+			window.location.href = window.location.href;
+		});
+
+	});
+
+</script>
+{{> nav this}}
+
+{{> header}}
+
+<main id="page-content">
+
+	<div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Night Audit History</h3>
+        </div>
+    </div>
+
+	<div class="page-container">
+		<div class="row row-xl">
+
+			<div class="col-md-12">
+				<div class="filter-form">
+					<form name="night-audit-list" id="night-audit-list" class="" action='/pms/night/audit/list?hotel_id={{ hotel_id }}' method="POST">
+						{{#if errors}} {{#each errors}}
+						<div class="alert alert-danger"> {{ msg }}</div>
+						{{/each}} {{/if}}
+
+						<div class="row row-xl">
+						
+							<div class="col-md-2">
+								<div class="form-group">
+									<label class="" for="start_date_from">Start Date From</label>
+									<input type="text" id="start_date_from" value="{{ inputs.start_date_from }}" name="start_date_from" placeholder="" class="form-control">
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="form-group">
+									<label class="" for="start_date_to">Start Date To</label>
+									<input type="text" id="start_date_to" value="{{ inputs.start_date_to }}" name="start_date_to" placeholder="" class="form-control">
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="form-group">
+									<label class="" for="end_date_from">End Date From</label>
+									<input type="text" id="end_date_from" value="{{ inputs.end_date_from }}" name="end_date_from" placeholder="" class="form-control">
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="form-group">
+									<label class="" for="end_date_to">End Date To</label>
+									<input type="text" id="end_date_to" value="{{ inputs.end_date_to }}" name="end_date_to" placeholder="" class="form-control">
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="form-group">
+									<label>Status</label>
+									<div class="select-wrapper">
+										<select name="status" id="audit-status" class="form-control">
+											<option value="">Select</option>
+											<option value="CLOSED" {{#equal inputs.status 'CLOSED'}} selected="selected" {{/equal}}>CLOSED</option>
+											<option value="OPEN" {{#equal inputs.status 'OPEN'}} selected="selected" {{/equal}}>OPEN</option>		
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row row-xl m-xl-b">
+							<div class="col-md-12 text-right">
+								<button class="btn btn-danger btn-rounded w-150 text-left" name="Submit" value="Save" type="Submit">Search <i class="fa fa-search fa-fw pull-right"></i></button>
+								<button class="btn btn-danger btn-rounded w-150 text-left" id="reset" type="reset" value="Reset">Reset <i class="fa fa-refresh fa-fw pull-right" aria-hidden="true"></i></button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="table-view">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Start</th>
+								<th>End</th>
+								<th>Opening Balance</th>
+								<th>Closing Balance</th>
+								<th>Withdrawal Amount</th>
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							{{#each output }}
+									{{#if this.end }}
+									<tr>
+										<td><a href="/pms/night/audit/details?hotel_id={{ ../hotel_id }}&night_audit_uuid={{ this.uuid }}">{{#countrycustomDateFormatwithTime this.begin ../country_name }}{{/countrycustomDateFormatwithTime}}</a></td>
+										<td>{{#countrycustomDateFormatwithTime this.end ../country_name }}{{/countrycustomDateFormatwithTime}}</td>
+										<td>{{#round this.openingBalance }}{{/round}}</td>
+										<td>{{#round this.closingBalance }}{{/round}}</td>
+										<td>{{ this.withdrawal }}</td>
+										<td>{{ this.status }}</td>
+									</tr>
+									{{/if}}
+							{{/each}}
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</main>
+
+{{> footer}}

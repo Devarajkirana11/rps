@@ -1,0 +1,508 @@
+.slick-next,
+.slick-prev {
+  &:before {
+    color: #000;
+  }
+}
+
+.card-container {
+  background: $white;
+  box-shadow: 0 2px 4px #ddd;
+  margin-bottom: 15px;
+  position: relative;
+
+  .card-img {
+
+  }
+
+  .card-content {
+    position: relative;
+    padding: 15px;
+
+    .card-badge {
+      position: absolute;
+      padding: 0 5px;
+      text-transform: uppercase;
+      font-size: 11px;
+      left: 15px;
+      top: -15px;
+      color: $white;
+
+      &.badge-restaurant {
+        background: $danger;
+      }
+
+      &.badge-shopping {
+        background: #1abc9c;
+      }
+
+      &.badge-street-food {
+        background: #9b59b6;
+      }
+
+      &.badge-entertainment {
+        background: #3498db;
+      }
+
+      &.badge-views {
+        background: #95a5a6;
+      }
+
+      &.badge-landmarks {
+        background: #f39c12;
+      }
+    }
+  }
+
+  .distance-badge {
+    position: absolute;
+    padding: 0 5px;
+    font-size: 11px;
+    right: 15px;
+    top: 15px;
+    background: $black;
+    color: $white;
+  }
+}
+.card-badge {
+
+}
+
+#page-content {
+  .section-title {
+    position: relative;
+    margin: 70px 0;
+
+    &:before {
+      content: '';
+      display: block;
+      height: 7px;
+      width: 50px;
+      background: $danger;
+      border-radius: 50px;
+      position: absolute;
+      bottom: -20px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+    }
+  }
+
+  #hero-container {
+    height: 100vh;
+    position: relative;
+
+    .slider-container,
+    #revolutionSlider {
+      height: 100% !important;
+      width: 100vw !important;
+    }
+
+    // .hero-img {
+    // 	position: absolute;
+    // 	top: 0;
+    // 	bottom: 0;
+    // 	left: 0;
+    // 	right: 0;
+    // 	z-index: -1;
+    // 	height: 100%;
+    // 	background-image: url('../images/bangkok-banner.jpg');
+    // 	background-size: cover;
+    // 	background-position: center center;
+    // 	background-repeat:  no-repeat;
+    // 	background-attachment: fixed;
+
+    // 	&:before {
+    // 		content: '';
+    // 		display: block;
+    // 		top: 0;
+    // 		bottom: 0;
+    // 		right: 0;
+    // 		left: 0;
+    // 		height: 100%;
+    // 		width: 100%;
+    // 		background-color: rgba(0, 0, 0, 0.35);
+    // 		z-index: 0;
+    // 	}
+    // }
+  }
+}
+
+#malaysia-hotels {
+  background-image: url('https://s3-ap-southeast-1.amazonaws.com/hotelnida/home-images/malaysia-true-taste-of-asia.jpg');
+  background-size: cover;
+  background-position: center;
+  a {
+    div {
+      width: 70%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      h1 {
+        -webkit-transition: color 200ms;
+        -moz-transition: color 200ms;
+        -ms-transition: color 200ms;
+        -o-transition: color 200ms;
+        transition: color 200ms;
+        font-family: $oduda-bold;
+        color: $white;
+      }
+    }
+  }
+}
+
+#thailand-hotels {
+  background-image: url('https://s3-ap-southeast-1.amazonaws.com/hotelnida/home-images/thailand-true-gem-of-asia.jpg');
+  background-size: cover;
+  background-position: center;
+  a {
+    div {
+      height: 100%;
+      background-color: rgba(255,255,255,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      h1 {
+        -webkit-transition: color 200ms;
+        -moz-transition: color 200ms;
+        -ms-transition: color 200ms;
+        -o-transition: color 200ms;
+        transition: color 200ms;
+        font-family: $oduda-bold;
+        color: $danger;
+      }
+    }
+  }
+}
+
+@media (min-width: 769px) {
+  .home {
+    #home-search-form {
+      .form-container {
+        display: flex;
+        width: 90%;
+        margin: 0 auto;
+        // margin-top: 23px;
+
+        .input-container {
+          width: 25%;
+
+          .select2.select2-container {
+            width: 100% !important;
+
+            .select2-selection.select2-selection--single {
+              height: 45px;
+              border-top-left-radius: 50px;
+              border-bottom-left-radius: 50px;
+              border: none;
+              text-align: left;
+              padding-left: 15px;
+
+              .select2-selection__rendered {
+                line-height: 45px;
+              }
+
+              .select2-selection__arrow {
+                height: 45px;
+              }
+            }
+          }
+
+          .form-control[readonly] {
+            background: $white;
+          }
+
+          &.check-in-container {
+            width: 20%;
+
+            .form-group {
+              span {
+                left: 0;
+                padding-left: 15px;
+              }
+
+              &:before {
+                content: "\f178";
+                font-family: 'FontAwesome';
+                display: inline-block;
+                color: $danger;
+                position: absolute;
+                right: 0;
+                margin-top: 23px;
+                line-height: 45px;
+                font-size: 20px;
+              }
+            }
+          }
+
+          &.check-out-container {
+            width: 20%;
+
+            span {
+              right: 0;
+              padding-right: 15px;
+            }
+          }
+
+          &.guests-container {
+            position: relative;
+
+            input {
+              background: $white;
+              cursor: pointer;
+            }
+
+            .guests-selection-container {
+              width: 400px;
+              background: $white;
+              padding: 25px;
+              position: absolute;
+              bottom: 100%;
+              left: -20%;
+              display: none;
+              border-radius: 10px;
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+
+              &.active {
+                display: block;
+              }
+
+              .room-title {
+                font-size: 12px;
+                // padding-left: 20px;
+                color: $black;
+                font-weight: 600;
+              }
+
+              .form-group {
+                margin-bottom: 20px;
+
+                .select-wrapper {
+                  &:after {
+                    top: 10px;
+                    right: 20px;
+                  }
+                }
+
+                input[readonly] {
+                  background: $white !important;
+                }
+
+                label {
+                  color: $font-color;
+                }
+
+                select {
+                  height: 40px;
+                  line-height: 20px;
+                }
+              }
+            }
+          }
+
+          .form-group {
+            margin: 0;
+            position: relative;
+
+            label {
+              color: $white;
+              font-weight: 700;
+              font-size: 13px;
+            }
+
+            span.icon-container {
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              margin-top: 23px;
+
+              i {
+                line-height: 45px;
+              }
+            }
+
+            input {
+              border-radius: 0;
+              border: none;
+
+              &#check-in-date {
+                border-left: solid 1px #ddd;
+                padding-left: 50px;
+              }
+
+              &#check-out-date {
+                border-right: solid 1px #ddd;
+                padding-right: 50px;
+              }
+            }
+          }
+        }
+
+        .search-button-container {
+          width: 10%;
+
+          button {
+            width: 100%;
+            border-radius: 0 50px 50px 0;
+            margin-top: 23px;
+            line-height: 45px;
+            padding: 0;
+            border: none;
+          }
+        }
+      }
+    }
+  }
+  .nav-toggle,
+  .selection-information-container {
+    display: none;
+  }
+
+  .hero-title-container {
+    display: table;
+    width: 100%;
+    // height: calc(100vh - 125px);
+    height: 100%;
+
+    .hero-message {
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+      color: $white;
+
+      .hero-title {
+        font-family: $font-cursive;
+        font-size: 72px;
+        position: relative;
+        margin-bottom: 35px;
+        margin-top: 0;
+        text-shadow: 0 1px 1px rgba(0,0,0,.6);
+
+        &:before {
+          content: '';
+          display: block;
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: -20px;
+          margin: auto;
+          height: 7px;
+          width: 100px;
+          background: $danger;
+          border-radius: 50px;
+        }
+      }
+
+      p {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .hero-content-container {
+    form {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.3);
+      // height: 125px;
+      border-top: solid 3px rgba(255, 255, 255, 0.5);
+
+      .tab-container {
+        .nav {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: -75px;
+          margin: 0 auto;
+          border: none;
+
+          li {
+            float: none;
+            display: inline-block;
+            text-align: center;
+
+            &:first-child {
+              a {
+                i {
+                  margin-bottom: 5px;
+                  font-size: 32px;
+                }
+              }
+            }
+
+            &.active {
+              a {
+                color: $danger;
+
+                &:hover,
+                &:focus {
+                  color: $danger;
+                }
+
+                svg {
+                  .st0 {
+                    fill: $danger;
+                  }
+                }
+              }
+            }
+
+            a {
+              background: transparent;
+              border: none;
+              color: $white;
+              font-size: 11px;
+              text-transform: uppercase;
+
+              svg {
+                height: 37px;
+                width: 37px;
+              }
+
+              &:hover {
+                background: transparent;
+                color: $white;
+              }
+            }
+          }
+        }
+      }
+
+      .tab-pane {
+        height: 110px;
+        padding: 20px 0;
+      }
+    }
+  }
+
+
+
+  #fixed-search-bar {
+    form {
+      #home-search-form {
+        .form-container {
+          .input-container {
+            .form-group {
+              text-align: center;
+
+              label {
+                color: $font-color !important;
+              }
+            }
+
+            &.guests-container {
+              .guests-selection-container {
+                top: 100%;
+                bottom: auto;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

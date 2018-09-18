@@ -1,0 +1,175 @@
+{{> nav}}
+
+{{> header}}
+
+<main id="page-content">
+    <div class="row row-xl page-title">
+        <div class="col-sm-6 page-name-container">
+            <h3 class="text-black fw-semi-thk">Landmark Details</h3>
+        </div>
+        <div class="col-sm-6 breadcrumb-container text-right">
+            <ol class="breadcrumb">
+                <li><a href="javascript:void(0)" class="text-default"><small><i class="fa fa-home fa-fw m-xs-r"></i>Home</small></a></li>
+                <li><a href="javascript:void(0)" class="text-danger"><small>Landmark Details</small></a></li>
+            </ol>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="page-container">
+        {{#if errors}}
+        <ul>
+            {{#each errors}}
+            <li>
+                <div class="text-danger"> {{ msg }}</div>
+            </li>
+            {{/each}}
+        </ul>
+        {{/if}}
+        {{#if success }}
+        <div class="alert alert-success">{{ message}}</div>
+        {{else if message }}
+        <div class="alert alert-danger">{{ message}}</div>
+        {{/if}}
+        {{#if data}}
+        <div class="row">
+            <div class="col-md-12 text-right m-lg-b">
+                <a href="/admin/nearby-landmarks/{{data._landmark_id}}/edit" class="btn btn-danger btn-rounded w-150 text-left">Edit <i class="fa fa-edit fa-fw pull-right"></i></a>
+            </div>
+        </div>
+        <div class="row row-xl">
+            <div class="col-md-6">
+                <div class="row m-sm-b">
+                    <div class="col-md-5 col-sm-6 col-xs-12">
+                        <p>Landmark Name :</p>
+                    </div>
+
+                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                        <p>{{#if data._landmark_name }} {{ data._landmark_name }} {{/if}} </p>
+                    </div>
+                </div>
+                <div class="row m-sm-b">
+                    <div class="col-md-5 col-sm-6 col-xs-12">
+                        <p>Country:</p>
+                    </div>
+
+                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                        <p>{{#if data._country_id }} {{data._country_id }} {{/if}}</p>
+                    </div>
+                </div>
+                {{!-- End Country --}}
+
+                {{!-- Begin City --}}
+                <div class="row m-sm-b">
+                    <div class="col-md-5 col-sm-6 col-xs-12">
+                        <p>City:</p>
+                    </div>
+
+                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                        <p>{{#if data._city_id }} {{ data._city_id }} {{/if}}</p>
+                    </div>
+                </div>
+                {{!-- End City --}}
+
+                {{!-- Begin State --}}
+                <div class="row m-sm-b">
+                    <div class="col-md-5 col-sm-6 col-xs-12">
+                        <p>State:</p>
+                    </div>
+
+                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                        <p>{{#if data._state_id }} {{ data._state_id }} {{/if}}</p>
+                    </div>
+                </div>
+                {{!-- End State --}}
+
+                {{!-- Begin Location --}}
+                <div class="row m-sm-b">
+                    <div class="col-md-5 col-sm-6 col-xs-12">
+                        <p>Location:</p>
+                    </div>
+
+                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                        <p>{{#if data._locality_id }} {{ data._locality_id }} {{/if}}</p>
+                    </div>
+                </div>
+                {{!-- End Location --}}
+
+                <div class="row m-sm-b">
+                    <div class="col-md-5 col-sm-6 col-xs-12">
+                        <p>Category:</p>
+                    </div>
+
+                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                        <p>{{#if data._category }} {{ data._category }} {{/if}}</p>
+                    </div>
+                </div>
+              
+                {{!-- Begin Latitude --}}
+                <div class="row m-sm-b">
+                    <div class="col-md-5 col-sm-6 col-xs-12">
+                        <p>Latitude:</p>
+                    </div>
+
+                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                        <p>{{#if data._latitude }} {{ data._latitude }} {{/if}}</p>
+                    </div>
+                </div>
+                {{!-- End Latitude --}}
+
+                {{!-- Begin Longitude --}}
+                <div class="row m-sm-b">
+                    <div class="col-md-5 col-sm-6 col-xs-12">
+                        <p>Longitude:</p>
+                    </div>
+
+                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                        <p>{{#if data._longitude }} {{ data._longitude }} {{/if}}</p>
+                    </div>
+                </div>
+                {{!-- End Longitude --}}
+                  <div class="row m-sm-b">
+                    <div class="col-md-5 col-sm-6 col-xs-12">
+                        <p>Description:</p>
+                    </div>
+
+                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                        <p>{{#if data._description }} {{ data._description }} {{/if}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                
+                <p class="row"><span class="col-md-5 text-capitalize">Image :
+                {{#if data._landmark_images }} 
+                    {{#each data._landmark_images}}
+                             <img src="{{this}}" class="img-responsive"> 
+                            </img>
+                    {{/each}}
+                {{/if}}
+            
+                
+            </div>
+        </div>
+      
+        <div class="row row-xl">
+           
+        </div>
+
+        <div class="row row-xl m-lg-t">
+            <div class="col-md-12">
+                <div id="map" style="width:100%;height:500px;margin:auto;"></div>      
+            </div>
+        </div>
+    {{/if}}
+    </div>
+</main>
+
+{{> footer}}
+
+<script defer type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyDR1iZRZ36Ew7W9UIbXAKV8AIM-OUGujbA"></script>
+<script>
+    var Dlocality = '{{ data._locality_id }}'
+</script>
+<script src="/js/hotel_details.js"></script>

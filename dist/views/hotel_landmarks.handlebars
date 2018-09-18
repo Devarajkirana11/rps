@@ -1,0 +1,185 @@
+<script>
+    var city_master = new Array();
+    var locality_master = new Array();
+    $(function(){
+        {{#if locationmasters }}
+            {{#each locationmasters }}
+                {{#each this.states}}
+                    {{#each this.cities}}
+                        city_master.push({value:"{{@key}}",text:"{{this.name}}"});
+                    {{/each}}	
+                {{/each}}
+            {{/each}}
+            {{#each locationmasters }}
+                {{#each this.states}}
+                    {{#each this.cities}}
+                        {{#each this.localities}}
+                            locality_master.push({value:"{{@key}}",text:"{{this.name}}"});
+                        {{/each}}
+                    {{/each}}	
+                {{/each}}
+            {{/each}}
+        {{/if}}
+
+        
+        /*var oTable = $('#landmark_list').DataTable( 
+            {
+        "order": [[ 6, "desc" ]],
+        dom:'<"#add.row selectWrapper m-lg-b">frtlip',
+        processing: true,
+		serverSide: true,
+        autoWidth: true,
+        ajax:function (data, callback, settings) {
+             $.ajax({url:"/admin-manager/nearby-landmarks/list",type:"POST",data:data,dataType:'json',
+                success:function(res){
+                    $.each(res.Tabledata.data,function(i,val){
+                        res.Tabledata.data[i]['_landmark_name'] = '<a href="/admin/nearby-landmarks/'+res.Tabledata.data[i]['_landmark_id']+'/view">'+res.Tabledata.data[i]['_landmark_name']+'</a>';
+                    });
+                    callback(res.Tabledata);
+                }
+            })
+        },
+        columns: [
+            { data: '_landmark_name',name: '_landmark_name',searchable:true},
+			{ data: '_category',name: '_category',searchable:false},
+            { data: '_country_id',name: '_country_id',searchable:false},
+            { data: '_city_id',name: '_city_id',searchable:false },
+			 { data: '_locality_id',name: '_locality_id',searchable:false},
+            { data: '_description',name: '_description',searchable:true},
+            { data: '_id',"visible": false,searchable:false},
+            { data: '_landmark_id',"visible": false,searchable:false}
+        ]
+		})
+        */
+        let field = addNewFilterElement('select',{label:'City',name:'city',id:'city'});
+
+        $.each(city_master,function(index,option){
+            $('<option/>').val(option.value).text(option.text).appendTo(field);    
+        })
+
+        var localityfield = addNewFilterElement('select',{label:'Locality',name:'locality',id:'locality', class:'locality'});
+        $.each(locality_master,function(index,option){
+            $('<option/>').val(option.value).text(option.text).appendTo(localityfield);    
+        })
+        
+        $(document).on('change',"#city,#locality",function(){
+            var filterval = $(this).val()
+            isAppend = false;
+            if($(this).attr('id') == "city" || $(this).attr('id') == "locality") {
+                var colno = ($(this).attr('id') == "city"?2:5);
+                if(filterval == "all"){
+                    if($(this).attr('id') == "city" && $('#locality').val() == "all"){
+                        isAppend=true;               
+                        $(document).ajaxStop(function() {
+                            $.each(locality_master,function(index,option){
+                                if(!$("select#locality option[value='"+option.value+"']").length && isAppend===true)
+                                    $('<option/>').val(option.value).text(option.text).appendTo(localityfield)
+                            })
+                        });
+                        oTable.column([2,5]).search('').draw();
+                    }else
+                        oTable.column([colno]).search('').draw();
+                }else {
+                    isAppend=false;
+                    oTable.column([colno]).search(filterval).draw();
+                }
+            }
+        });
+    });
+    jQuery(document).ready(function () {
+        
+        $(".hotel_landmark_remove").click(function () {
+            //var hotel_id = $(this).attr("hotel-id");
+            //var landmark_id = $(this).attr("landmark-id");
+            //alert(hotel_id);
+            //alert(landmark_id);
+            var id = $(this).attr("id");
+            //alert(id);
+            if (id) {
+                var r = confirm("Are you sure want to remove this landmark from hotel?");
+                if (r == true) {
+                    $.ajax({
+                        url: "/hotel-landmarks/delete",
+                        type: "PUT",
+                        //data: { hotel_id: hotel_id , landmark_id: landmark_id },
+                        data: { id: id },
+                        success: function (response) {
+                            window.location.reload();
+                        },
+                        error: function (xhr) { }
+                    });
+                } else {
+                }
+            }
+        });
+        $('#landmark_list').DataTable();
+    });
+
+</script>
+{{> nav}}
+
+{{> header}}
+
+<main id="page-content">
+    <div class="row row-xl page-title">
+        <div class="pull-left">
+            <h3 class="fw-semi-thk">Hotel Landmarks</h3>
+        </div>
+        <div class="pull-right">
+            <ol class="breadcrumb">
+                <li><a href="javascript:void(0)" class="text-default"><small><i class="fa fa-home fa-fw m-xs-r"></i>Nearby Landmarks From Hotel</small></a></li>
+                <li><a href="javascript:void(0)" class="text-danger"><small>Hotel Landmarks list</small></a></li>
+            </ol>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="page-container">
+        <div class="row row-xl">
+            <div class="col-md-12 m-lg-b">
+                <div class="text-right"><a href="/hotel-landmarks/create/{{hotel_id}}" class="btn btn-danger btn-rounded w-175 text-left">Create New Landmark<i class="fa fa-plus-circle fa-fw pull-right"></i></a>
+            </div>
+        </div>
+
+        <div class="row row-xl">
+            <div class="col-md-12 m-lg-b">
+                <h4 class="text-black fw-semi-thk fs-20">Hotel Landmarks List</h4>
+            </div>
+
+            <div class="col-md-12">
+                <table  id="landmark_list" class="table table-striped" border="1" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Landmark Name</th>
+                            <th>Category</th>
+                            <th>Country</th>
+                            <th>State</th>
+                            <th>City</th>
+                            <th>Locality</th>
+							<th>Distance (Km)</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each data}}
+							<tr>
+								<td><a target="_blank" href="/admin/nearby-landmarks/{{this._landmark_id}}/view">{{ this.landmark_name }}</a></td>
+                                <td>{{ this.category }} </td>
+                                <td>{{ this.country }} </td>
+                                <td>{{ this.state }} </td>
+                                <td>{{ this.city }} </td>
+                                <td>{{ this.locality }} </td>
+								<td>{{ this._distance }} </td>
+								<td><a href="/hotel-landmarks/edit/{{this.hotel_id}}/{{this._landmark_id}}" class="btn btn-danger" >Edit</a></td>
+                                <td><span id="{{ this._id }}"  class="btn btn-danger hotel_landmark_remove">Delete</span></td>
+                                <!--<td><span hotel-id="{{ this.hotel_id }}" landmark-id="{{ this._landmark_id }}" class="btn btn-danger hotel_landmark_remove">Delete</span></td>-->
+							</tr>
+							{{/each}}
+                    </tbody>
+                </table> 
+            </div>
+        </div>
+    </div>
+</main>
+
+{{> footer}}

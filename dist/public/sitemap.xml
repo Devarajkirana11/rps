@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<url>
+  <loc>https://www.hotelnida.com/</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://www.hotelnida.com/users/register</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://www.hotelnida.com/users/login</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://www.hotelnida.com/about-us</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://www.hotelnida.com/faq</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://www.hotelnida.com/contact-us</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://www.hotelnida.com/privacy-policy</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://www.hotelnida.com/terms-and-conditions</loc>
+  <changefreq>weekly</changefreq>
+</url>
+</urlset>

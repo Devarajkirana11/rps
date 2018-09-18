@@ -1,0 +1,646 @@
+<!-- Begin Page Content -->
+<main id="page-content" ng-init="search_details()">
+  <!-- Begin Fixed Search Bar -->
+  {{> fixed_search_bar}}
+  <!-- End Fixed Search Bar -->
+
+  <!-- Begin Content Container -->
+  <div class="content-container" ng-init="init('edit')">
+    <!-- Begin List View Container -->
+    <div class="list-view-container">
+      <div class="row row-xl text-danger text-center" ng-show="setResult == 2"
+           style="height: 500px; padding-top: 200px; padding-bottom: 200px; line-height: 100px;"> No Results Found.
+        Modify your search
+      </div>
+      <div ng-show="setResult == 1 || setResult == 3">
+        <div class="page-container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="hotel-details-container m-lg-b">
+                <div class="row alert-danger" ng-if="setResult == 3"><p class="col-md-12 col-sm-12 col-xs-12 fw-semi-thk text-black" ng-bind="hotelError"></p></div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <h3 class="fw-semi-thk text-black text-uppercase m-n-b" ng-bind="details.hotel_name"></h3>
+                    <p class="text-grey" ng-bind="(details.hotel_city) + ', ' + (details.hotel_country)"></p>
+                  </div>
+                  <div class="col-md-2 col-sm-8 col-xs-8 col-sm-offset-2 col-xs-offset-2 col-md-offset-0"
+                       style="margin-top: 25px;">
+                    <a ng-if="details.custom_rating_image!=''" href="{[{details.custom_rating_link}]}"
+                       target="_blank"><img src="{[{details.custom_rating_image}]}" alt="Rating Image"/></a>
+                  </div>
+                  <div class="col-md-4 col-sm-12 col-xs-12">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                      <a id="mapQuery" class="btn btn-danger m-lg-t btn-rounded"
+                         target='_blank'
+                         href="https://maps.google.com/?q={[{ details.Lat }]},{[{ details.Lng }]}">
+                        <i class="fa fa-map-marker"></i> Map
+                      </a>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                      <a {{#if userid }}
+                      href="#" data-toggle="modal" data-target="#refer-and-earn-modal"
+                      {{ else }}
+                      href="/nidacash"
+                      {{/if}} id="share-n-earn" class="btn btn-danger m-lg-t btn-rounded">
+                        <i class="fa fa-share fa-fw"></i> Share & Earn $
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="slider-container hidden-sm hidden-xs">
+            {{!-- <div class="m-lg-b"> --}}
+            <div class="hotel-preview-image-container" ng-if="RoomTypesimages.length > 0">
+              <ul class="bxslider">
+                <li ng-repeat="image in RoomTypesimages">
+                  <img src="{[{image._medium}]}" alt="Hotel Images"/>
+                </li>
+              </ul>
+            </div>
+            <div class="hotel-preview-image-container-preload" ng-hide="RoomTypesimages.length > 0"></div>
+            {{!-- </div> --}}
+
+            {{!-- <div class="m-lg-b"> --}}
+            <div class="hotel-preview-map-container">
+              <span class="map-expand-button"><i class="ti-arrow-left fa-fw"></i></span>
+              <div class="hotel-preview-map-container-preload" ng-hide="RoomTypesimages.length > 0"></div>
+              <div id="map" style="width:100%;height:600px;"></div>
+            </div>
+            {{!-- </div> --}}
+          </div>
+
+          <div class="row row-xs m-xl-b" id="select-room">
+            <div class="col-md-9">
+              <h4 class="text-black fs-20 fw-lgt text-uppercase m-lg-b">Select your room</h4>
+
+              {{!-- Begin Hotel List Container --}}
+              <div class="hotel-list-container">
+                <div class="row row-xs">
+                  {{!-- Begin Loop --}}
+                  <div class="col-md-12">
+                    <div class="row row-xs room-type-slider">
+                      <div class="col-md-6 col-sm-6" ng-repeat="room_type in details.room_types track by $index">
+                        {{!-- Begin Hote List Items --}}
+                        <div class="hotel-list-item">
+                          <div class="row row-xs" ng-class="room_type.rate.availability <= 0?'soldout':'available'">
+
+                            {{!-- Begin Room Type Image --}}
+                            <div class="col-md-4" ng-if="room_type._image_links!==undefined">
+                              <img src="{[{room_type._image_links[0]['_thumbnail'] }]}" alt="Room Image" width="100%">
+                            </div>
+                            {{!-- End Room Type Image --}} {{!-- Begin Room Type Image Not Found --}}
+                            <div class="col-md-4" ng-if="room_type._image_links===undefined">
+                              <img src="/images/hotel-item-preview.png" alt="Room Image" width="115px" height="90px">
+                            </div>
+                            {{!-- End Room Type Image Not Found --}} {{!-- Begin Room Type Details --}}
+                            <div class="col-md-8">
+                              <div class="row row-xs">
+                                {{!-- Begin Room Name --}}
+                                <div class="col-md-12 m-sm-b">
+                                  <h4 class="text-black fw-thk m-n m-xs-b" ng-bind="room_type._type"></h4>
+                                  <p class="text-grey">
+                                    <small class="text-uppercase fs-xs">Capacity:</small>
+                                    <span ng-bind="room_type._no_of_guest_stay"></span>x Adult(s)
+                                  </p>
+                                </div>
+                                {{!-- End Room Name --}} {{!-- Begin Rooms --}}
+                                <div class="col-xs-6 col-md-6 text-center" style="margin-bottom: 6px;">
+                                  <div class="no-of-rooms">
+                                    <div>
+                                      <small class="text-uppercase fs-xs">Rooms</small>
+                                      <p ng-if="room_type.rate!==undefined && room_type.rate.availability > 0 && room_type.rate.averageCost > 0">
+                                        <a href="javascript:void(0)" class="text-default"
+                                           ng-click="roomCount('dec',room_type,$index)">
+                                          <i class="fa fa-minus-circle fs-xl"></i>
+                                        </a>
+                                        <span class="text-danger fs-xl fw-semi-thk p-xs-l p-xs-r"
+                                              ng-bind="room_type.RoomsReq"></span>
+                                        <a href="javascript:void(0)" class="text-default"
+                                           ng-click="roomCount('inc',room_type,$index)">
+                                          <i class="fa fa-plus-circle fs-xl"></i>
+                                        </a>
+                                      </p>
+                                    </div>
+                                    <div>
+                                      <p class="availabilityMessage"
+                                         ng-if="room_type.rate!==undefined && room_type.rate.availability > 0 && room_type.rate.averageCost > 0">
+                                        {[{
+                                        room_type.availabilityMessage }]}</p>
+                                    </div>
+                                  </div>
+
+                                  <div class="notavailableclass badge" style="margin-top: 11px;"
+                                       ng-if="room_type.rate===undefined || (room_type.rate.availability <= 0 || room_type.rate.averageCost <= 0) ">
+                                    <a href="javascript:void(0)" class="text-center badge text-uppercase fw-nml"
+                                       style="cursor: default; border-radius: 50px;">Sold Out</a>
+                                  </div>
+                                </div>
+                                {{!-- End Rooms --}} {{!-- Begin Price --}}
+                                <div class="col-xs-6  col-md-6 text-center">
+                                  <p class="m-n m-xs-t" ng-if="room_type.rate">
+                                    <small class="fs-xs text-uppercase"
+                                           ng-if="room_type.rate.availability > 0 && room_type.rate.averageCost > 0">Per
+                                      Night
+                                    </small>
+                                  </p>
+                                  <div ng-if="room_type.rate">
+                                    <div class="hotel-room-price"
+                                         ng-if="room_type.rate.availability > 0 && room_type.rate.averageCost > 0">
+                                      <p class="m-n">
+																					<span class="fs-lg fw-semi-thk">
+																						<small
+                                                                                            class="fs-xs text-uppercase">{[{ searchdata.currencyCode }]} </small> {[{ room_type.rate.averageCost| number : 2 }]}</span>
+                                      </p>
+                                    </div>
+                                  </div>
+
+                                  <div ng-if="room_type.rate===undefined"></div>
+                                </div>
+                                {{!-- End Price --}}
+                              </div>
+                            </div>
+                            {{!-- End Room Type Details --}}
+                          </div>
+
+                          {{!-- <div class="row row-md hidden-md hidden-sm">
+                            <div class="col-md-12 p-n">
+                              <p class="text-center modal-button-container m-n">
+                                <a class="text-default"
+                                   ng-click="roomTypeGallery(room_type._type | lowercase | removeSpaces)">View Room
+                                  Details and Photos</a>
+                              </p>
+                            </div>
+                          </div> --}}
+                        </div>
+                        {{!-- End Hote List Items --}}
+                      </div>
+                    </div>
+
+                    <div ng-repeat="room_type in details.room_types track by $index">
+                      <div id="modal_{[{room_type._type | lowercase | removeSpaces}]}"
+                           class="modal fade room-type-modal modal-center" role="dialog">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-body">
+                              <div class="room-type-slider-container text-center">
+                                <div class="room-type-carousel">
+                                  <div class="text-center" ng-if="room_type._image_links!==undefined"
+                                       ng-repeat="image in room_type._image_links">
+                                    <img src="{[{ image['_medium'] }]}" alt="slide image" align="center" height="100%"/>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <button type="button" class="close" data-dismiss="modal">
+                                <i class="fa fa-times-circle"></i>
+                              </button>
+
+                              <a href="javascript:void(0)" class="toggle-room-amenities hidden-md hidden-lg"
+                                 data-toggle-class="amenities-visible" data-target=".amenities-container">
+                                <i class="fa fa-bars fa-fw"></i>
+                              </a>
+
+                              <div class="amenities-container">
+                                <h4 class="text-uppercase fw-semi-thk text-black">Room Amenities</h4>
+                                <div class="row">
+                                  <div class="col-xs-12">
+                                    <p class="fw-semi-thk"></p>
+                                  </div>
+                                  <div class="m-sm-b col-md-6 col-xs-12" ng-repeat="amenity in room_type.amenities">
+                                    <div class="row">
+                                      <div class="col-xs-2">
+                                        <i class="{[{amenity.icon}]} fa-fw text-black m-md-r w-50"></i>
+                                      </div>
+                                      <div class="col-xs-10">
+                                        <span>{[{amenity.name}]}</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="clearfix"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {{!-- End Loop --}}
+                </div>
+              </div>
+              {{!-- End Hotel List Container --}}
+            </div>
+
+            <div class="col-md-3">
+              <h4 class="text-black fs-20 fw-lgt text-uppercase m-lg-b hidden-sm hidden-xs">Summary</h4>
+
+
+              <div class="hotel-list-summary summary-hidden" ng-if="details.room_types"
+                   ng-show="searchdata!==undefined">
+                <a href="javascript:void(0)" class="text-default fs-lg summary-close-button hidden-lg hidden-md"><i
+                    class="fa fa-times-circle fa-fw"></i></a>
+
+                <div class="row m-lg-b">
+                  <div class="col-xs-6">
+                    <p class="m-n">
+                      <small class="fs-xs text-grey text-uppercase">Check In</small>
+                    </p>
+                    <p ng-show="searchdata.check_in" class="m-n"><span class="fw-semi-thk m-n text-black">{[{ searchdata.check_in | date: 'EEE, dd MMM yyyy' }]}</span>
+                    </p>
+                  </div>
+
+                  <div class="col-xs-6">
+                    <p class="m-n">
+                      <small class="fs-xs text-grey text-uppercase">Check Out</small>
+                    </p>
+                    <p ng-show="searchdata.check_out" class="m-n"><span class="fw-semi-thk m-n text-black"
+                                                                        ng-bind="searchdata.check_out | date: 'EEE, dd MMM yyyy'"></span>
+                    </p>
+                  </div>
+                </div>
+
+
+                <div class="row m-lg-b">
+                  <div class="col-xs-12 fs-sm">
+                    <span class="fs-md fw-thk text-black"
+                          ng-if="searchdata.noOfNights">{[{ searchdata.noOfNights}]}</span> Night(s), <span
+                      class="fs-md fw-thk text-black" ng-bind="searchdata.totalAdults"></span>x Adult(s), <span
+                      class="fs-md fw-thk text-black" ng-bind="searchdata.totalkids"></span>x Kid(s)
+                  </div>
+                </div>
+
+
+                <div class="row m-md-b" ng-if="totalRoomsAdded > 0">
+                  <div class="col-md-12">
+                    <p>
+                      <small class="text-uppercase fs-xs text-grey">Room(s)</small>
+                    </p>
+
+                    {{!-- {[{details.room_types.RoomsReq}]} --}}
+
+                    <p class="text-black" ng-repeat="room_type in details.room_types" ng-if="room_type.RoomsReq!=0">
+                      <span class="m-xs-t pull-left"><span ng-bind="room_type.RoomsReq"></span> x <span class="m-xs-t"
+                                                                                                        ng-bind="room_type._type"></span></span>
+                      <span class="pull-right fw-semi-thk fs-lg" ng-if="room_type.totalRoomPrice">{[{ searchdata.currencyCode }]} {[{room_type.totalRoomPrice | number: 2}]}</span>
+                    <div class="clearfix"></div>
+                    </p>
+                  </div>
+                </div>
+
+
+                <div class="row" ng-if="totalRoomsAdded > 0">
+                  <div class="col-xs-6">
+                    <p>
+                      <small class="text-uppercase fs-xs text-grey m-n">Room Price</small>
+                    </p>
+                  </div>
+                  <div class="col-xs-6">
+                    <h4 class="text-black fw-semi-thk m-n text-right" ng-if="searchdata.totalPriceWithoutTax">
+                      {[{searchdata.totalPriceWithoutTax | number: 2}]}</h4>
+                  </div>
+                </div>
+                {{!--<div class="row" ng-if="searchdata.flexiAmount > 0">
+                    <div class="col-xs-6">
+                        <p><small class="text-uppercase fs-xs text-grey m-n">Flexi Fee</small></p>
+                    </div>
+                    <div class="col-xs-6">
+                        <h4 class="text-black fw-semi-thk m-n text-right" ng-if="searchdata.flexiAmount">{[{searchdata.flexiAmount | number: 2}]}</h4>
+                    </div>
+                </div>--}}
+
+                <div class="row" ng-if="searchdata.ServiceFee > 0">
+                  <div class="col-xs-6">
+                    <p>
+                      <small class="text-uppercase fs-xs text-grey m-n">Service</small>
+                    </p>
+                  </div>
+                  <div class="col-xs-6">
+                    <h4 class="text-black fw-semi-thk m-n text-right" ng-if="searchdata.ServiceFee">
+                      {[{searchdata.ServiceFee | number: 2 }]}</h4>
+                  </div>
+                </div>
+                <div class="row" ng-if="totalRoomsAdded > 0">
+                  <div class="col-xs-6">
+                    <p>
+                      <small class="text-uppercase fs-xs text-grey m-n">Tax</small>
+                    </p>
+                  </div>
+                  <div class="col-xs-6">
+                    <h4 class="text-black fw-semi-thk m-n text-right" ng-if="searchdata.totalTax">
+                      {[{searchdata.totalTax | number: 2 }]}</h4>
+                  </div>
+                </div>
+                {{!--<div class="row" ng-if="totalRoomsAdded > 0">
+                    <div class="col-xs-12">
+                        <div class="text-danger" ng-bind="flexiMessage"></div>
+                        <p><input type="checkbox" name="flexiBox" id="flexiBox" ng-model="flexiBox" ng-true-value="true" ng-false-value="false" ng-disabled="details.flexiBox" ng-click="FlexiProcess(flexiBox)"/><span>FLEXI</span></p>
+                        <p><small class="text-uppercase fs-xs text-grey m-n" >Flexi CheckIn & CheckOut</small></p>
+                    </div>
+                </div>--}}
+                <div class="row">
+                  <div class="col-xs-6">
+                    <p>
+                      <small class="text-uppercase fs-xs text-grey m-n">Total Price</small>
+                    </p>
+                  </div>
+                  <div class="col-xs-6">
+                    <h4 class="text-danger fw-semi-thk text-right m-n m-xl-b " ng-if="searchdata.totalPriceWithTax">{[{
+                      searchdata.currencyCode }]} {[{searchdata.totalPriceWithTax | number: 2}]}</h4>
+                  </div>
+                </div>
+                <div class="row m-lg-t">
+                  <div class="col-md-12">
+                    <div>
+                      <div ng-bind="validation_summary_msg" class="text-danger text-center"></div>
+                      <a href="javascript:void(0)" class="btn btn-danger btn-rounded btn-block"
+                         ng-click="check_button(button_summary)"
+                         ng-disabled="(totalRoomsAdded < searchdata.totalRooms)">{[{button_summary}]}</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="nidaCash-summary">
+                <img src="/images/NIDACash Logo_Final.svg" alt="NIDACash" height="100" width="150">
+                {{#if userid }}
+                  <div class="row" ng-if="totalRoomsAdded > 0">
+                    <div class="col-xs-6">
+                      <p>
+                        <small class="text-uppercase fs-xs text-grey m-n">You will earn</small>
+                      </p>
+                    </div>
+                    <div class="col-xs-6">
+                      <h4 class="text-black fw-semi-thk m-n text-right" ng-if="searchdata.totalPriceWithoutTax">USD {[{
+                        details.nidaCash | number: 2}]}</h4>
+                    </div>
+                  </div>
+                  <hr ng-if="totalRoomsAdded > 0">
+                  <div class="row learn-more" ng-if="totalRoomsAdded > 0">
+                    <p>Your earned NIDACash will be paid within 3 business days after hotel checkout date. <a
+                        href="/NIDACash-faq" target="_blank">Questions?</a></p>
+                  </div>
+                {{/if}}
+                <div class="text-center"><a {{#if userid }}
+                href="javascript:void(0);" data-toggle="modal" data-target="#refer-and-earn-modal" {{ else }}
+                href="/nidacash" {{/if}} class="btn btn-danger m-lg-b btn-rounded"><i class="fa fa-share fa-fw"></i>
+                  Share and Earn $</a></div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="row hidden-md hidden-lg">
+            <div class="col-md-12">
+              <div class="booknow-container">
+                <button class="btn btn-danger text-uppercase fw-semi-thk">{[{button}]}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white">
+          <div class="page-container">
+            <div class="row p-lg-t p-lg-b">
+              <div class="col-md-7 m-md-b">
+                <h4 class="text-black fs-20 fw-lgt text-uppercase m-lg-b">The Hotel</h4>
+
+                <p>{[{details.hotel_description}]}</p>
+                <div class="col-md-12" id="review_snippet">
+                  {{!-- {{{ metaTags.rating_snippet }}} --}}
+                </div>
+              </div>
+
+              <div class="col-md-5">
+                <h4 class="text-black fs-20 fw-lgt text-uppercase m-lg-b">Hotel Amenities</h4>
+
+                <div class="owl-carousel owl-theme" id="owl-carousel">
+                  <div class="item" ng-repeat="amenities in details.hotel_amenities" ng-if="amenities.length > 0">
+                    <div class="row row-sm">
+                      <div class="col-xs-6 col-md-4 m-md-b" ng-repeat="amenity in amenities">
+                        <div class="p-sm"
+                             style="border: solid 1px #ddd; min-height: 125px; display: table; width: 100%; border-radius: 5px;">
+                          <div style="display: table-cell; vertical-align: middle;">
+                            <p class="text-center m-n"><i class="fa-3x {[{amenity.icon}]}" style="color: #777"></i></p>
+                            <p class="text-center m-n text-uppercase text-black">
+                              <small class="fs-xs">{[{amenity.name}]}</small>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <section ng-if="blog.length > 0">
+          <div class="page-container">
+            <div class="p-xl-t p-xl-b">
+              <div class="row">
+                <div class="col-md-12">
+                  <h2 class="text-uppercase text-center m-lg-b text-black fw-lgt">Things to do</h2>
+                </div>
+              </div>
+              <div class="slider blogs-container row">
+                <div class="col-md-4" ng-repeat="article in blog">
+                  <a href="{[{ article.link }]}" class="text-default" target="_blank">
+                    <div class="card-container">
+                      <div class="card-img">
+                        <img src="{[{ article.featured_image_src }]}" alt="Article Image" width="100%">
+                      </div>
+                      <div class="card-content">
+                        <h4 class="fw-lgt text-black m-n m-sm-b text-center text-uppercase"
+                            ng-bind-html="trustHtml(article.title.rendered)" style="line-height: 22px;"></h4>
+                        {{!--<p ng-bind-html="trustHtml(article.content.rendered)"></p>--}}
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="row text-center">
+                <a href="https://blog.hotelnida.com/" target="_blank" class="btn btn-danger btn-rounded">See more</a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="bg-white" ng-if="details.landmarks">
+          <div class="page-container">
+            <div class="p-xl-t p-xl-b">
+              <div class="row">
+                <div class="col-md-12">
+                  <h4 class="text-uppercase fs-20 fw-lgt m-lg-b text-black">Nearby Places & Landmarks</h4>
+                </div>
+              </div>
+              <div class="nav-pills-container">
+                <ul class="nav nav-pills nida-red text-center responsive" role="tablist">
+                  <li role="presentation" class="text-uppercase fw-thk" style="display: inline-block; float: none;"
+                      ng-class="{active:$index == 0}" ng-repeat="(category,landmark) in details.landmarks"
+                      ng-if="$index!=(details.landmarks.length)">
+                    <a href="#panel_{[{ category.split(' ').join('_') }]}" aria-controls="first" role="tab"
+                       data-toggle="tab">{[{ category }]} <span class="badge" style="color: #0b1115;">{[{ landmark.length }]}</span></a>
+                  </li>
+                </ul>
+              </div>
+              {{!--<div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Places
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu landmarkdd">
+                    <li role="presentation" class="text-uppercase fw-thk" style="display: inline-block; float: none;" ng-class="{active:$index == 0}" ng-repeat="(category,landmark) in details.landmarks" ng-if="$index!=(details.landmarks.length + 1)">
+                        <a href="#panel_{[{ category.split(' ').join('_') }]}" aria-controls="first" role="tab" data-toggle="tab">{[{ category }]} <span class="badge" style="background-color: #bbbbbb;">{[{ landmark.length }]}</span></a>
+                    </li>
+                </ul>
+              </div>--}}
+              <div class="tab-content responsive" style="margin-top:0;">
+                <div role="tabpanel" class="tab-pane fade in p-md nearby-places-slider" ng-class="{active:$index == 0}"
+                     ng-repeat="(category,landmark) in details.landmarks"
+                     id="panel_{[{ category.split(' ').join('_') }]}">
+                  <div class="slider nearby-cards row">
+                    <div class="col-md-3" ng-repeat="item in landmark">
+                      <div class="card-container">
+                        <div class="card-img">
+                          <img src="{[{ item.landmarkdetails._landmark_images }]}" alt="Landmark Image" width="100%"
+                               ng-if="item.landmarkdetails._landmark_images && item.landmarkdetails._landmark_images.indexOf('s3') > -1 "/>
+                          <img src="/images/default-image.png" alt="Landmark Image" width="100%"
+                               ng-if="!item.landmarkdetails._landmark_images"/>
+                        </div>
+
+                        <div class="card-content">
+                          <!--<span class="card-badge badge-shopping">{[{ landmark.landmarkdetails._category }]}</span>-->
+                          <h4 class="fw-thk text-black m-n m-sm-b text-center text-uppercase"
+                              style="line-height: 22px;">{[{ item.landmarkdetails._landmark_name }]}</h4>
+                        </div>
+                        <span class="distance-badge">{[{ item._distance }]} Km</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {{!-- <div class="slider nearby-cards row">
+                <div class="col-md-3" ng-repeat="item in details.landmarks" >
+                    <div class="card-container">
+                    <div class="card-img">
+                        <img src="{[{ item.landmarkdetails._landmark_images }]}" alt="Landmark Image" width="100%" ng-if="item.landmarkdetails._landmark_images && item.landmarkdetails._landmark_images.indexOf('s3') > -1 "/>
+                        <img src="/images/default-image.png" alt="Landmark Image" width="100%" ng-if="!item.landmarkdetails._landmark_images"/>
+                    </div>
+
+                    <div class="card-content">
+                        <span class="card-badge badge-shopping">{[{ item.landmarkdetails._category }]}</span>
+                        <h4 class="fw-thk text-black m-n m-sm-b text-center text-uppercase" style="line-height: 22px;">{[{ item.landmarkdetails._landmark_name }]}</h4>
+                    </div>
+                    <span class="distance-badge">{[{ item._distance }]} Km</span>
+                    </div>
+                </div>
+              </div> --}}
+
+            </div>
+          </div>
+          <section class="text-black m-xl-b" style="background-color: #f9f9f9;" ng-if="details.essentials">
+            <div class="page-container">
+              <div class="row p-xl-t p-xl-b">
+                <div class="col-md-12">
+                  <h4 class="fs-20 fw-lgt text-uppercase m-lg-b">Nearby Essentials</h4>
+                  <div class="row">
+                    <div class="col-md-3 m-lg-b" ng-repeat="(category,essential) in details.essentials">
+                      <p class="fw-semi-thk fs-lg m-md-b">{[{ category }]}</p>
+                      <div ng-repeat="item in essential">
+                        <p class="fw-semi-thk m-xs-b">{[{ item.landmarkdetails._landmark_name }]}</p>
+                        <p>{[{ item._distance }]} km</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <div class="page-container">
+            <div class="row m-xl-b">
+              <div class="col-md-6">
+                <h4 class="fw-thk text-black text-uppercase m-sm-b" ng-bind="details.hotel_name"></h4>
+                <p class="m-n fw-semi-thk" ng-bind="details.hotel_address"></p>
+                <p class="text-danger fw-semi-thk"><span ng-bind="details.hotel_contact_number"></span></p>
+                <div ng-if="details.hotel_checks" class="row col-md-12">
+                  <div class="row col-md-4">
+                    <p class="fw-thk text-black text-uppercase m-sm-b">Check-In: </p>
+                    <p> {[{ details.hotel_checks._check_in._from }]} </p>
+                  </div>
+                  <div class="row col-md-4">
+                    <p class="fw-thk text-black text-uppercase m-sm-b">Check-Out: </p>
+                    <p> {[{ details.hotel_checks._check_out._to }]}</p>
+                  </div>
+                </div>
+              </div>
+
+              {{!--<div class="col-md-6">
+                  <h4 class="text-black fs-20 fw-lgt text-uppercase m-sm-b">Directions</h4>
+
+                  <div class="directions-container">
+                      <b>By train (KLIA Express)</b><br>
+                      <span>Take the KLIA Express from KLIA or KLIA 2 that will take you straight to KL Sentral. The train ride is approximately 30 minutes. From KL Sentral, you may opt for a cab which takes around 20 minutes to the hotel. Alternatively, you may hop onto the monorail line and stop at Bukit Bintang station. </span> <br><br>
+
+                      <b>From monorail: Bukit Bintang stop </b><br>
+                      <span>Exit at Lot 10 Shopping Centre and walk straight along Jalan Sultan Ismail until you reach WOLO Hotel. Cross the street and turn into Jalan Berangan. Walk straight for 350m and the hotel is on the left.</span><br><br>
+
+                      <b>KL Hop and off-bus: Bukit Bintang stop</b><br>
+                      <span>The hop on and off bus tour takes you in a loop around the city. Stop at the Bukit Bintang stop, which is at the intersection of Jalan Sultan Ismail and Jalan Berangan. </span>
+                  </div>
+
+                  <a class="text-danger directions-toggle-button" href="javascript:void(0)">Read More <i class="fa fa-angle-down fa-fw"></i></a>
+              </div>--}}
+            </div>
+          </div>
+
+          {{!-- <div id="hotel-map" style="width:100%;height:400px;"></div> --}}
+        </div>
+      </div>
+      <div class="text-center sub-sections-preload" ng-if="setResult == 0">
+        <img src="/images/circle_loading.gif" alt = "loader" width="20%" height="20%"/>
+      </div>
+      <!-- End List View Container -->
+      <!-- Modal -->
+      <div class="modal fade" id="flexiModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-3 ml-auto"></div>
+                  <img src="/images/didyouknow.png" align="middle" alt="did you know?" width="350" height="220">
+                </div>
+                <br><br>
+                <p style="text-align:center;" style="font-family:OpenSans;"><strong>NIDA Hotel has launched Flexi; a new
+                  service for your ease of comfort and travel needs. Now you can check-in and check-out at your own
+                  desired time. Say good-bye to all time restrictions which prevented you from enjoying your
+                  holidays. </strong></p> <br>
+
+                <p style="text-align:center;" style="font-family:OpenSans;"><strong>you like to book a room with Flexi
+                  previliages? </strong></p>
+              </div>
+              <div class="modal-footer text-center">
+                <button type="button" class="btn btn-danger" id="modal-btn-yes">Yes, add flexi</button>
+                <button type="button" class="btn btn-primary" id="modal-btn-no">No, thanks.</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Content Container -->
+    </div>
+</main>
+<!-- Begin Page Content -->
+<script>
+  var hotel_id = "{{hotelid}}";
+  var country_id = "{{country_id}}";
+  var country_page_id = null
+</script>

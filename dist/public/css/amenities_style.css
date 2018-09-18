@@ -1,0 +1,464 @@
+@font-face {
+  font-family: 'hotelnida';
+  src:  url('../fonts/hotelnida.eot?sf6rus');
+  src:  url('../fonts/hotelnida.eot?sf6rus#iefix') format('embedded-opentype'),
+    url('../fonts/hotelnida.ttf?sf6rus') format('truetype'),
+    url('../fonts/hotelnida.woff?sf6rus') format('woff'),
+    url('../fonts/hotelnida.svg?sf6rus#hotelnida') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'hotelnida' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-adapters-01:before {
+  content: "\e900";
+  color: #bbbbbb;
+}
+.icon-aircondition-01:before {
+  content: "\e901";
+  color: #bbbbbb;
+}
+.icon-alarmclock-01:before {
+  content: "\e902";
+  color: #000;
+}
+.icon-balcony-01:before {
+  content: "\e903";
+  color: #bbbbbb;
+}
+.icon-bathrobe-01:before {
+  content: "\e904";
+  color: #bbbbbb;
+}
+.icon-bathtub-01:before {
+  content: "\e905";
+  color: #bbbbbb;
+}
+.icon-bbq-01:before {
+  content: "\e906";
+  color: #bbbbbb;
+}
+.icon-boardgame-01:before {
+  content: "\e907";
+  color: #bbbbbb;
+}
+.icon-boardgame-01-01:before {
+  content: "\e908";
+  color: #bbbbbb;
+}
+.icon-body-soap-01:before {
+  content: "\e909";
+  color: #bbbbbb;
+}
+.icon-cable-channels-01:before {
+  content: "\e90a";
+  color: #bbbbbb;
+}
+.icon-carpeted-floors-01:before {
+  content: "\e90b";
+  color: #bbbbbb;
+}
+.icon-cdplayer-01 .path1:before {
+  content: "\e90c";
+  color: rgb(211, 211, 211);
+}
+.icon-cdplayer-01 .path2:before {
+  content: "\e90d";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-cdplayer-01 .path3:before {
+  content: "\e90e";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-cdplayer-01 .path4:before {
+  content: "\e90f";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-cdplayer-01 .path5:before {
+  content: "\e910";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-cdplayer-01 .path6:before {
+  content: "\e911";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-cdplayer-01 .path7:before {
+  content: "\e912";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-champagne-01:before {
+  content: "\e913";
+  color: #bbbbbb;
+}
+.icon-cityview-01:before {
+  content: "\e914";
+  color: #bbbbbb;
+}
+.icon-cleaning-01:before {
+  content: "\e915";
+  color: #bbbbbb;
+}
+.icon-coffee-machine-01:before {
+  content: "\e916";
+  color: #bbbbbb;
+}
+.icon-computer-01:before {
+  content: "\e917";
+  color: #bbbbbb;
+}
+.icon-cookies-01:before {
+  content: "\e918";
+  color: #bbbbbb;
+}
+.icon-crib-01:before {
+  content: "\e919";
+  color: #bbbbbb;
+}
+.icon-desk-01:before {
+  content: "\e91a";
+  color: #bbbbbb;
+}
+.icon-dining-area-01:before {
+  content: "\e91b";
+  color: #bbbbbb;
+}
+.icon-dining-table-01:before {
+  content: "\e91c";
+  color: #bbbbbb;
+}
+.icon-dishwasher-01:before {
+  content: "\e91d";
+  color: #bbbbbb;
+}
+.icon-downfloorstair-01:before {
+  content: "\e91e";
+  color: #bbbbbb;
+}
+.icon-dryer-01:before {
+  content: "\e91f";
+  color: #bbbbbb;
+}
+.icon-dvd-01:before {
+  content: "\e920";
+  color: #bbbbbb;
+}
+.icon-dvdplayer-01 .path1:before {
+  content: "\e921";
+  color: rgb(211, 211, 211);
+}
+.icon-dvdplayer-01 .path2:before {
+  content: "\e922";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-dvdplayer-01 .path3:before {
+  content: "\e923";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-dvdplayer-01 .path4:before {
+  content: "\e924";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-dvdplayer-01 .path5:before {
+  content: "\e925";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-dvdplayer-01 .path6:before {
+  content: "\e926";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-dvdplayer-01 .path7:before {
+  content: "\e927";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-dvdplayer-01 .path8:before {
+  content: "\e928";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-dvdplayer-01 .path9:before {
+  content: "\e929";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-dvd-player-01:before {
+  content: "\e92a";
+  color: #bbbbbb;
+}
+.icon-electric-kettle-01:before {
+  content: "\e92b";
+  color: #bbbbbb;
+}
+.icon-elevator-01:before {
+  content: "\e92c";
+  color: #bbbbbb;
+}
+.icon-extralong-bed-01:before {
+  content: "\e92d";
+  color: #bbbbbb;
+}
+.icon-fan-01:before {
+  content: "\e92e";
+  color: #bbbbbb;
+}
+.icon-fireplace-01:before {
+  content: "\e92f";
+  color: #bbbbbb;
+}
+.icon-flatscreen-01 .path1:before {
+  content: "\e930";
+  color: rgb(211, 211, 211);
+}
+.icon-flatscreen-01 .path2:before {
+  content: "\e931";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-flatscreen-01 .path3:before {
+  content: "\e932";
+  margin-left: -1em;
+  color: rgb(211, 211, 211);
+}
+.icon-flatscreen-01 .path4:before {
+  content: "\e933";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-fruit-01:before {
+  content: "\e934";
+  color: #bbbbbb;
+}
+.icon-hair-dryer-01:before {
+  content: "\e935";
+  color: #bbbbbb;
+}
+.icon-heating-01:before {
+  content: "\e936";
+  color: #bbbbbb;
+}
+.icon-highchair-01:before {
+  content: "\e937";
+  color: #bbbbbb;
+}
+.icon-hypoallergnic-01:before {
+  content: "\e938";
+  color: #bbbbbb;
+}
+.icon-ipad-01 .path1:before {
+  content: "\e939";
+  color: rgb(211, 211, 211);
+}
+.icon-ipad-01 .path2:before {
+  content: "\e93a";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-iron-01:before {
+  content: "\e93b";
+  color: #bbbbbb;
+}
+.icon-ironing-facilities-01:before {
+  content: "\e93c";
+  color: #bbbbbb;
+}
+.icon-kitchen-01:before {
+  content: "\e93d";
+  color: #bbbbbb;
+}
+.icon-kitchenette-01:before {
+  content: "\e93e";
+  color: #bbbbbb;
+}
+.icon-laptop-01:before {
+  content: "\e93f";
+  color: #bbbbbb;
+}
+.icon-linens-01:before {
+  content: "\e940";
+  color: #bbbbbb;
+}
+.icon-loungeaccess-01:before {
+  content: "\e941";
+  color: #bbbbbb;
+}
+.icon-marble-floor-01:before {
+  content: "\e942";
+  color: #bbbbbb;
+}
+.icon-microwave-01:before {
+  content: "\e943";
+  color: #bbbbbb;
+}
+.icon-minibar-01:before {
+  content: "\e944";
+  color: #bbbbbb;
+}
+.icon-mosquito-net-01:before {
+  content: "\e945";
+  color: #bbbbbb;
+}
+.icon-outdoor-dining-01:before {
+  content: "\e946";
+  color: #bbbbbb;
+}
+.icon-outdoor-furniture-01:before {
+  content: "\e947";
+  color: #bbbbbb;
+}
+.icon-outdoor-view-01:before {
+  content: "\e948";
+  color: #bbbbbb;
+}
+.icon-oven-01:before {
+  content: "\e949";
+  color: #bbbbbb;
+}
+.icon-pay-per-view-01:before {
+  content: "\e94a";
+  color: #bbbbbb;
+}
+.icon-pool-town-01:before {
+  content: "\e94b";
+  color: #bbbbbb;
+}
+.icon-poolview-01:before {
+  content: "\e94c";
+  color: #bbbbbb;
+}
+.icon-private-entrance-01:before {
+  content: "\e94d";
+  color: #bbbbbb;
+}
+.icon-radio-01:before {
+  content: "\e94e";
+  color: #bbbbbb;
+}
+.icon-refrigerator-01:before {
+  content: "\e94f";
+  color: #bbbbbb;
+}
+.icon-safe-01:before {
+  content: "\e950";
+  color: #bbbbbb;
+}
+.icon-sauna-01:before {
+  content: "\e951";
+  color: #bbbbbb;
+}
+.icon-shampoo-01:before {
+  content: "\e952";
+  color: #bbbbbb;
+}
+.icon-shower-01:before {
+  content: "\e953";
+  color: #bbbbbb;
+}
+.icon-sitting-area-01:before {
+  content: "\e954";
+  color: #bbbbbb;
+}
+.icon-slippers-01:before {
+  content: "\e955";
+  color: #bbbbbb;
+}
+.icon-sofa-01:before {
+  content: "\e956";
+  color: #bbbbbb;
+}
+.icon-sofa-bed-01:before {
+  content: "\e957";
+  color: #bbbbbb;
+}
+.icon-stovetop-01:before {
+  content: "\e958";
+  color: #bbbbbb;
+}
+.icon-telephone-01:before {
+  content: "\e959";
+  color: #bbbbbb;
+}
+.icon-toaster-01:before {
+  content: "\e95a";
+  color: #bbbbbb;
+}
+.icon-toilet-01:before {
+  content: "\e95b";
+  color: #bbbbbb;
+}
+.icon-toiletpaper-01:before {
+  content: "\e95c";
+  color: #bbbbbb;
+}
+.icon-toothbrush-01:before {
+  content: "\e95d";
+  color: #bbbbbb;
+}
+.icon-towels-01:before {
+  content: "\e95e";
+  color: #bbbbbb;
+}
+.icon-towel-sheets-01:before {
+  content: "\e95f";
+  color: #bbbbbb;
+}
+.icon-trash-can-01:before {
+  content: "\e960";
+  color: #bbbbbb;
+}
+.icon-tv-01:before {
+  content: "\e961";
+  color: #bbbbbb;
+}
+.icon-upperfloorstair-01:before {
+  content: "\e962";
+  color: #bbbbbb;
+}
+.icon-wakeup-01:before {
+  content: "\e963";
+  color: #bbbbbb;
+}
+.icon-wardrobe:before {
+  content: "\e964";
+  color: #bbbbbb;
+}
+.icon-washing-machine-01:before {
+  content: "\e965";
+  color: #bbbbbb;
+}
+.icon-water-bottle-01:before {
+  content: "\e966";
+  color: #bbbbbb;
+}
+.icon-wheelchair-01:before {
+  content: "\e967";
+  color: #bbbbbb;
+}
+.icon-wineglass-01:before {
+  content: "\e968";
+  color: #bbbbbb;
+}

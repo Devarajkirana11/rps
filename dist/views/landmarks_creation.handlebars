@@ -1,0 +1,329 @@
+{{> nav}}
+
+{{> header}}
+
+<main id="page-content">
+	<div class="row row-xl page-title">
+		<div class="pull-left">
+			<h3 class="text-black fw-semi-thk">Landmarks Details</h3>
+		</div>
+		<div class="pull-right">
+			<ol class="breadcrumb">
+				<li><a href="javascript:void(0)" class="text-default"><small><i class="fa fa-home fa-fw m-xs-r"></i>Home</small></a></li>
+				<li><a href="javascript:void(0)" class="text-danger"><small>Hotel Landmarks</small></a></li>
+			</ol>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<div class="page-container">
+		<div class="row row-xl">
+			<div class="col-md-12 m-lg-b">
+				<h4 class="text-black fw-semi-thk fs-20">Add New Landmark</h4>
+			</div>
+		</div>
+
+		<div class="row row-xl">
+			<div class="col-md-12 selectWrapper">
+				{{#if landmark_id }}
+				<form class="" action='/admin/nearby-landmarks/create?landmark_id={{landmark_id}}' method="POST">
+				{{else}}
+				<form class="" action='/admin/nearby-landmarks/create' method="POST">
+				{{/if}}
+
+					{{#if errors}}
+					<ul>
+					{{#each errors}}
+					
+					<li>
+						<div class="text-danger"> {{ msg }}</div>
+					</li>
+					{{/each}}
+					</ul>
+					{{/if}}
+
+
+					{{#if success }}
+					<div class="alert alert-success">{{ message}}</div>
+					{{else if message }}
+					<div class="alert alert-danger">{{ message}}</div>
+					{{/if}}
+
+
+					<div class="row row-xl">
+						<div class="col-md-6">
+							<div class="row row-xl">
+								{{!-- Begin Landmark NAme --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="landmark_name">Landmark Name*</label>
+										<input type="text" id="" name="landmark_name" placeholder="" class="form-control" value="{{#if requestBody.landmark_name }}{{ requestBody.landmark_name }}{{/if}}" >
+										<span class="text-danger">{{#if landmark_name }}{{#trim landmark_name}}{{/trim}} {{/if}}</span>
+									</div>
+								</div>
+								{{!-- End Landmark NAme --}}
+
+								{{!-- Begin Country --}}
+								<!-- <div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="country">Country*</label>
+
+										<div class="select-wrapper">
+											<select  id="" name="country" placeholder="" class="country form-control">
+												<option value="select" {{#equal requestBody.country 'select'}} selected="selected" {{/equal}}>Choose Country</option>
+												{{#if locationmasters }}
+												{{#each locationmasters }}
+												<option value="{{@key}}" {{#equal ../requestBody.country @key}} selected="selected" {{/equal}}>{{ this.name }}</option>
+												{{/each}}
+												{{/if}}
+											</select>
+										</div>
+										<span class="text-danger">{{#if country }} {{ country }} {{/if}}</span>
+									</div>
+									{{!-- End Country --}}
+								</div>
+
+								{{!-- Begin State --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="state">State*</label>
+
+										<div class="select-wrapper">
+											<select  id="" name="state" placeholder="" class="state form-control">
+												<option value="select" {{#equal requestBody.state 'select'}} selected="selected" {{/equal}}>Choose State</option>
+												{{#if locationmasters }}
+												{{#each locationmasters }}
+												{{#each this.states}}
+												<option value="{{@key}}" {{#equal ../../requestBody.state @key}} selected="selected" {{/equal}}>{{ this.name }}</option>
+												{{/each}}
+												{{/each}}
+												{{/if}}
+											</select>
+										</div>
+
+										<span class="text-danger">{{#if state }} {{ state }} {{/if}}</span>
+									</div>	
+								</div>
+								{{!-- End State --}}
+
+								{{!-- Begin City --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="city">City*</label>
+
+										<div class="select-wrapper">
+											<select  id="" name="city" placeholder="" class="city form-control">
+												<option value="select" {{#equal requestBody.city 'select'}} selected="selected" {{/equal}}>Choose City</option>
+												{{#if locationmasters }}
+												{{#each locationmasters }}
+												{{#each this.states}}
+												{{#each this.cities}}
+												<option value="{{@key}}" {{#equal ../../../requestBody.city @key}} selected="selected" {{/equal}}>{{ this.name }}</option>
+												{{/each}}	
+												{{/each}}
+												{{/each}}
+												{{/if}}
+											</select>
+										</div>
+
+										<span class="text-danger">{{#if city }} {{ city }} {{/if}}</span>				
+									</div>
+								</div>
+								{{!-- End City --}}
+
+								{{!-- Begin Location --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="locality">Location</label>
+
+										<div class="select-wrapper">
+											<select  id="locality" name="locality" placeholder="" class="locality form-control">
+												<option value="select" {{#equal requestBody.locality 'select'}} selected="selected" {{/equal}}>Choose Locality</option>
+												{{#if locationmasters }}
+												{{#each locationmasters}}
+												{{#each this.states}}
+												{{#each this.cities}}
+												{{#each this.localities}}
+												<option value="{{@key}}" {{#equal ../../../../requestBody.locality @key}} selected="selected" {{/equal}}>{{ this.name }}</option>
+												{{/each}}	
+												{{/each}}
+												{{/each}}	
+												{{/each}}
+												{{/if }}
+											</select>
+										</div>
+										
+										<span class="text-danger">{{#if locality }} {{ locality }} {{/if}}</span>
+									</div>
+								</div>
+								{{!-- End Location --}} -->
+                               {{!-- Begin Country --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="country">Country*</label>
+
+										<div class="select-wrapper">
+											<select  id="" name="country" placeholder="" class="country form-control">
+												<option value="select" {{#equal requestBody.country 'select'}} selected="selected" {{/equal}}>Choose Country</option>
+												{{#if locationmasters }}
+												{{#each locationmasters }}
+												<option value="{{@key}}" {{#equal ../requestBody.country @key}} selected="selected" {{/equal}}>{{ this.name }}</option>
+												{{/each}}
+												{{/if}}
+											</select>
+										</div>
+										<span class="text-danger">{{#if country }} {{ country }} {{/if}}</span>
+									</div>
+									{{!-- End Country --}}
+								</div>
+
+								{{!-- Begin State --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="state">State*</label>
+
+										<div class="select-wrapper">
+											<select  id="" name="state" placeholder="" class="state form-control">
+												<option value="select" {{#equal requestBody.state 'select'}} selected="selected" {{/equal}}>Choose State</option>
+												<option value="{{requestBody.state}}" {{#if requestBody.state }} selected="selected" {{/if}}>Loading...</option>
+											</select>
+										</div>
+
+										<span class="text-danger">{{#if state }} {{ state }} {{/if}}</span>
+									</div>	
+								</div>
+								{{!-- End State --}}
+
+								{{!-- Begin City --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="city">City*</label>
+
+										<div class="select-wrapper">
+											<select  id="" name="city" placeholder="" class="city form-control">
+												<option value="select" {{#equal requestBody.city 'select'}} selected="selected" {{/equal}}>Choose City</option>
+												<option value="{{requestBody.city}}" {{#if requestBody.city }} selected="selected" {{/if}}>Loading...</option>
+											</select>
+										</div>
+
+										<span class="text-danger">{{#if city }} {{ city }} {{/if}}</span>				
+									</div>
+								</div>
+								{{!-- End City --}}
+
+								{{!-- Begin Location --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="locality">Location</label>
+
+										<div class="select-wrapper">
+											<select  id="locality" name="locality" placeholder="" class="locality form-control">
+												<option value="select" {{#equal requestBody.locality 'select'}} selected="selected" {{/equal}}>Choose Locality</option>
+												<option value="{{requestBody.locality}}" {{#if requestBody.locality }} selected="selected" {{/if}}>Loading...</option>
+											</select>
+										</div>
+										
+										<span class="text-danger">{{#if locality }} {{ locality }} {{/if}}</span>
+									</div>
+								</div>
+								{{!-- End Location --}}
+								
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="row row-xl">
+                               	<div class="col-md-12">
+									<div class="form-group">
+									<label class="" for="Category">Category</label>
+									<div class="select-wrapper">
+										<select name="category" class="form-control">
+											<option value="">Select</option>
+											<option value="Shopping" {{#equal requestBody.category 'Shopping'}} selected="selected" {{/equal}}>Shopping</option>
+											<option value="Fine-Dine"  {{#equal requestBody.category 'Fine-Dine'}} selected="selected" {{/equal}}>Fine-Dine</option>
+											<option value="Street Food" {{#equal requestBody.category 'Street Food'}} selected="selected" {{/equal}}>Street Food</option>
+											<option value="Entertainment"  {{#equal requestBody.category 'Entertainment'}} selected="selected" {{/equal}}>Entertainment</option>
+											<option value="To-Die-For Views" {{#equal requestBody.category 'To-Die-For Views'}} selected="selected" {{/equal}}>To-Die-For Views</option>
+											<option value="Landmarks"  {{#equal requestBody.category 'Landmarks'}} selected="selected" {{/equal}}>Landmarks</option>
+											<option value="Medical"  {{#equal requestBody.category 'Medical'}} selected="selected" {{/equal}}>Medical</option>
+											<option value="Public Transportation"  {{#equal requestBody.category 'Public Transportation'}} selected="selected" {{/equal}}>Public Transportation</option>
+											<option value="Supermarkets"  {{#equal requestBody.category 'Supermarkets'}} selected="selected" {{/equal}}>Supermarkets</option>
+											<option value="Airports"  {{#equal requestBody.category 'Airports'}} selected="selected" {{/equal}}>Airports</option>
+											<option value="ATM/Banks"  {{#equal requestBody.category 'ATM/Banks'}} selected="selected" {{/equal}}>ATM/Banks</option>
+										</select>
+									</div>
+								</div>	
+							</div>
+								{{!-- Begin Description --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="description">Description</label>
+										<textarea id="" name="description" placeholder="" class="form-control">{{#if requestBody.description }}{{#trim requestBody.description }}{{/trim}}{{/if}}</textarea>
+										<span class="text-danger">{{#if description }} {{ description }} {{/if}}</span>
+									</div>
+								</div>
+								
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="latitude">Latitude *</label>
+										<input type="text" id="latitude" name="latitude" placeholder="" class="form-control"  value="{{#if requestBody.latitude }}{{#trim requestBody.latitude }}{{/trim}}{{/if}}">
+										<span class="text-danger">{{#if latitude }} {{ latitude }} {{/if}}</span>
+									</div>
+								</div>
+								{{!-- End Latitude --}}
+
+								{{!-- Begin Longitude --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="longitude">Longitude  *</label>
+										<input type="text" id="longitude" name="longitude" placeholder="" class="form-control"  value="{{#if requestBody.longitude }}{{#trim requestBody.longitude }}{{/trim}}{{/if}}">
+										<span class="text-danger">{{#if longitude }} {{ longitude }} {{/if}}</span>
+									</div>
+								</div>
+								{{!-- End Longitude --}}
+							</div>
+						</div>
+					</div>
+					<div class="row row-xl">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class=""  for="landmark_images">Landmark Images</label>
+								<input type="file" class="saveFile form-control" name="landmark_images" value="{{#if requestBody.landmark_images }}{{requestBody.landmark_images}}{{/if}}"/>
+							</div>
+						</div>
+					</div>	
+
+					<div class="row row-xl">
+						<div class="col-md-12 m-lg-t">
+							<div id="map" style="width:100%;height:500px;margin:auto;"></div>							
+						</div>
+					</div>
+					<div class="row row-xl m-xl-t">
+
+						<div class="col-md-12 text-right">
+							<input type="hidden" name="hotel_id" value="{{presave_landmark_id}}"/>
+							<input type="submit" name="save" value="Save" class = "btn btn-danger btn-rounded w-150 m-md-b"/> 
+							<a href="#" class="btn btn-default btn-rounded w-150 m-md-b">Cancel</a>
+
+						</div>
+					</div>
+				</form>
+			</div>	
+		</div>
+	</div>
+</main>
+
+{{> footer}}
+
+
+{{#if requestBody.locality }}
+<script>
+	var Dlocality= '{{ requestBody.locality }}';
+</script>
+{{else}}
+<script>
+	var Dlocality=undefined;
+</script>
+{{/if}}
+
+<script defer type="text/javascript" src="//maps.google.com/maps/api/js?key=AIzaSyDR1iZRZ36Ew7W9UIbXAKV8AIM-OUGujbA"></script>
+<script src="/js/hotel_details.js"></script>

@@ -1,0 +1,178 @@
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="/scripts/plugins/jquery.bootstrap.wizard.min.js"></script>
+<script src="/js/jquery-ui.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        var searchMinDate = "m";
+        $("#check_in").datepicker({
+            dateFormat: "dd-mm-yy",
+            onClose: function (selectedDate) {
+                $("#check_in").datepicker('setDate', selectedDate);
+                $("#check_in_to").datepicker("option", "minDate", selectedDate);
+            }
+        });
+        $("#check_out").datepicker({
+            dateFormat: "dd-mm-yy",
+            onClose: function (selectedDate) {
+                $("#check_out").datepicker('setDate', selectedDate);
+                $("#check_out_to").datepicker("option", "minDate", selectedDate);
+            }
+        });
+        $("#check_in_to").datepicker({ dateFormat: "dd-mm-yy" });
+        $("#check_out_to").datepicker({ dateFormat: "dd-mm-yy" });
+        $(".booking-cancel").click(function () {
+            var booking_uuid = $(this).attr("id");
+            if (booking_uuid) {
+                var r = confirm("Are you sure want to cancel this booking?");
+                if (r == true) {
+                    $.ajax({
+                        url: "/inventory/booking/cancellation",
+                        type: "PUT",
+                        data: { booking_uuid: booking_uuid },
+                        success: function (response) {
+                            window.location.reload();
+                        },
+                        error: function (xhr) { }
+                    });
+                } else {
+                }
+            }
+        });
+        $("#reset").click(function () {
+            window.location.href = window.location.href;
+        });
+    });
+
+</script>
+{{> nav this}} {{> header}}
+<main id="page-content">
+    <div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Booking List View</h3>
+        </div>
+    </div>
+    <div class="page-container">
+        <div class="row row-xl">
+            <div class="col-md-8 m-md-b">
+                <a href="/pms/front-desk?hotel_id={{ hotel_id }}" class="btn btn-danger btn-rounded w-175 text-left">Calendar View <i class="fa fa-calendar pull-right"></i></a>
+                <a href="javascript:void(0)" class="btn btn-danger btn-rounded w-175 text-left disabled">Booking List View <i class="fa fa-th-list pull-right"></i></a>
+                <a href="/pms/rooms/list?hotel_id={{ hotel_id }}" class="btn btn-danger btn-rounded w-175 text-left">Rooms Status <i class="fa fa-th pull-right"></i></a>
+            </div>
+            <div class="col-md-4 text-right m-lg-b">
+                <a href="/pms/walkin-reservation?hotel_id={{ hotel_id }}" class="btn btn-danger btn-rounded text-left">Walk In / New Reservation <i class="fa fa-plus-circle fa-fw pull-right"></i></a>
+            </div>
+            <div class="col-md-12">
+                <div class="filter-form">
+                    <form name="booking-list-view" id="booking-list-view" class="" action='/pms/bookings/list?hotel_id={{ hotel_id }}' method="POST">
+                        {{#if errors}} {{#each errors}}
+                        <div class="alert alert-danger"> {{ msg }}</div>
+                        {{/each}} {{/if}}
+                        <div class="row row-xl">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="" for="taxname">Booking ID</label>
+                                    <input type="text" id="booking_reference_id" value="{{ inputs.booking_reference_id }}" name="booking_reference_id" placeholder=""
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="" for="taxname">Check in From</label>
+                                    <input type="text" id="check_in" value="{{ inputs.check_in_from }}" name="check_in_from" placeholder="" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="" for="taxname">Check in To</label>
+                                    <input type="text" id="check_in_to" value="{{ inputs.check_in_to }}" name="check_in_to" placeholder="" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="" for="taxname">Check out From</label>
+                                    <input type="text" id="check_out" value="{{ inputs.check_out_from }}" name="check_out_from" placeholder="" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="" for="taxname">Check out To</label>
+                                    <input type="text" id="check_out_to" value="{{ inputs.check_out_to }}" name="check_out_to" placeholder="" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <div class="select-wrapper">
+                                        <select name="status" id="booking-status" class="form-control">
+                                            <option value="">Select</option>
+                                            <option value="ON_HOLD" {{#equal inputs.status 'ON_HOLD'}} selected="selected" {{/equal}}>ON HOLD</option>
+                                            <option value="CONFIRMED" {{#equal inputs.status 'CONFIRMED'}} selected="selected" {{/equal}}>CONFIRMED</option>
+                                            <option value="CHECK_IN" {{#equal inputs.status 'CHECK_IN'}} selected="selected" {{/equal}}>CHECK IN</option>
+                                            <option value="OCCUPIED" {{#equal inputs.status 'OCCUPIED'}} selected="selected" {{/equal}}>OCCUPIED</option>
+                                            <option value="CHECK_OUT" {{#equal inputs.status 'CHECK_OUT'}} selected="selected" {{/equal}}>CHECK OUT</option>
+                                            <option value="CANCELLED" {{#equal inputs.status 'NO_SHOW'}} selected="selected" {{/equal}}>CANCELLED</option>
+                                            <option value="VACATED" {{#equal inputs.status 'NO_SHOW'}} selected="selected" {{/equal}}>VACATED</option>
+                                            <option value="NO_SHOW" {{#equal inputs.status 'NO_SHOW'}} selected="selected" {{/equal}}>NO SHOW</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-xl m-xl-b">
+                            <div class="col-md-12 text-right">
+                                <button class="btn btn-danger btn-rounded w-150 text-left" name="Submit" value="Save" type="Submit">Search <i class="fa fa-search fa-fw pull-right"></i></button>
+                                <button class="btn btn-danger btn-rounded w-150 text-left" id="reset" type="reset" value="Reset">Reset <i class="fa fa-refresh fa-fw pull-right" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="table-view">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Booking ID</th>
+                                <th>Check in</th>
+                                <th>Check out</th>
+                                <th>Guest Name</th>
+                                <th>Room Type</th>
+                                <th>Room Number</th>
+                                <th>Total Price</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each output }}
+                            <tr>
+                                <td><a href="/pms/booking-details?booking_uuid={{ this.bookingUuid }}&hotel_id={{ this.hotelUuid }}">{{ this.referrence_id }} </a></td>
+                                <td>{{#customDateFormat this.checkIn }}{{/customDateFormat}}</td>
+                                <td>{{#customDateFormat this.checkOut }}{{/customDateFormat}}</td>
+                                <td>{{ this.guest.firstName }} {{ this.guest.lastName }}</td>
+                                <td>{{#getRoomTypeName this.roomType }}{{/getRoomTypeName}}</td>
+                                <td>{{ this.roomNumber }}</td>
+                                <td>{{#roundNumbers this.total_price }}{{/roundNumbers}}</td>
+                                <td>{{ this.status }}</td>
+                                {{#if this.status }} {{#equal this.status 'ON_HOLD'}}
+                                <td><span id="{{ this.bookingUuid }}" class="btn btn-danger booking-cancel">Cancel</span></td>
+                                {{/equal}} {{#equal this.status 'CONFIRMED'}}
+                                <td><span id="{{ this.bookingUuid }}" class="btn btn-danger booking-cancel">Cancel</span></td>
+                                {{/equal}} {{#equal this.status 'CHECK_IN'}}
+                                <td><span id="{{ this.bookingUuid }}" class="btn btn-danger booking-cancel">Cancel</span></td>
+                                {{/equal}} {{#equal this.status 'OCCUPIED'}}
+                                <td></td>
+                                {{/equal}} {{#equal this.status 'VACATED'}}
+                                <td></td>
+                                {{/equal}} {{#equal this.status 'CANCELLED'}}
+                                <td></td>
+                                {{/equal}} {{/if}}
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{{> footer}}

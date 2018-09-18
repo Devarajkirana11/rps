@@ -1,0 +1,57 @@
+{{> header }}
+<script>
+    $(function(){
+        var filtersFirstInitialized = false;
+        var oTable = $('#vans_list').DataTable( {
+            "order": [[1, "desc"]],
+            dom: '<"#add.row selectWrapper m-lg-b">frtlip',
+            processing: true,
+		})
+    });
+</script>
+<section>
+  <div class="content-wrapper">
+    <div class="container-fluid">
+            <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Vans List</div>
+        <div class="card-body">
+          <div class="table-responsive">
+                <div class="text-right"><a href="/vans/create" class="float-left btn btn-primary btn-rounded w-175 text-left">Add Van <i class="fa fa-plus-circle fa-fw pull-right"></i></a>
+                <table  id="vans_list"  cellspacing="0" class="table table-striped" border="1" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Vechile Make</th>
+                            <th>Vechile Reg No</th>
+                            <th>Vechile Type</th>
+                            <th>Vechile Provider</th>
+                            <th>Status</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each output.data }}
+                            <tr>
+                                <td><a href="/vans/{{ this.uuid }}/view">{{ this.make }}</a></td>
+                                <td>{{ this.reg_no }}</td>
+                                <td>{{ this.type }}</td>
+                                <td>{{ this.provider }}</td>
+                                <td>
+                                    {{#in '1' this.status }} Active<br/> {{/in}}
+                                    {{#in '0' this.status }} InActive<br/> {{/in}}
+                                </td>
+                                <td><a class="btn btn-success" href="/vans/{{ this.uuid }}/edit">Edit</a></td>
+                                <td><span class="btn btn-danger van-delete" data-uuid="{{ this.uuid }}" >Delete</span></td>
+                                </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+<script src="/js/jquery-ui.js"></script>
+{{> footer}}

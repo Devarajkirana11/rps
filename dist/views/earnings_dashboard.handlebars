@@ -1,0 +1,305 @@
+{{> nav this}}
+
+{{> header}}
+
+<main id="page-content">
+    <div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">
+                <img src="/images/NIDACash Logo_Final.svg" alt="NIDACash logo" width="200"/>
+                <small class="text-right p-lg-t"><a href="/nidacash" class="fs-sm">Find out more.</a></small>
+            </h3>
+        </div>
+    </div>
+
+    <div class="page-container">
+        <div class="row row-xl">
+            <div class="col-md-6">
+                <div class="earnings-item bg-white p-lg earnings-bookings">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <small>Bookings</small>
+                            <h1 class="m-n fw-semi-thk text-black">{{ output.no_of_bookings }}</h1>
+                        </div>
+                        <div class="col-md-4">
+                            <small>Shared Hotels</small>
+                            <h4 class="m-n fw-semi-thk text-black">{{ output.no_of_shared_hotels }}</h4>
+                        </div>
+                        <div class="col-md-4">
+                            <small>Openings</small>
+                            <h4 class="m-n fw-semi-thk text-black">{{ output.links_open }}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="earnings-item bg-white p-lg earnings-revenue">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <small>Total NIDACash</small>
+                            <h1 class="m-n fw-semi-thk text-black">USD {{#round output.total_earnings }}{{/round}}</h1>
+                        </div>
+                        <div class="col-md-4">
+                            <small>Upcoming NIDACash</small>
+                            <h4 class="m-n fw-semi-thk text-black">USD {{#round output.upcoming_commision }}{{/round}}</h4>
+                        </div>
+                        <div class="col-md-4">
+                            <small>Last NIDACash</small>
+                            <h4 class="m-n fw-semi-thk text-black">USD {{#round output.last_commision_earned }}{{/round}}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row tab-container rooms-list-tab">
+            <div class="nav-tabs-container">
+                <!-- Begin Nav Tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#share_earn" aria-controls="share_earn" role="tab" data-toggle="tab">Share & Earn</a>
+                    <li>
+                    <li role="presentation">
+                        <a href="#shared_hotels" aria-controls="shared_hotels" role="tab" data-toggle="tab">Shared Hotels</a>
+                    <li>
+                </ul>
+                <!-- End Nav Tabs -->
+            </div>
+            <!-- Begin Tab Content -->
+            <div class="tab-content" style="margin-top:0;">
+                <div role="tabpanel" class="tab-pane fade in active" id="share_earn">
+                    <div class="row row-xl page-title" >
+                        <p class="text-black fw-semi-thk">Please select the hotel you would like to share with your friend.</p>
+                        <p class="text-center"><img class="ajax-loading" src="/images/circle_loading.gif" width="150" height="150"/></p>
+                        <div class="row row-xl" id="share_earn_wrapper"></div>
+                    </div>
+                </div>
+                <div  role="tabpanel" class="tab-pane fade in" id="shared_hotels">
+                    {{#if output.hotels}}
+                        <div class="row row-xl page-title">
+                            <h3 class="text-black fw-semi-thk">Shared Hotels</h3>
+                            {{#each output.hotels }}
+                                <div class="clearfix col-sm-4 col-md-4">
+                                    <div class="earnings-shared-hotels col-md-12 m-sm">
+                                        <div class="hotel-img">
+                                            {{#if this._single_image_link}}
+                                                <img src="{{this._single_image_link}}" alt="" height="250px" width="100%">
+                                            {{else}}
+                                                <img src="https://s3-ap-southeast-1.amazonaws.com/hotelnida/nearby/changkat_bukit_bintang/Pavillion-Shopping-Centre.jpg" alt="" height="250px" width="100%">
+                                            {{/if}}
+                                        </div>
+
+                                        <div class="hotel-content p-md">
+                                            <h4 class="fw-semi-thk text-black" style="margin-bottom: 0;">{{ this._nida_stay_name }}</h4>
+                                            <span>{{ this._city_id}}, {{this._country_id}}</span>
+                                            <div class="row">
+                                                <div class="col-xs-6 m-sm-t">
+                                                    <p>Opened</p>
+                                                    <h4 class="fw-semi-thk text-black">
+                                                        {{#if this._no_Of_links_opened}}
+                                                            {{this._no_Of_links_opened}}
+                                                        {{/if}}
+                                                    </h4>
+                                                </div>
+                                                <div class="col-xs-6 m-sm-t">
+                                                    <p>Booked</p>
+                                                    <h4 class="fw-semi-thk text-black">
+                                                        {{#if this._no_Of_Bookings}}
+                                                            {{this._no_Of_Bookings}}
+                                                        {{/if}}
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row row-xl">
+                                            <div class="text-center"><a data-image="{{this._single_image_link}}" data-place="{{ this._city_id}}, {{this._country_id}}" data-hotel_name="{{ this._nida_stay_name }}" data-target="#refer-and-earn-modal" data-hotel_id="{{ this._hotel_id }}" data-countryID="{{ this._country_id }}" class="btn btn-danger m-md-b btn-rounded share_earn_modal"><i class="fa fa-share fa-fw"></i> Share and Earn $</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {{/each }}
+                        </div>
+                    {{/if }}
+                </div>
+            </div>
+            <div style="width:100%;">
+                <div class="table-view">
+                    {{#if output.total_earning_array }}
+                        <div class="col-md-6 earnings-item bg-white p-lg">
+                            <h3>Total NIDACash</h3>
+                            <table class="table table-striped">
+                                <thead>
+                                <tr><th>Guest Name</th><th>Amount</th></tr>
+                                </thead>
+                                <tbody>
+                                {{#each output.total_earning_array }}
+                                    <tr><td>{{ this.name }}</td> <td>{{#round this.amount }}{{/round}}</td> </tr>
+                                {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    {{/if}}
+                    {{#if output.upcoming_earning_array }}
+                        <div class="col-md-6 earnings-item bg-white p-lg">
+                            <h3>Upcoming NIDACash</h3>
+                            <table class="table table-striped">
+                                <thead>
+                                <tr><th>Guest Name</th><th>Amount</th></tr>
+                                </thead>
+                                <tbody>
+                                {{#each output.upcoming_earning_array }}
+                                    <tr><td>{{ this.name }}</td> <td>{{#round this.amount }}{{/round}}</td> </tr>
+                                {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<div id="refer-and-earn-modal" class="modal fade modal-center" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content-container">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    <img src="/images/NIDACash Logo_Final.svg" alt="NIDACash - Share and Earn" width="200" class="m-lg-t">
+                </div>
+                <div class="modal-body p-xl-t">
+                    <div class="media m-lg-b">
+                        <div class="media-left">
+                            <img id = "share_earnings_image" src="" alt="" height="100px">
+                        </div>
+                        <div class="media-body">
+                            <h4 class="fw-semi-thk text-black" id="share_earning_hotel"> </h4><br> <hr class="fw-semi-thk text-black" id="share_earning_locality"></h4>
+                        </div>
+                    </div>
+
+                    <h4 class="fw-semi-thk text-uppercase text-black">How would you like to share?</h4>
+                    <h4 class="text-uppercase text-grey">COPY & SHARE LINK</h4>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="input-group m-md-b">
+                                <input readonly type="text" id="share_url" class="form-control"  placeholder="" >
+                                <span class="input-group-btn">
+                                        <!--<input type="button" name="copy" value="Copy Link" ng-click="copy_link()" class = "btn btn-danger btn-rounded m-lg-t btn-block"/>-->
+                                        <button class="btn btn-danger" onClick="copy_link(event)" type="button"><i class="fa fa-copy fa-fw"></i> Copy Link</button>
+                                    <!--<p class="text-center"><a class="text-info" href="'.$url.'">'.$url.'</a></p><p class="text-center m-xl-b"><a class="btn btn-success copy" data-clipboard-text="'.$url.'" data-toggle="tooltip" >Copy Link </a></p> -->
+                                    <!-- <a class="btn btn-danger btn-rounded m-lg-t btn-block copy" data-clipboard-text="http://hotelnida.com" data-toggle="tooltip"><i class="fa fa-copy fa-fw"></i> Copy Link</a> -->
+                                    </span>
+
+                            </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+                    </div>
+
+                    <div class="or-container">
+                        <span>or</span>
+                    </div>
+                    <h4 class="text-uppercase text-grey">EMAIL</h4>
+                    <form method="POST" action='' id="form_send_email">
+                        <input type="hidden" name="redirect_url" id="redirect_url">
+                        <!--<input type="hidden" class="form-control" name="share_type" value= "Email" >
+                        <input type="hidden" class="form-control" name="link_opens" value= 0 > -->
+                        <input type="hidden" class="form-control" id="user_id" name="user_id" value= "{{ userid }}" >
+                        <input type="hidden" class="form-control" id="hotel_id" name="hotel_id" value= "{{ hotelid }}" >
+                        <input type="hidden" class="form-control" name="share_url"  id="url" >
+                        <input type="hidden" class="form-control" name="hotel_city" >
+                        {{#if errors}}
+                            <ul>
+                                {{#each errors}}
+
+                                    <li>
+                                        <div class="text-danger"> {{ msg }}</div>
+                                    </li>
+                                {{/each}}
+                            </ul>
+                        {{/if}}
+
+
+                        {{#if success }}
+                            <div class="alert alert-success">{{ message}}</div>
+                        {{else if message }}
+                            <div class="alert alert-danger">{{ message}}</div>
+                        {{/if}}
+                        <div class="row row-xs">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="">Name</label>
+                                    <input type="text" id="refer_name" class="form-control" name="refer_name" placeholder="Name">
+                                </div>
+                            </div>
+
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label for="">Email</label>
+                                    <input type="text" id="refer_email" class="form-control" name="refer_email" placeholder="Email Address">
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 p-xs-t">
+                                <div class="form-group">
+                                    <input type="button" name="send" value="Send" onClick="send_email(event)" class = "btn btn-danger btn-rounded m-lg-t btn-block"/>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="or-container">
+                        <span>or</span>
+                    </div>
+                    <h4 class="text-uppercase text-grey">SHARE ON SOCIAL</h4>
+
+                    <div class="row">
+                        <div class="col-md-6 text-center">
+                            {{!-- {{#if userid }}
+                                <div class="fb-share-button"  id="fb-share-button-custom"  data-size="large"
+                                    data-href="{{ metaTags.url }}"
+                                    data-layout="button_count">
+                                </div>
+                            {{ else }} --}}
+                            <a id="facebook" onClick="share_fb(event)" href="#"  class="btn btn-facebook btn-rounded w-150"><i class="fa fa-facebook fa-fw"></i> Share it!</a>
+                            {{!-- {{/if}} --}}
+
+                        </div>
+                        <div class="col-md-6 text-center">
+                            {{!-- {{#if userid }}
+                                <a class="twitter-share-button"  id="twitter-share-button-custom" href="{{ metaTags.url }}" data-size="large">Tweet</a>
+                            {{else}} --}}
+                            <a id="twitter" onClick="share_twitter(event)" href="#" class="btn btn-twitter btn-rounded w-150"><i class="fa fa-twitter fa-fw"></i> Tweet it!</a>
+                            {{!-- {{/if}} --}}
+                        </div>
+                        {{!-- <div class="col-md-4 text-center">
+                            <a href="javascript:void(0)" class="btn btn-whatsapp btn-rounded w-150"><i class="fa fa-whatsapp fa-fw"></i> WhatsApp it!</a>
+                        </div> --}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        //var current_url=window.location.href;
+        //var redirect_url = current_url.replace(window.location.host, "").replace("http://","").replace("https://","");
+        //var userid = '{{ userid }}';
+        //let url = new URL(current_url);
+        //let searchParams = new URLSearchParams(url.search);
+        //let place = searchParams.get('place');
+        //let countryID = searchParams.get('countryID');
+        //var share_url=current_url+"&referred_by="+userid;
+        //var share_url = '{{ metaTags.host }}/search/details?place='+place+'&countryID='+countryID+"&referred_by="+userid;
+        //var share_url = (share_url.indexOf('http') < 0? 'http:'+share_url : share_url);
+        //document.getElementById("share_url").value = share_url;
+        //document.getElementById("url").value = share_url;
+        //document.getElementById("redirect_url").value = redirect_url;
+        //document.getElementById("twitter-share-button-custom").href = share_url
+        //document.getElementById("facebookAnchor").href += share_url.replace(/\&/g,"\%26");
+        //document.getElementById('fb-share-button-custom').setAttribute('data-href',share_url)
+    </script>
+</div>
+<script  src="/js/share_and_earn.js"></script>
+{{> footer}}

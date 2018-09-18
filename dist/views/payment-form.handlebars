@@ -1,0 +1,46 @@
+
+<div style="height: 100vh; overflow: hidden; transform: translate3d(0, 0, 0)">
+	<div class="triangle"></div>
+
+	<div class="wrapper login-wrapper">
+		<div class="login-form-container">
+			<div class="login-form">
+				<p class="text-center">
+					<img src="/images/logo.svg" alt="" height="80" width="80">
+				</p>
+				{{#if errors}}
+					<ul>
+					{{#each errors}}
+						<li>
+							<div class="alert alert-danger"> {{ msg }}</div>
+						</li>
+					{{/each}}
+					</ul>
+				{{/if}}
+
+				<form action="/payment/paynow" method="post" name="Login_Form" class="form-signin">       
+
+					<p class="m-lg-b text-center">Payment Form</p>
+
+					<div class="form-group">
+						<label>Amount</label>
+						<input type="text" class="form-control" name="amount" placeholder="amount" required="" autofocus="" />
+					</div>
+
+					<div class="form-group m-xl-b">
+						<label>Currency</label>	  
+						<input type="text" class="form-control" name="currency" placeholder="currency" required=""/>    
+					</div> 		  
+					
+					<div class="form-group m-xl-b">
+						<label>Description</label>	  
+						<input type="text" class="form-control" name="description" placeholder="currency" required=""/>    
+					</div> 	
+
+					<button class="btn btn-danger btn-rounded btn-block m-lg-b"  name="Submit" value="Submit" type="Submit">Pay Now</button>  			
+
+				</form>
+			</div>
+		</div>			
+	</div>
+</div>

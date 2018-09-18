@@ -1,0 +1,115 @@
+{{> header }}
+
+<section>
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="/">Edit Van</a>
+        </li>
+        <li class="breadcrumb-item active">Edit Van</li>
+      </ol>
+      <div class="row mx-3">
+        <div class="col-12">
+                <h1>Edit Van</h1>
+                <form name="registration" enctype="multipart/form-data" id="cde_edit" action="/vans/{{ output.uuid }}/edit" data-toggle="validator" method="POST">
+                <input type="hidden" name="uuid" value="{{ output.uuid }}">
+                <div class="form-group required">
+                    <label class="control-label">Make</label>
+                    <input class="form-control" value="{{ output.make }}" name="make" id="make" type="text" placeholder="Vechile Make" required>
+                    <p class="help-block text-danger"></p>
+                </div>
+                
+                <div class="form-group required">
+                    <label class="control-label">Reg No</label>
+                    <input class="form-control" value="{{ output.reg_no }}" name="reg_no" id="reg_no" type="text" placeholder="Vechile Reg No" required>
+                    <p class="help-block text-danger"></p>
+                </div>
+                              
+                <div class="form-group required">
+                    <label class="control-label">Type</label>
+                    <input class="form-control" value="{{ output.type }}" name="type" id="type" type="text" placeholder="Vechile Type" required>
+                    <p class="help-block text-danger"></p>
+                </div>
+
+                <div class="form-group required">
+                    <label class="control-label">Capacity</label>
+                    <input class="form-control" value="{{ output.capacity }}" name="capacity" id="capacity" type="text" placeholder="Capacity" required>
+                    <p class="help-block text-danger"></p>
+                </div>
+
+                <div class="form-group required">
+                    <label class="control-label">Provider</label>
+                    <input class="form-control" value="{{ output.provider }}" name="provider" id="provider" type="text" placeholder="Vechile provider" required>
+                    <p class="help-block text-danger"></p>
+                </div>
+                                
+                <div class="form-group required">
+                    <label class="control-label">GPS Tracking ID</label>
+                    <input class="form-control" value="{{ output.gps_tracking_id }}" name="gps_tracking_id" id="gps_tracking_id" type="text" placeholder="GPS Tracking ID" required>
+                    <p class="help-block text-danger"></p>
+                </div>
+                                
+                <div class="form-group">
+                    <label class="control-label">Documents</label>
+                    <input class="form-control" value="{{ output.documents }}" name="documents" id="documents" type="file" placeholder="Upload Documents">
+                    <p class="help-block text-danger">
+                        {{#if output.documents }}
+                            <a class="btn btn-success" target="_blank" href="/uploads/{{ output.documents }}">Download</a>
+                        {{/if}}
+                    </p>
+                </div>
+
+                <div class="form-group required">
+                    <label class="control-label">DC Name</label>
+                    <select class="form-control" id="dc_uuid" name="dc_uuid">
+                        <option value="">Select</option>
+                        {{#each dc.data }}
+                            <option {{#equal this.uuid ../output.dc_uuid }}selected="selected"{{/equal}} value="{{ this.uuid }}">{{ this.name }}</option>
+                        {{/each}}
+                    </select>
+                </div>
+
+                <input type="hidden" id="dc_name" name="dc_name" value="{{ output.dc_name }}">
+
+                <div class="form-group required">
+                    <label class="control-label">Marker Color</label>
+                        <select class="form-control" name="color_code">
+                        <option value="">Select</option>
+                        <option {{#equal output.color_code "800000" }}selected="selected"{{/equal}} value="800000">Maroon</option>
+                        <option {{#equal output.color_code "FF0000" }}selected="selected"{{/equal}} value="FF0000">Red</option>
+                        <option {{#equal output.color_code "FFA500" }}selected="selected"{{/equal}} value="FFA500">Orange</option>
+                        <option {{#equal output.color_code "FFFF00" }}selected="selected"{{/equal}} value="FFFF00">Yellow</option>
+                        <option {{#equal output.color_code "0000FF" }}selected="selected"{{/equal}} value="0000FF">Blue</option>
+                        <option {{#equal output.color_code "008000" }}selected="selected"{{/equal}} value="008000">Green</option>
+                        <option {{#equal output.color_code "C0C0C0" }}selected="selected"{{/equal}} value="C0C0C0">Silver</option>
+                        <option {{#equal output.color_code "FFFFFF" }}selected="selected"{{/equal}} value="FFFFFF">White</option>
+                        <option {{#equal output.color_code "000000" }}selected="selected"{{/equal}} value="000000">Black</option>
+                        <option {{#equal output.color_code "808000" }}selected="selected"{{/equal}} value="808000">Olive</option>
+                        <option {{#equal output.color_code "00FFFF" }}selected="selected"{{/equal}} value="00FFFF">Aqua</option>
+                    </select>
+                </div>
+                
+                <div class="form-group required">
+                    <label class="control-label">Status</label>
+                    <div class="radio">
+                    <label><input type="radio" {{#equal output.status '1' }} checked="checked" {{/equal}} value="1" name="status"> Active</label>
+                    </div>
+                    <div class="radio">
+                    <label><input type="radio" {{#equal output.status '0' }} checked="checked" {{/equal}} value="0" name="status"> InActive</label>
+                    </div>
+                </div>                      
+                
+                <div id="success"></div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-xl">Submit</button>
+                </div>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{> footer }}

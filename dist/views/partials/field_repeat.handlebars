@@ -1,0 +1,86 @@
+{{#equal type 'standardbed'}}
+    <div class="row row-xl">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="bed-type">What kind of beds are available in this room?</label>
+                <div class="select-wrapper">
+                    <select name="standard_bed_type[]" id="bed-type" class="form-control">
+                        <option value="select">-- Please Select --</option>
+                        {{#if standard_bed_types }}
+                            {{#each standard_bed_types }}
+                                <option value="{{this.value}}" {{#equal this.value ../currentvalue}} selected="selected" {{/equal}}>{{this.text}}</option>
+                            {{/each}}
+                        {{/if}}
+                    </select>
+                </div>
+                <span class="text-danger">{{#if standard_bed_type }}{{standard_bed_type}} {{/if}}</span>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="no_of_bedrooms">Number of beds</label>
+                <input type="text" id="no-of-beds" name="standard_no_of_beds[]" class="form-control" value="{{#notequal key "" }} {{#getChildProperty requestBody.standard_no_of_beds key}} {{/getChildProperty}}{{/notequal}}">
+                <span class="text-danger">{{#if standard_no_of_beds }}{{standard_no_of_beds}} {{/if}}</span>
+            </div>
+        </div>
+    </div>
+{{/equal}}
+
+
+{{#equal type 'room_number'}}
+    <div class="row row-xl">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="number-of-room">Room Number</label>
+                <input type="text" class="form-control" name="room_number[]" class="form-control" value="{{ currentvalue }}" >
+                <input type="hidden" class="form-control" name="room_id[]" class="form-control" value="{{#notequal key "" }}{{#getChildProperty requestBody.room_id key}}{{/getChildProperty}}{{/notequal}}" >
+                <span class="text-danger">{{#if room_number }}{{#checkArrErrValidation requestBody.room_number currentvalue key 'duplicate'}}{{room_number}}{{/checkArrErrValidation}} {{/if}}</span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="floor-number">Floor Number</label>
+                <input type="text" name="floor_number[]" id="floor-number" class="form-control" value="{{#notequal key "" }}{{#getChildProperty requestBody.floor_number key}}{{/getChildProperty}}{{/notequal}}"/>
+                <span class="text-danger">{{#if floor_number }}{{floor_number}} {{/if}}</span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="checkbox">
+                <input type="checkbox" name="virtual_room[]" id="virtual_room_{{#equal key ""}}1{{else}}{{#addTwoNumber key 1}}{{/addTwoNumber}}{{/equal}}" value="virtual_room_{{#equal key ""}}1{{else}}{{#addTwoNumber key 1}}{{/addTwoNumber}}{{/equal}}" {{#notequal key "" }}{{#equal (getChildProperty requestBody.virtual_room key) 'on'}} checked {{/equal}}{{/notequal}}/>
+                <label for="virtual_room_{{#equal key ""}}1{{else}}{{#addTwoNumber key 1}}{{/addTwoNumber}}{{/equal}}">Virtual Room</label>
+                <span class="text-danger">{{#if virtual_room }}{{virtual_room}} {{/if}}</span>
+            </div>
+        </div>
+    </div>
+{{/equal}}
+
+
+{{#equal type 'addon_bed'}}
+    <div class="row row-xl">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="bed-type">What kind of beds are available in this room?</label>
+                <div class="select-wrapper">
+                    <select name="addon_bed_type[]" id="bed-type" class="form-control">
+                        <option value="select">-- Please Select --</option>
+                        {{#if addon_bed_types }}
+                            {{#each addon_bed_types }}
+                                <option value="{{this.value}}" {{#equal this.value ../currentvalue}} selected="selected" {{/equal}}>{{this.text}}</option>
+                            {{/each}}
+                        {{/if}}
+                    </select>
+                    <span class="text-danger">{{#if addon_bed_type }}{{addon_bed_type}} {{/if}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="add_on_no-of-beds">Number of beds</label>
+                <input type="text" id="no-of-bedrooms" name = "addon_no_of_beds[]" class="form-control" value="{{#notequal key ""}} {{#getChildProperty requestBody.addon_no_of_beds key}}{{/getChildProperty}}{{/notequal}}"/>
+                <span class="text-danger">{{#if addon_no_of_beds }}{{addon_no_of_beds}} {{/if}}</span>
+            </div>
+        </div>
+    </div>
+{{/equal}}

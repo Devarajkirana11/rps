@@ -1,0 +1,283 @@
+/* ====== Tables ===== 
+------------------------------------------------------------ */
+.table {
+    border: none !important;
+    > thead {
+        > tr {
+            > th {
+                font-family: $font-family;
+                padding: 15px;
+                font-size: 12px !important;
+                font-weight: 700 !important;
+                // text-align: center;
+                text-transform: uppercase;
+                vertical-align: middle;
+                border: none;
+                border-bottom: 1px solid !important;
+                border-color: #ddd !important;
+            }
+        }
+    }
+    > tbody {
+        > tr {
+            &:hover {
+                background: lighten($info, 52%) !important;
+            }
+
+            &:first-child {
+                td {
+                    border-top: none !important;
+                }
+            }
+
+            > td {
+                padding: 20px !important;
+                border: none !important;
+                // font-size: 13px;
+                border-top: solid 1px #eee !important;
+                vertical-align: middle !important;
+            }
+
+            &.active {
+                // background: 
+            }
+
+            &.primary {
+                td {
+                    background: $primary;
+                }
+            }
+
+            &.success {
+                td {
+                    background: $success;
+                }
+            }
+
+            &.info {
+                td {
+                    background: $info;
+                }
+            }
+
+            &.warning {
+                td {
+                    background: $warning;
+                }
+            }
+
+            &.danger {
+                td {
+                    background: $danger;
+                }
+            }
+        }
+    }
+
+    &.table-condensed {
+        thead {
+            tr {
+                th {
+                    padding: 8px;
+                }
+            }
+        }
+        tbody {
+            tr {
+                td {
+                    padding: 8px;
+                }
+            }
+        }
+    }
+
+    &.table-striped {
+        tbody {
+            tr:nth-child(odd) {
+                background: $white;
+            }
+        }
+    }
+}
+
+
+
+
+/* ====== Datatables ===== 
+------------------------------------------------------------ */
+.dataTables_wrapper {
+    margin-bottom: 15px;
+
+    .DTTT_container {
+        display: block;
+        float: none;
+        text-align: right;
+
+        a {
+            display: inline-block !important;
+            margin: 0;
+            border: solid 1px #ddd;
+            background: $white;
+            padding: 10px 15px;
+            box-shadow: none;
+            border-radius: 0;
+
+            &:hover {
+                background: $white;
+                box-shadow: none;
+                border-color: #ddd;
+            }
+        }
+    }
+
+    .dataTables_length {
+        height: 35px;
+        font-weight: normal;
+        line-height: 35px;
+        margin-bottom: 20px;
+
+        label,
+        select {
+            font-weight: normal;
+        }
+    }
+
+
+    .dataTables_filter {
+        margin-bottom: 20px;
+
+        label {
+            font-weight: normal;
+
+            input {
+                @extend .form-control;
+            }
+        }
+    }
+
+    .dataTable {
+        &.no-footer {
+            border-color: #eee;
+            margin-bottom: 15px;
+        }
+
+        thead {
+            th {
+                &.sorting_asc,
+                &.sorting_desc {
+                    color: $black;
+                }
+            }
+        }
+    }
+
+    .dataTables_info {
+        color: $font-color;
+    }
+
+    .dataTables_paginate {
+        > span {
+            display: inline-block;
+            text-align: center;
+        }
+
+        .paginate_button {
+            margin: 0;
+            border: none;
+            opacity: 0.65;
+            padding: 0;
+            height: 36px;
+            line-height: 36px;
+            padding: 0 10px;
+            font-size: 15px;
+            width: 36px;
+
+            &.current {
+                background: transparent;
+                border: none;
+                // font-weight: bold;
+                opacity: 1;
+
+                &:hover {
+                    background: transparent;
+                    border: none;
+                }
+            }
+
+            &:hover,
+            &:focus {
+                background: transparent;
+                box-shadow: none;
+                border: none;
+                opacity: 1;
+                color: $font-color !important;
+            }
+
+            &.disabled {
+                opacity: 0.65 !important;
+            }
+
+            &.previous,
+            &.next {
+                position: relative;
+                color: transparent !important;
+                width: 36px;
+                height: 36px;
+                background: $white;
+                border-radius: 50%;
+                margin: 0;
+                opacity: 1;
+
+                &:hover {
+                    color: transparent !important;
+                    background: transparent !important;
+                      
+                }
+            }
+
+            &.previous {
+                &:before {
+                    font-family: 'FontAwesome';
+                    content: "\f104";
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    top: 0;
+                    bottom: 0;
+                    margin: auto;
+                    height: 36px;
+                    background: $white;
+                    border-radius: 50%;
+                    opacity: 1;
+                    line-height: 36px;
+                    color: $black !important;
+                    font-size: 0.8em;
+                }
+            }
+
+            &.next {
+                &:before {
+                    font-family: 'FontAwesome';
+                    content: "\f105";
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    top: 0;
+                    bottom: 0;
+                    margin: auto;
+                    height: 36px;
+                    background: $white;
+                    border-radius: 50%;
+                    opacity: 1;
+                    line-height: 36px;
+                    color: $black !important;
+                    font-size: 0.8em;
+                }
+            }
+        }
+    }
+}
+
+.fixedHeader-floating {
+    top: 50px !important;
+}

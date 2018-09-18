@@ -1,0 +1,137 @@
+{{> nav this}}
+
+{{> header}}
+
+<!-- Begin Page Content -->
+<main id="page-content">
+	<div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Rooms Status</h3>
+        </div>
+    </div>
+
+	<div class="page-container">
+		<div class="row row-xl m-lg-b">
+			<div class="col-md-8 text-left">
+				<a href="/pms/front-desk?hotel_id={{ hotel_id }}" class="btn btn-danger btn-rounded w-175 text-left">Calendar View <i class="fa fa-calendar pull-right"></i></a>
+				<a href="/pms/bookings/list?hotel_id={{ hotel_id }}" class="btn btn-danger btn-rounded w-175 text-left">Booking List View <i class="fa fa-th-list pull-right"></i></a>
+				<a href="javascript:void(0)" class="btn btn-danger btn-rounded w-175 text-left disabled">Rooms Status <i class="fa fa-th pull-right"></i></a>
+			</div>
+
+			<div class="col-md-4 text-right m-lg-b">
+				<a href="/pms/walkin-reservation?hotel_id={{ hotel_id }}" class="btn btn-danger btn-rounded text-left">Walk In / New Reservation <i class="fa fa-plus-circle fa-fw pull-right"></i></a>
+			</div>
+		</div>
+
+		<!-- Begin Hotels View -->
+		<div class="row row-xl">
+			<div class="col-md-12">
+				<!-- Begin Tab Container -->
+				<div class="tab-container rooms-list-tab">
+					<div class="nav-tabs-container">
+						<!-- Begin Nav Tabs -->
+						<ul class="nav nav-tabs" role="tablist">
+							{{#each output.roomTypeArray }}
+								{{#equal @index '0'}}
+									<li role="presentation" class="active">
+								{{/equal}}
+								{{#notequal @index '0'}}
+									<li role="presentation">
+								{{/notequal}}
+									<a href="#{{ this }}" aria-controls="{{ this }}" role="tab" data-toggle="tab"><i class="fa fa-home fa-fw m-xs-r"></i>{{#getRoomTypeName this }}{{/getRoomTypeName}}</a>
+								<li>
+							{{/each}}
+						</ul>
+						<!-- End Nav Tabs -->
+					</div>
+
+					<!-- Begin Tab Content -->
+					<div class="tab-content">
+				
+					{{#each output.roomTypeArray }}
+						{{#equal @index '0'}}
+							<div role="tabpanel" class="tab-pane fade in active" id="{{ this }}">
+						{{/equal}}
+						{{#notequal @index '0'}}
+							<div role="tabpanel" class="tab-pane fade in" id="{{ this }}">
+						{{/notequal}}		
+							<div class="row">
+								{{#each ../output.data }}
+								{{#equal ../this this.roomType }}
+								<div class="col-md-3">
+										{{#if this.booking }}
+										<div class="grid-view-room-item">
+											<span class="room-status {{ this.status }}"><small class="text-uppercase fs-xs">{{ this.status }}</small></span>
+											<div class="row row-xs m-md-b">
+												<div class="col-xs-12 m-md-b">
+													<p class="m-n"><small class="fs-xs text-uppercase">Guest Name</small></p>
+													<h4 class="text-black fw-semi-thk m-n text-uppercase">{{ this.booking.guest.firstName }} {{ this.booking.guest.lastName }}</h4>
+												</div>
+
+												<div class="col-xs-6 checkin-date">
+													<p class="m-n"><small class="fs-xs text-uppercase">Check In</small></p>
+													<h5 class="text-black fw-semi-thk m-n">{{#customDateFormat this.booking.checkIn }}{{/customDateFormat}}</h5>
+												</div>
+												<div class="col-xs-6 checkout-date text-right">
+													<p class="m-n"><small class="fs-xs text-uppercase">Check Out</small></p>
+													<h5 class="text-black fw-semi-thk m-n">{{#customDateFormat this.booking.checkOut }}{{/customDateFormat}}</h5>
+												</div>
+											</div>
+
+											<div class="row row-xs m-lg-b">
+												<div class="col-xs-3">
+													<p class="m-n"><small class="fs-xs text-uppercase">Room #</small></p>
+													<h5 class="text-black fw-semi-thk m-n text-uppercase">{{ this.number }}</h5>
+												</div>
+
+												<div class="col-xs-6 text-center">
+													<p class="m-n"><small class="fs-xs text-uppercase">Booking ID</small></p>
+													<h5 class="text-black fw-semi-thk m-n text-uppercase">{{ this.booking.booking_id }}</h5>
+												</div>
+
+												<div class="col-xs-3 text-right">
+													<p class="m-n"><small class="fs-xs text-uppercase"># Guests</small></p>
+													<h5 class="text-black fw-semi-thk m-n text-uppercase">{{  this.booking.numberOfGuests }}</h5>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-xs-12">
+													<a class="btn btn-danger btn-block btn-transparent" href="/pms/booking-details?hotel_id={{ this.booking.hotelUuid }}&booking_uuid={{ this.booking.bookingUuid }}">View More Details</a>
+												</div>
+											</div>
+										</div>
+
+										{{ else }}
+
+										<div class="grid-view-room-item no-reservations">
+											<div class="row row-xs m-lg-b">
+												<div class="col-xs-12 text-center">
+													<p class="m-n"><small class="fs-xs text-uppercase">Room #</small></p>
+													<h1 class="m-md-b text-black fw-semi-thk m-n text-uppercase">{{ this.number }}</h1>
+												</div>
+
+												<div class="col-xs-12 text-center">
+													<span class="room-status {{ this.status }}"><small class="text-uppercase fs-xs">{{ this.status }}</small></span>
+												</div>
+											</div>
+										</div>
+										{{/if}}
+								</div>
+								{{/equal}}
+								{{/each}}
+							</div>		
+					</div>
+					{{/each}}
+						<!-- End Tab Panel -->
+					</div>
+					<!-- End Tab Content -->
+				</div>
+				<!-- End Tab Container -->
+			</div>
+		</div>
+		<!-- End Hotels View -->
+	</div>
+</main>
+<!-- End Page Content -->
+{{> footer}}

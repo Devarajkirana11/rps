@@ -1,0 +1,106 @@
+{{> nav}}
+
+{{> header}}
+<!-- bxSlider CSS file -->
+<link href="/css/jquery.bxslider.css" rel="stylesheet" />
+<link href="/css/amazonmenu.css" rel="stylesheet" />
+<link href="/css/bootstrap-tagsinput.css" rel="stylesheet" />   
+<!-- bxSlider Javascript file -->
+<script src="/js/jquery.bxslider.min.js"></script>
+<script src="/js/amazonmenu.js"></script>
+<script src="/js/bootstrap-tagsinput.js"></script>
+<main id="page-content">
+    <div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Photo Edit</h3>
+        </div>
+    </div>
+
+<div class="page-container">
+    <div class="row row-xl">
+        <script>
+            var currentid  = "{{currentid}}";
+        </script>
+        <script src="/js/gallery.js"></script>    
+        {{#if errors}}
+        <ul>
+            {{#each errors}}
+            <li>
+                <div class="text-danger"> {{ msg }}</div>
+            </li>
+            {{/each}}
+        </ul>
+        {{/if}}
+        {{#if success }}
+        <div class="alert alert-success">{{ message}}</div>
+        {{else if message }}
+        <div class="alert alert-danger">{{ message}}</div>
+        {{/if}}
+        <div class="row row-xl">
+        <form action="/file/photo/save" id="photoeditform" method="post" />
+            <div class="col-md-3">
+                <div>
+                    <h4>Tag This Photo</h4>
+                    <div>Tell us what's in this photo by adding tags - tags help us assist guest with their search and connect them to your property.</div>
+                    <div><button class="btn btn-primary" id ="addTags" type="button"><span class="glyphicon glyphicon-tag"></span>Add Tags</button>
+                        {{#if photoTags.success }}
+                            <nav id="Tags" class="amazonmenu" style="display:none;">
+                            <ul>
+                            {{#each photoTags.data }}
+                                <li id="tag#{{@key}}#{{this.name}}"><a href="#">{{this.name}}</a>
+                                    {{#if this.submenu }}
+                                        <div>
+                                            <ul>
+                                                {{#each this.submenu}}
+                                                    <li id="tag#{{@key}}#{{this.name}}"><a href="#">{{this.name}}</a>
+                                                    {{#if this.submenu}}
+                                                        <div>
+                                                            <ul>
+                                                                {{#each this.submenu}}
+                                                                    <li id="tag#{{@key}}#{{this.name}}"><a href="#">{{this.name}}</a>
+                                                                {{/each}}
+                                                            </ul>
+                                                        </div>
+                                                    {{/if}}
+                                                {{/each}}
+                                            </ul> 
+                                        </div>                                    
+                                    {{/if}}
+                                </li>
+                            {{/each}}
+                            </ul>
+                            </nav>                
+                        {{/if}}    
+                    </div>
+                <div class="form-group">
+                    <label>Selected Tags:</label>
+                    <input type="textbox" name="phototags" id="photoTagInput"  class="form-control" style="display:none;"/>
+                </div>
+                </div>
+                <div>
+                    <h4>Indicate if this is a room photo:</h4>
+                    <span><input type="checkbox" name="stdDoubleRoom"/><label>Standard Double Room</label></span>
+                </div>
+                
+            </div>
+            <div class="col-md-9">
+                {{#if success }}
+                    <ul class="bxslider">
+                        {{#each images}}
+                            <li><img id="{{this.fid}}" src="{{this.image}}"/></li>
+                        {{/each}}
+                    </ul>
+                {{/if}}
+                
+            </div>
+            <div class="col-md-12">
+                <div id="message"></div>
+                <input type="hidden" name="photo_id" value="{{currentid}}"/>
+                <input type="submit" value="Save" class="btn btn-primary photoedit"/>
+                <a class="btn btn-default" href="#" >Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+</main>
+{{> footer}}

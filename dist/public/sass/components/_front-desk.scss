@@ -1,0 +1,978 @@
+#walkin-wizard {
+	ul.nav-tabs {
+		li {
+			a {
+				border-top-left-radius: 10px;
+				border-top-right-radius: 10px;
+				padding: 20px 20px;
+				// color: $danger;
+			}
+
+			&.active {
+				a {
+					box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.12);
+					// color: $white;
+				}
+
+				&:nth-child(2) {
+
+				}
+			}
+		}
+	}
+
+	.tab-content {
+		padding: 0;
+		border-bottom-left-radius: 10px;
+		border-bottom-right-radius: 10px;
+		background: transparent !important;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+		overflow-x: hidden;
+
+		.tab-pane {
+			padding: 50px 30px;
+			border-top-left-radius: 10px;
+			border-top-right-radius: 10px;
+			background: $white;
+
+			&.active {
+				&:first-child {
+					border-top-left-radius: 0 !important;
+				}
+
+				&:nth-child(3) {
+					border-top-right-radius: 0 !important;
+				}
+			}
+		}
+	}
+
+	.wizard-pager {
+		list-style-type: none;
+		margin: 0;
+		padding: 0 30px 50px 30px;
+		// border-bottom-left-radius: 10px;
+		// border-bottom-right-radius: 10px;
+		background: $white;
+
+		li {
+			display: inline;
+		}
+	}
+}
+
+.walkin-summary {
+	padding: 20px;
+	background: $white;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+	border-radius: 10px;
+}
+
+
+.front-desk--legend-container-res {
+	ul {
+		margin-left: 0;
+		
+		li {
+			position: relative;
+			padding-left: 20px;
+
+			&:before {
+				content: '';
+				display: block;
+				position: absolute;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				height: 12px;
+				width: 12px;
+				background: transparent;
+				border-radius: 50%;
+				margin: auto;
+			}
+
+			&.legend-available {
+				&:before {
+					background: $available;
+				}
+			}
+
+			&.legend-on-hold {
+				&:before {
+					background: $on-hold;
+				}
+			}
+
+			&.legend-confirmed {
+				&:before {
+					background: $confirmed;
+				}
+			}
+
+			&.legend-check-in {
+				&:before {
+					background: $checkin;
+				}
+			}
+
+			&.legend-occupied {
+				&:before {
+					background: $occupied;
+				}
+			}
+
+			&.legend-check-out {
+				&:before {
+					background: $checkout;
+				}
+			}
+
+			&.legend-blocked {
+				&:before {
+					background: $blocked;
+				}
+			}
+
+			&.legend-vacated {
+				&:before {
+					background: $vacated;
+				}
+			}
+		}
+	}
+}
+
+.front-desk--legend-container {
+	// width: 100%;
+	// overflow: hidden;
+	margin: 0 -8px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+
+	.front-desk--legend-item-container {
+		// display: inline-block;
+		padding: 0 8px;
+		width: 14.28%;
+		text-align: center;
+
+		// flex: 1;
+
+		.panel.panel-default {
+			background: $white;
+			border: solid 1px transparent;
+			box-shadow: 0 2px 4px #ddd;
+
+			.panel-body {
+				span {
+					&:before {
+						content: '';
+						display: block;
+						height: 8px;
+						width: 8px;
+						border-radius: 50%;
+						position: absolute;
+						top: 0;
+						bottom: 0;
+						left: -15px;
+						margin: auto;
+					}
+				}
+			}
+
+			.legend-available {
+				span {
+					position: relative;
+					// color: #00B828;
+					color: $font-color;
+
+					&:before {
+						background: $available;
+					}
+				}
+			}
+
+			.legend-on-hold {
+				span {
+					position: relative;
+					// color: #ED6F19;
+					color: $font-color;
+
+					&:before {
+						background: $on-hold;
+					}
+				}
+			}
+
+			.legend-confirmed {
+				span {
+					position: relative;
+					// color: #00B828;
+					color: $font-color;
+
+					&:before {
+						background: $confirmed;
+					}
+				}
+			}
+
+			.legend-check-in {
+				span {
+					position: relative;
+					// color: #16A1AA;
+					color: $font-color;
+
+					&:before {
+						background: $checkin;
+					}
+				}
+			}
+
+			.legend-occupied {
+				span {
+					position: relative;
+					// color: #0084BC;
+					color: $font-color;
+
+					&:before {
+						background: $occupied;
+					}
+				}
+			}
+
+			.legend-check-out {
+				span {
+					position: relative;
+					// color: #D4001A;
+					color: $font-color;
+
+					&:before {
+						background: $checkout;
+					}
+				}
+			}
+
+			.legend-blocked {
+				span {
+					position: relative;
+					// color: #D4001A;
+					color: $font-color;
+
+					&:before {
+						background: $blocked;
+					}
+				}
+			}
+		}
+	}
+}
+
+.front-desk--nav {
+	margin-left: 250px;
+	width: calc(100% - 250px);
+	padding: 10px 0;
+	position: relative;
+
+	.previous-button,
+	.next-button {
+		position: absolute;
+		bottom: -75px;
+		z-index: 9999;
+		height: 75px;
+		line-height: 75px;
+	}
+
+	.previous-button {
+		left: 10px;
+	}
+
+	.next-button {
+		right: 10px;
+	}
+}
+
+.front-desk--container {
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	background: $white;
+	border-radius: 5px;
+	box-shadow: 0 1px 2px #ddd;
+
+	&.front-desk--week-view {
+		.front-desk--content {
+			width: 100% !important;
+		}
+
+		.front-desk--left {
+			.front-desk--menu {
+				margin: 75px 0 0 0;
+
+				.front-desk--child {
+					li {
+						height: 41px;
+
+						a {
+							height: 41px;
+							line-height: 11px;
+						}
+					}
+				}
+			}
+		}
+
+		.front-desk--right {
+			width: calc(100% - 250px);
+			
+			.front-desk--day-container {
+				width: 100%;
+				// padding: 0 10px;
+
+				.front-desk--day-header-container {
+					border-bottom: solid 3px #ddd;
+					overflow: hidden;
+					padding: 0 10px;
+
+					.front-desk-day-header {
+						float: left;
+						width: calc(100% / 7);
+						padding: 10px 10px;
+						text-align: center;
+					}
+				}
+				
+				.front-desk--count-container {
+					padding: 0 10px;
+					overflow: hidden;
+
+					.front-desk--day-count {
+						width: calc(100% / 7);
+						float: left;
+						text-align: center;
+						padding: 10px 10px;
+						height: 31px;
+						margin: 5px 0;
+						line-height: 11px;
+
+						.one-day-booking {
+							width: calc(100% / 7) !important;
+							border-radius: 50px; 
+						}
+
+						&.start {
+							border-radius: 50px 0 0 50px;
+							width: calc(100% / 7 * 0.5);
+							margin-left: calc(100% / 7 * 0.5);
+
+							&.adjacent-booking {
+								margin-left: 0;
+							}
+						}
+
+						&.end {
+							border-radius: 0 50px 50px 0;
+							width: calc(100% / 7 * 0.5);
+							margin-right: calc(100% / 7 * 0.5);
+
+							&.adjacent-booking {
+								margin-right: 0;
+							}
+						}
+
+						&.AVAILABLE {
+							background: $available;
+						}
+
+						&.BLOCKED {
+							background: $available;
+						}
+
+						&.ON_HOLD {
+							background: $on-hold;
+						}
+		
+						&.CONFIRMED {
+							background: $confirmed;
+						}
+		
+						&.CHECK_IN {
+							background: $checkin;
+						}
+		
+						&.OCCUPIED {
+							background: $occupied;
+						}
+		
+						&.CHECK_OUT {
+							background: $checkout;
+						}
+		
+						&.VACATED {
+							background: $vacated;
+						}
+		
+						&.NO_SHOW {
+							background: $no-show;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.front-desk--content {
+		// width: 2700px;
+		overflow: hidden;
+	}
+
+	.front-desk--left {
+		width: 250px;
+		float: left;
+		position: absolute;
+		background: $white;
+		box-shadow: 1px 0 20px rgba(0, 0, 0, 0.1);
+
+		.accordion--parent {
+			background: #f5f5f5;
+			color: $black !important;
+			font-weight: 600;
+		}
+
+		.front-desk--menu {
+			padding: 0;
+			list-style-type: none;
+			margin: 96px 0 0 0;
+
+			> li {
+				&:first-child {
+					> a {
+						border-top: solid 3px #ddd;
+					}
+				}
+			}
+
+			li {
+
+				a {
+					color: $font-color;
+					display: block;
+					padding: 10px 15px;
+					border-bottom: solid 1px #f1f1f1;
+
+					&:hover,
+					&:focus {
+						text-decoration: none;
+					}
+				}
+
+				.front-desk--child {
+					padding: 0;
+					list-style-type: none;
+				}
+			}
+		}
+	}
+
+	.front-desk--right {
+		// float: left;
+		width: auto;
+		margin-left: 250px;
+		overflow: hidden;
+
+		.accordion--parent {
+			background: #f5f5f5;
+			color: $black !important;
+			font-weight: 600;
+		}
+
+		.front-desk--day-container {
+			float: left;
+			border-right: solid 1px #ddd;
+
+			&:last-child {
+				border: none;
+			}
+
+			.front-desk--day-header {
+				border-bottom: solid 1px #ddd;
+				padding: 5px 15px;
+				// text-align: center;
+			}
+
+			.front-desk--hour-container {
+				border-bottom: solid 3px #ddd;
+				padding: 5px 15px;
+
+				.front-desk--hour {
+					display: inline-block;
+					margin-left: -4px !important;
+					width: 50px;
+					white-space: normal;
+					text-align: center;
+
+					&:first-child {
+						margin-left: 0 !important;
+					}
+				}
+			}
+		}
+
+		.front-desk--count-container {
+			border-bottom: solid 1px #f1f1f1;
+			height: 41px;
+			padding: 0 15px;
+
+			
+			.front-desk--hour-count {
+				display: inline-block;
+				margin-left: -4px !important;
+				width: 50px;
+				padding: 10px 10px;
+				height: 30px;
+				text-align: center;
+
+				// &.start {
+				// 	border-radius: 50px 0 0 50px;
+				// }
+
+				// &.end {
+				// 	border-radius: 0px 50px 50px 0px;
+				// }
+
+				&.AVAILABLE {
+					background: $available;
+				}
+
+				&.ON_HOLD {
+					background: $on-hold;
+				}
+
+				&.CONFIRMED {
+					background: $confirmed;
+				}
+
+				&.CHECK_IN {
+					background: $checkin;
+				}
+
+				&.OCCUPIED {
+					background: $occupied;
+				}
+
+				&.CHECK_OUT {
+					background: $checkout;
+				}
+
+				&.VACATED {
+					background: $vacated;
+				}
+
+				&.NO_SHOW {
+					background: $no-show;
+				}
+			}
+		}
+	}
+}
+
+
+
+
+// =====================================
+//     Front Desk Dashboard
+// =====================================
+
+.room-status-container {
+	background: $white;
+	height: 100px;
+	border-radius: 4px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+	margin-bottom: 25px;
+	padding: 20px;
+
+	small {
+		position: relative;
+		margin-left: 15px;
+
+		&:before {
+			content: '';
+			display: block;
+			height: 10px;
+			width: 10px;
+			border-radius: 50%;
+			position: absolute;
+			left: -15px;
+			top: 0;
+			bottom: 0;
+			margin: auto;
+			background: transparent;
+		}
+	}
+
+	&.status-available {
+		small {
+			&:before {
+				background: $available;
+			}	
+		}
+	}
+
+	&.status-on-hold {
+		small {
+			&:before {
+				background: $on-hold;
+			}	
+		}
+	}
+
+	&.status-checkin {
+		small {
+			&:before {
+				background: $checkin;
+			}	
+		}
+	}
+
+	&.status-checkout {
+		small {
+			&:before {
+				background: $checkout;
+			}	
+		}
+	}
+
+	&.status-occupied {
+		small {
+			&:before {
+				background: $occupied;
+			}	
+		}
+	}
+	
+	&.status-vacated {
+		small {
+			&:before {
+				background: $vacated;
+			}	
+		}
+	}
+}
+
+#revenue-stacked-bar-chart,
+#occupancy-bar-chart {
+	.nv-axis.nv-x .tick line {
+		display:none;
+	}
+}
+
+.nvd3-svg,
+.nvd3 text {
+	font-family: $font-family !important;
+
+	text {
+		font-family: $font-family !important;
+	}
+}
+
+
+
+
+// 
+//  GRID VIEW
+// ====================================================
+
+.rooms-list-tab {
+	.nav-tabs-container {
+		background: transparent;
+	}
+
+	.tab-content {
+		background: transparent;
+		padding: 0;
+		margin-top: 25px;
+
+		.tab-pane {
+			background: transparent;
+
+			.grid-view-room-item {
+				position: relative;
+				background: $white;
+				box-shadow: 0 10px 10px -7px rgba(0, 0, 0, 0.2);
+				border: solid 1px #ddd;
+				padding: 10px;
+				margin-bottom: 25px;
+				// border-radius: 5px;
+				min-height: 220px;
+
+				.checkin-date {
+					border-right: dashed 1px #ddd;
+				}
+
+				small {
+					font-size: 9px;
+				}
+
+				.room-status {
+					position: absolute;
+					background: transparent;
+					border-radius: 50px;
+					padding: 0 15px;
+					color: $white;
+					top: -10px;
+					right: 25px;
+					line-height: 20px;
+					display: inline-block;
+
+					&.AVAILABLE {
+						background: $available;
+					}
+
+					&.ON_HOLD {
+						background: $on_hold;
+					}
+
+					&.CONFIRMED {
+						background: $confirmed;
+					}
+
+					&.CHECK_IN {
+						background: $checkin;
+					}
+
+					&.OCCUPIED {
+						background: $occupied;
+					}
+
+					&.CHECK_OUT {
+						background: $checkout;
+					}
+
+					&.VACATED {
+						background: $vacated;
+					}
+
+					&.NO_SHOW {
+						background: $no-show;
+					}
+				}
+			}
+
+			.grid-view-room-item.no-reservations {
+				padding-top: 60px;
+
+				.room-status {
+					background: transparent;
+					border-radius: 50px;
+					padding: 0 15px;
+					color: $white;
+					line-height: 20px;
+					position: initial !important;
+					top: auto !important;
+					right: auto !important;
+					display: inline-block;
+
+					&.AVAILABLE {
+						background: $available;
+					}
+					&.BLOCKED {
+						background: #7f8c8d;
+					}
+
+				}
+			}
+		}
+	}
+}
+
+
+
+.stats-container {
+	background: $white;
+	box-shadow: 0 10px 10px -7px rgba(0, 0, 0, 0.2);
+	border: solid 1px #ddd;
+	text-align: center;
+	padding: 20px 0;
+	
+	h1 {
+		color: $black;
+		margin: 0;
+		margin-bottom: 10px;
+	}
+
+	> small {
+		// font-size: 11px;
+	}
+}
+
+.source-stats-container {
+	min-height: 175px;
+	background: $white;
+
+	.source-name-container {
+		float: left;
+		width: 50px;
+		position: relative;
+		min-height: 175px;
+		height: 100%;
+		background: lighten($danger, 10%);
+		color: $white;
+
+		.source-name {
+			min-width: 175px;
+			text-align: center;
+			margin: 0;
+			transform-origin: left top;
+			position: absolute;
+			bottom: 0;
+			top: 100%;
+			height: 50px;
+			line-height: 50px;
+			@include rotate2d(-90deg);
+		}
+	}
+
+	.source-content-container {
+		float: left;
+		width: calc(100% - 50px);
+		min-height: 175px;
+		height: 100%;
+		padding: 0 15px;
+
+		.source-revenue-container {
+			text-align: center;
+			margin-bottom: 20px;
+
+			h1 {
+				margin-bottom: 5px;
+			}
+
+			> small {
+				// font-size: 10px;
+			}
+		}
+	}
+}
+
+.overall-stats-container {
+	background: $white;
+	border: solid 1px #ddd;
+	box-shadow: 0 10px 10px -7px rgba(0, 0, 0, 0.2);
+	padding: 25px;
+	margin-bottom: 20px;
+
+	.overall-source {
+		padding-top: 15px;
+		margin-top: 5px;
+		border-top: solid 1px #ddd;
+
+		.row {
+			margin-bottom: 5px;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+}
+
+.summary-table {
+	table {
+		// background: $white;
+		table-layout: fixed;
+
+		.table-header-row {
+			th {
+				width: 200px;
+				text-align: center;
+				vertical-align: bottom;
+				// font-weight: normal !important;
+
+				&.month,
+				&.week,
+				&.day {
+					width: 100px;
+				}
+			}
+		}
+
+		td {
+			text-align: center;
+			background: $white;
+
+			&.month {
+				background: #e5a1a1;
+			}
+
+			&.week {
+				background: #bad4d6;
+			}
+
+			&:first-child {
+				text-align: left !important;
+			}
+		}
+	}
+}
+
+#monthly-chart,
+#weekly-chart,
+#daily-chart {
+	.nvd3-svg {
+		.nv-x {
+			.tick {
+				line {
+					display: none;
+				}
+			}
+		}
+
+		.nv-groups {
+			text {
+				font-weight: normal !important;
+			}
+		}
+
+		.g.nv-groups {
+			path.nv-line {
+				stroke-width: 5px;
+			}
+		}
+		  
+	}
+}
+
+#source-area,
+#source-line {
+	.nv-axisMaxMin {
+		text {
+			font-weight: normal !important;
+		}
+	}
+}
+
+.panel {
+	&.panel-default {
+		background: $white;
+		border: solid 1px #ddd;
+		box-shadow: 0 10px 10px -7px rgba(0, 0, 0, 0.2);
+		border-radius: 0;
+	}
+}
+
+.booking-view-container {
+	float:left;
+	width:100%;
+	padding:25px 25% 25px 25%
+}
+
+.left-block {
+	height:500px;
+}
+
+@media only screen and (max-width: 500px) {
+	.booking-view-container {
+		float:left;
+		width:100%;
+		padding:25px 0% 25px 0%
+	}
+}

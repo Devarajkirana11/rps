@@ -1,0 +1,240 @@
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="/scripts/plugins/jquery.bootstrap.wizard.min.js"></script>
+<script src="/js/jquery-ui.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        var searchMinDate = "m";
+        $("#checkin_from").datepicker({
+            dateFormat: "dd-mm-yy",
+            onClose: function (selectedDate) {
+                $("#checkin_from").datepicker('setDate', selectedDate);
+                $("#checkin_to").datepicker("option", "minDate", selectedDate);
+            }
+        });
+
+        $("#checkout_from").datepicker({
+            dateFormat: "dd-mm-yy",
+            onClose: function (selectedDate) {
+                $("#checkout_from").datepicker('setDate', selectedDate);
+                $("#checkout_to").datepicker("option", "minDate", selectedDate);
+            }
+        });
+
+        $("#checkin_to").datepicker({ dateFormat: "dd-mm-yy" });
+        $("#checkout_to").datepicker({ dateFormat: "dd-mm-yy" });
+
+        $("#reset").click(function () {
+            checkin_from
+            window.location.href = window.location.href;
+        });
+    });
+
+</script>
+{{> nav this}} {{> header}}
+<main id="page-content">
+    <div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Booking List View</h3>
+        </div>
+    </div>
+    <div class="page-container">
+        <div class="row row-xl">
+            <div class="col-md-8 m-md-b">
+                <a href="/pms/front-desk?hotel_id={{ hotel_id }}" class="btn btn-danger btn-rounded w-175 text-left">Calendar View <i class="fa fa-calendar pull-right"></i></a>
+                <a href="javascript:void(0)" class="btn btn-danger btn-rounded w-175 text-left disabled">Booking List View <i class="fa fa-th-list pull-right"></i></a>
+                <a href="/pms/rooms/list?hotel_id={{ hotel_id }}" class="btn btn-danger btn-rounded w-175 text-left">Rooms Status <i class="fa fa-th pull-right"></i></a>
+
+            </div>
+            <div class="row row-xl m-xl-b">
+                <div class="col-md-12 text-right">
+                    <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; ">
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                        <span></span>
+                        <b class="caret"></b>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 text-right m-lg-b">
+                <a href="/pms/walkin-reservation?hotel_id={{ hotel_id }}" class="btn btn-danger btn-rounded text-left">Walk In / New Reservation <i class="fa fa-plus-circle fa-fw pull-right"></i></a>
+            </div>
+            <div class="col-md-12">
+                <div class="filter-form">
+                    {{#if errors}} {{#each errors}}
+                    <div class="alert alert-danger"> {{ msg }}</div>
+                    {{/each}} {{/if}}
+                    <div class="row row-xl">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="" for="booking_reference_id">Reference ID</label>
+                                <input type="text" id="booking_reference_id" value="{{ inputs.booking_reference_id }}" name="booking_reference_id" placeholder=""
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="" for="checkin_from">Check in From</label>
+                                <input type="text" id="checkin_from" value="{{ inputs.checkin_from }}" name="checkin_from" placeholder="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="" for="checkin_to">Check in To</label>
+                                <input type="text" id="checkin_to" value="{{ inputs.checkin_to }}" name="checkin_to" placeholder="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="" for="checkout_from">Check Out From</label>
+                                <input type="text" id="checkout_from" value="{{ inputs.checkout_from }}" name="checkout_from" placeholder="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="" for="checkout_to">Check Out To</label>
+                                <input type="text" id="checkout_to" value="{{ inputs.checkout_to }}" name="booking_to" placeholder="" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="row row-xl m-xl-b">
+                            <div class="col-md-12 text-right">
+                                <button class="btn btn-danger btn-rounded w-150 text-left" name="Submit" value="Save" type="Submit" id="Submit">Search <i class="fa fa-search fa-fw pull-right"></i></button>
+                                <button class="btn btn-danger btn-rounded w-150 text-left" id="reset" type="reset" value="Reset">Reset <i class="fa fa-refresh fa-fw pull-right" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table" id="report-table">
+                            <thead>
+                                <tr>
+                                    <th>Booking Date</th>
+                                    <th>Referrence Id</th>
+                                    <th>Check in</th>
+                                    <th>Check out</th>
+                                    <th>Guest Name</th>
+                                    <th>Booking Source</th>
+                                    <th>Booking Channel</th>
+                                    <th>OTA Reference ID</th>
+                                    <th>Room Type</th>
+                                    <th>Room Number</th>
+                                    <th>Total Price</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+</main>
+{{> footer}}
+
+<script type="text/javascript">
+    $(function () {
+        var start = moment().subtract(7, 'days');
+        var end = moment();
+
+        function cb(start, end) {
+            if (!$('#booking_date').length) {
+                $("<label id='booking_date'>Booking Date</label>").insertBefore("#reportrange");
+            }
+
+            $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        }
+
+        $('#reportrange').daterangepicker({
+            startDate: start,
+            endDate: end,
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            }
+        }, cb);
+
+        cb(start, end);
+
+        var startDate = start.format('DD-MM-YYYY');
+        var endDate = end.format('DD-MM-YYYY');
+        var url = '/pms-manager/get-booking-list?hotel_id={{hotel_id}}&start_date=' + startDate + '&end_date=' + endDate
+        // INITIALIZE DATA TABLE
+        updateTable(url);
+
+        var table;
+
+        // CREATE DATA TABLE
+        function updateTable(url) {
+            table = $('#report-table').DataTable({
+                ajax: url,
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: 'Download',
+                        footer: true,
+                    },
+                    {
+                        extend: 'print',
+                        text: 'Print',
+                        footer: true,
+                    }
+                ],
+                dom: 'Bfrtip',
+                paging: true,
+                footerCallback: function (row, data, start, end, display) {
+                    var api = this.api(), data;
+                    // Remove the formatting to get integer data for summation
+                    var intVal = function (i) {
+                        return typeof i === 'string' ?
+                            i.replace(/[\$,]/g, '') * 1 :
+                            typeof i === 'number' ?
+                                i : 0;
+                    };
+                }
+            });
+        }
+
+        // UPDATE DATATABLE ON DATE CHANGE
+        $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
+            var startDate = picker.startDate.format('DD-MM-YYYY')
+            var endDate = picker.endDate.format('DD-MM-YYYY')
+
+            var url = '/pms-manager/get-booking-list?hotel_id={{hotel_id}}&start_date=' + startDate + '&end_date=' + endDate;
+
+            table.destroy();
+
+            updateTable(url);
+        });
+
+        $("#Submit").click(function () {
+
+            var startDate = $('#reportrange').data('daterangepicker').startDate.format('DD-MM-YYYY');
+            var endDate = $('#reportrange').data('daterangepicker').endDate.format('DD-MM-YYYY');
+            var reference_id = $('#booking_reference_id').val();
+            var checkin_from = $('#checkin_from').val();
+            var checkin_to = $('#checkin_to').val();
+            var checkout_from = $('#checkout_from').val();
+            var checkout_to = $('#checkout_to').val();
+
+            var params = '&start_date=' + startDate + '&end_date=' + endDate;
+            if (reference_id) {
+                params += '&reference_id=' + reference_id;
+            }
+            if (checkin_from) { params += '&checkin_from=' + checkin_from; }
+            if (checkin_to) { params += '&checkin_to=' + checkin_to; }
+            if (checkout_from) { params += '&checkout_from=' + checkout_from; }
+            if (checkout_to) { params += '&checkout_to=' + checkout_to; }
+
+            var url = '/pms-manager/get-booking-list?hotel_id={{hotel_id}}' + params;
+
+            table.destroy();
+
+            updateTable(url);
+        });
+    });
+
+</script>

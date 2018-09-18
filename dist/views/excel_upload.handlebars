@@ -1,0 +1,144 @@
+{{> nav}}
+
+{{> header}}
+<link href="/css/jquery-ui.css" rel="stylesheet" />
+<main id="page-content">
+	<div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Data Migration</h3>
+        </div>
+    </div>
+
+	<div class="page-container">
+		<div class="row row-xl">
+			<div class="col-md-12 m-lg-b">
+				<h4 class="text-black fw-semi-thk fs-20">Excel Uploads</h4>
+			</div>
+		</div>
+
+		<div class="row row-xl">
+            {{#if success }}
+                <div class="alert alert-info">{{ message}}</div>
+            {{else if message }}
+                <div class="alert alert-danger">{{ message}}</div>
+            {{/if}}
+            
+			<div class="col-md-12">
+				<form name="uploadform" id="uploadform" class="" action='/migration/upload' method="POST" enctype="multipart/form-data">
+                    <div class="row row-xl">
+						<div class="col-md-6">
+							<div class="row row-xl">
+								{{!-- Begin Hotel Nida NAme --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="nidaStayname">File</label>
+										<input type="file" id="fileupload" name="fileupload" placeholder="" class="form-control" required accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,.xlsx" >
+										<span class="text-danger">{{#if fileupload }}{{#trim fileupload}}{{/trim}} {{/if}}</span>
+									</div>
+								</div>
+                                <div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="nidaStayname">Hotel</label>
+                                        <input type="text" id="hotel" name="hotel" placeholder="" class="form-control" required />
+										<input type="hidden" id="hotel_id" name="hotel_id" placeholder="" class="form-control" required / >
+										<span class="text-danger">{{#if fileupload }}{{#trim fileupload}}{{/trim}} {{/if}}</span>
+									</div>
+								</div>
+								{{!-- End Hotel Nida NAme --}}
+                            </div>
+                            <div class="row row-xl">
+                                {{#if successCount}}
+                                    <div>SucessCount: {{successCount}}</div>
+                                {{/if}}
+                            </div>
+                            <div class="row row-xl m-xl-t">
+                                <div class="col-md-12 text-right">
+                                    {{!--<input type="submit" name="save" value="Import" class = "btn btn-danger btn-rounded w-150 m-md-b"/> --}}
+                                    <button type="submit" name="import" class="import-btn btn btn-danger btn-rounded w-150 m-md-b">Import</button>
+                                    {{!--<a href="#" class="btn btn-default btn-rounded w-150 m-md-b">Cancel</a>--}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-12">
+                <h3>Error Messages</h3>
+                <div id="errorWrapper" class='well'></div>
+            </div>
+            <div class="col-md-12">
+                <h3>Import status</h3>
+                <div id="importWrapper" class='well'></div>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    $(function(){
+        $( "#hotel" ).autocomplete({
+            source: function( request, response ) {
+                if(request.term && request.term == "") {
+                    ("#hotel_id").val('')
+                } else {
+                    $.ajax( {
+                        url: "/hotel_manager/getHotelByName?hotel_name="+request.term,
+                        dataType: "json",
+                        success: function( res ) {
+                            response( res.data );
+                        }
+                    });
+                }
+            },
+            select: function( event, ui ) {
+                event.preventDefault();
+                $("#hotel").val(ui.item.label);
+                $("#hotel_id").val(ui.item.value)
+            },
+            focus: function(event, ui) {
+                event.preventDefault();
+                $("#hotel").val(ui.item.label);
+            }
+        });
+
+        //ajax form submit
+        $('form#uploadform').submit(function(e) {
+            e.preventDefault();
+            var formdata = new FormData();
+            formdata.append('fileupload',document.getElementById("fileupload").files[0]);
+            formdata.append('hotel_id',$('#hotel_id').val());
+            $('#errorWrapper').html('');
+            $('#importWrapper').html('');
+            $('.import-btn').prop('disabled',true);
+            if($('.import-btn').find('i').length) {
+                $('.import-btn').html('');
+            }
+            $('.import-btn').html('<i class="fa fa-refresh fa-spin" style="font-size:24px"></i>&nbsp; Importing');
+            $.ajax({url:'/migration/upload',type:'POST',data:formdata,processData: false,contentType: false,success:function(result){
+                $('.import-btn').html('import').prop('disabled',false);
+                //console.log(result);
+                if(result.success) {
+                    var errorElement =  "<ol>";
+                    var statusElement = "<ol>";
+                    for(var  i = 0;i<result.errors.length;i++) {
+                        errorElement += "<li class='text-danger'>"+result.errors[i]+"</li>";
+                    }
+                    for(var j=0;j<result.importMessages.length;j++) {
+                        statusElement += "<li>"+result.importMessages[j]+"</li>";
+                    }
+                    errorElement += '</ol>';
+                    statusElement += '</ol>';
+                    $('#errorWrapper').html(errorElement);
+                    $('#importWrapper').html(statusElement);
+                } else {
+                    $('#errorWrapper').html('<p class="text-danger">'+result.msg+'</p>');
+                }
+            },error:function(err){
+                $('.import-btn').html('import').prop('disabled',false);
+                 $('#errorWrapper').html('<p class="text-danger">'+err.message+'</p>');
+                console.log(err);
+            }});
+        })
+    });
+</script>
+<script src="/js/jquery-ui.js"></script>
+{{> footer}}

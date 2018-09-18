@@ -1,0 +1,78 @@
+<!-- Begin Page Sidebar -->
+
+<nav id="page-sidebar">
+	<div class="scrollbar-padder">
+		<div class="sidebar-container">
+			<div class="sidebar-navigation">
+				<ul>
+					{{#if user_details._id}}					
+						{{#if menus }}
+							{{#if menus.hq_menu.length}}
+								<li class="menu-header"><span class="text-uppercase">HQ Menu</span></li>
+								{{#each menus.hq_menu}}
+									{{#if this.sub_menu}}
+										<li>
+											<a href="javascript:void(0)" data-toggle="nav-submenu"><span>{{this.menu_title}}<i class="fa fa-angle-right fa-fw"></i></span></a>
+											{{#isArray this.sub_menu}}
+											<ul class="nav-submenu">
+												{{#each this.sub_menu}}
+													<li><a href="{{this.menu_link}}"><span>{{this.menu_title}}</span></a></li>
+												{{/each}}
+											</ul>
+											{{/isArray}}
+										</li>
+									{{else}}
+										<li><a href="{{this.menu_link}}"><span>{{this.menu_title}}<i class="fa fa-angle-right fa-fw"></i></a></span></li>
+									{{/if}}
+								{{/each}}
+							{{/if}}
+
+							{{#if menus.hotel_menu.length}}
+								<li class="menu-header"><span class="text-uppercase">{{!--{{#inArray user_details._roles "9" }} Guest Menu {{ else }} Hotel Menu {{/inArray}}--}} Hotel Menu</span></li>
+								{{#each menus.hotel_menu}}
+									{{#if this.sub_menu}}
+										<li>
+											<a href="javascript:void(0)" data-toggle="nav-submenu"><span>{{this.menu_title}}<i class="fa fa-angle-right fa-fw"></i></span></a>
+											{{#isArray this.sub_menu}}
+											<ul class="nav-submenu">
+												{{#each this.sub_menu}}
+													<li><a href="{{this.menu_link}}"><span>{{this.menu_title}}</span></a></li>
+												{{/each}}
+											</ul>
+											{{/isArray}}
+										</li>
+									{{else}}
+										<li><a href="{{this.menu_link}}"><span>{{this.menu_title}}<i class="fa fa-angle-right fa-fw"></i></a></span></li>
+									{{/if}}
+								{{/each}}
+							{{/if}}
+
+							{{#if menus.guest_menu.length}}
+								<li class="menu-header"><span class="text-uppercase">Guest Menu</li>
+								{{#each menus.guest_menu}}
+									{{#if this.sub_menu}}
+										<li>
+											<a href="javascript:void(0)" data-toggle="nav-submenu"><span>{{this.menu_title}}<i class="fa fa-angle-right fa-fw"></i></span></a>
+											{{#isArray this.sub_menu}}
+											<ul class="nav-submenu">
+												{{#each this.sub_menu}}
+													<li><a href="{{this.menu_link}}"><span>{{this.menu_title}}</span></a></li>
+												{{/each}}
+											</ul>
+											{{/isArray}}
+										</li>
+									{{else}}
+										<li><a href="{{this.menu_link}}"><span>{{this.menu_title}}<i class="fa fa-angle-right fa-fw"></i></a></span></li>
+									{{/if}}
+								{{/each}}
+							{{/if}}
+						{{/if}}
+					{{/if}}
+
+				</ul>
+			</div>
+		</div>
+	</div>
+</nav>
+
+<!-- End Page Sidebar -->

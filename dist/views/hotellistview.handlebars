@@ -1,0 +1,113 @@
+{{> nav}}
+
+{{> header}}
+
+<!-- Begin Page Content -->
+<main id="page-content">
+	<div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Hotel Users</h3>
+        </div>
+    </div>
+
+	<div class="page-container">
+		<div class="row row-xl">
+			<div class="col-md-12">
+				<div class="add-button text-right">
+					<a href="/pms/users/create?hotel_id={{ hotel_id }}"class="btn btn-danger btn-rounded w-150 btn-danger text-left">Add New User<i class="fa fa-plus-circle pull-right fa-fw"></i></a>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row row-xl">
+			<div class="col-md-12">
+				<div class="filter-form">
+					<form class="" action='/pms/users/list?hotel_id={{ hotel_id }}' method="POST">
+						{{#if errors}}
+							{{#each errors}}
+								<div class="alert alert-danger"> {{ msg }}</div>
+							{{/each}}
+						{{/if}}
+						
+						<div class="row row-xl">
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="" for="username">Name</label>
+									<input type="text" id="" value="{{ inputs.first_name }}" name="first_name" placeholder="" class="form-control">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="" for="username">Username</label>
+									<input type="text" id="" value="{{ inputs.username }}" name="username" placeholder="" class="form-control">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class=""  for="status">Status</label>
+									<select name="status" class="form-group form-control">
+										<option value="">Select</option>
+										<option value="Active" {{#equal inputs.status 'Active'}} selected="selected" {{/equal}} >Active</option>
+										<option value="InActive" {{#equal inputs.status 'InActive'}} selected="selected" {{/equal}} >InActive</option>
+									</select>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="text-right  m-lg-t m-xl-b">
+							<button class="pull-left btn btn-rounded w-150 btn-danger w-150 text-left"  name="Submit" value="Save" type="Submit">Search <i class="fa fa-search fa-fw pull-right"></i></button> 
+							<a href="/pms/users/list?hotel_id={{ hotel_id }}" class="pull-right btn btn-rounded search-reset w-150 btn-default text-left">Reset <i class="fa fa-refresh pull-right"></i></a> 
+							<div class="clearfix"></div>
+						</div>
+
+					</form>
+				</div>
+
+				<div class="table-view">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>username</th>
+								<th>Roles</th>
+								<th>Status</th>
+							
+							</tr>
+						</thead>
+						<tbody>
+							{{#each output.data}}
+							<tr>
+								<td><a href="/pms/users/{{ this._user_id }}/edit">{{ this._first_name }}</a></td>
+								<td>{{ this._username }}</td>
+								<td>
+									{{#if this._roles  }}
+									{{#in '1' this._roles }} Admin<br/> {{/in}}
+									{{#in '2' this._roles }} HQ Operation<br/> {{/in}}
+									{{#in '3' this._roles }} HQ Finance<br/>  {{/in}}
+									{{#in '4' this._roles }} Owner<br/> {{/in}}
+									{{#in '5' this._roles }} Finance<br/> {{/in}}
+									{{#in '6' this._roles }} Manager<br/> {{/in}}
+									{{#in '7' this._roles }} Front Desk<br/> {{/in}}
+									{{#in '8' this._roles }} Operation<br/> {{/in}}
+									{{#in '9' this._roles }} Guest<br/> {{/in}}
+									{{#in '10' this._roles }} HQ Admin<br/> {{/in}}
+									{{/if}}
+								</td>
+								<td>{{ this._status }}</td>
+								
+							</tr>
+							{{/each}}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<!-- End Hotels View -->
+
+	</div>
+</main>
+<!-- End Page Content -->
+
+{{> footer}}

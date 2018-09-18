@@ -1,0 +1,319 @@
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="/scripts/plugins/jquery.bootstrap.wizard.min.js"></script>
+<script src="/js/jquery-ui.js"></script>
+{{> nav this}} {{> header}}
+<main id="page-content">
+    <div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">NIDA Cash Daily Performance Report - Past NIDA Cash </h3>
+        </div>
+    </div>
+    <div class="page-container">
+        <div class="row row-xl">
+            <div class="row row-xl m-xl-b">
+                <div class="col-md-12 text-right">
+                    <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; ">
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                        <span></span>
+                        <b class="caret"></b>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                    {{#if errors}} {{#each errors}}
+                    <div class="alert alert-danger"> {{ msg }}</div>
+                    {{/each}} {{/if}}
+                    <div class="table-responsive">
+                        <table class="table" id="report-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Sign Ups</th>
+                                    <th>Referrals</th>
+                                    <th>Referral SignUps</th>
+                                    <th>Referral Bookings</th>
+                                    <th>Self Bookings</th>
+                                    <th>Friends Bookings</th>
+                                    <th>Total Bookings</th>
+                                    <th>Referral Earnings $</th> 
+                                    <th>Self Earnings $</th> 
+                                    <th>Friends Earnings $</th> 
+                                    <th>Total Earnings $</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                            <tfoot>
+							<tr>
+								<td style="text-align:right">Overall Till Date:</td>
+                               {{#each footer}}
+                                <td> {{this}} </td>
+                                {{/each}}
+							</tr>
+						</tfoot>
+                        </table>
+                    </div>
+            </div>
+        </div>
+</main>
+{{> footer}}
+
+<script type="text/javascript">
+    $(function () {
+        var start = moment().subtract(7, 'days');
+        var end = moment();
+
+        function cb(start, end) {
+            if (!$('#date').length) {
+                $("<label id='date'> Date</label>").insertBefore("#reportrange");
+            }
+            $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        }
+
+        $('#reportrange').daterangepicker({
+            startDate: start,
+            endDate: end,
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            }
+        }, cb);
+
+        cb(start, end);
+
+        var startDate = start.format('DD-MM-YYYY');
+        var endDate = end.format('DD-MM-YYYY');
+        var url = '/report-manager/manager/past-nidacash?start_date=' + startDate + '&end_date=' + endDate;
+        // INITIALIZE DATA TABLE
+        updateTable(url);
+
+        var table;
+
+        // CREATE DATA TABLE
+        function updateTable(url) {
+            table = $('#report-table').DataTable({
+                ajax: url,
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: 'Download',
+                        footer: true,
+                    },
+                    {
+                        extend: 'print',
+                        text: 'Print',
+                        footer: true,
+                    }
+                ],
+                dom: 'Bfrtip',
+                paging: true,
+             	/* footerCallback: function (row, data, start, end, display) {
+					var api = this.api(), data;
+					var intVal = function (i) {
+						return typeof i === 'string' ?
+							i.replace(/[\$,]/g, '') * 1 :
+							typeof i === 'number' ?
+								i : 0;
+					};
+					totalcol1 = api
+						.column(1)
+						.data()
+						.reduce(function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0);
+					pageTotal1 = api
+						.column(1, { page: 'current' })
+						.data()
+						.reduce(function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0);
+					$(api.column(1).footer()).html(
+						//total.toFixed(2)
+                        totalcol1
+					);
+                    totalcol2 = api
+						.column(2)
+						.data()
+						.reduce(function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0);
+					pageTotal2 = api
+						.column(2, { page: 'current' })
+						.data()
+						.reduce(function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0);
+					$(api.column(2).footer()).html(
+						//total.toFixed(2)
+                        totalcol2
+					);
+                    totalcol3 = api
+						.column(3)
+						.data()
+						.reduce(function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0);
+					pageTotal3 = api
+						.column(3, { page: 'current' })
+						.data()
+						.reduce(function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0);
+					$(api.column(3).footer()).html(
+						//total.toFixed(2)
+                        totalcol3
+					);
+                    totalcol4 = api
+						.column(4)
+						.data()
+						.reduce(function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0);
+					pageTotal4 = api
+						.column(4, { page: 'current' })
+						.data()
+						.reduce(function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0);
+					$(api.column(4).footer()).html(
+						//total.toFixed(2)
+                        totalcol4
+					);
+                    totalcol5 = api
+						.column(5)
+						.data()
+						.reduce(function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0);
+					pageTotal5 = api
+						.column(5, { page: 'current' })
+						.data()
+						.reduce(function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0);
+					$(api.column(5).footer()).html(
+						//total.toFixed(2)
+                        totalcol5
+					);
+                    totalcol6 = api
+						.column(6)
+						.data()
+						.reduce(function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0);
+					pageTotal6 = api
+						.column(6, { page: 'current' })
+						.data()
+						.reduce(function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0);
+					$(api.column(6).footer()).html(
+						//total.toFixed(2)
+                        totalcol6
+					);
+                    totalcol7 = api
+						.column(7)
+						.data()
+						.reduce(function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0);
+					pageTotal7 = api
+						.column(7, { page: 'current' })
+						.data()
+						.reduce(function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0);
+					$(api.column(7).footer()).html(
+						//total.toFixed(2)
+                        totalcol7
+					);
+                    totalcol8 = api
+						.column(8)
+						.data()
+						.reduce(function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0);
+					pageTotal8 = api
+						.column(8, { page: 'current' })
+						.data()
+						.reduce(function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0);
+					$(api.column(8).footer()).html(
+						totalcol8.toFixed(2)
+                        //totalcol1
+					);
+                    totalcol9 = api
+						.column(9)
+						.data()
+						.reduce(function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0);
+					pageTotal9 = api
+						.column(9, { page: 'current' })
+						.data()
+						.reduce(function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0);
+					$(api.column(9).footer()).html(
+						totalcol9.toFixed(2)
+                       // totalcol9
+					);
+                    totalcol10 = api
+						.column(10)
+						.data()
+						.reduce(function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0);
+					pageTotal10 = api
+						.column(10, { page: 'current' })
+						.data()
+						.reduce(function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0);
+					$(api.column(10).footer()).html(
+						totalcol10.toFixed(2)
+                        //totalcol1
+					);
+                    totalcol11 = api
+						.column(11)
+						.data()
+						.reduce(function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0);
+					pageTotal11 = api
+						.column(11, { page: 'current' })
+						.data()
+						.reduce(function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0);
+					$(api.column(11).footer()).html(
+						totalcol11.toFixed(2)
+                       // totalcol1
+					);
+				} */
+            });
+        }
+
+        // UPDATE DATATABLE ON DATE CHANGE
+        $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
+            var startDate = picker.startDate.format('DD-MM-YYYY')
+            var endDate = picker.endDate.format('DD-MM-YYYY')
+
+            var url = '/report-manager/manager/past-nidacash?start_date=' + startDate + '&end_date=' + endDate;
+
+            table.destroy();
+
+            updateTable(url);
+        });
+
+    });
+
+</script>

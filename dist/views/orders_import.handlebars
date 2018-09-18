@@ -1,0 +1,36 @@
+{{> header }}
+<script>
+    jQuery(document).ready(function(){
+        $("#date").datepicker({ dateFormat: 'yy-mm-dd' });
+    });
+</script>
+<section>
+  <div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Orders Import
+            </div>
+        </div>
+
+        {{#if message}}
+            <div class="alert alert-success">Order importing is done. Please go to orders list page to view all the orders</div>
+        {{/if}}
+        
+        <form name="orders_import" id="orders_import" action="/orders/import" data-toggle="validator" method="POST">
+            <div class="form-group required">
+            <label class="control-label">Delivery Date</label>
+            <input class="form-control" id="date" name="delivery_date" placeholder="YYY-MM-DD" type="text"/ required>
+            <p class="help-block text-danger"></p>
+            </div>
+            <div id="success"></div>
+            <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-xl">Submit</button>
+            </div>
+        </form>
+
+    </div>
+    </div>
+</section>
+<script src="/js/jquery-ui.js"></script>
+{{> footer}}

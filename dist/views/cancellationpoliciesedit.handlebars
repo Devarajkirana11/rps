@@ -1,0 +1,137 @@
+<!-- Begin Page Content -->
+
+{{> nav this}}
+
+{{> header}}
+
+<main id="page-content">
+	<div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Tax</h3>
+        </div>
+    </div>
+
+	<div class="page-container">
+		<div class="row row-xl">
+			<div class="col-md-12 m-lg-b">
+				<h4 class="text-black fw-semi-thk fs-20">Edit Cancellation Policies</h4>
+			</div>
+		</div>
+
+		<div class="row row-xl">
+			<div class="col-md-12">
+				<form class="" action='/admin/cancellation-policies/{{ output._policy_id }}/edit' method="POST">
+					{{#if errors}}
+						{{#each errors}}
+							<div class="alert alert-danger"> {{ msg }}</div>
+						{{/each}}
+					{{/if}}
+					
+					<div class="row row-xl">
+						<div class="col-md-12">
+							{{!-- <div class="form-group"> --}}
+								<input type="hidden" value="{{ output._policy_id }}" id="" name="policy_id" placeholder="" class="form-control">
+							{{!-- </div>	 --}}
+						</div>
+					</div>
+					
+					<div class="row row-xl">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="name">Name</label>
+								<input type="text" value="{{ output._name }}" id="" name="name" placeholder="" class="form-control">
+							</div>	
+						</div>
+
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="status">Status</label>
+								<div class="select-wrapper">
+									<select name="status" class="form-control">
+										<option value="">Select</option>
+										<option value="Active" {{#equal output._status 'Active'}} selected="selected" {{/equal}}>Active</option>
+										<option value="InActive"  {{#equal output._status 'InActive'}} selected="selected" {{/equal}}>InActive</option>
+									</select>
+								</div>
+							</div>	
+						</div>
+					</div>
+
+					<hr class="m-xl-b m-xl-t">
+
+					<div class="row row-xl">
+						<div class="col-md-12">
+							<div class="container1">
+								<div class="row row-xl">
+									<div class="col-md-12 m-lg-b">
+										<h4 class="text-black fw-semi-thk fs-20">Conditions</h4>
+									</div>
+								</div>
+
+								<div class="row row-xl">
+									<div class="col-md-12">
+										<p>Cancelled within</p>
+									</div>
+								</div>
+
+
+								{{#each output._duration as |value key|}}
+
+									<div class="row row-xl">
+										<div class="col-md-9 text-right delete">
+											<a href="#" class="text-default"><i class="fa fa-times-circle fa-fw"></i></a>
+										</div>
+									</div>
+
+									<div class="row row-xl">
+										<div class="col-md-3">
+											<div class="form-group">
+												<label for="">Days</label>
+												<input type="text" value="{{ value }}" id="" name="duration[]" placeholder="" class="form-control">
+											</div>
+										</div>
+										<div class="col-md-3">
+											{{#each ../output._duration_hours as |values keys|}}
+												{{#equal keys @key}}
+													<div class="form-group">
+														<label for="">Hours</label>
+														<input type="text" value="{{ values }}" id="" name="duration_hours[]" placeholder="" class="form-control">
+													</div>
+												{{/equal}}
+											{{/each}}
+										</div>
+										<div class="col-md-3">
+											{{#each ../output._percentage_value as |values keys|}}
+												{{#equal keys @key}}
+													<div class="form-group">
+														<label for="">Percentage of Refund</label>
+														<input type="text" value="{{ values }}" id="" name="value_percentage[]" placeholder="" class="form-control">
+													</div>
+												{{/equal}}
+											{{/each}}
+										</div>
+									</div>
+								{{/each}}
+
+							</div>
+						</div>
+
+						<div class="col-md-12 m-xl-t">
+							<button class="add_form_field btn btn-danger btn-rounded w-150 text-left">Add New Field <i class="fa fa-plus-circle fa-fw pull-right"></i></button>
+						</div>
+					</div>
+
+					<div class="m-xl-t text-right">
+						<button class="btn btn-danger w-150 btn-rounded m-md-b"  name="Submit" value="Save" type="Submit">Save</button> 
+						<button class="btn btn-default w-150 btn-rounded m-md-b" onclick="history.go(-1);">Cancel</button>
+					</div>
+				</form>	
+			</div>
+		</div>
+	</div>
+</main>
+
+{{> footer }}
+
+<!-- End Page Content -->
+

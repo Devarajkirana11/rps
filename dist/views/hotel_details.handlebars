@@ -1,0 +1,348 @@
+{{> nav}}
+
+{{> header}}
+
+<main id="page-content">
+	<div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Hotel Details</h3>
+        </div>
+    </div>
+
+	<div class="page-container">
+		<div class="row row-xl">
+			<div class="col-md-12 m-lg-b">
+				<h4 class="text-black fw-semi-thk fs-20">Add new hotel</h4>
+			</div>
+		</div>
+
+		<div class="row row-xl">
+			<div class="col-md-12 selectWrapper">
+				{{#if hotel_id }}
+				<form class="" action='/hotel_details/create?id={{hotel_id}}' method="POST">
+				{{else}}
+				<form class="" action='/hotel_details/create' method="POST">
+				{{/if}}
+
+					{{#if errors}}
+					<ul>
+					{{#each errors}}
+					
+					<li>
+						<div class="text-danger"> {{ msg }}</div>
+					</li>
+					{{/each}}
+					</ul>
+					{{/if}}
+
+
+					{{#if success }}
+					<div class="alert alert-success">{{ message}}</div>
+					{{else if message }}
+					<div class="alert alert-danger">{{ message}}</div>
+					{{/if}}
+
+
+					<div class="row row-xl">
+						<div class="col-md-6">
+							<div class="row row-xl">
+								{{!-- Begin Hotel Nida NAme --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="nidaStayname">HOTEL NIDA Name*</label>
+										<input type="text" id="" name="nidastayname" placeholder="" class="form-control" value="{{#if requestBody.nidastayname }}{{ requestBody.nidastayname }}{{/if}}" >
+										<span class="text-danger">{{#if nidastayname }}{{#trim nidastayname}}{{/trim}} {{/if}}</span>
+									</div>
+								</div>
+								{{!-- End Hotel Nida NAme --}}
+
+								{{!-- Begin Country --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="country">Country*</label>
+
+										<div class="select-wrapper">
+											<select  id="" name="country" placeholder="" class="country form-control">
+												<option value="select" {{#equal requestBody.country 'select'}} selected="selected" {{/equal}}>Choose Country</option>
+												{{#if locationmasters }}
+												{{#each locationmasters }}
+												<option value="{{@key}}" {{#equal ../requestBody.country @key}} selected="selected" {{/equal}}>{{ this.name }}</option>
+												{{/each}}
+												{{/if}}
+											</select>
+										</div>
+										<span class="text-danger">{{#if country }} {{ country }} {{/if}}</span>
+									</div>
+									{{!-- End Country --}}
+								</div>
+
+								{{!-- Begin State --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="state">State*</label>
+
+										<div class="select-wrapper">
+											<select  id="" name="state" placeholder="" class="state form-control">
+												<option value="select" {{#equal requestBody.state 'select'}} selected="selected" {{/equal}}>Choose State</option>
+												<option value="{{requestBody.state}}" {{#if requestBody.state }} selected="selected" {{/if}}>Loading...</option>
+											</select>
+										</div>
+
+										<span class="text-danger">{{#if state }} {{ state }} {{/if}}</span>
+									</div>	
+								</div>
+								{{!-- End State --}}
+
+								{{!-- Begin City --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="city">City*</label>
+
+										<div class="select-wrapper">
+											<select  id="" name="city" placeholder="" class="city form-control">
+												<option value="select" {{#equal requestBody.city 'select'}} selected="selected" {{/equal}}>Choose City</option>
+												<option value="{{requestBody.city}}" {{#if requestBody.city }} selected="selected" {{/if}}>Loading...</option>
+											</select>
+										</div>
+
+										<span class="text-danger">{{#if city }} {{ city }} {{/if}}</span>				
+									</div>
+								</div>
+								{{!-- End City --}}
+
+								{{!-- Begin Location --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="locality">Location</label>
+
+										<div class="select-wrapper">
+											<select  id="locality" name="locality" placeholder="" class="locality form-control">
+												<option value="select" {{#equal requestBody.locality 'select'}} selected="selected" {{/equal}}>Choose Locality</option>
+												<option value="{{requestBody.locality}}" {{#if requestBody.locality }} selected="selected" {{/if}}>Loading...</option>
+											</select>
+										</div>
+										
+										<span class="text-danger">{{#if locality }} {{ locality }} {{/if}}</span>
+									</div>
+								</div>
+								{{!-- End Location --}}
+
+								{{!-- Begin Total Rooms --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="" for="noOfRooms">Total No of Rooms</label>
+										<input type="text" id="" name="noOfRooms" placeholder="" class="form-control"  value="{{#if requestBody.noOfRooms }}{{#trim requestBody.noOfRooms }}{{/trim}}{{/if}}">
+										<span class="text-danger">{{#if noOfRooms }} {{ noOfRooms }} {{/if}}</span>
+									</div>
+								</div>
+								{{!-- End Total Rooms --}}
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="row row-xl">
+								{{!-- Begin Actual Hotel Name --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="ActualHotelName">Actual Hotel Name*</label>
+										<input type="text" id="" name="actualHotelName" placeholder="" class="form-control"  value="{{#if requestBody.actualHotelName }}{{#trim requestBody.actualHotelName }}{{/trim}}{{/if}}">
+										<span class="text-danger">{{#if actualHotelName }} {{ actualHotelName }} {{/if}}</span>
+									</div>
+								</div>
+								{{!-- End Actual Hotel Name --}}
+
+								{{!-- Begin Address Line 1 --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="Addressline1">Address Line 1</label>
+										<input type="text" id="" name="addressline1" placeholder="" class="form-control" value="{{#if requestBody.addressline1 }}{{#trim requestBody.addressline1 }}{{/trim}}{{/if}}">
+										<span class="text-danger">{{#if addressline1 }} {{ addressline1 }} {{/if}}</span>
+									</div>
+								</div>
+								{{!-- End Address Line 1 --}}
+
+								{{!-- Begin Address Line 2 --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="Addressline2">Address Line 2</label>
+										<input type="text" id="" name="addressline2" placeholder="" class="form-control"  value="{{#if requestBody.addressline2 }}{{#trim requestBody.addressline2 }}{{/trim}}{{/if}}">
+										<span class="text-danger">{{#if addressline2 }} {{ addressline2 }} {{/if}}</span>
+									</div>
+								</div>
+								{{!-- End Address Line 2 --}}
+
+								{{!-- Begin Zip / Postal Code --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="zipcode">Zip/Postal code *</label>
+										<input type="text" id="" name="zipcode" placeholder="" class="form-control"  value="{{#if requestBody.zipcode }}{{#trim requestBody.zipcode }}{{/trim}}{{/if}}">
+										<span class="text-danger">{{#if zipcode }} {{ zipcode }} {{/if}}</span>
+									</div>
+								</div>
+								{{!-- End Zip / Postal Code --}}
+
+								{{!-- Begin Latitude --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="latitude">Latitude *</label>
+										<input type="text" id="latitude" name="latitude" placeholder="" class="form-control"  value="{{#if requestBody.latitude }}{{#trim requestBody.latitude }}{{/trim}}{{/if}}">
+										<span class="text-danger">{{#if latitude }} {{ latitude }} {{/if}}</span>
+									</div>
+								</div>
+								{{!-- End Latitude --}}
+
+								{{!-- Begin Longitude --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="longitude">Longitude  *</label>
+										<input type="text" id="longitude" name="longitude" placeholder="" class="form-control"  value="{{#if requestBody.longitude }}{{#trim requestBody.longitude }}{{/trim}}{{/if}}">
+										<span class="text-danger">{{#if longitude }} {{ longitude }} {{/if}}</span>
+									</div>
+								</div>
+								{{!-- End Longitude --}}
+							</div>
+						</div>
+					</div>
+					<div class="row row-xl">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class=""  for="locality">Hotel Type</label>
+
+								<div class="select-wrapper">
+									<select  id="hotel_type" name="hotel_type" placeholder="" class="form-control">
+										<option value="select" {{#equal requestBody.hotel_type 'select'}} selected="selected" {{/equal}}>Choose Hotel Type</option>
+										{{#if fieldMasters.hotel_types }}
+											{{#each fieldMasters.hotel_types}}
+												<option value="{{this.value}}" {{#equal ../requestBody.hotel_type this.value}} selected="selected" {{/equal}}>{{this.text}}</option>
+											{{/each}}
+										{{/if}}
+									</select>
+								</div>
+
+								<span class="text-danger">{{#if hotel_type }} {{ hotel_type }} {{/if}}</span>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class=""  for="locality">Hotel Status</label>
+								<div class="select-wrapper">
+									<select  id="hotel_status" name="hotel_status" placeholder="" class="form-control">
+										<option value="select" {{#equal requestBody.hotel_status 'select'}} selected="selected" {{/equal}}>Choose Hotel Status</option>
+										<option value="1" {{#equal requestBody.hotel_status "1" }} selected="selected" {{/equal}}>Active</option>
+										<option value="2" {{#equal requestBody.hotel_status "2" }} selected="selected" {{/equal}}>Inactive</option>
+									</select>
+								</div>
+								<span class="text-danger">{{#if hotel_status }} {{ hotel_status }} {{/if}}</span>
+						</div>
+					</div>
+					<div class="row row-xl">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class=""  for="locality">Hotel Code:</label>
+								<input type="text" class="form-control"  name="hotel_code" value="{{#if requestBody.hotel_code }}{{requestBody.hotel_code}}{{/if}}"/>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class=""  for="locality">Trip Advisor Rating :</label>
+								<textarea name="rating_snippet" class="form-control">{{#if requestBody.rating_snippet }}{{requestBody.rating_snippet}}{{/if}}</textarea>
+							</div>
+						</div>
+					</div>
+					<div class="row row-xl">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="ota_username">OTA Username:</label>
+								<input type="text" name="ota_username" class="form-control" id="ota_username" value="{{#if requestBody.ota_username }}{{requestBody.ota_username}}{{/if}}"/>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="ota_password">OTA Password:</label>
+								<input type="text" name="ota_password" class="form-control" id="ota_password" value="{{#if requestBody.ota_password }}{{requestBody.ota_password}}{{/if}}"/>
+							</div>
+						</div>
+					</div>
+					<div class="row row-xl">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="ota_hotel_code">OTA Hotel Code:</label>
+								<input type="text" name="ota_hotel_code" class="form-control"  id="ota_hotel_code" value="{{#if requestBody.ota_hotel_code }}{{requestBody.ota_hotel_code}}{{/if}}"/>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="deposit_amount">Deposit Amount:</label>
+								<input type="number" name="deposit_amount" class="form-control"  id="deposit_amount" value="{{#if requestBody.deposit_amount }}{{requestBody.deposit_amount}}{{/if}}"/>
+							</div>
+						</div>
+					</div>
+					<div class="row row-xl">
+						<div class="col-md-12">
+							<label class=""  for="locality">Trip Advisor Rating Link:</label>
+								<textarea name="rating_link" class="form-control">{{#if requestBody.rating_link }}{{requestBody.rating_link}}{{/if}}</textarea>
+						</div>
+					</div>
+					<div class="row row-xl">
+						<div class="col-md-12">
+							<label class=""  for="locality">Hotel Description:</label>
+								<textarea name="hotel_description" class="form-control">{{#if requestBody.hotel_description }}{{requestBody.hotel_description}}{{/if}}</textarea>
+						</div>
+					</div>
+					<div class="row row-xl">
+						<div class="col-md-12">
+							<label class=""  for="locality">Custom Rating Image Path:</label>
+								<textarea name="custom_rating_image" class="form-control">{{#if requestBody.custom_rating_image }}{{requestBody.custom_rating_image}}{{/if}}</textarea>
+						</div>
+					</div>
+					<div class="row row-xl">
+						<div class="col-md-12">
+							<label class=""  for="locality">Custom Rating Image Link:</label>
+								<textarea name="custom_rating_link" class="form-control">{{#if requestBody.custom_rating_link }}{{requestBody.custom_rating_link}}{{/if}}</textarea>
+						</div>
+					</div>
+					<div class="row row-xl">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class=""  for="locality">Hotel Images</label>
+								<input type="file" class="saveFile form-control" multiple name="hotel_images" value="{{#if requestBody.hotel_images }}{{requestBody.hotel_images}}{{/if}}"/>
+							</div>
+						</div>
+					</div>	
+
+					<div class="row row-xl">
+						<div class="col-md-12 m-lg-t">
+							<div id="map" style="width:100%;height:500px;margin:auto;"></div>							
+						</div>
+					</div>
+					<div class="row row-xl m-xl-t">
+
+						<div class="col-md-12 text-right">
+							<input type="hidden" name="hotel_id" value="{{presave_hotel_id}}"/>
+							<input type="submit" name="save" value="Save" class = "btn btn-danger btn-rounded w-150 m-md-b"/> 
+							<a href="#" class="btn btn-default btn-rounded w-150 m-md-b">Cancel</a>
+
+						</div>
+					</div>
+				</form>
+			</div>	
+		</div>
+	</div>
+</main>
+
+{{> footer}}
+
+
+{{#if requestBody.locality }}
+<script>
+	var Elocality= '{{ requestBody.locality }}';
+</script>
+{{else}}
+<script>
+	var Elocality=undefined;
+</script>
+{{/if}}
+
+<script defer type="text/javascript" src="//maps.google.com/maps/api/js?key=AIzaSyDR1iZRZ36Ew7W9UIbXAKV8AIM-OUGujbA"></script>
+
+<script src="/js/hotel_details.js"></script>

@@ -1,0 +1,471 @@
+// ----------------------------------------------------
+//  *  Mixins
+//  *
+//  *  All the mixins used in this framework
+//  * ----------------------------------------------------
+
+// ====== Border Radius ===== 
+// ------------------------------------------------------------
+@mixin border-top-radius($radius) {
+	border-top-left-radius: $radius;
+	border-top-right-radius: $radius;
+}
+@mixin border-bottom-radius($radius) {
+	border-bottom-left-radius: $radius;
+	border-bottom-right-radius: $radius;
+}
+@mixin border-radius($radius) {
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	border-radius: $radius;
+}
+
+// ====== Animation ===== 
+// ------------------------------------------------------------
+@mixin animation($animation) {
+	-webkit-animation: $animation;
+	-moz-animation: $animation;
+	animation: $animation;
+}
+@mixin animation-delay($animation-delay) {
+	-webkit-animation-delay: $animation-delay;
+	-moz-animation-delay: $animation-delay;
+	animation-delay: $animation-delay;
+}
+@mixin animation-direction($animation-direction) {
+	-webkit-animation-direction: $animation-direction;
+	-moz-animation-direction: $animation-direction;
+	animation-direction: $animation-direction;
+}
+@mixin animation-duration($animation-duration) {
+	-webkit-animation-duration: $animation-duration;
+	-moz-animation-duration: $animation-duration;
+	animation-duration: $animation-duration;
+}
+@mixin animation-fill-mode($animation-fill-mode) {
+	-webkit-animation-fill-mode: $animation-fill-mode;
+	-moz-animation-fill-mode: $animation-fill-mode;
+	animation-fill-mode: $animation-fill-mode;
+}
+@mixin animation-iteration-count($animation-iteration-count) {
+	-webkit-animation-iteration-count: $animation-iteration-count;
+	-moz-animation-iteration-count: $animation-iteration-count;
+	animation-iteration-count: $animation-iteration-count;
+}
+@mixin animation-name($animation-name) {
+	-webkit-animation-name: $animation-name;
+	-moz-animation-name: $animation-name;
+	animation-name: $animation-name;
+}
+@mixin animation-play-state($animation-play-state) {
+	-webkit-animation-play-state: $animation-play-state;
+	-moz-animation-play-state: $animation-play-state;
+	animation-play-state: $animation-play-state;
+}
+@mixin animation-timing-function($animation-timing-function) {
+	-webkit-animation-timing-function: $animation-timing-function;
+	-moz-animation-timing-function: $animation-timing-function;
+	animation-timing-function: $animation-timing-function;
+}
+
+// ====== Transition ===== 
+// ------------------------------------------------------------
+@mixin transition($transition...) {
+	-webkit-transition: $transition;
+	-moz-transition: $transition;
+	transition: $transition;
+}
+@mixin transition-delay($transition-delay) {
+	-webkit-transition-delay: $transition-delay;
+	-moz-transition-delay: $transition-delay;
+	transition-delay: $transition-delay;
+}
+@mixin transition-duration($transition-duration) {
+	-webkit-transition-duration: $transition-duration;
+	-moz-transition-duration: $transition-duration;
+	transition-duration: $transition-duration;
+}
+@mixin transition-property($transition-property) {
+	-webkit-transition-property: $transition-property;
+	-moz-transition-property: $transition-property;
+	transition-property: $transition-property;
+}
+@mixin transition-timing-function($transition-timing-function) {
+	-webkit-transition-timing-function: $transition-timing-function;
+	-moz-transition-timing-function: $transition-timing-function;
+	transition-timing-function: $transition-timing-function;
+}
+
+// ====== Transform ===== 
+// ------------------------------------------------------------
+@mixin transform($transform) {
+	-webkit-transform: $transform;
+	-moz-transform: $transform;
+	transform: $transform;
+}
+@mixin transform-origin($transform-origin) {
+	-webkit-transform-origin: $transform-origin;
+	-moz-transform-origin: $transform-origin;
+	transform-origin: $transform-origin;
+}
+@mixin transform-style($transform-style) {
+	-webkit-transform-style: $transform-style;
+	-moz-transform-style: $transform-style;
+	transform-style: $transform-style;
+}
+@mixin perspective($perspective) {
+	-webkit-perspective: $perspective;
+	-moz-perspective: $perspective;
+	perspective: $perspective;
+}
+@mixin perspective-origin($perspective-origin) {
+	-webkit-perspective-origin: $perspective-origin;
+	-moz-perspective-origin: $perspective-origin;
+	perspective-origin: $perspective-origin;
+}
+@mixin backface-visibility($backface-visibility) {
+	-webkit-backface-visibility: $backface-visibility;
+	-moz-backface-visibility: $backface-visibility;
+	backface-visibility: $backface-visibility;
+}
+@mixin transform($val) {
+	-webkit-transform: $val;
+	-moz-transform: $val;
+	transform: $val;
+}
+@mixin translate2d($x, $y) {
+	-webkit-transform: translate($x, $y);
+	-moz-transform: translate($x, $y);
+	transform: translate($x, $y);
+}
+@mixin translate3d($x, $y, $z) {
+	-webkit-transform: translate3d($x, $y, $z);
+	-moz-transform: translate3d($x, $y, $z);
+	transform: translate3d($x, $y, $z);
+}
+@mixin translateX($x) {
+	-webkit-transform: translateX($x);
+	-moz-transform: translateX($x);
+	transform: translateX($x);
+}
+@mixin translateY($y) {
+	-webkit-transform: translateY($y);
+	-moz-transform: translateY($y);
+	transform: translateY($y);
+}
+@mixin translateZ($z) {
+	-webkit-transform: translateZ($z);
+	-moz-transform: translateZ($z);
+	transform: translateZ($z);
+}
+@mixin scale2d($x, $y) {
+	-webkit-transform: scale($x, $y);
+	-moz-transform: scale($x, $y);
+	transform: scale($x, $y);
+}
+@mixin scale3d($x, $y, $z) {
+	-webkit-transform: scale3d($x, $y, $z);
+	-moz-transform: scale3d($x, $y, $z);
+	transform: scale3d($x, $y, $z);
+}
+@mixin scaleX($x) {
+	-webkit-transform: scaleX($x);
+	-moz-transform: scaleX($x);
+	transform: scaleX($x);
+}
+@mixin scaleY($y) {
+	-webkit-transform: scaleY($y);
+	-moz-transform: scaleY($y);
+	transform: scaleY($y);
+}
+@mixin scaleZ($z) {
+	-webkit-transform: scaleZ($z);
+	-moz-transform: scaleZ($z);
+	transform: scaleZ($z);
+}
+@mixin rotate2d($angle) {
+	-webkit-transform: rotate($angle);
+	-moz-transform: rotate($angle);
+	transform: rotate($angle);
+}
+@mixin rotate3d($x, $y, $z, $angle) {
+	-webkit-transform: rotate($x, $y, $z, $angle);
+	-moz-transform: rotate($x, $y, $z, $angle);
+	transform: rotate($x, $y, $z, $angle);
+}
+@mixin rotateX($x) {
+	-webkit-transform: rotateX($x);
+	-moz-transform: rotateX($x);
+	transform: rotateX($x);
+}
+@mixin rotateY($y) {
+	-webkit-transform: rotateY($y);
+	-moz-transform: rotateY($y);
+	transform: rotateY($y);
+}
+@mixin rotateZ($z) {
+	-webkit-transform: rotateZ($z);
+	-moz-transform: rotateZ($z);
+	transform: rotateZ($z);
+}
+@mixin skew($x-angle, $y-angle) {
+	-webkit-transform: skew($x-angle, $y-angle);
+	-moz-transform: skew($x-angle, $y-angle);
+	transform: skew($x-angle, $y-angle);
+}
+@mixin skewX($x-angle) {
+	-webkit-transform: skewX($x-angle);
+	-moz-transform: skewX($x-angle);
+	transform: skewX($x-angle);
+}
+@mixin skewY($y-angle) {
+	-webkit-transform: skewY($y-angle);
+	-moz-transform: skewY($y-angle);
+	transform: skewY($y-angle);
+}
+
+// ====== Padding ===== 
+// ------------------------------------------------------------
+@mixin padding($val) {
+	padding: $val !important;
+	&-t {
+		padding-top: $val !important;
+	}
+	&-r {
+		padding-right: $val !important;
+	}
+	&-b {
+		padding-bottom: $val !important;
+	}
+	&-l {
+		padding-left: $val !important;
+	}
+}
+@mixin remove-padding() {
+	padding: 0 !important;
+	&-t {
+		padding-top: 0 !important;
+	}
+	&-r {
+		padding-right: 0 !important;
+	}
+	&-b {
+		padding-bottom: 0 !important;
+	}
+	&-l {
+		padding-left: 0 !important;
+	}
+}
+
+// ====== Margin ===== 
+// ------------------------------------------------------------
+@mixin margin($val) {
+	margin: $val !important;
+
+	&-t {
+		margin-top: $val !important;
+	}
+	&-r {
+		margin-right: $val !important;
+	}
+	&-b {
+		margin-bottom: $val !important;
+	}
+	&-l {
+		margin-left: $val !important;
+	}
+}
+@mixin remove-margin() {
+	margin: 0 !important;
+
+	&-t {
+		margin-top: 0 !important;
+	}
+	&-r {
+		margin-right: 0 !important;
+	}
+	&-b {
+		margin-bottom: 0 !important;
+	}
+	&-l {
+		margin-left: 0 !important;
+	}
+}
+
+// ====== Text Variant ===== 
+// ------------------------------------------------------------
+@mixin text-variant($class, $color) {
+	.#{$class} {
+		color: $color;
+	}
+
+	a.#{$class} {
+		color: $color;
+		text-decoration: none;
+
+		&:hover,
+		&:focus,
+		&:active {
+			color: $color;
+			opacity: 0.8;
+			text-decoration: none;
+		}
+	}
+}
+
+// ====== Background ===== 
+// ------------------------------------------------------------
+@mixin bg-variant($class, $bg) {
+	.#{$class} {
+		background-color: $bg !important;
+	}
+	.#{$class}-light {
+		background-color: lighten($bg, 7%) !important;
+	}
+	.#{$class}-lighter {
+		background-color: lighten($bg, 12%) !important;
+	}
+	.#{$class}-dark {
+		background-color: darken($bg, 7%) !important;
+	}
+	.#{$class}-darker {
+		background-color: darken($bg, 12%) !important;
+	}
+}
+
+// ====== Buttons ===== 
+// ------------------------------------------------------------
+@mixin btn-variant($class, $color) {
+	.btn-#{$class},
+	.btn-#{$class}:focus {
+		background-color: $color;
+		border-color: $color;
+		color: $white;
+
+		&.active,
+		&:active,
+		&.active:focus,
+		&:active:focus,
+		&:active:hover {
+			background-color: darken($color, 12%);
+			border-color: darken($color, 12%);
+			color: $white;
+		}
+
+		&:hover,
+		&.hover {
+			background-color: lighten($color, 12%);
+			border-color: lighten($color, 12%);
+			color: $white;
+		}
+
+		&.active:hover {
+			background-color: darken($color, 17%);
+			border-color: darken($color, 17%);
+		}
+
+		&.disabled,
+		&.disabled:hover,
+		&.disabled:focus,
+		&.disabled.focus,
+		&.disabled:active,
+		&.disabled.active,
+		&[disabled],
+		&[disabled]:hover,
+		&[disabled]:focus,
+		&[disabled].focus,
+		&[disabled]:active,
+		&[disabled].active,
+		fieldset[disabled] &,
+		fieldset[disabled] &:hover,
+		fieldset[disabled] &:focus,
+		fieldset[disabled] &.focus,
+		fieldset[disabled] &:active,
+		fieldset[disabled] &.active {
+			background-color: darken($color, 10%);
+			border-color: darken($color, 10%);
+		}
+	}
+}
+
+@mixin btn-transparent-variant($class, $color) {
+	.btn-transparent {
+		&.btn-#{"" + $class},
+		&.btn-#{"" + $class}:focus {
+			background-color: transparent;
+			border-color: $color;
+			color: $color;
+
+			&.active,
+			&:active,
+			&.active:focus,
+			&:active:focus,
+			&:active:hover {
+				background-color: darken($color, 12%);
+				border-color: darken($color, 12%);
+				color: $white;
+			}
+
+			&:hover,
+			&.hover {
+				background-color: $color;
+				border-color: $color;
+				color: $white;
+			}
+
+			&.active:hover {
+				background-color: darken($color, 17%);
+				border-color: darken($color, 17%);
+			}
+
+			&.disabled,
+			&.disabled:hover,
+			&.disabled:focus,
+			&.disabled.focus,
+			&.disabled:active,
+			&.disabled.active,
+			&[disabled],
+			&[disabled]:hover,
+			&[disabled]:focus,
+			&[disabled].focus,
+			&[disabled]:active,
+			&[disabled].active,
+			fieldset[disabled] &,
+			fieldset[disabled] &:hover,
+			fieldset[disabled] &:focus,
+			fieldset[disabled] &.focus,
+			fieldset[disabled] &:active,
+			fieldset[disabled] &.active {
+				background-color: darken($color, 10%);
+				border-color: darken($color, 10%);
+			}
+		}
+	}
+}
+
+// ====== Forms ===== 
+// ------------------------------------------------------------
+@mixin appearance($val) {
+	-webkit-appearance: $val;
+	-moz-appearance: $val;
+	-ms-appearance: $val;
+	-o-appearance: $val;
+	appearance: $val;
+}
+
+@mixin placeholder($val) {
+	&::-webkit-input-placeholder {
+		color: $val;
+	}
+	&:-moz-placeholder { /* Firefox 18- */
+	   color: $val;
+	}
+
+	&::-moz-placeholder {  /* Firefox 19+ */
+	   color: $val;
+	}
+
+	&:-ms-input-placeholder {
+	   color: $val;
+	}
+}

@@ -1,0 +1,79 @@
+{{> nav this}}
+
+{{> header}}
+
+<!-- Begin Page Content -->
+<main id="page-content">
+	<div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Booking List</h3>
+        </div>
+    </div>
+
+	<div class="page-container">
+		
+    <!-- Begin Hotels View -->
+		<div class="row row-xl">
+			<div class="col-md-12">					
+				 <div class="table-view">
+						<div class="table-responsive">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th>Booking ID</th>
+										{{!-- <th>Time</th>
+										<th>Booking Done By</th> --}}
+										<th>Guest Name</th>
+										<th>No.Of.Guests</th>
+										<th>No.Of Rooms</th>
+										<th>Check In</th>
+										<th>Check Out</th>
+										<th>Source Of Booking</th>
+										<th>Status</th>
+										<th>Room Price</th>
+										<th>Discount Amount</th>
+										<th>Price After Amount</th>
+										<th>Tax</th>
+										<th>Service Fee</th>
+										<th>Tourism Tax</th>
+										<th>Total Amount</th>
+										<th>Payment Type</th>
+									</tr>
+								</thead>
+								<tbody>
+									{{#each output}}
+									<tr>
+										<td><a href="/pms/booking-details?hotel_id={{this.hotel_id}}&booking_uuid={{this.bookingUuid}}" >{{this.referenceId}}</a></td>
+										{{!-- <td>{{this.time}}</td>
+										<td>{{this.by}}</td> --}}
+										<td>{{this.guest.firstName}}</td>
+										<td>{{this.numberOfGuests}}</td>
+										<td>{{this.numberOfRooms}}</td>
+										<td>{{this.checkIn}}</td>
+										<td>{{this.checkOut}}</td>
+										<td>{{this.booking_channel}}</td>
+										<td>{{this.status}}</td>
+										<td>{{this.totalRoomPrice}}</td>
+										<td>{{this.discountAmount}}</td>
+										<td>{{this.priceAfterDiscount}}</td>
+										<td>{{this.tax}}</td>
+										<td>{{this.serviceFee}}</td>
+										<td>{{this.tourismTax}}</td>
+										<td>{{this.totalAmount}}</td>
+										<td>{{this.paymentType}}</td>
+									</tr>
+									{{/each}}
+								</tbody>
+							</table>		
+						</div>
+					</form>
+				</div>		
+			</div>
+		</div>
+	</div>
+		
+	<!-- End Hotels View -->
+</main>
+
+<!-- End Page Content -->
+{{> footer}}

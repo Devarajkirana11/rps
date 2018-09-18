@@ -1,0 +1,62 @@
+{{> header }}
+<script>
+    $(function(){
+        var filtersFirstInitialized = false;
+        var oTable = $('#users_list').DataTable( {
+            "order": [[1, "desc"]],
+            dom: '<"#add.row selectWrapper m-lg-b">frtlip',
+            processing: true,
+		})
+    });
+</script>
+
+<section>
+  <div class="content-wrapper">
+    <div class="container-fluid">
+            <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Users List</div>
+        <div class="card-body">
+          <div class="table-responsive">
+                <div class="text-right"><a href="/admin/user/create" class="float-left btn btn-primary btn-rounded w-175 text-left">Add user <i class="fa fa-plus-circle fa-fw pull-right"></i></a>
+                <table  id="users_list" class="table table-striped" border="1" width="100%">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Roles</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each output.data }}
+                            <tr>
+                                <td><a href="/admin/user/{{ this.uuid }}/edit">{{ this.user_id }}</a></td>
+                                <td>{{ this.first_name }}</td>
+                                <td>{{ this.last_name }}</td>
+                                <td>{{ this.email }}</td>
+                                <td>
+                                    {{#if this.roles  }}
+									{{#in '1' this.roles }} Administrator<br/> {{/in}}
+                                    {{#in '2' this.roles }} Customer<br/> {{/in}}
+                                    {{#in '3' this.roles }} Customer Delivery Executive<br/> {{/in}}
+                                    {{/if}}
+                                </td>
+                                <td>{{ this.status }}</td>
+                                <td><span class="btn btn-danger" data-uuid="{{ this.uuid }}" id="user-delete">Delete</span></td>
+                                
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+<script src="/js/jquery-ui.js"></script>
+{{> footer}}

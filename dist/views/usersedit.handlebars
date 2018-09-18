@@ -1,0 +1,186 @@
+{{> nav}}
+
+{{> header}}
+
+
+<main id="page-content">
+	<div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">User Management</h3>
+        </div>
+    </div>
+
+	<div class="page-container">
+		<div class="row row-xl">
+			<div class="col-md-12 m-lg-b">
+				<h4 class="text-black fw-semi-thk fs-20">Edit List</h4>
+			</div>
+		</div>
+
+		<div class="row row-xl">
+			<div class="col-md-12">
+				<form class="" action='/users/{{ output._user_id }}/edit' method="POST">
+					{{#if errors}}
+						{{#each errors}}
+							<div class="alert alert-danger"> {{ msg }}</div>
+						{{/each}}
+					{{/if}}
+
+					<input type="hidden" value="{{ output._user_id }}" id="user-id" name="user_id" placeholder="" class="form-control">
+
+					<div class="row row-xl">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="username">First Name</label>
+								<input type="text" value="{{ output._first_name }}" id="" name="first_name" placeholder="" class="form-control">
+							</div>	
+						</div>
+
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="username">Last Name</label>
+								<input type="text" value="{{ output._last_name }}" id="" name="last_name" placeholder="" class="form-control">
+							</div>	
+						</div>
+					</div>
+
+					<div class="row row-xl">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="username">User Name</label>
+								<input type="text" value="{{ output._username }}" id="" name="user_name" placeholder="" class="form-control">
+							</div>	
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="hotel_name">Hotel Name</label>
+
+								<div class="select-wrapper">
+									<select name="hotel_name" class="form-group form-control">
+										<option value="">Select</option>
+										{{#each hotels }}
+											<option value="{{ this._hotel_id }}"{{#equal ../output._hotel_name this._hotel_id }} selected="selected" {{/equal}}>{{ this._nida_stay_name }}</option>
+										{{/each}}
+									</select>
+								</div>
+							</div>
+						</div>						
+					</div>
+
+					<div class="row row-xl">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="" for="email">E-mail</label>
+								<input type="text" value="{{ output._email }}" id="" name="email" placeholder="" class="form-control">
+							</div>
+						</div>
+					</div>
+					
+					<div class="row row-xl">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="password">Password</label>
+								<input type="password" id="" name="password" placeholder="" class="form-control">
+							</div>	
+						</div>
+
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="password_confirm">Confirm Password</label>
+								<input type="password" id="" name="password2" placeholder="" class="form-control">
+							</div>	
+						</div>
+					</div>
+					
+					<div class="row row-xl">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="status">Status</label>
+								<div class="select-wrapper">
+									<select name="status" class="form-control">
+										<option value="">Select</option>
+										<option value="Active" {{#equal output._status 'Active'}} selected="selected" {{/equal}}>Active</option>
+										<option value="InActive"  {{#equal output._status 'InActive'}} selected="selected" {{/equal}}>InActive</option>
+									</select>
+								</div>
+							</div>	
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<input type="hidden" id="" value="{{ output._password }}" name="pass_hidden" placeholder="" class="form-control">
+					</div>
+
+					<div class="form-group">
+						<input type="hidden" id="" value="{{ output._created_on }}" name="created_on" placeholder="" class="form-control">
+					</div>
+
+					<div class="form-group">
+						<input type="hidden" id="" value="{{ output._last_access }}" name="last_access" placeholder="" class="form-control">
+					</div>
+					
+
+					<div class="row row-xl">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="" for="roles">Roles</label>
+							</div>
+							
+							<div class="checkbox-inline">
+								<input type="checkbox" name="roles[]" value="4" {{#in '4' output._roles }} checked="checked" {{/in}} id="user-create--owner">
+								<label for="user-create--owner">Owner</label>
+							</div>
+
+							<div class="checkbox-inline">
+								<input type="checkbox" name="roles[]" value="5" {{#in '5' output._roles }} checked="checked" {{/in}}  id="user-create--finance">
+								<label for="user-create--finance">Finance</label>
+							</div>
+
+							<div class="checkbox-inline">
+								<input type="checkbox" name="roles[]" value="6" {{#in '6' output._roles }} checked="checked" {{/in}}  id="user-create--manager">
+								<label for="user-create--manager">Manager</label>
+							</div>
+
+							<div class="checkbox-inline">
+								<input type="checkbox" name="roles[]" value="7" {{#in '7' output._roles }} checked="checked" {{/in}}  id="user-create--frontdesk">
+								<label for="user-create--frontdesk">Front Desk</label>
+							</div>	
+							<div class="checkbox-inline">
+								<input type="checkbox" name="roles[]" value="1" {{#in '1' output._roles }} checked="checked" {{/in}}  id="user-create--admin">
+								<label for="user-create--admin">Admin</label>
+							</div>	
+							<div class="checkbox-inline">
+								<input type="checkbox" name="roles[]" value="9" {{#in '9' output._roles }} checked="checked" {{/in}}  id="user-create--guest">
+								<label for="user-create--guest">Guest</label>
+							</div>
+							<div class="checkbox-inline">
+								<input type="checkbox" name="roles[]" value="10" {{#in '10' output._roles }} checked="checked" {{/in}}  id="user-create--hq--admin">
+								<label for="user-create--hq--admin">HQ Admin</label>
+							</div>
+							<div class="checkbox-inline">
+								<input type="checkbox" name="roles[]" value="2" {{#in '2' output._roles }} checked="checked" {{/in}}  id="user-create--hq--operation">
+								<label for="user-create--hq--operation">HQ Operation</label>
+							</div>
+							<div class="checkbox-inline">
+								<input type="checkbox" name="roles[]" value="3" {{#in '3' output._roles }} checked="checked" {{/in}} id="user-create--hq--finance">
+								<label for="user-create--hq--finance">HQ Finance</label>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row row-xl">
+						<div class="col-md-12">
+							<div class="m-xl-t text-right">
+								<button class="btn btn-danger btn-rounded w-150"  name="Submit" value="Save" type="Submit">Save</button> 
+								<span class="btn btn-default hotel-cancel-button btn-rounded w-150">Cancel</span> 
+								<span class="btn btn-default btn-rounded w-150 user-delete"  name="Submit" value="Delete" type="Submit">Delete</span> 
+							</div>	
+						</div>
+					</div>
+				</form>	
+			</div>
+		</div>
+	</div>
+</main>
+
+{{> footer}}

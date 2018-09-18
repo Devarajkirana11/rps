@@ -1,0 +1,261 @@
+{{> nav}}
+
+{{> header}}
+<link href="/css/jquery-ui.css" rel="stylesheet" />
+<main id="page-content">
+	<div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Seo Details</h3>
+        </div>
+    </div>
+
+	<div class="page-container">
+		<div class="row row-xl">
+			<div class="col-md-12 m-lg-b">
+				<h4 class="text-black fw-semi-thk fs-20">Add SEO info </h4>
+				<div class="text-right"><a href="/seo/list" class="btn btn-danger btn-rounded w-175 text-left">Seo listings <i class="fa fa-plus-circle fa-fw pull-right"></i></a></div>
+			</div>
+		</div>
+
+		<div class="row row-xl">
+			<div class="col-md-12 selectWrapper">
+				{{#if seo_id }}
+				<form class="" action='/seo/create?id={{seo_id}}' method="POST">
+				{{else}}
+				<form class="" action='/seo/create' method="POST">
+				{{/if}}
+
+					{{#if errors}}
+					<ul>
+					{{#each errors}}
+					
+					<li>
+						<div class="text-danger"> {{ msg }}</div>
+					</li>
+					{{/each}}
+					</ul>
+					{{/if}}
+
+
+					{{#if success }}
+					<div class="alert alert-success">{{ message}}</div>
+					{{else if message }}
+					<div class="alert alert-danger">{{ message}}</div>
+					{{/if}}
+
+
+					<div class="row row-xl">
+						<div class="col-md-6">
+							<div class="row row-xl">
+								{{!-- Begin title--}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="title">Title*</label>
+										<input type="text" id="" name="title" placeholder="" class="form-control" value="{{#if requestBody.title }}{{ requestBody.title }}{{/if}}" >
+										<span class="text-danger">{{#if title }}{{#trim title}}{{/trim}} {{/if}}</span>
+									</div>
+								</div>
+								{{!-- End title --}}
+
+								{{!-- Begin Country --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="country">Country*</label>
+
+										<div class="select-wrapper">
+											<select  id="country" name="country" placeholder="" class="country form-control">
+												<option value="select" {{#equal requestBody.country 'select'}} selected="selected" {{/equal}}>Choose Country</option>
+												{{#if locationmasters }}
+												{{#each locationmasters }}
+												<option value="{{@key}}" {{#equal ../requestBody.country @key}} selected="selected" {{/equal}}>{{ this.name }}</option>
+												{{/each}}
+												{{/if}}
+											</select>
+										</div>
+										<span class="text-danger">{{#if country }} {{ country }} {{/if}}</span>
+									</div>
+									{{!-- End Country --}}
+								</div>
+
+								{{!-- Begin State --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="state">State*</label>
+
+										<div class="select-wrapper">
+											<select  id="state" name="state" placeholder="" class="state form-control">
+												<option value="select" {{#equal requestBody.state 'select'}} selected="selected" {{/equal}}>Choose State</option>
+												<option value="{{requestBody.state}}" {{#if requestBody.state }} selected="selected" {{/if}}>Loading...</option>
+											</select>
+										</div>
+
+										<span class="text-danger">{{#if state }} {{ state }} {{/if}}</span>
+									</div>	
+								</div>
+								{{!-- End State --}}
+
+								{{!-- Begin City --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="city">City*</label>
+
+										<div class="select-wrapper">
+											<select  id="city" name="city" placeholder="" class="city form-control">
+												<option value="select" {{#equal requestBody.city 'select'}} selected="selected" {{/equal}}>Choose City</option>
+												<option value="{{requestBody.city}}" {{#if requestBody.city }} selected="selected" {{/if}}>Loading...</option>
+											</select>
+										</div>
+
+										<span class="text-danger">{{#if city }} {{ city }} {{/if}}</span>				
+									</div>
+								</div>
+								{{!-- End City --}}
+
+
+								{{!-- Begin SEO Type --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="" for="noOfRooms">SEO Type</label>
+                                        <select name="seotype" id="seotype" class="form-control">
+                                            <option value="select">Select</option>
+                                            <option value="1" {{#equal requestBody.seotype "1"}} selected {{/equal}} >Country</option>
+                                            <option value="2" {{#equal requestBody.seotype "2"}} selected {{/equal}}>City</option>
+                                            <option value="3" {{#equal requestBody.seotype "3"}} selected {{/equal}}>Hotel</option>
+                                        </select>
+										<span class="text-danger">{{#if seotype }} {{ seotype }} {{/if}}</span>
+									</div>
+								</div>
+								{{!-- End SEO type--}}
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="row row-xl">
+								{{!-- Begin Meta tags --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="ActualHotelName">Meta tags*</label>
+										<input type="text" id="metatags" name="metatags" placeholder="" class="form-control"  value="{{#if requestBody.metatags }}{{#trim requestBody.metatags }}{{/trim}}{{/if}}">
+										<span class="text-danger">{{#if metatags }} {{ metatags }} {{/if}}</span>
+									</div>
+								</div>
+								{{!-- End Meta tags --}}
+                                {{!-- Begin Latitude --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="latitude">Latitude *</label>
+										<input type="text" id="latitude" name="latitude" placeholder="" class="form-control"  value="{{#if requestBody.latitude }}{{#trim requestBody.latitude }}{{/trim}}{{/if}}">
+										<span class="text-danger">{{#if latitude }} {{ latitude }} {{/if}}</span>
+									</div>
+								</div>
+								{{!-- End Latitude --}}
+
+								{{!-- Begin Longitude --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="longitude">Longitude  *</label>
+										<input type="text" id="longitude" name="longitude" placeholder="" class="form-control"  value="{{#if requestBody.longitude }}{{#trim requestBody.longitude }}{{/trim}}{{/if}}">
+										<span class="text-danger">{{#if longitude }} {{ longitude }} {{/if}}</span>
+									</div>
+								</div>
+								{{!-- End Longitude --}}
+                                {{!-- Begin hotel_id --}}
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class=""  for="hotel_id">Hotel *</label>
+										<input type="text" name="seo_hotel_name" id="seo_hotel_name" class="form-control"/>
+										<input type="hidden" id="hotel_id" name="hotel_id" placeholder="" class="form-control"  value="{{#if requestBody.hotel_id }}{{#trim requestBody.hotel_id }}{{/trim}}{{/if}}">
+										<span class="text-danger" id="hotel_error">{{#if hotel_id }} {{ hotel_id }} {{/if}}</span>
+									</div>
+								</div>
+								{{!-- End Longitude --}}
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class=""  for="status">Status</label>
+                                        <div class="select-wrapper">
+                                            <select  id="status" name="status" placeholder="" class="form-control">
+                                                <option value="select" {{#equal requestBody.status 'select'}} selected="selected" {{/equal}}>Choose Status</option>
+                                                <option value="1" {{#equal requestBody.status "1" }} selected="selected" {{/equal}}>Active</option>
+                                                <option value="2" {{#equal requestBody.status "2" }} selected="selected" {{/equal}}>Inactive</option>
+                                            </select>
+                                        </div>
+                                        <span class="text-danger">{{#if status }} {{ status }} {{/if}}</span>
+                                    </div>
+                                </div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row row-xl">
+						<div class="col-md-12">
+							<label class=""  for="locality">Link:</label>
+								<textarea name="seo_link" id="seo_link" class="form-control">{{#if requestBody.seo_link }}{{requestBody.seo_link}}{{/if}}</textarea>
+                                <span class="text-danger">{{#if seo_link }} {{ seo_link }} {{/if}}</span>
+						</div>
+					</div>
+					<div class="row row-xl">
+						<div class="col-md-12">
+							<label class=""  for="locality"> Description:</label>
+								<textarea name="description" class="form-control" id="editor">{{#if requestBody.description }}{{requestBody.description}}{{/if}}</textarea>
+                                <span class="text-danger">{{#if description }} {{ description }} {{/if}}</span>
+						</div>
+					</div>
+					<div class="row row-xl">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class=""  for="locality">Images</label>
+								<input type="file" class="saveFile form-control" multiple name="images" value="{{#if requestBody.images }}{{requestBody.images}}{{/if}}"/>
+                                <span class="text-danger">{{#if images }} {{ images }} {{/if}}</span>
+							</div>
+						</div>
+					</div>
+					<div class="row row-xl">
+						<div class="col-md-12">
+							<label class=""  for="locality">Meta Description:</label>
+								<textarea name="meta_description" class="form-control">{{#if requestBody.meta_description }}{{requestBody.meta_description}}{{/if}}</textarea>
+                                <span class="text-danger">{{#if meta_description }} {{ meta_description }} {{/if}}</span>
+						</div>
+					</div>
+
+					<div class="row row-xl">
+						<div class="col-md-12 m-lg-t">
+							<div id="map" style="width:100%;height:500px;margin:auto;"></div>							
+						</div>
+					</div>
+					<div class="row row-xl m-xl-t">
+
+						<div class="col-md-12 text-right">
+							<input type="submit" name="save" value="Save" class = "btn btn-danger btn-rounded w-150 m-md-b"/> 
+							<a href="#" class="btn btn-default btn-rounded w-150 m-md-b">Cancel</a>
+
+						</div>
+					</div>
+				</form>
+			</div>	
+		</div>
+	</div>
+</main>
+
+{{> footer}}
+
+
+{{#if requestBody.locality }}
+<script>
+	var Elocality= '{{ requestBody.locality }}';
+</script>
+{{else}}
+<script>
+	var Elocality=undefined;
+</script>
+{{/if}}
+
+<script defer type="text/javascript" src="//maps.google.com/maps/api/js?key=AIzaSyDR1iZRZ36Ew7W9UIbXAKV8AIM-OUGujbA"></script>
+
+<script src="/js/hotel_details.js"></script>
+<script src="/js/seo.js"></script>
+<script src="/js/jquery-ui.js"></script>
+<script src="/scripts/plugins/ckeditor/ckeditor.js"></script>
+<script src="/js/ckInit.js"></script>
+<script>
+	initSample();
+</script>

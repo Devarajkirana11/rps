@@ -1,0 +1,217 @@
+
+<!-- Begin Page Content -->
+
+{{> nav this}}
+
+{{> header}}
+
+<script type="text/javascript">
+
+	jQuery(document).ready(function(){
+
+		var tax_type = $("#tax_type").val();
+
+		if(tax_type == 'Service Fee'){
+		
+			$("#applicable_level").hide();
+		
+		} else {
+		
+			$("#applicable_level").show();
+		
+		}
+
+		$("#tax_type").change(function(){
+
+			var values = $(this).val();
+	
+			if(values == 'Service Fee'){
+		
+				$("#applicable_level").hide();
+		
+			} else {
+		
+				$("#applicable_level").show();
+		
+			}
+
+		});
+
+	});
+
+</script>
+
+<main id="page-content">
+	<div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Tax</h3>
+        </div>
+    </div>
+
+	<div class="page-container">
+		<div class="row row-xl">
+			<div class="col-md-12 m-lg-b">
+				<h4 class="text-black fw-semi-thk fs-20">Edit Tax</h4>
+			</div>
+		</div>
+
+		<div class="row row-xl">
+			<div class="col-md-12">
+				<form class="" action='/pms/tax/{{ output._tax_id }}/edit' method="POST">
+
+					{{#if errors}}
+						{{#each errors}}
+							<div class="alert alert-danger"> {{ msg }}</div>
+						{{/each}}
+					{{/if}}
+					
+					<div class="row row-xl">
+						<div class="col-md-12">
+							<div class="form-group">
+								<input type="hidden" value="{{ output._tax_id }}" id="" name="tax_id" placeholder="" class="form-control">
+								<input type="hidden" value="{{ output._hotel_id }}" id="" name="hotel_id" placeholder="" class="form-control">
+							</div>	
+						</div>
+					</div>
+					
+					<div class="row row-xl">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="" for="taxname">Tax Name</label>
+								<input type="text" value="{{ output._name }}" id="" name="tax_name" placeholder="" class="form-control">
+							</div>	
+						</div>
+					</div>
+
+					<div class="row row-xl">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="country">Country</label>
+
+								<div class="select-wrapper">
+									<select name="country" class="form-control">
+										<option value="">Select Country</option>
+										<option value="Malaysia" {{#equal output._country 'Malaysia'}} selected="selected" {{/equal}} >Malaysia</option>
+										<option value="Indonesia"   {{#equal output._country 'Indonesia'}} selected="selected" {{/equal}}>Indonesia</option>
+										<option value="Thailand"  {{#equal output._country 'Thailand'}} selected="selected" {{/equal}}>Thailand</option>
+										<option value="Philippines"  {{#equal output._country 'Philippines'}} selected="selected" {{/equal}}>Philippines</option>
+										<option value="Singapore"  {{#equal output._country 'Singapore'}} selected="selected" {{/equal}}>Singapore</option>
+									</select>
+								</div>
+							</div>	
+						</div>
+
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="city">City</label>
+								<input type="text" value="{{ output._city }}" id="" name="city" placeholder="" class="form-control">
+							</div>	
+						</div>
+					</div>
+
+					<div class="row row-xl">
+						<div class="col-md-12">
+							<div class="form-group" class="form-control">
+								<label class="" for="type">Type</label>
+								<div class="select-wrapper">
+									<select name="type" class="form-control" id="tax_type">
+										<option value="">Select Type</option>
+										<option value="Service Fee" {{#equal output._type 'Service Fee'}} selected="selected" {{/equal}}>Service Fee</option>
+										<option value="Tax" {{#equal output._type 'Tax'}} selected="selected" {{/equal}}>Tax</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+
+					<div class="row row-xl">
+						<div class="col-md-12">
+							<div class="form-group" class="form-control">
+								<label class="" for="type">Calculation</label>
+								<div class="select-wrapper">
+									<select name="calculation_type" class="form-control">
+										<option value="">Select</option>
+										<option value="Fixed" {{#equal output._calculation_type 'Fixed'}} selected="selected" {{/equal}}>Fixed</option>
+										<option value="Percentage" {{#equal output._calculation_type 'Percentage'}} selected="selected" {{/equal}}>Percentage</option>
+									</select>
+								</div>
+							</div>	
+						</div>
+					</div>
+
+					<div class="row row-xl">
+						<div class="col-md-12">
+							<div class="form-group" class="form-control">
+								<label class="" for="based_on">Based on</label>
+								<div class="select-wrapper">
+									<select name="based_on" class="form-control">
+										<option value="">Select</option>
+										<option value="Room Price" {{#equal output._based_on 'Room Price'}} selected="selected" {{/equal}}>Room Price</option>
+										<option value="Room Night" {{#equal output._based_on 'Room Night'}} selected="selected" {{/equal}}>Room Night</option>
+									</select>
+								</div>
+							</div>	
+						</div>
+					</div>
+
+					<div class="row row-xl">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="value">Value</label>
+								<input type="text" value="{{ output._tax_value }}" id="" name="tax_value" placeholder="" class="form-control">
+							</div>	
+						</div>
+
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="status">Status</label>
+								<div class="select-wrapper">
+									<select name="status" class="form-control">
+										<option value="">Select</option>
+										<option value="Active" {{#equal output._status 'Active'}} selected="selected" {{/equal}}>Active</option>
+										<option value="InActive"  {{#equal output._status 'InActive'}} selected="selected" {{/equal}}>InActive</option>
+									</select>
+								</div>
+							</div>	
+						</div>
+					</div>
+
+					
+					<div class="row row-xl">
+				
+						{{#if output._add_on}}
+							<div class="col-md-6">
+								<div class="form-group">
+									<input type="checkbox" name="add_on" value="1" {{#equal output._add_on '1'}} checked="checked" {{/equal}}> Add on
+								</div>
+							</div>
+						{{/if}}
+
+						{{#if output._applicable_level}}
+							<div class="col-md-6">
+								<div class="form-group" id="applicable_level">
+								<input type="radio" name="applicable_level" value="0" {{#equal output._applicable_level '0'}} checked="checked" {{/equal}}> Before Service Fee
+								<input type="radio" name="applicable_level" value="1" {{#equal output._applicable_level '1'}} checked="checked" {{/equal}}> After Service Fee
+								</div>
+							</div>
+						{{/if}}
+
+					</div>
+					
+					<div class="row row-xl">
+						<div class="col-md-12">
+							<div class="m-xl-t text-right">
+								<button class="btn btn-danger w-150 btn-rounded m-md-b"  name="Submit" value="Save" type="Submit">Save</button> 
+								<button class="btn btn-default w-150 btn-rounded m-md-b" onclick="history.go(-1);">Cancel</button>
+							</div>	
+						</div>
+					</div>
+				</form>	
+			</div>
+		</div>
+	</div>
+</main>
+
+
+{{> footer}}

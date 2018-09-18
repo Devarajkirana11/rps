@@ -1,0 +1,138 @@
+hr {
+    border-top-color: #f1f1f1;
+}
+
+.about-us-text {
+    min-height: 500px;
+    height: auto;
+    padding: 20px 0;
+    width: 60%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-header {
+    margin-bottom: 40px;
+    position: relative;
+
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: -15px;
+        left: 0;
+        right: 0;
+        height: 5px;
+        width: 50px;
+        background: $danger;
+        border-radius: 50px;
+    }
+}
+
+.shareholder-container {
+    display: flex;
+
+    .shareholder-logo-container {
+        flex: 1;
+        white-space: nowrap;
+        // text-align: center;
+    
+        &:before {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+    
+        img {
+            vertical-align: middle;
+            width: 80%;
+        }
+    }
+}
+
+.management-container {
+    .profile-photo {
+        // box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+    }
+
+    .team-member-container {
+        min-height: 210px;
+        // padding: 15px;
+        // background: $white;
+        // box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+        // height: 260px;
+    }
+}
+
+.promise-icon-container {
+    height: 100px;
+    width: 100px;
+    margin: 0 auto;
+    background: #f9f9f9;
+    border: solid 2px #f1f1f1;
+    border-radius: 50%;
+
+    i {
+        line-height: 100px;
+    }
+}
+
+@media (max-width: 576px) {
+    .content-header {
+        margin-bottom: 40px;
+        position: relative;
+
+        > * {
+            text-align: center !important;
+        }
+        
+    
+        &:before {
+            margin: 0 auto;
+        }
+    }
+
+    .about-us-text {
+        width: 100%;
+        padding: 0 10px;
+        text-align: center;
+    }
+
+    .shareholder-container {
+        flex-flow: column;
+        align-items: center;
+        justify-content: center;
+
+        .shareholder-logo-container {
+            flex: 0 0 auto;
+            height: 75px;
+            text-align: center;
+        }
+    }
+
+    .management-container {
+        .media {
+            .media-left {
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+
+            .media-body {
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+        }
+
+        .team-member-container {
+            img {
+                height: 96px;
+                width: 96px;
+            }
+        }
+    }
+}

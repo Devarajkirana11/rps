@@ -1,0 +1,194 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="/scripts/plugins/jquery.bootstrap.wizard.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+
+{{> nav this}}
+
+{{> header}}
+
+<script type="text/javascript">
+
+	jQuery(document).ready(function(){
+
+	var searchMinDate = "m";
+
+		$("#from_date").datepicker({
+			dateFormat: "dd-mm-yy",
+			minDate: searchMinDate,
+
+			onClose: function (selectedDate) {
+				$("#from_date").datepicker('setDate', selectedDate);
+				var selectedDate = $(this).datepicker('getDate');
+				var selectedDate = new Date(selectedDate);
+				selectedDate.setDate(selectedDate.getDate() + 1);
+				$("#to_date").datepicker( "option", "minDate", selectedDate);
+			}
+		});
+
+		$("#to_date").datepicker({
+			dateFormat: "dd-mm-yy",
+
+			onClose: function (selectedDate) {
+				$("#to_date").datepicker('setDate', selectedDate);
+			}
+		});
+
+		$("#room_type").change(function(){
+			var room_type = $(this).val();
+			var hotel_id = $("#hotel_id").val();
+			var check_in = "01-10-2017";
+			var check_out = "02-10-2017";
+			var blocked_array = [];
+			if(room_type > 0){
+				/*$.ajax({
+				url: "/search/ajax",
+				type: "POST", 
+				data: { ajaxid:17, hotel_uuid:hotel_id,room_type:room_type },
+				success: function(response) { 
+					$.each( response.data, function( key, value ) {
+						blocked_array.push(value.roomNumber);
+					});	
+				},
+				error: function(xhr) { 	 }
+				});*/
+
+				$.ajax({
+				url: "/search/ajax",
+				type: "POST", 
+				data: { ajaxid:18, hotel_uuid:hotel_id,room_type:room_type },
+				success: function(response) { 
+					var options = '<option value="">Select</option>';
+					if(response.data){
+						console.log(response);
+						$.each( response.data, function( key, value ) {
+							var room_number_value = value._number;
+							/*if(jQuery.inArray(room_number_value, blocked_array) != -1) {
+
+							} else {*/
+							options += '<option value="'+room_number_value+'">'+room_number_value+'</option>';
+							//} 
+						});
+					}
+					$("#room_numbers").html(options);
+				},
+				error: function(xhr) { 	alert('Sold Out'); }
+				});
+			}
+		});
+	});
+
+</script>
+
+<main id="page-content">
+	<div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Maintainance Block Create</h3>
+        </div>
+    </div>
+
+	<div class="page-container">
+		<div class="row row-xl">
+		</div>
+		
+		<div class="row row-xl">
+			<div class="col-md-8">
+				<form class="" action='/pms/maintenance/create?hotel_id={{ hotel_id }}' method="POST">
+
+					{{#if errors}}
+						{{#each errors}}
+							<div class="alert alert-danger"> {{ msg }}</div>
+						{{/each}}
+					{{/if}}
+
+					<div class="row row-xl">
+						<div class="col-md-12">
+							<div class="form-group">
+								<input type="hidden" value="{{ hotel_id }}" id="hotel_id" name="hotel_id" placeholder="" class="form-control">
+							</div>	
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Room Type *</label>
+								<div class="select-wrapper">
+									<select name="room_type" id="room_type" class="form-control">
+										<option value="">Select</option>
+										{{#each room_types }}
+										<option value="{{ this.type._type }}" {{#equal requestBody.room_type ../this.type._type }} selected="selected" {{/equal}}>{{#getRoomTypeName this.type._type  }}{{/getRoomTypeName}}</option>
+										{{/each}}
+									</select>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Room Number *</label>
+								<div class="select-wrapper">
+									<select name="room_numbers[]" id="room_numbers" class="form-control">
+										<option value="">Select</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>From Date *</label>
+								<input class="form-control" id="from_date" type="text" name="from_date" value="{{#if requestBody.from_date}}{{ requestBody.from_date }}{{/if}}"/> 
+								<span class="text-danger">{{#if from_date}} {{from_date}} {{/if}}</span>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="form-group">
+								<label> To Date *</label> 
+								<input class="form-control" type="text" id="to_date" name="to_date" value="{{#if requestBody.to_date}}{{requestBody.to_date}}{{/if}}"/>
+								<span class="text-danger">{{#if to_date}} {{to_date}} {{/if}}</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label>Reason *</label>
+						<div class="select-wrapper">
+							<select name="reason" id="reason" class="form-control">
+								<option value="">Select</option>
+								<option value="CEILING_LEAKAGE" {{#equal requestBody.reason 'CEILING_LEAKAGE'}} selected="selected" {{/equal}}>CEILING_LEAKAGE</option>
+								<option value="BROKEN_MAIN_DOOR" {{#equal requestBody.reason 'BROKEN_MAIN_DOOR'}} selected="selected" {{/equal}}>BROKEN_MAIN_DOOR</option>
+								<option value="AIR_CONDITIONING" {{#equal requestBody.reason 'AIR_CONDITIONING'}} selected="selected" {{/equal}}>AIR_CONDITIONING</option>
+								<option value="TOILET_FLUSH" {{#equal requestBody.reason 'TOILET_FLUSH'}} selected="selected" {{/equal}}>TOILET_FLUSH</option>
+								<option value="OTHERS"{{#equal requestBody.reason 'OTHERS'}} selected="selected" {{/equal}} >OTHERS</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label>Remarks *</label>
+						<input class="form-control" type="text" value="{{requestBody.remarks}}" name="remarks" id="remarks">
+					</div>
+
+					<div>
+						Note: Blocked on {{ currenttime }} by {{ user_details._first_name }} {{ user_details._last_name }}
+					</div>
+
+					<div class="row row-xl">
+						<div class="col-md-12">
+							<div class="m-xl-t text-right">
+								<button class="btn btn-danger w-150 btn-rounded"  name="Submit" value="Save" type="Submit">Save</button> 
+								<span class="btn btn-default w-150 btn-rounded" onclick="history.go(-1);">Cancel </span>
+							</div>	
+						</div>
+					</div>
+				</form>	
+			</div>
+		</div>
+	</div>
+</main>
+
+
+{{> footer}}

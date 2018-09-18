@@ -1,0 +1,121 @@
+<script src="/js/jquery.dataTables.min.js"></script>
+<script>
+    var reason_master = new Array();
+    {{#each masters.reason}}
+        reason_master.push({value:"{{this.value}}",text:"{{this.text}}"})
+    {{/each}}
+    $(function(){
+        var oTable = $('#maintenance_list').DataTable( {
+        "order": [[ 3, "desc" ]],
+        "search": {
+            "caseInsensitive": true
+        },
+        dom:'<"#add.row row-xl">rtlip',
+        processing: true,
+		serverSide: true,
+        ajax:function (data, callback, settings) {
+             $.ajax({url:"/maintenance_manager/getAllBlocks",type:"POST",data:data,dataType:'json',
+                success:function(res){
+                    $.each(res.Tabledata.data,function(i,val){
+                        res.Tabledata.data[i]['room_no'] = '<a href="/pms/maintenance/'+res.Tabledata.data[i]['blockid']+'/view">'+res.Tabledata.data[i]['room_no']+'</a>';
+                    });
+                    callback(res.Tabledata);
+                }
+            })
+        },
+        columns: [
+            { data: 'room_no'},
+            { data: 'from_date'},
+            { data: 'to_date' },
+            { data: 'createdTime'},
+            { data: 'userid'},
+            { data: 'reason'},
+            { data: 'blockstatus'},
+            { data: 'blockid',visible:false}
+
+        ]
+		});
+
+        let field = addNewFilterElement('select',{label:'Reason',name:'reasonfilter',id:'reasonfilter'});
+        $.each(reason_master,function(index,option){
+            $('<option/>').val(option.value).text(option.text).appendTo(field);    
+        })
+        addNewFilterElement('input',{label:'From Date',name:'from_date',id:'from_date'});
+        addNewFilterElement('input',{label:'To Date',name:'to_date',id:'to_date'});
+        addNewFilterElement('input',{label:'Room No',name:'room_no',id:'room_no'});
+
+        $(document).on('change',"#reasonfilter,#from_date,#to_date",function(){
+            var filterval = $(this).val();
+            if($(this).attr('id') == "reasonfilter") {
+                if(filterval == "all")
+                    oTable.column([5]).search('').draw();
+                else
+                    oTable.column([5]).search(filterval).draw();
+            }else if($(this).attr('id') == "from_date") {
+                oTable.column([1]).search(filterval).draw();
+            }else if($(this).attr('id') == "to_date") {
+                oTable.column([2]).search(filterval).draw();
+            }
+        });
+        $(document).on('keyup','#room_no,#from_date,#to_date',function(){
+            let filterval = $(this).val();
+            if($(this).attr('id') == "room_no")
+                oTable.column([0]).search(filterval).draw();
+            else if($(this).attr('id') == "from_date") {
+                oTable.column([1]).search(filterval).draw();
+            }else if($(this).attr('id') == "to_date") {
+                oTable.column([2]).search(filterval).draw();
+            }
+        })
+        $('input[name="from_date"]').datetimepicker({
+            format: 'Y-m-d H:i:s',
+            onChangeDateTime:function(dp,$input){
+                $('input[name="to_date"]').datetimepicker({minDate:$input.val()})
+            }
+        })
+        $('input[name="to_date"]').datetimepicker({
+            format: 'Y-m-d H:i:s',
+            onChangeDateTime:function(dp,$input){
+                $('input[name="from_date"]').datetimepicker({maxDate:$input.val()})
+            }
+        })
+
+    })
+</script>
+
+{{> nav}}
+
+{{> header}}
+
+<main id="page-content">
+    <div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Hotels</h3>
+        </div>
+    </div>
+
+    <div class="page-container">
+        <div class="row row-xl">
+            <div class="col-md-12">
+                <div class="text-right"><a href="/pms/maintenance/create" class="btn btn-danger btn-rounded w-175">Add Room</a>
+            </div>
+        </div>
+        <div class="row row-xl">
+            <div class="col-md-12 m-lg-b">
+                <h4 class="text-black fw-semi-thk fs-20">Maintenance Blocklist</h4>
+                
+                <table  id="maintenance_list" class="table table-striped" border="1" width="100%">
+                    <thead>
+                        <tr><th>Room No</th><th>Block From</th><th>Block To</th><th>Blocked On</th><th>Blocked By</th><th>Reason</th><th>Block status</th></tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="/js/jquery-ui.js"></script>
+<link href="/css/bootstrap-tagsinput.css" rel="stylesheet" />
+
+{{> footer}}

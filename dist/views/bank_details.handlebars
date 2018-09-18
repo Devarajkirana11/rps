@@ -1,0 +1,492 @@
+{{> nav}}
+
+{{> header}}
+
+<main id="page-content">
+    <script src="/js/bank_details.js"></script>
+    <div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Bank Details</h3>
+        </div>
+    </div>
+
+    <div class="page-container">
+    {{#if errors}}
+		<ul>
+		{{#each errors}}
+			<li>
+				<div class="text-danger"> {{ msg }}</div>
+			</li>
+		{{/each}}
+		</ul>
+	{{/if}}
+	{{#if success }}
+		<div class="alert alert-success">{{ message}}</div>
+	{{else if message }}
+		<div class="alert alert-danger">{{ message}}</div>
+	{{/if}}
+    {{#if bank_id}}
+        <form class="" action='/bank_details/create?bank_id={{bank_id}}' method="POST">
+    {{else}}
+        <form class="" action='/bank_details/create?hotel_id={{#if requestBody.hotel_id }}{{requestBody.hotel_id}}{{/if}}' method="POST">
+    {{/if}}
+{{#if formstatus}}
+        <div class="row row-xl">
+            <div class="col-md-12 m-lg-b">
+                <h4 class="text-black fw-semi-thk fs-20">Bank Account Details</h4>
+            </div>
+        </div>
+        {{!-- Begin Bank Account Details --}}
+        <div class="row row-xl selectWrapper">
+            <div class="col-md-6">
+                <div class="row row-xl">
+                    {{!-- Begin Bank Name --}}
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class=""  for="bankname">Bank Name*</label>
+                            <input type="text" id="" name="bankname" placeholder="" class="form-control" value="{{#if requestBody.bankname }}{{ requestBody.bankname }}{{/if}}" >
+                            <span class="text-danger">{{#if bankname }} {{ bankname }} {{/if}}</span>
+                        </div>
+                    </div>
+                    {{!-- End Bank Name --}}
+
+                    {{!-- Begin Bank Branch --}}
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class=""  for="bankbranch">Bank Branch*</label>
+                            <input type="text" id="" name="bankbranch" placeholder="" class="form-control" value="{{#if requestBody.bankbranch }}{{ requestBody.bankbranch }}{{/if}}">
+                            <span class="text-danger">{{#if bankbranch }} {{ bankbranch }} {{/if}}</span>
+                        </div>
+                    </div>
+                    {{!-- End Bank Branch --}}
+
+                    {{!-- Begin Bank Code --}}
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class=""  for="bankcode">Bank Code*</label>
+                            <input type="text" id="" name="bankcode" placeholder="" class="form-control" value="{{#if requestBody.bankcode }}{{ requestBody.bankcode }}{{/if}}">
+                            <span class="text-danger">{{#if bankcode }} {{ bankcode }} {{/if}}</span>
+                        </div>
+                    </div>
+                    {{!-- End Bank Code --}}
+
+                    {{!-- Begin Branch Code --}}
+                    {{!--<div class="col-md-12">
+                        <<div class="form-group">
+                            <label class=""  for="bankbranchcode">Bank Branch Code*</label>
+                            <input type="text" id="" name="bankbranchcode" placeholder="" class="form-control" value="{{#if requestBody.bankbranchcode }}{{ requestBody.bankbranchcode }}{{/if}}" >
+                            <span class="text-danger">{{#if bankbranchcode }} {{ bankbranchcode }} {{/if}}</span>
+                        </div>
+                    </div>--}}
+                    {{!-- End Branch Code --}}
+
+                    {{!-- Begin Swift Code --}}
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class=""  for="bankswiftcode">Bank Swift Code*</label>
+                            <input type="text" id="" name="bankswiftcode" placeholder="" class="form-control" value="{{#if requestBody.bankswiftcode }}{{ requestBody.bankswiftcode }}{{/if}}">
+                            <span class="text-danger">{{#if bankswiftcode }} {{ bankswiftcode }} {{/if}}</span>
+                        </div>
+                    </div>
+                    {{!-- End Swift Code --}}
+
+                    {{!-- Begin Account Number --}}
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class=""  for="bankaccountnumber">Bank Account Number*</label>
+                            <input type="text" id="" name="bankaccountnumber" placeholder="" class="form-control" value="{{#if requestBody.bankaccountnumber }}{{ requestBody.bankaccountnumber }}{{/if}}">
+                            <span class="text-danger">{{#if bankaccountnumber }} {{ bankaccountnumber }} {{/if}}</span>
+                        </div>
+                    </div>
+                    {{!-- End Account Number --}}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row row-xl">
+                    {{!-- Begin Address Line 1 --}}
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="">Address Line 1</label>
+                            <input typ="text" name="address_line1" class="form-control" placeholder="Address line 1" value="{{#if requestBody.address_line1 }}{{ requestBody.address_line1 }}{{/if}}"><span class="text-danger">{{#if address_line1 }} {{ address_line1 }} {{/if}}</span>
+                        </div>
+                    </div>
+                    {{!-- End Address Line 1 --}}
+
+                    {{!-- Begin Address Line 2 --}}
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="">Address Line 2</label>
+                            <input typ="text" name="address_line2" class="form-control" placeholder="Address line 2" value="{{#if requestBody.address_line2 }}{{ requestBody.address_line2 }}{{/if}}"><span class="text-danger">{{#if address_line2 }} {{ address_line2 }} {{/if}}</span>
+                        </div>
+                    </div>
+                    {{!-- End Address Line 2 --}}
+
+                    {{!-- Begin Country --}}
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="">Country*</label>
+                            <div class="select-wrapper">
+                                <select  id="" name="country" placeholder="" class="country form-control">
+                                    <option value="select" {{#equal requestBody.country 'select'}} selected="selected" {{/equal}}>Choose Country</option>
+                                    {{#if locationmasters }}
+                                        {{#each locationmasters }}
+                                            <option value="{{@key}}" {{#equal ../requestBody.country @key}} selected="selected" {{/equal}}>{{ this.name }}</option>
+                                        {{/each}}
+                                    {{/if}}
+                                </select>
+                                <span class="text-danger">{{#if country }} {{ country }} {{/if}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- End Country --}}
+
+                    {{!-- Begin State --}}
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="">State*</label>
+                            <div class="select-wrapper">
+                                <select  id="" name="state" placeholder="" class="state form-control">
+                                    <option value="select" {{#equal requestBody.state 'select'}} selected="selected" {{/equal}}>Choose State</option>
+                                    <option value="{{requestBody.state}}" {{#if requestBody.state }} selected="selected" {{/if}}>Loading...</option>
+                                </select>
+                                <span class="text-danger">{{#if state }} {{ state }} {{/if}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- End State --}}
+
+                    {{!-- Begin City --}}
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="">City*</label>
+                            <div class="select-wrapper">
+                                <select  id="" name="city" placeholder="" class="city form-control">
+                                    <option value="select" {{#equal requestBody.city 'select'}} selected="selected" {{/equal}}>Choose City</option>
+                                    <option value="{{requestBody.city}}" {{#if requestBody.city }} selected="selected" {{/if}}>Loading...</option>
+                                </select>
+                                <span class="text-danger">{{#if city }} {{ city }} {{/if}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- End City --}}
+
+                    {{!-- Begin Zip / Postal Code --}}
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="">Zip / Postal Code</label>
+                            <input typ="text" name="zipcode" class="form-control" placeholder="Postal Code" value="{{#if requestBody.zipcode }}{{ requestBody.zipcode }}{{/if}}"><span class="text-danger">{{#if zipcode }} {{ zipcode }} {{/if}}</span>
+                        </div>
+                    </div>
+                    {{!-- End Zip / Postal Code --}}
+                </div>
+            </div>
+        </div>
+        {{!-- End Bank Account Details --}}
+
+        <hr class="m-xl-b m-xl-t">
+
+        {{!-- Begin Account Holder Details --}}
+        <div class="row row-xl selectWrapper">
+            {{!-- Account Holder Details Header --}}
+            <div class="col-md-12 m-lg-b">
+                <h4 class="text-black fw-semi-thk fs-20">Account Holder Details</h4>
+            </div>
+            {{!-- End Holder Details Header --}}
+
+            {{!-- Begin Account Holder First Name --}}
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class=""  for="accountholderfirstname">Account Holder First Name*</label>
+                    <input type="text" id="" name="accountholderfirstname" placeholder="" class="form-control" value="{{#if requestBody.accountholderfirstname }}{{ requestBody.accountholderfirstname }}{{/if}}">
+                    <span class="text-danger">{{#if accountholderfirstname }} {{ accountholderfirstname }} {{/if}}</span>
+                </div>
+            </div>
+            {{!-- End Account Holder First Name --}}
+
+            {{!-- Begin Account Holder Last Name --}}
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class=""  for="accountholderlastname">Account Holder Last Name*</label>
+                    <input type="text" id="" name="accountholderlastname" placeholder="" class="form-control" value="{{#if requestBody.accountholderlastname }}{{ requestBody.accountholderlastname }}{{/if}}">
+                    <span class="text-danger">{{#if accountholderlastname }} {{ accountholderlastname }} {{/if}}</span>
+                </div>
+            </div>
+            {{!-- End Account Holder Last Name --}}
+
+            {{!-- Begin Hotel Address Checkbox --}}
+            <div class="col-md-12 m-lg-b">
+                <div class="checkbox">
+                    <input type="checkbox" name="accountSameAsHotelAddress" id="accountSameAsHotelAddress" {{#equal requestBody.accountSameAsHotelAddress "on"}} checked="checked" {{/equal}} />
+                    <label for="accountSameAsHotelAddress"> Same as Hotel Address </label>
+                </div>
+            </div>
+            {{!-- End Hotel Address Checkbox --}}
+
+            {{!-- Begin Address Line 1 --}}
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="">Address Line 1*</label>
+                    <input typ="text" name="ACCaddress_line1" class="form-control" placeholder="Address line 1" value="{{#if requestBody.ACCaddress_line1 }}{{ requestBody.ACCaddress_line1 }}{{/if}}">
+                    <span class="text-danger">{{#if ACCaddress_line1 }} {{ ACCaddress_line1 }} {{/if}}</span>
+                </div>
+            </div>
+            {{!-- End Address Line 1 --}}
+
+            {{!-- Begin Address Line 2 --}}
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="">Address Line 2*</label>
+                    <input typ="text" name="ACCaddress_line2" class="form-control" placeholder="Address line 2" value="{{#if requestBody.ACCaddress_line2 }}{{ requestBody.ACCaddress_line2 }}{{/if}}">
+                    <span class="text-danger">{{#if ACCaddress_line2 }} {{ ACCaddress_line2 }} {{/if}}</span>
+                </div>
+            </div>
+            {{!-- End Address Line 2 --}}
+
+            {{!-- Begin Country --}}
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">Country*</label>
+                    <div class="select-wrapper">
+                        <select  id="" name="ACCcountry" placeholder="" class="country form-control">
+                            <option value="select" {{#equal requestBody.ACCcountry 'select'}} selected="selected" {{/equal}}>Choose Country</option>
+                            {{#if locationmasters }}
+                                {{#each locationmasters }}
+                                    <option value="{{@key}}" {{#equal ../requestBody.ACCcountry @key}} selected="selected" {{/equal}}>{{ this.name }}</option>
+                                {{/each}}
+                            {{/if}}
+                        </select>
+                    </div>
+
+                    <span class="text-danger">{{#if ACCcountry }} {{ ACCcountry }} {{/if}}</span>
+                </div>
+            </div>
+            {{!-- End Country --}}
+
+            {{!-- Begin State --}}
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">State*</label>
+                    <div class="select-wrapper">
+                        <select  id="" name="ACCstate" placeholder="" class="state form-control">
+                            <option value="select" {{#equal requestBody.ACCstate 'select'}} selected="selected" {{/equal}}>Choose State</option>
+                            <option value="{{requestBody.ACCstate}}" {{#if requestBody.ACCstate }} selected="selected" {{/if}}>Loading...</option>
+                        </select>
+                    </div>
+
+                    <span class="text-danger">{{#if ACCstate }} {{ ACCstate }} {{/if}}</span>
+                </div>
+            </div>
+            {{!-- End State --}}
+
+            {{!-- Begin City --}}
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">City*</label>
+                    <div class="select-wrapper">
+                        <select  id="" name="ACCcity" placeholder="" class="city form-control">
+                            <option value="select" {{#equal requestBody.ACCcity 'select'}} selected="selected" {{/equal}}>Choose City</option>
+                            <option value="{{requestBody.ACCcity}}" {{#if requestBody.ACCcity }} selected="selected" {{/if}}>Loading...</option>
+                        </select>
+                    </div>
+
+                    <span class="text-danger">{{#if ACCcity }} {{ ACCcity }} {{/if}}</span>
+                </div>
+            </div>
+            {{!-- End City --}}
+
+            {{!-- Begin Zip / Postal Code --}}
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">Zip / Postal Code*</label>
+                    <input typ="text" name="ACCzipcode" class="form-control" placeholder="Postal Code" value="{{#if requestBody.ACCzipcode }}{{ requestBody.ACCzipcode }}{{/if}}">
+                    <span class="text-danger">{{#if ACCzipcode }} {{ ACCzipcode }} {{/if}}</span>
+                </div>
+            </div>
+            {{!-- End Zip / Postal Code --}}
+        </div>
+    
+        {{!-- End Account Holder Details --}}
+
+        <hr class="m-xl-b m-xl-t">
+
+        {{!-- Begin Legal Details --}}
+        <div class="row row-xl">
+            {{!-- Begin Leagal Details Header --}}
+            <div class="col-md-12 m-lg-b">
+                <h4 class="text-black fw-semi-thk fs-20">Legal Details</h4>
+            </div>
+            {{!-- End Leagal Details Header --}}
+
+            {{!-- Begin Service Tax Type --}}
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class=""  for="servicetaxtype">Service Tax Type*</label>
+                    <input type="text" id="" name="servicetaxtype" placeholder="" class="form-control" value="{{#if requestBody.servicetaxtype }}{{ requestBody.servicetaxtype }}{{/if}}">
+                    <span class="text-danger">{{#if servicetaxtype }} {{ servicetaxtype }} {{/if}}</span>
+                </div>
+            </div>
+            {{!-- End Service Tax Type --}}
+
+            {{!-- Begin Service Tax No --}}
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class=""  for="servicetaxno">Service Tax No.*</label>
+                    <input type="text" id="" name="servicetaxno" placeholder="" class="form-control" value="{{#if requestBody.servicetaxno }}{{ requestBody.servicetaxno }}{{/if}}">
+                    <span class="text-danger">{{#if servicetaxno }} {{ servicetaxno }} {{/if}}</span>
+                </div>
+            </div>
+            {{!-- End Service Tax No --}}
+
+            {{!-- Begin Certificate Type --}}
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class=""  for="certificatetype">Certificate Type*</label>
+                    <input type="text" id="" name="certificatetype" placeholder="" class="form-control" value="{{#if requestBody.certificatetype }}{{ requestBody.certificatetype }}{{/if}}">
+                    <span class="text-danger">{{#if certificatetype }} {{ certificatetype }} {{/if}}</span>
+                </div>
+            </div>
+            {{!-- End Certificate Type --}}
+            {{!-- Begin Certificate No --}}
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label class=""  for="certificateno">Certificate No*</label>
+                        <input type="text" id="" name="certificateno" placeholder="" class="form-control" value="{{#if requestBody.certificateno }}{{ requestBody.certificateno }}{{/if}}">
+                        <span class="text-danger">{{#if certificateno }} {{ certificateno }} {{/if}}</span>
+                    </div>
+                </div>
+                {{!-- End Certificate No --}}
+
+                {{!-- Begin Upload Copy of Legal Document --}}
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class=""  for="legaldocument">Upload copy of Legal Document</label>
+                        <input type="file"  id="" multiple name="legaldocument" placeholder="" class="saveFile form-control" value="{{#if requestBody.legaldocument }}{{ requestBody.legaldocument }}{{/if}}">
+                        <span class="text-danger">{{#if legaldocument }} {{ legaldocument }} {{/if}}</span>
+                    </div>
+                </div>
+                {{!-- End Upload Copy of Legal Document --}}
+            </div>
+        </div>
+        {{!-- End Legal Details --}}
+
+        <hr class="m-xl-b m-xl-t">
+
+        {{!-- Begin Registered Office Address --}}
+        <div class="row row-xl selectWrapper">
+            {{!-- Begin Same Address Checkbox --}}
+            <div class="col-md-12 m-lg-b">
+                <div class="checkbox">
+                    <input type="checkbox" name="legalSameAsHotelAddress" id="legalSameAsHotelAddress" {{#equal requestBody.legalSameAsHotelAddress "on"}} checked="checked" {{/equal}}/> 
+                    <label for="legalSameAsHotelAddress"> Same as Hotel Address </label>
+                </div>
+            </div>
+            {{!-- End Same Address Checkbox --}}
+
+            {{!-- Begin Registered Details Header --}}
+            <div class="col-md-12 m-lg-b">
+                <h4 class="text-black fw-semi-thk fs-20">Registered Office Address</h4>
+            </div>
+            {{!-- End Registered Details Header --}}
+
+            {{!-- Begin Address Line 1 --}}
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="">Address Line 1*</label>
+                    <input typ="text" name="Laddress_line1" class="form-control" placeholder="Address line 1" value="{{#if requestBody.Laddress_line1 }}{{ requestBody.Laddress_line1 }}{{/if}}">
+                    <span class="text-danger">{{#if Laddress_line1 }} {{ Laddress_line1 }} {{/if}}</span>
+                </div>
+            </div>
+            {{!-- End Address Line 1 --}}
+
+            {{!-- Begin Address Line 2 --}}
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="">Address Line 2*</label>
+                    <input typ="text" name="Laddress_line2" class="form-control" placeholder="Address line 2" value="{{#if requestBody.Laddress_line2 }}{{ requestBody.Laddress_line2 }}{{/if}}">
+                    <span class="text-danger" >{{#if Laddress_line2 }} {{ Laddress_line2 }} {{/if}}</span>
+                </div>
+            </div>
+            {{!-- End Address Line 2 --}}
+
+            {{!-- Begin Country --}}
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">Country*</label>
+                    <div class="select-wrapper">
+                        <select  id="" name="Lcountry" placeholder="" class="country form-control">
+                            <option value="select" {{#equal requestBody.Lcountry 'select'}} selected="selected" {{/equal}}>Choose Country</option>
+                            {{#if locationmasters }}
+                                {{#each locationmasters }}
+                                    <option value="{{@key}}" {{#equal ../requestBody.Lcountry @key}} selected="selected" {{/equal}}>{{ this.name }}</option>
+                                {{/each}}
+                            {{/if}}
+                        </select>                           
+                    </div>
+                    <span class="text-danger">{{#if Lcountry }} {{ Lcountry }} {{/if}}</span>
+                </div>
+            </div>
+            {{!-- End Country --}}
+
+            {{!-- Begin State --}}
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">State*</label>
+
+                    <div class="select-wrapper">
+                        <select  id="" name="Lstate" placeholder="" class="state form-control">
+                            <option value="select" {{#equal requestBody.Lstate 'select'}} selected="selected" {{/equal}}>Choose State</option>
+                            <option value="{{requestBody.Lstate}}" {{#if requestBody.Lstate }} selected="selected" {{/if}}>Loading...</option>
+                        </select>
+                    </div>
+                    <span class="text-danger">{{#if Lstate }} {{ Lstate }} {{/if}}</span>
+                </div>
+            </div>
+            {{!-- End State --}}
+            {{!-- Begin City --}}
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">City*</label>
+
+                    <div class="select-wrapper">
+                        <select  id="" name="Lcity" placeholder="" class="city form-control">
+                            <option value="select" {{#equal requestBody.Lcity 'select'}} selected="selected" {{/equal}}>Choose City</option>
+                            <option value="{{requestBody.Lcity}}" {{#if requestBody.Lcity }} selected="selected" {{/if}}>Loading...</option>
+                        </select>
+                    </div>
+
+                    <span class="text-danger">{{#if Lcity }} {{ Lcity }} {{/if}}</span>
+                </div>
+            </div>
+            {{!-- End City --}}
+
+            {{!-- Begin Zip / Postal Code --}}
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">Zip / Postal Code</label>
+                    <input typ="text" name="Lzipcode" class="form-control" placeholder="Postal Code" value="{{#if requestBody.Lzipcode }}{{ requestBody.Lzipcode }}{{/if}}">
+                    <span class="text-danger">{{#if Lzipcode }} {{ Lzipcode }} {{/if}}</span>
+                </div>
+            </div>
+            {{!-- End Zip / Postal Code --}}
+        </div>
+        {{!-- End Registered Office Address --}}
+
+        {{!-- Begin Submit Button Container --}}
+        <div class="row row-xl">
+            <div class="col-md-12 m-xl-t">
+                <div class="text-right">
+                    <input type="hidden" name="hotel_id" value="{{#if requestBody.hotel_id }}{{requestBody.hotel_id}}{{/if}}" />
+                    <input type="submit" name="save" class = "btn btn-danger btn-rounded w-150 m-md-b"/> 
+                    <a href="#" class="btn btn-default btn-rounded w-150 m-md-b">Cancel</a>
+                </div>
+            </div>
+        </div>
+        {{!-- End Submit Button Container --}}
+
+        </form>
+        {{/if}}
+    </div>
+</main>
+
+{{>footer}}

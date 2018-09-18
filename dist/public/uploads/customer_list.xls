@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  </head>
+  <body>
+    <table>
+    <thead><tr><th>User ID</th><th>Mobile Number</th><th>Address</th></tr></thead>    <tbody> <tr class="odd"><td>53389</td><td>234567829021</td><td></td> </tr>
+ <tr class="even"><td>53388</td><td>23456789021</td><td></td> </tr>
+ <tr class="odd"><td>53379</td><td>87543643392212</td><td></td> </tr>
+ <tr class="even"><td>53373</td><td>9500592490</td><td></td> </tr>
+ <tr class="odd"><td>53372</td><td>8754364387</td><td></td> </tr>
+ <tr class="even"><td>51237</td><td>9686227331</td><td></td> </tr>
+ <tr class="odd"><td>51151</td><td>9844232243</td><td></td> </tr>
+ <tr class="even"><td>48974</td><td>9900582172</td><td><div class="addressfield-container-inline name-block"><div class="name-block">Vasanth shastry</div></div><div class="street-block"><div class="thoroughfare">Pioneer regency, 1st cross , flat no 102, 1st cross, venkatadri</div></div><div class="addressfield-container-inline locality-block country-IN">Bangalore Karnataka 560076</div></td> </tr>
+ <tr class="odd"><td>48933</td><td>9403592999</td><td></td> </tr>
+ <tr class="even"><td>48932</td><td>9980610017</td><td><div class="addressfield-container-inline name-block"><div class="name-block">Shanmugam</div></div><div class="street-block"><div class="thoroughfare">#3, First Main, BDA Layout, Kodihalli, HAL 2nd Stagr</div><div class="premise">Shree Building, Sir CV Raman Rd, HAL 2nd Stage, Kodihalli, Bengaluru, Karnataka 560017, India</div></div><div class="addressfield-container-inline locality-block country-IN">Bangalore Karnataka 560008</div></td> </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

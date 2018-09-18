@@ -4,11 +4,5 @@
 .baseDir.ts
 .idea
 
-node_modules
-dist
-
-npm-debug.log
-gruntfile.js
-package.json
 
 *.tmp.txt

@@ -1,0 +1,60 @@
+{{> nav this}}
+
+{{> header}}
+
+<main id="page-content">
+	<div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Channels Sell Rates</h3>
+        </div>
+    </div>
+
+	<div class="page-container">
+		<div class="row row-xl">
+			<div class="col-md-12">
+				<div class="add-button text-right">
+					<a href="/hotels/rates/sell/create?hotel_id={{ hotel_id }}" class="btn btn-danger btn-rounded w-150 btn-danger text-left">Add New <i class="fa fa-plus-circle pull-right fa-fw"></i></a>
+				</div>
+			</div>
+		</div>
+
+		<div class="row row-xl">
+			<div class="col-md-12">
+				<div class="table-view">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Markup Plan Name</th>
+								<th>Percentage / Flat</th>
+								<th>Status</th>
+								<th>Start Date</th>
+								<th>End Date</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{{#each output}}
+							<tr>
+								<td><a href="/hotels/rates/sell/{{../hotel_id}}/edit?key_value={{ @index }}&hotel_id={{ ../hotel_id }}" class="markup-name">{{ this.name }}</a></td>
+								<td>{{ this.markup.value }}</td>
+								<td>
+									{{#equal this.active 'true'}} Active {{/equal}}
+									{{#equal this.active 'false'}} In-Active {{/equal}}
+								</td>
+								<td>{{ this.startDate }}</td>
+								<td>{{ this.endDate }}</td>
+								<td>
+									{{#equal this.active 'true'}} <span  data-hotel-id="{{../hotel_id}}" data-name="{{ this.name }}" data-action="false" class="btn btn-danger markup-status">Deactivate</span> {{/equal}}
+									{{#equal this.active 'false'}} <span  data-hotel-id="{{../hotel_id}}" data-name="{{ this.name }}" data-action="true" class="btn btn-success markup-status">Activate</span> {{/equal}}
+								</td>
+							</tr>
+							{{/each}}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+
+{{> footer}}

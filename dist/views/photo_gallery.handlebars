@@ -1,0 +1,97 @@
+{{> nav}}
+
+{{> header}}
+
+<main id="page-content">
+    <div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Photo Gallery</h3>
+        </div>
+    </div>
+
+<div class="page-container">
+<div class="row row-xl">
+    {{#if errors}}
+        <ul>
+            {{#each errors}}
+            <li>
+                <div class="text-danger"> {{ msg }}</div>
+            </li>
+            {{/each}}
+        </ul>
+    {{/if}}
+    <div class="panel panel-default">
+        <legend>Gallery Photos</legend>
+        {{#if success }}
+            <div class="alert alert-success">{{ message}}</div>
+        {{else if message }}
+            <div class="alert alert-danger">{{ message}}</div>
+        {{/if}}
+        <div class="row row-xl"><button class="btn btn-danger pull-right" data-toggle="modal" data-target="#HotelImageUpload">Upload Hotel Image</button></div>
+        <div class="panel-body">
+            <div class="row row-xl">
+                <div class="col-md-12 m-lg-b">
+                    <h4 class="text-black fw-semi-thk fs-20">Hotel Images</h4>
+                </div>
+                {{#if success }}
+                    {{#each images }}
+                        {{#if this.image }}
+                            {{#inArray ../hotel_images this.fid }}
+                                <div class="col-md-3">
+                                    <img src="{{this.image}}" width="150px" height="150px"/>
+                                    <div><a href="/gallery/{{../hid}}/photo/{{this.fid}}/edit" >Edit</a></div>
+                                </div>
+                            {{/inArray}}
+                        {{/if}}
+                    {{/each}}
+                {{/if}}
+            </div>
+            <div class="row row-xl">
+                <div class="col-md-12 m-lg-b">
+                    <h4 class="text-black fw-semi-thk fs-20">Other Images</h4>
+                </div>
+                {{#if success }}
+                    {{#each images }}
+                        {{#if this.image }}
+                            {{#notInArray ../hotel_images this.fid }}
+                                <div class="col-md-3">
+                                    <img src="{{this.image}}" width="150px" height="150px"/>
+                                    <div><a href="/gallery/{{../hid}}/photo/{{this.fid}}/edit" >Edit</a></div>
+                                </div>
+                            {{/notInArray}}
+                        {{/if}}
+                    {{/each}}
+                {{/if}}
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div id="HotelImageUpload" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+               <div class="form-group">
+                    <label>Please choose Image(s) to upload:</label>
+                    <input type="file" name="hotelImage" class="form-control saveFile"  multiple value=""/>
+                    <input type="hidden" name="hotel_id" value="{{hid}}"/>
+               </div>
+               <div id="message"></div>
+            </div>
+            <div class="modal-footer">
+                <button  class="btn btn-primary"  id="uploadHotelImage">Upload</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">cancel</button>
+            </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+</main>
+{{> footer }}

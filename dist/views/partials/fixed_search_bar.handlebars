@@ -1,0 +1,157 @@
+<div id="fixed-search-bar">
+    <!-- Begin Row -->
+    <form action="javascript:void(0)">
+      <div id="home-search-form">
+        <div class="form-container">
+          <div class="input-container">
+            <div class="form-group">
+              <label for="">Where</label>
+              <!-- <div class="select-wrapper"> -->
+              <select name="location" id="location-dropdown" placeholder='Location' ui-select2
+                      ng-options="place.locality group by place.country for place in pagedata.localities"
+                      ng-model="searchdata.place" ng-change="setDateRangeDyanmically('change')"></select>
+              <!-- </div> -->
+            </div>
+          </div>
+
+          <div class="input-container check-in-container">
+            <div class="form-group">
+              <label for="">Check In</label>
+              <span class="icon-container"><i class="fa fa-sign-in fa-fw text-danger"></i></span>
+              <input type="text" class="form-control" id="check-in-date" name="check_in" placeholder="Check In">
+            </div>
+          </div>
+
+          <div class="input-container check-out-container">
+            <div class="form-group">
+              <label for="">Check Out</label>
+              <input type="text" class="form-control" id="check-out-date" name="check_out" placeholder="Check Out">
+              <span class="icon-container"><i class="fa fa-sign-out fa-fw text-danger"></i></span>
+            </div>
+          </div>
+
+          <div class="input-container guests-container">
+            <div class="form-group">
+              <label for="">Guests</label>
+              <input type="text" class="form-control" placeholder="No of Guests" id="guests-input"
+                     ng-model="searchdata.guests" readonly>
+
+              <div class="guests-selection-container">
+                <!--<div class="guests-ul-container" ng-repeat="guest in guests track by $index">
+                    <div>
+                        <p class="text-left text-uppercase room-title">Room <span ng-bind="($index+1)"></span></p>
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group text-left">
+                                    <label for="">Adult(s)</label>
+                                    <div class="select-wrapper">
+                                        <select name="adults" id="adults" ng-model="guestsData.adults[$index]" class="form-control" >
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <div class="form-group text-left">
+                                    <label for="">Kid(s)</label>
+                                    <div class="select-wrapper">
+                                        <select name="kids" id="kids"  ng-model="guestsData.kids[$index]" class="form-control">
+                                            <option value="0" selected="selected">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row m-lg-t">
+                    <div class="col-md-6 col-sm-6 col-xs-12 m-md-b">
+                        <button class="btn btn-danger btn-transparent btn-rounded btn-block text-left" id="add-room-button" ng-click="cloneRow(guest,'add')">Add Room <i class="fa fa-plus-circle fa-fw pull-right"></i></button>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-12 m-md-b">
+                        <button class="btn btn-danger btn-transparent btn-rounded btn-block text-right" id="remove-room-button" ng-click="cloneRow(guest,'sub')"><i class="fa fa-minus-circle fa-fw pull-left"></i> Remove Room</button>
+                    </div>
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <button class="btn btn-danger btn-rounded btn-block" ng-click="CountGuests()">Submit</button>
+                    </div>
+                </div>-->
+                {{>adding_guests}}
+              </div>
+
+              {{!-- <div class="guests-selection-container">
+                  <div class="guests-ul-container" ng-repeat="guest in guests track by $index">
+                      <div>
+                          <p class="text-left text-uppercase room-title">Room <span ng-bind="($index+1)"></span></p>
+
+                          <div class="row">
+                              <div class="col-xs-6">
+                                  <div class="form-group text-left">
+                                      <label for="">Adult(s)</label>
+                                      <div class="select-wrapper">
+                                          <select name="adults" id="adults" ng-model="guestsData.adults[$index]" class="form-control" >
+                                              <option value="1" selected="selected">1</option>
+                                              <option value="2">2</option>
+                                              <option value="3">3</option>
+                                              <option value="4">4</option>
+                                          </select>
+                                      </div>
+                                  </div>
+                              </div>
+
+                              <div class="col-xs-6">
+                                  <div class="form-group text-left">
+                                      <label for="">Kid(s)</label>
+                                      <div class="select-wrapper">
+                                          <select name="kids" id="kids"  ng-model="guestsData.kids[$index]" class="form-control">
+                                              <option value="1" selected="selected">1</option>
+                                              <option value="2">2</option>
+                                              <option value="3">3</option>
+                                              <option value="4">4</option>
+                                          </select>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="row m-lg-t">
+                      <div class="col-xs-6">
+                          <button class="btn btn-danger btn-transparent btn-rounded btn-block text-left" id="add-room-button" ng-click="cloneRow(guest,'add')">Add Room <i class="fa fa-plus-circle fa-fw pull-right"></i></button>
+                      </div>
+
+                      <div class="col-xs-6">
+                          <button class="btn btn-danger btn-transparent btn-rounded btn-block text-right" id="remove-room-button" ng-click="cloneRow(guest,'sub')"><i class="fa fa-minus-circle fa-fw pull-left"></i> Remove Room</button>
+                      </div>
+
+                      <div class="col-md-12 m-md-t">
+                          <button class="btn btn-danger btn-rounded btn-block" ng-click="CountGuests()">Submit</button>
+                      </div>
+                  </div>
+              </div> --}}
+            </div>
+          </div>
+
+          <div class="input-container search-button-container">
+            <button class="btn btn-danger btn-rounded" ng-click="search()">Search</button>
+          </div>
+
+          <div class="clearfix"></div>
+        </div>
+        <div class="text-danger" ng-bind="validation_msg"></div>
+      </div>
+    </form>
+    <!-- End Row -->
+  </div>

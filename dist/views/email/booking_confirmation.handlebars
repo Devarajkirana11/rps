@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Booking Confirmation</title>
+
+    <style type="text/css">
+        @media (max-width: 480px) {
+            .hotel-information {
+                display: block !important;
+                text-align: left !important;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body style="padding: 0; margin: 0; background: #fff;">
+<table cellpadding="0" cellspacing="0" width="100%"  style="border-collapse:collapse;margin:0;padding:0;width:100%;font-size:15px;color:#373737;">
+    <tbody>
+    <tr>
+        <td style="font-family: Roboto-Regular,BlinkMacSystemFont,-apple-system,'Trebuchet MS',Roboto,Helvetica,Arial,sans-serif; border-collapse: collapse;">
+            <table cellpadding="0" cellspacing="0" width="600" align="center">
+                <tbody>
+                <tr>
+                    <td>
+                        <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                            <tbody>
+                            <tr>
+                                <td style="text-align: left; font-size: 14px;">
+                                    <a href="https://hotelnida.com">
+                                        <img src="https://s3-ap-southeast-1.amazonaws.com/hotelnida/home-images/logo-small.png" alt="" width="110">
+                                    </a>
+                                </td>
+                                <td style="text-align: right; font-size: 14px;">
+                                    <a href="https://hotelnida.com/nidacash">
+                                        <img src="https://hotelnida.com/images/nidacash-email.jpg" height="50" alt="">
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>             
+                <tr>
+                </tr>
+
+                <tr>
+                    <td>
+                        <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                            <tbody>
+                            <tr>
+                                <td style="text-align: left; font-size: 14px; text-transform: uppercase;"><small style="font-size: 12px;">Booking ID:</small> <br> <strong style="color: #000;">{{ output.booking.referenceId }}</strong></td>
+                                <td style="text-align: right; font-size: 14px; text-transform: uppercase;"><small style="font-size: 12px;">Booking Date:</small> <br> <strong style="color: #000;">{{ output.booking.bookedOn }}</strong></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td style="padding: 25px 0;">
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                            <tbody>
+                            <td style="width: 25%; text-align: right;" valign="middle">
+                                <img src="https://hotelnida.com/images/check.png" alt="" height="60" width="60">
+                            </td>
+                            <td style="width: 75%; text-align: left; padding-left: 15px;" valign="middle">
+                                <h3 style="font-weight: 600; margin: 20px 0; color: #27c24c;"><span style="text-transform: uppercase;">Congratulations!</span><br/>Thank you for booking with us.<br/>Your booking is now confirmed. </h3>
+                                <p style="margin: 0"> </p>
+                            </td>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <table cellpadding="0" cellspacing="0"  style="width: 100%;">
+                            <tr>
+                                <td><h4 style="text-transform: uppercase; margin: 0; color: #000; margin-bottom: 10px;">Hotel Information</h4></td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <table cellpadding="0" cellspacing="0"  style="width: 100%;">
+                                        <tr>
+                                            <td class="hotel-information">
+                                                <div style="margin-bottom: 5px;">
+                                                    <strong style="font-size: 20px; text-transform: uppercase; color: #000;">
+                                                        {{ hotel_details._nida_stay_name }}
+                                                    </strong>
+                                                </div>
+                                                {{ hotel_details._address_line1 }}<br/>
+                                                {{ hotel_details._address_line2 }}<br/>
+                                            </td>
+                                            <td class="hotel-information" valign="top" style="text-align: right;">
+                                                <small style="text-transform: uppercase; font-size: 12px;">Phone</small>
+                                                <br>
+                                                <span style="color: #000;">{{ contact_details._FrontDeskContactDetails.[0]._landline_number }}</span>
+
+                                                <br>
+                                                <br>
+
+                                                <small style="text-transform: uppercase; font-size: 12px;">Email</small>
+                                                <br>
+                                                <span style="color: #000;">{{ contact_details._FrontDeskContactDetails.[0]._email }}</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <tr><td><br/></td></tr>
+
+                            <tr><td><b>Breakfast Available : 7am to 10am. </b></td></tr>
+
+                            <tr>
+                                <td>
+                                    <hr style="border: none; border-top: solid 1px #ddd; margin: 30px 0;">
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                            <tbody>
+                            <tr>
+                                <td><h4 style="text-transform: uppercase; margin: 0; color: #000; margin-bottom: 10px;">Booking Details</h4></td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <table cellpadding="0" cellspacing="0" style="width: 100%">
+                                        <tbody>
+                                        <tr>
+                                            <td style="text-align: left;">
+                                                <p style="margin: 0; text-transform: uppercase;"><small style="font-size: 12px;">Check In</small></p>
+                                                <div style="margin-bottom: 15px; margin-top: 5px;"><h3 style="margin: 0; color: #ec1c24;"><strong>{{ output.roomReservations.[0].checkIn }}</strong></h3></div>
+                                            </td>
+
+                                            <td style="text-align: right;">
+                                                <p style="margin: 0; text-transform: uppercase;"><small style="font-size: 12px;">Check Out</small></p>
+                                                <div style="margin-bottom: 15px; margin-top: 5px;"><h3 style="margin: 0; color: #ec1c24;"><strong>{{ output.roomReservations.[0].checkOut }}</strong></h3></div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                                        <tbody>
+                                        <tr>
+                                            <td style="width: 33.33%; text-align: left;" valign="top">
+                                                <p style="margin: 0; text-transform: uppercase;"><small style="font-size: 12px;">Guest Name</small></p>
+                                                <h4 style="margin: 0; margin-top: 5px; color: #000;"><strong>{{ output.booking.guest.firstName }} {{ output.booking.guest.lastName }}</strong></h4>
+                                            </td>
+
+                                            <td style="width: 33.33%; text-align: center;" valign="top">
+                                                <p style="margin: 0; text-transform: uppercase;"><small style="font-size: 12px;">No of Nights</small></p>
+                                                <h4 style="margin: 0; margin-top: 5px; color: #000;"><strong>{{ output.roomReservations.[0].numberOfNights }} </strong></h4>
+                                            </td>
+
+                                            <td style="width: 33.33%; text-align: right;" valign="top">
+                                                <p style="margin: 0; text-transform: uppercase;"><small style="font-size: 12px;">No of Rooms</small></p>
+                                                <h4 style="margin: 0; margin-top: 5px; color: #000;"><strong>{{ no_of_rooms }}</strong></h4>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <hr style="border: none; border-top: solid 1px #ddd; margin: 30px 0;">
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                            <tbody>
+                            <tr>
+                                <td><h4 style="text-transform: uppercase; margin: 0; color: #000; margin-bottom: 10px;">Tax Invoice</h4></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 5px 0; border-bottom: solid 1px #dd; text-align: left;"><small style="font-size: 12px; text-transform: uppercase;">Company Name</small></td>
+                                <td style="padding: 5px 0; border-bottom: solid 1px #dd; text-align: right;">{{ hotel_details.company_name }}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 5px 0; border-bottom: solid 1px #dd; text-align: left;"><small style="font-size: 12px; text-transform: uppercase;">Company Registration No</small></td>
+                                <td style="padding: 5px 0; border-bottom: solid 1px #dd; text-align: right;">{{ hotel_details.registration_number }}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 5px 0; border-bottom: solid 1px #dd; text-align: left;"><small style="font-size: 12px; text-transform: uppercase;">Tax Number</small></td>
+                                <td style="padding: 5px 0; border-bottom: solid 1px #dd; text-align: right;">{{ hotel_details.tax_number }}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 5px 0; border-bottom: solid 1px #dd; text-align: left;"><small style="font-size: 12px; text-transform: uppercase;">Room Price</small></td>
+                                <td style="padding: 5px 0; border-bottom: solid 1px #dd; text-align: right;"><strong style="color: #000;">{{ paymentData.totalRoomPrice }}</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 5px 0; border-bottom: solid 1px #dd; text-align: left;"><small style="font-size: 12px; text-transform: uppercase;">Discount</small></td>
+                                <td style="padding: 5px 0; border-bottom: solid 1px #dd; text-align: right;"><strong style="color: #000;">{{ paymentData.discountAmount }}</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 5px 0; border-bottom: solid 1px #dd; text-align: left;"><small style="font-size: 12px; text-transform: uppercase;">Service Fee</small></td>
+                                <td style="padding: 5px 0; border-bottom: solid 1px #dd; text-align: right;"><strong style="color: #000;">{{ paymentData.serviceFee }}</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 5px 0; border-bottom: solid 1px #dd; text-align: left;"><small style="font-size: 12px; text-transform: uppercase;">GST(6%)</small></td>
+                                <td style="padding: 5px 0; border-bottom: solid 1px #dd; text-align: right;"><strong style="color: #000;">{{ paymentData.tax }}</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 5px 0; border-bottom: solid 1px #dd; text-align: left;"><small style="font-size: 12px; text-transform: uppercase;">Tourism Tax</small></td>
+                                <td style="padding: 5px 0; border-bottom: solid 1px #dd; text-align: right;"><strong style="color: #000;">{{ paymentData.tourismTax }}</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px 0 0 0; border-bottom: solid 1px #dd; text-align: left;"><small style="font-size: 12px; text-transform: uppercase;">Total Price</small></td>
+                                <td style="padding: 10px 0 0 0; border-bottom: solid 1px #dd; text-align: right;"><strong style="color: #ec1c24; font-size: 20px;">{{ paymentData.paymentCurrency }} {{ paymentData.totalAmount }}</strong></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <hr style="border: none; border-top: solid 1px #ddd; margin: 30px 0;">
+                                </td>
+                                <td>
+                                    <hr style="border: none; border-top: solid 1px #ddd; margin: 30px 0;">
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+
+                {{#if audit_details }}
+                <tr>
+                    <td><h4 style="text-transform: uppercase; margin: 0; color: #000; margin-bottom: 10px;">Payment Summary</h4></td>
+                </tr>
+                <tr>
+                    <td>
+                    <table border="1" cellpadding="10" cellspacing="0" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <td><b>Date</b></td>
+                                <td><b>Description</b></td>
+                                <td><b>Amount</b></td>
+                            </tr>
+                           </thead>
+                        <tbody>    
+                            {{#each audit_details }}
+                                <tr>
+                                    <td> {{ this.transactionDate }} </td>
+                                    <td> {{ this.transactedItems }}</td>
+                                    <td> {{ this.amount }}</td>
+                                </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                    </td>
+                </tr>
+                {{/if}}
+
+                <tr>
+                    <td style="padding-top: 15px">
+                        <a href="https://www.hotelnida.com/nidacash">
+                            <img src="http://staging.nidagenesis.com/images/email/earn-cash-banner.jpg" alt="Earn Cash Banner" width="100%">
+                        </a>
+                    </td>
+                </tr>
+
+                
+
+                <tr>
+                    <td>
+                        <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <hr style="border: none; border-top: solid 1px #ddd; margin: 30px 0;">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="text-align: center;">
+                                    <small style="text-transform: uppercase;">Follow Us</small>
+
+                                    <br>
+                                    <br>
+
+                                    <small>
+                                        <a href="https://www.facebook.com/HotelNIDA/" target="_blank">
+                                            <img src="http://hotelnida.com/images/facebook.png" alt="" height="25" width="25">
+                                        </a>
+                                    </small>
+                                    <small>
+                                        <a href="https://twitter.com/hotelnida" target="_blank">
+                                            <img src="http://hotelnida.com/images/twitter.png" alt="" height="25" width="25">
+                                        </a>
+                                    </small>
+                                    <small>
+                                        <a href="https://www.instagram.com/hotelnida/" target="_blank">
+                                            <img src="http://hotelnida.com/images/instagram.png" alt="" height="25" width="25">
+                                        </a>
+                                    </small>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="text-align: center;">
+                                    <p>This is an automated email. Please do not reply.<br>This email was sent directly and only to you.</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <table cellpadding="0" cellspacing="0" width="100%">
+                                        <tr>
+                                            <td style="text-align: left;color: #ec1c24;">
+                                                Powered by NIDA Genesis
+
+                                            </td>
+                                            <td style="text-align: right;color: #ec1c24;">
+                                                © 2017 Hotel NIDA. All Rights Reserved.
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

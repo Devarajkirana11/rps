@@ -1,0 +1,550 @@
+@font-face {
+  font-family: 'hotel-amenities';
+  src:  url('../fonts/hotel-amenities.eot?j5t33y');
+  src:  url('../fonts/hotel-amenities.eot?j5t33y#iefix') format('embedded-opentype'),
+    url('../fonts/hotel-amenities.ttf?j5t33y') format('truetype'),
+    url('../fonts/hotel-amenities.woff?j5t33y') format('woff'),
+    url('../fonts/hotel-amenities.svg?j5t33y#hotel-amenities') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'hotel-amenities' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-24hr_frontdesk-01:before {
+  content: "\e900";
+  color: #d3d3d3;
+}
+.icon-adultsonly-01:before {
+  content: "\e901";
+  color: #d3d3d3;
+}
+.icon-aircondition-01:before {
+  content: "\e902";
+  color: #d3d3d3;
+}
+.icon-airport_shuttle-01:before {
+  content: "\e903";
+  color: #d3d3d3;
+}
+.icon-atm-01:before {
+  content: "\e904";
+  color: #d3d3d3;
+}
+.icon-babysitting-01:before {
+  content: "\e905";
+  color: #d3d3d3;
+}
+.icon-badminton-01:before {
+  content: "\e906";
+  color: #d3d3d3;
+}
+.icon-baggage_storage-01:before {
+  content: "\e907";
+  color: #d3d3d3;
+}
+.icon-bar-01:before {
+  content: "\e908";
+  color: #d3d3d3;
+}
+.icon-bathhouse-01:before {
+  content: "\e909";
+  color: #d3d3d3;
+}
+.icon-bbq-01:before {
+  content: "\e90a";
+  color: #d3d3d3;
+}
+.icon-beach_chair-01:before {
+  content: "\e90b";
+  color: #d3d3d3;
+}
+.icon-beach_umbrella-01:before {
+  content: "\e90c";
+  color: #d3d3d3;
+}
+.icon-beach-01:before {
+  content: "\e90d";
+  color: #d3d3d3;
+}
+.icon-beauty_service-01:before {
+  content: "\e90e";
+  color: #d3d3d3;
+}
+.icon-bicycle_rental-01:before {
+  content: "\e90f";
+  color: #d3d3d3;
+}
+.icon-bike_rental-01:before {
+  content: "\e910";
+  color: #d3d3d3;
+}
+.icon-boardgame-01:before {
+  content: "\e911";
+  color: #d3d3d3;
+}
+.icon-bowling-01:before {
+  content: "\e912";
+  color: #d3d3d3;
+}
+.icon-breakfast_in_room-01:before {
+  content: "\e913";
+  color: #d3d3d3;
+}
+.icon-business-center-01:before {
+  content: "\e914";
+  color: #d3d3d3;
+}
+.icon-canoeing-01:before {
+  content: "\e915";
+  color: #d3d3d3;
+}
+.icon-car_rental-01:before {
+  content: "\e916";
+  color: #d3d3d3;
+}
+.icon-casino-01:before {
+  content: "\e917";
+  color: #d3d3d3;
+}
+.icon-champagne-01:before {
+  content: "\e918";
+  color: #d3d3d3;
+}
+.icon-chapel-01:before {
+  content: "\e919";
+  color: #d3d3d3;
+}
+.icon-coffeeshop:before {
+  content: "\e91a";
+  color: #d3d3d3;
+}
+.icon-concierge-01:before {
+  content: "\e91b";
+  color: #d3d3d3;
+}
+.icon-cookies-01:before {
+  content: "\e91c";
+  color: #d3d3d3;
+}
+.icon-currency_exchange-01:before {
+  content: "\e91d";
+  color: #d3d3d3;
+}
+.icon-cycling-01:before {
+  content: "\e91e";
+  color: #d3d3d3;
+}
+.icon-dart-01:before {
+  content: "\e91f";
+  color: #d3d3d3;
+}
+.icon-diving-01:before {
+  content: "\e920";
+  color: #d3d3d3;
+}
+.icon-dry_cleaning-01:before {
+  content: "\e921";
+  color: #d3d3d3;
+}
+.icon-electric_vehicle_charging-01:before {
+  content: "\e922";
+  color: #d3d3d3;
+}
+.icon-elevator-01:before {
+  content: "\e923";
+  color: #d3d3d3;
+}
+.icon-entertainment_staff-01:before {
+  content: "\e924";
+  color: #d3d3d3;
+}
+.icon-entire_property-01:before {
+  content: "\e925";
+  color: #d3d3d3;
+}
+.icon-evening_entertainment-01:before {
+  content: "\e926";
+  color: #d3d3d3;
+}
+.icon-express_checkin-01:before {
+  content: "\e927";
+  color: #d3d3d3;
+}
+.icon-family_rooms-01:before {
+  content: "\e928";
+  color: #d3d3d3;
+}
+.icon-fax-01:before {
+  content: "\e929";
+  color: #d3d3d3;
+}
+.icon-fishing-01:before {
+  content: "\e92a";
+  color: #d3d3d3;
+}
+.icon-fitness_lockers-01:before {
+  content: "\e92b";
+  color: #d3d3d3;
+}
+.icon-fitness-01:before {
+  content: "\e92c";
+  color: #d3d3d3;
+}
+.icon-footbath-01:before {
+  content: "\e92d";
+  color: #d3d3d3;
+}
+.icon-fruit-01:before {
+  content: "\e92e";
+  color: #d3d3d3;
+}
+.icon-gameroom-01:before {
+  content: "\e92f";
+  color: #d3d3d3;
+}
+.icon-golf-01:before {
+  content: "\e930";
+  color: #d3d3d3;
+}
+.icon-grocery_delivery-01:before {
+  content: "\e931";
+  color: #d3d3d3;
+}
+.icon-grounds-01:before {
+  content: "\e932";
+  color: #d3d3d3;
+}
+.icon-heating-01:before {
+  content: "\e933";
+  color: #d3d3d3;
+}
+.icon-hiking-01:before {
+  content: "\e934";
+  color: #d3d3d3;
+}
+.icon-honeymoon-01:before {
+  content: "\e935";
+  color: #d3d3d3;
+}
+.icon-horse_riding-01:before {
+  content: "\e936";
+  color: #d3d3d3;
+}
+.icon-hot_spring-01:before {
+  content: "\e937";
+  color: #d3d3d3;
+}
+.icon-housekeeping-01:before {
+  content: "\e938";
+  color: #d3d3d3;
+}
+.icon-hypoallergnic-01:before {
+  content: "\e939";
+  color: #d3d3d3;
+}
+.icon-indoor_playarea-01:before {
+  content: "\e93a";
+  color: #d3d3d3;
+}
+.icon-ironing_facilities-01:before {
+  content: "\e93b";
+  color: #d3d3d3;
+}
+.icon-jacuzzi-01:before {
+  content: "\e93c";
+  color: #d3d3d3;
+}
+.icon-karoke-01:before {
+  content: "\e93d";
+  color: #d3d3d3;
+}
+.icon-kids_buffet-01:before {
+  content: "\e93e";
+  color: #d3d3d3;
+}
+.icon-kids_meal-01:before {
+  content: "\e93f";
+  color: #d3d3d3;
+}
+.icon-kids_pool-01:before {
+  content: "\e940";
+  color: #d3d3d3;
+}
+.icon-kids_tv_network-01:before {
+  content: "\e941";
+  color: #d3d3d3;
+}
+.icon-laundry-01:before {
+  content: "\e942";
+  color: #d3d3d3;
+}
+.icon-library-01:before {
+  content: "\e943";
+  color: #d3d3d3;
+}
+.icon-lockers-01:before {
+  content: "\e944";
+  color: #d3d3d3;
+}
+.icon-massage_chair-01:before {
+  content: "\e945";
+  color: #d3d3d3;
+}
+.icon-massage-01:before {
+  content: "\e946";
+  color: #d3d3d3;
+}
+.icon-meetingroom-01:before {
+  content: "\e947";
+  color: #d3d3d3;
+}
+.icon-minigolf-01:before {
+  content: "\e948";
+  color: #d3d3d3;
+}
+.icon-newspaper-01:before {
+  content: "\e949";
+  color: #d3d3d3;
+}
+.icon-nightclub-01:before {
+  content: "\e94a";
+  color: #d3d3d3;
+}
+.icon-no_pets-01:before {
+  content: "\e94b";
+  color: #d3d3d3;
+}
+.icon-nosmoking-01:before {
+  content: "\e94c";
+  color: #d3d3d3;
+}
+.icon-open_bath-01:before {
+  content: "\e94d";
+  color: #d3d3d3;
+}
+.icon-outdoor_fireplace-01:before {
+  content: "\e94e";
+  color: #d3d3d3;
+}
+.icon-outdoor_play_equipment-01:before {
+  content: "\e94f";
+  color: #d3d3d3;
+}
+.icon-outdoor-furniture-01:before {
+  content: "\e950";
+  color: #d3d3d3;
+}
+.icon-packed_lunch-01:before {
+  content: "\e951";
+  color: #d3d3d3;
+}
+.icon-parking_garage-01:before {
+  content: "\e952";
+  color: #d3d3d3;
+}
+.icon-personal_trainer-01:before {
+  content: "\e953";
+  color: #d3d3d3;
+}
+.icon-picnic_area-01:before {
+  content: "\e954";
+  color: #d3d3d3;
+}
+.icon-pingpong-01:before {
+  content: "\e955";
+  color: #d3d3d3;
+}
+.icon-playground-01:before {
+  content: "\e956";
+  color: #d3d3d3;
+}
+.icon-pooltable-01:before {
+  content: "\e957";
+  color: #d3d3d3;
+}
+.icon-pool-towel-01:before {
+  content: "\e958";
+  color: #d3d3d3;
+}
+.icon-private_checkin-01:before {
+  content: "\e959";
+  color: #d3d3d3;
+}
+.icon-public_transportation_tickets-01:before {
+  content: "\e95a";
+  color: #d3d3d3;
+}
+.icon-public_wifi-01:before {
+  content: "\e95b";
+  color: #d3d3d3;
+}
+.icon-puzzle-01:before {
+  content: "\e95c";
+  color: #d3d3d3;
+}
+.icon-Racquetball-01:before {
+  content: "\e95d";
+  color: #d3d3d3;
+}
+.icon-restaurant-01:before {
+  content: "\e95e";
+  color: #d3d3d3;
+}
+.icon-restaurent_menu-01:before {
+  content: "\e95f";
+  color: #d3d3d3;
+}
+.icon-room_service-01:before {
+  content: "\e960";
+  color: #d3d3d3;
+}
+.icon-safe-01:before {
+  content: "\e961";
+  color: #d3d3d3;
+}
+.icon-sauna-01:before {
+  content: "\e962";
+  color: #d3d3d3;
+}
+.icon-secure_parking-01:before {
+  content: "\e963";
+  color: #d3d3d3;
+}
+.icon-shared_lounge-01:before {
+  content: "\e964";
+  color: #d3d3d3;
+}
+.icon-shoeshine-01:before {
+  content: "\e965";
+  color: #d3d3d3;
+}
+.icon-shuttle_service-01:before {
+  content: "\e966";
+  color: #d3d3d3;
+}
+.icon-ski-01:before {
+  content: "\e967";
+  color: #d3d3d3;
+}
+.icon-smoking_area-01:before {
+  content: "\e968";
+  color: #d3d3d3;
+}
+.icon-snackbar-01:before {
+  content: "\e969";
+  color: #d3d3d3;
+}
+.icon-snorkelling-01:before {
+  content: "\e96a";
+  color: #d3d3d3;
+}
+.icon-solarium-01:before {
+  content: "\e96b";
+  color: #d3d3d3;
+}
+.icon-soundproof-01:before {
+  content: "\e96c";
+  color: #d3d3d3;
+}
+.icon-spa_locker-01:before {
+  content: "\e96d";
+  color: #d3d3d3;
+}
+.icon-spa_package-01:before {
+  content: "\e96e";
+  color: #d3d3d3;
+}
+.icon-spa_wellness-01:before {
+  content: "\e96f";
+  color: #d3d3d3;
+}
+.icon-special_diet-01:before {
+  content: "\e970";
+  color: #d3d3d3;
+}
+.icon-steam_bath-01:before {
+  content: "\e971";
+  color: #d3d3d3;
+}
+.icon-street_parking-01:before {
+  content: "\e972";
+  color: #d3d3d3;
+}
+.icon-stroller-01:before {
+  content: "\e973";
+  color: #d3d3d3;
+}
+.icon-suit_press-01:before {
+  content: "\e974";
+  color: #d3d3d3;
+}
+.icon-sundeck-01:before {
+  content: "\e975";
+  color: #d3d3d3;
+}
+.icon-swimming_pool-01:before {
+  content: "\e976";
+  color: #d3d3d3;
+}
+.icon-tennis-01:before {
+  content: "\e977";
+  color: #d3d3d3;
+}
+.icon-ticket_service-01:before {
+  content: "\e978";
+  color: #d3d3d3;
+}
+.icon-tour_desk-01:before {
+  content: "\e979";
+  color: #d3d3d3;
+}
+.icon-valet_parking-01:before {
+  content: "\e97a";
+  color: #d3d3d3;
+}
+.icon-vending_machine-01:before {
+  content: "\e97b";
+  color: #d3d3d3;
+}
+.icon-vip_room-01:before {
+  content: "\e97c";
+  color: #d3d3d3;
+}
+.icon-water_slide-01:before {
+  content: "\e97d";
+  color: #d3d3d3;
+}
+.icon-water-bottle-01:before {
+  content: "\e97e";
+  color: #d3d3d3;
+}
+.icon-waterpark-01:before {
+  content: "\e97f";
+  color: #d3d3d3;
+}
+.icon-watersports-01:before {
+  content: "\e980";
+  color: #d3d3d3;
+}
+.icon-wind_surfing-01:before {
+  content: "\e981";
+  color: #d3d3d3;
+}
+.icon-yoga-01:before {
+  content: "\e982";
+  color: #d3d3d3;
+}

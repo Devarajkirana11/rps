@@ -1,0 +1,121 @@
+<link rel="stylesheet" href="/scripts/plugins/nvd3/nv.d3.min.css"> {{> nav this}} {{> header}}
+
+
+<main id="page-content">
+    <div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Dashboard</h3>
+        </div>
+    </div>
+
+    <div class="page-container">
+        <div class="row">
+            <div class="col-md-12">
+                <input type="hidden" value="{{ hotel_uuid }}" id="hotel-uuid">
+            </div>
+        </div>
+        <div class="row m-lg-b">
+            <div class="col-md-8"></div>
+            <div class="col-md-4">
+                <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                    <span></span>
+                    <b class="caret"></b>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row m-xl-b">
+            <div class="col-md-12">
+                <h5 class="fw-semi-thk text-uppercase text-black m-n m-md-b">Overview</h5>
+            </div>
+
+            <div class="col-md-2">
+                <div class="stats-container text-center">
+                    <h2 class="fw-semi-thk text-black m-n total-room-nights"></h2>
+                    <small class="text-uppercase">Total Rooms</small>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="stats-container">
+                    <h2 class="fw-semi-thk text-black m-n total-rooms-sold"></h2>
+                    <small class="text-uppercase">Rooms Sold</small>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="stats-container">
+                    <h2 class="fw-semi-thk text-black m-n occupancy"></h2>
+                    <small class="text-uppercase">Occupancy</small>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="stats-container">
+                    <h2 class="fw-semi-thk text-black m-n total-revenue">
+                        <small class="text-uppercase fs-sm text-black"></small>
+                    </h2>
+                    <small class="text-uppercase">Total Revenue</small>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="stats-container">
+                    <h2 class="fw-semi-thk text-black m-n adr">
+                        <small class="text-uppercase fs-sm text-black"></small>
+                    </h2>
+                    <small class="text-uppercase">ADR</small>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="stats-container">
+                    <h2 class="fw-semi-thk text-black m-n rev-par">
+                        <small class="text-uppercase fs-sm text-black"></small>
+                    </h2>
+                    <small class="text-uppercase">Rev PAR</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="row row-xs m-xl-b">
+            <div class="col-md-6">
+                <h5 class="fw-semi-thk text-uppercase text-black m-n m-md-b">Room Nights by Type</h5>
+                <div id="rooms-realized">
+                    <svg height="250"></svg>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <h5 class="fw-semi-thk text-uppercase text-black m-n m-md-b">Occupancy by Type</h5>
+                <div id="rooms-occupancy">
+                    <svg height="250"></svg>
+                </div>
+            </div>
+        </div>
+
+        {{!--
+        <div class="row m-xl-b">
+            <div class="col-md-12">
+                <p>Room Nights & Revenue Contribution by Type</p>
+            </div>
+        </div>
+
+
+        <div class="row m-xl-b">
+            <div class="col-md-12">
+                <p>Overview by channel</p>
+            </div>
+        </div> --}}
+        <div class="row source-stats"></div>
+    </div>
+</main>
+
+{{> footer}}
+
+
+<script src="/scripts/plugins/d3/d3.min.js"></script>
+<script src="/scripts/plugins/nvd3/nv.d3.min.js"></script>
+<script src="/js/dashboard_overview.js"></script>

@@ -1,0 +1,122 @@
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="/js/front-desk.js"></script>
+{{> nav this}}
+
+{{> header}}
+
+<!-- Begin Page Content -->
+		<!-- Begin Page Content -->
+		<main id="page-content">
+			<div class="row row-xl page-title">
+				<div class="col-md-12">
+					<h3 class="text-black fw-semi-thk">Calendar View</h3>
+				</div>
+			</div>
+
+			<div class="page-container">
+						<input type="hidden" name="hotel_id" id="hotel_id" value="{{ hotel_id }}">
+						<div class="row">
+							<div class="col-md-8 text-left">
+								<a href="javascript:void(0)" class="btn btn-danger btn-rounded w-175 text-left disabled">Calendar View <i class="fa fa-calendar pull-right"></i></a>
+								<a href="/pms/bookings/list?hotel_id={{ hotel_id }}" class="btn btn-danger btn-rounded w-175 text-left">Booking List View <i class="fa fa-th-list pull-right"></i></a>
+								<a href="/pms/rooms/list?hotel_id={{ hotel_id }}" class="btn btn-danger btn-rounded w-175 text-left">Rooms Status <i class="fa fa-th pull-right"></i></a>
+							</div>
+
+							<div class="col-md-4 text-right m-lg-b">
+								<a href="/pms/walkin-reservation?hotel_id={{ hotel_id }}" class="btn btn-danger btn-rounded text-left">Walk In / New Reservation <i class="fa fa-plus-circle fa-fw pull-right"></i></a>
+							</div>
+						</div>
+
+						<div class="front-desk--legend-container-res">
+							<div class="front-desk--legend-item">
+								<ul class="list-inline">
+
+									<li class="legend-on-hold m-md-r m-md-b">
+										<span class="legend-name text-uppercase fs-sm">On Hold</span>
+										<span class="fs-md fw-semi-thk"></span>
+									</li>
+
+									<li class="legend-confirmed m-md-r m-md-b">
+										<span class="legend-name text-uppercase fs-sm">Confirmed</span>
+										<span class="fs-md fw-semi-thk"></span>
+									</li>
+
+									<li class="legend-check-in m-md-r m-md-b">
+										<span class="legend-name text-uppercase fs-sm">Check In</span>
+										<span class="fs-md fw-semi-thk"></span>
+									</li>
+
+									<li class="legend-occupied m-md-r m-md-b">
+										<span class="legend-name text-uppercase fs-sm">Occupied</span>
+										<span class="fs-md fw-semi-thk"></span>
+									</li>
+
+									<li class="legend-check-out m-md-r m-md-b">
+										<span class="legend-name text-uppercase fs-sm">Check Out</span>
+										<span class="fs-md fw-semi-thk"></span>
+									</li>
+
+									<li class="legend-vacated m-md-r m-md-b">
+										<span class="legend-name text-uppercase fs-sm">Vacated</span>
+										<span class="fs-md fw-semi-thk"></span>
+									</li>
+
+									<li class="legend-blocked m-md-r m-md-b">
+										<span class="legend-name text-uppercase fs-sm">Blocked</span>
+										<span class="fs-md fw-semi-thk"></span>
+									</li>
+
+								</ul>
+							</div>
+						</div>
+
+						
+		
+				<div class="row row-xl">
+					<div class="col-md-12">
+						<div class="front-desk--nav">
+							<div class="pull-left previous-button" id="-1"><a href="javascript:void(0)" class="text-info"><i class="fa fa-chevron-left fa-fw m-sm-r"></i></a></div>
+							<div class="pull-right next-button" id="1"><a href="javascript:void(0)" class="text-info"><i class="fa fa-chevron-right fa-fw m-sm-l"></i></a></div>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>					
+
+				<div class="row row-xl">
+					<div class="col-md-12">
+						<div class="front-desk--container front-desk--week-view">
+							<div class="front-desk--content">
+								<div class="front-desk--left">
+									<ul class="front-desk--menu">
+
+									</ul>
+								</div>
+
+								<div class="front-desk--right">
+									<div class="front-desk--day-container">
+										
+										<div class="front-desk--day-header-container">
+
+										</div>
+
+										<div class="front-desk--day-content-container">
+
+										</div>
+
+									</div>
+								</div>
+
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+
+
+<!-- End Page Content -->
+
+
+{{> footer}}

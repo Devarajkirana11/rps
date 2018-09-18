@@ -1,0 +1,92 @@
+<script type="text/javascript">
+
+	jQuery(document).ready(function(){
+
+		$(".clean-action").click(function(){
+
+			var room_number = $(this).attr("id");
+			var hotel_id = $("#hotel_id").val();
+			var isDirty = 'No';
+
+			$.ajax({
+			url: "/inventory/front-desk/room-cleaning?hotel_uuid="+hotel_id,
+			type: "PUT", 
+			data: { room_number:room_number, isDirty:isDirty },
+			success: function(response) {
+				alert('Hurray! The room is ready for next guest to check in...');
+				window.location.reload();
+			},
+			error: function(xhr) {   }
+			});
+
+		});
+
+	});
+
+</script>
+{{> nav this}}
+
+{{> header}}
+
+<!-- Begin Page Content -->
+<main id="page-content">
+	<div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Room Cleaning</h3>
+        </div>
+    </div>
+
+	<div class="page-container">
+		<div class="row row-xl">
+			<div class="col-md-12 m-lg-b">
+				<input type="hidden" value="{{ hotel_id }}" name="hotel_id" id="hotel_id">
+			</div>
+		</div>
+
+		<!-- Begin Hotels View -->
+		<div class="row row-xl">
+			<div class="col-md-12">
+	
+				{{#if errors}}
+					{{#each errors}}
+						<div class="alert alert-danger"> {{ msg }}</div>
+					{{/each}}
+				{{/if}}
+
+				<div class="table-view">
+
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Room No</th>
+								<th>Floor No</th>
+								<th>Room Type</th>
+								<th>Status</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							{{#each output }}
+							<tr>
+								<td>{{ this.roomNumber }}</td>
+								<td>{{ this.floorNumber }}</td>
+								<td>{{#getRoomTypeName this.roomType }}{{/getRoomTypeName}}</td>
+								<td>{{ this.status }}</td>
+								<td><span class="btn btn-success clean-action" id="{{ this.roomNumber }}">Cleaned</span></td>
+							</tr>
+							{{/each}}
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+		</div>
+		<!-- End Hotels View -->
+
+	</div>
+</main>
+
+<!-- End Page Content -->
+
+
+{{> footer}}

@@ -1,0 +1,163 @@
+{{> nav this}}
+
+{{> header}}
+
+<!-- Begin Page Content -->
+<main id="page-content">
+	<div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Daily Collection Report</h3>
+        </div>
+    </div>
+
+	<div class="page-container">
+		
+    		<!-- Begin Hotels View -->
+		<div class="row row-xl">
+			<div class="col-md-offset-8 col-md-4">
+				<div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+					<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+					<span></span> <b class="caret"></b>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="row daily-sales-summary m-md-t">
+				</div>
+			</div>
+			<div class="col-md-12">					
+				 <div class="table-view">
+					{{!-- <table  class="table table-striped" border="1" width="100%"> --}}
+					 <form class="" action='/report/daily-salesfd?hotel_id={{hotel_id}}&day={{day}}' method="GET">	
+						<div class="table-responsive">
+							<table id="daily_salesfd" class="table table-striped">
+								<thead>
+									<tr>
+										<th>Payment Collected By</th>
+										<th>Time</th>
+										<th>Guest Name</th>
+										<th>Booking ID</th>
+										<th>No.Of.Guests</th>
+										<th>No.Of Rooms</th>
+                                        <th>RoomNumber</th>
+										<th>Check In</th>
+										<th>Check Out</th>
+										<th>Room Price</th>
+										<th>Discount Amount</th>
+										<th>Price After Discount</th>
+										<th>Tax</th>
+										<th>Service Fee</th>
+										<th>Tourism Tax</th>
+										<th>Total Amount</th>
+										<th>Payment Type</th>
+										<th>Booking Channel</th>
+									</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>	
+						</div>
+					</form>
+				</div>		
+			</div>
+		</div>
+	</div>
+		
+	<!-- End Hotels View -->
+</main>
+
+<!-- End Page Content -->
+{{> footer}}
+
+<script type="text/javascript">
+	$(function() {
+		var start = moment().subtract(7, 'days');
+		var end = moment();
+		var dTable = $('#daily_salesfd').DataTable( {
+				"order": [[16, "desc"]],
+				buttons: [
+					 'excel', 'print'
+				],
+				dom: '<"add.row selectWrapper m-lg-b">frtlip, B',
+				processing: true,
+				deferLoading: 100,
+				serverSide: true,
+				autoWidth: true,
+				paging: false,
+				ajax:function (data, callback, settings) {
+				  $.ajax({
+				    url: "/report/daily-salesfd-ajax?hotel_id={{hotel_id}}&start_date="+start.format('DD-MM-YYYY')+"&end_date="+end.format('DD-MM-YYYY'),
+				    type: "POST",
+				    data:data,
+					async:false,
+				    dataType:'json',
+				    success:function(res){
+					  	if(res.success){
+					  		callback(res.data.paymentsObj);
+					  	}
+
+
+
+						$('.daily-sales-summary').html('')
+						//.append('<div class="col-md-1"></div>');
+
+						$.each(res.data.overallPayments, function(i, e) {
+							$('.daily-sales-summary').append('<div class="col-md-2">' +
+								'<div class="daily-sales-container text-center p-lg bg-white m-md-b m-md-t" style="border: solid 1px #ddd; border-radius: 5px; min-height: 100px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);">' +
+									'<h2 class="m-n fw-semi-thk text-black">' + parseFloat(e.totalAmount).toFixed(2) + ' <small class="text-uppercase fs-sm">MYR</small></h2>' +
+									'<p class="m-n m-xs-t"><small class="text-uppercase">' + e._id.paymentType + '</small></p>' +
+								'</div>' +
+							'</div>')
+						});
+				  	}});
+				},
+				columns: [
+					{ data: 'by',name: 'by'},
+					{ data: 'time',name: 'time'},
+					{ data: 'guest',name: 'guest'},
+					{ data: 'reference_id',name: 'reference_id'},
+					{ data: 'numberOfGuests',name: 'numberOfGuests'},
+					{ data: 'numberOfRooms', name: 'numberOfRooms'},
+					{ data: 'roomNumber', roomNumber: 'roomNumber'},
+					{ data: 'checkIn',name:'checkIn',searchable:false},
+					{ data: 'checkOut',name:'checkOut',searchable:false},
+					{ data: 'totalRoomPrice', name: 'totalRoomPrice'},
+					{ data: 'discountAmount', name: 'discountAmount'},
+					{ data: 'priceAfterDiscount', name: 'priceAfterDiscount'},
+					{ data: 'tax', name: 'tax'},
+					{ data: 'serviceFee', name:'serviceFee'},
+					{ data: 'tourismTax', name: 'tourismTax'},
+					{ data: 'totalAmount', name: 'totalAmount'},
+					{ data: 'paymentType', name: 'paymentType'},
+					{ data: 'booking_channel', name: 'booking_channel'},
+					{ data: 'payload', name: 'payload', visible:false, searchable:false},
+					{ data: 'moment', name: 'moment', visible:false, searchable:false},
+					{ data: 'type', name: 'type', visible:false, searchable:false}
+				]
+			})
+
+		function cb(start, end) {
+			$('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+			dTable.columns([7,8]).search(JSON.stringify({startdate:start.format('DD-MM-YYYY'),enddate:end.format('DD-MM-YYYY')})).draw();
+		}
+
+		$('#reportrange').daterangepicker({
+			startDate: start,
+			endDate: end,
+			ranges: {
+			'Today': [moment(), moment()],
+			'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+			'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+			'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+			'This Month': [moment().startOf('month'), moment().endOf('month')],
+			'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+			}
+		}, cb);
+
+		cb(start, end);
+
+
+		// console.log("http://localhost:3000/report/manager/daily-salesfd?hotel_id=e7017613-42db-4748-a00a-21b3b41ca661&start_date="+start.format('DD-MM-YYYY')+"&end_date=" + end.format('DD-MM-YYYY'))
+
+		
+	});
+	</script>

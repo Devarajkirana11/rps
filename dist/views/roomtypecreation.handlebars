@@ -1,0 +1,494 @@
+{{>nav}}
+
+{{>header}}
+
+{{#if formErrorExists }}
+    <script>  errorExists = true; </script>
+{{else}}
+    <script>  errorExists = false; </script>
+{{/if}}
+{{requestBody.mode}}
+{{#if requestBody.mode }}
+    <script>  mode = "{{requestBody.mode}}"; </script>
+{{else}}
+    <script>  mode = null; </script>
+{{/if}}
+<script src="/js/rooms.js"></script>
+
+{{#if errors}}
+    <ul>
+    {{#each errors}}
+        <li>
+            <div class="text-danger"> {{ msg }}</div>
+        </li>
+    {{/each}}
+    </ul>
+{{/if}}
+  
+{{!-- Begin Page Content --}}
+<main id="page-content">   
+    <div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">{{#equal requestBody.mode 'create'}} Add {{else}} Edit {{/equal}} Room Type</h3>
+        </div>
+    </div>
+
+
+    {{#if success }}
+		<div class="alert alert-success">{{ message}}</div>
+	{{else if message }}
+		<div class="alert alert-danger">{{ message}}</div>
+	{{/if}}
+
+    {{#if formstatus}}
+        {{#if roomtype_id}}
+        <form class="" action='/hotel/room/type/create?id={{roomtype_id}}&hotel_id={{#if requestBody.hotel_id}}{{ requestBody.hotel_id}}{{/if}}' method="POST">
+        {{else}}
+        <form class="" action='/hotel/room/type/create?hotel_id={{#if requestBody.hotel_id}}{{ requestBody.hotel_id}}{{/if}}' method="POST">
+        {{/if}}
+
+        {{!-- Begin Page Container --}}
+        <div class="page-container">
+            {{!-- Begin Top Bar --}}
+            <div class="row row-xl">
+                {{!-- Begin File Uploader --}}
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="file-uploader-new-room">
+                            <input type="file" id="" multiple name="room_type_images" placeholder="" class="saveFile form-control" value="{{#if requestBody.room_type_images }}{{ requestBody.room_type_images }}{{/if}}"/>
+                            <span class="text-danger">{{#if room_type_images }}{{room_type_images }} {{/if}}</span>
+                        </div>
+                    </div>
+                </div>
+                {{!-- End File Uploader --}}
+
+                {{!-- Begin Room Type --}}
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="room-type">Room Type</label>
+                        <div class="select-wrapper">
+                            <select name="room_type" id="room-type" class="form-control">
+                                <option value="select">-- Please Select --</option>
+                                {{#if room_types }}
+                                    {{#each room_types }}
+                                        <option value="{{this.value}}" {{#equal this.value ../requestBody.room_type}} selected = "selected" {{/equal}} >{{this.text}}</option>
+                                    {{/each}}
+                                {{/if}}
+                            </select>
+                        </div>
+
+                        <span class="text-danger">{{#if room_type}}{{room_type}} {{/if}}</span>
+                    </div>
+                </div>
+                {{!-- End Room Type --}}
+
+                {{!-- Begin Room Name --}}
+                {{!--<div class="col-md-6">--}}
+                    {{!--<div class="form-group">
+                        <label for="custom-name">Custom Name</label>
+                        <input type="text" id="custom-name" name="custom_name" class="form-control" value="{{#if requestBody.custom_name}}{{requestBody.custom_name}}{{/if}}">
+                        <div class="sub-captions">
+                            <p class="m-sm-t m-sm-b">Create an optional, custom name for your reference.</p>
+                        </div>
+                        <span class="text-danger">{{#if custom_name}}{{custom_name}} {{/if}}</span>
+                    </div>--}}
+                    {{!--<div class="form-group">
+                        <label for="room-type">Room Name</label>
+                        <div class="select-wrapper">
+                            <select name="room_name" id="room-name" class="form-control">
+                                <option value="select">-- Please Select --</option>
+                                {{#if room_names }}
+                                    {{#each room_names }}
+                                        <option value="{{this.value}}" {{#equal this.value ../requestBody.room_name}} selected = "selected" {{/equal}}>{{this.text}}</option>
+                                    {{/each}}
+                                {{/if}}
+                            </select>
+                            <div class="sub-captions">
+                                <p class="m-sm-t m-sm-b">This is the name guests will see on the NIDA Stay website.</p>
+                            </div>
+                            <span class="text-danger">{{#if room_name}}{{room_name}} {{/if}}</span>
+                        </div>
+                    </div>--}}
+                {{!--</div>--}}
+                {{!-- End Room Name --}}
+
+                
+
+                {{!-- Begin Smoking Policy --}}
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="smoking_policy">Smoking Policy</label>
+                        <div class="select-wrapper">
+                            <select name="smoking_policy" id="smoking_policy" class="form-control">
+                                <option value="select">-- Please Select --</option>
+                                {{#if smoking_policies }}
+                                    {{#each smoking_policies }}
+                                        <option value="{{this.value}}" {{#equal this.value ../requestBody.smoking_policy}} selected = "selected" {{/equal}}>{{this.text}}</option>
+                                    {{/each}}
+                                {{/if}}
+                            </select>
+                            <span class="text-danger">{{#if smoking_policy}}{{smoking_policy}} {{/if}}</span>
+                        </div>
+                    </div>
+                </div>
+                {{!-- End Smoking Policy --}}
+            </div>
+            {{!-- End Top Bar --}}
+
+            <hr class="m-xl-t m-xl-b">
+
+
+            {{!-- Begin Rooms & Floor --}}
+            <div class="row row-xl">
+                <div class="col-md-12 m-lg-b">
+                    <h4 class="text-black fw-semi-thk fs-20">Assign Rooms & Floor</h4>
+                </div>
+
+                {{!-- Begin No of Rooms --}}
+                <div class="col-md-12 m-lg-t">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="number-of-room">Number of rooms (of this type)</label>
+                            <input type="hidden" name="initial_no_of_rooms" value="{{#if requestBody.no_of_rooms}}{{requestBody.room_number.length}}{{else}}0{{/if}}"/>
+                            <input type="hidden" name="no_of_rooms" class="form-control" value="{{#if requestBody.no_of_rooms}}{{requestBody.room_number.length}}{{/if}}">
+                            <a href="javascript:void(0)" class="text-default no_of_roomsChange" id="nor_dec" ><i class="fa fa-minus-circle fs-xl"></i></a>
+                            <span id="no_of_rooms_count" class="text-danger fs-xl fw-semi-thk p-md-l p-md-r ng-binding">{{#if requestBody.no_of_rooms}}{{requestBody.no_of_rooms}}{{/if}}</span>
+                            <a href="javascript:void(0)" class="text-default no_of_roomsChange" id="nor_inc" ><i class="fa fa-plus-circle fs-xl"></i></a>
+                            <div class="sub-captions m-sm-t m-sm-b" id="roomcount"></div>
+                        </div>
+                        <span class="text-danger">{{#if no_of_rooms}}{{no_of_rooms}} {{/if}}</span>
+                    </div>
+                </div>
+                {{!-- End No of Rooms --}}
+
+                {{!-- Begin Rooms --}}
+                <div class="col-md-12 m-lg-t">
+                    {{#if requestBody.room_number}}
+                        {{#each requestBody.room_number}}{{requestBody.room_number}}
+                            <div class="roomwrapper" id="roomwrapper">
+                                {{#equal mode 'create'}}
+                                <div class="row row-xl">
+                                    <div class="col-md-12 text-right">
+                                        <a id="roomdelete" class="roomdelete text-default fs-lg" href="javascript:Void(0);"><i class="fa fa-times-circle fa-fw"></i></a>
+                                    </div>
+                                </div>
+                                {{/equal}}
+                                {{> field_repeat ../this type="room_number" currentvalue=this key=@key}}            
+                            </div>
+                        {{/each}}
+                    {{else}}
+                        <div class="roomwrapper" id="roomwrapper">
+                            <div class="row row-xl">
+                                <div class="col-md-12 text-right">
+                                    <a id="roomdelete" class="roomdelete text-default fs-lg" href="javascript:Void(0);"><i class="fa fa-times-circle fa-fw"></i></a>
+                                </div>
+                            </div>
+
+                            {{> field_repeat this type="room_number" currentvalue="" key=""}}
+                        </div>
+                    {{/if}}
+                </div>
+                {{!-- ENd Rooms --}}
+                
+                
+                {{!-- End Rooms --}}
+            </div>
+            <div class="row row-xl">
+                <div class="col-md-12 ">
+                    <p class="text-left">
+                        <a id="addroom" style="display:none;" class="btn btn-danger btn-rounded w-175 text-left">Add Another Room<i class="fa fa-plus-circle pull-right fa-fw lh-20"></i></a>
+                    </p>
+                </div>
+            </div>
+            {{!-- End Rooms & Floor --}}
+
+            <hr class="m-xl-t m-xl-b">
+
+            {{!-- Begin Room Size --}}
+            <div class="row row-xl">
+                <div class="col-md-12 m-lg-b">
+                    <h4 class="text-black fw-semi-thk fs-20">Room Size</h4>
+                </div>
+
+                {{!-- Begin Measurement Unit --}}
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <p>What's your preferred unit of measurement?</p>
+                        <div class="m-lg-b">
+                            <input type="radio" name="measurement_unit" value="sq.m" {{#equal requestBody.measurement_unit "sq.m"}} checked="checked" {{/equal}}> square meters  &nbsp;
+                            <input type="radio" name="measurement_unit" value="sq.ft" {{#equal requestBody.measurement_unit "sq.ft"}} checked="checked" {{/equal}}> square feet.
+                            <span class="text-danger">{{#if measurement_unit}}{{measurement_unit}} {{/if}}</span>
+                        </div>
+                    </div>
+                </div>
+                {{!-- End Measurement Unit --}}
+
+                {{!-- Begin Room Size --}}
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="number-of-room">Please enter the size of your room(s).</label>
+                        <input type="text" name="room_size" class="form-control" value="{{#if requestBody.room_size}}{{requestBody.room_size}}{{/if}}">
+                        <span class="text-danger">{{#if room_size}}{{room_size}} {{/if}}</span>    
+                    </div>
+                </div>
+                {{!-- End Room Size --}}
+            </div>
+            {{!-- End Room Size --}}
+
+            <hr class="m-xl-t m-xl-b">
+
+            {{!-- Begin Suites Option --}}
+            <div class="row row-xl">
+                <div class="col-md-12 m-lg-b">
+                    <h4 class="text-black fw-semi-thk fs-20">Suites Option</h4>
+                </div>
+
+                {{!-- Begin Stays --}}
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="guests-number">How many guests can stay in this room?</label>
+                        <input type="text" name="guest_number" class="form-control" value="{{#if requestBody.guest_number}}{{requestBody.guest_number}}{{/if}}">
+                        <span class="text-danger">{{#if guest_number }}{{guest_number}} {{/if}}</span>
+                    </div>
+                </div>
+                {{!-- End Stays --}}
+
+                {{!-- Begin Number of Bedrooms --}}
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="no-of-bedrooms">Number of bedrooms</label>
+                        <input type="text" name="no_of_bedrooms" id="no-of-bedrooms" class="form-control" value="{{#if requestBody.no_of_bedrooms}}{{requestBody.no_of_bedrooms}}{{/if}}">
+                        <span class="text-danger">{{#if no_of_bedrooms }}{{no_of_bedrooms}} {{/if}}</span>
+                    </div>
+                </div>
+                {{!-- End Number of Bedrooms --}}
+            </div>
+            {{!-- End Suites Option --}}
+
+            <hr class="m-xl-b m-xl-t">
+
+            {{!-- Begin Standard Bed --}}
+            <div class="row row-xl">
+                <div class="col-md-12">
+                    <h4 class="text-black fw-semi-thk fs-20">Standard Bed</h4>
+                </div>
+
+                <div class="col-md-12">
+                    {{#if requestBody.standard_bed_type}}
+                        {{#each requestBody.standard_bed_type}}
+                        <div id="standardbedwrapper" class="standardbedwrapper">
+                            <div class="row row-xl">
+                                <div class="col-md-12 text-right">
+                                    <a id="standardbeddelete" href="javascript:Void(0);" class="text-default fs-lg"><i class="fa fa-times-circle fa-fw"></i></a>
+                                </div>
+                            </div>
+
+                            {{> field_repeat ../this type="standardbed" currentvalue=this key=@key}}
+                        </div>
+                        {{/each}}
+                    {{else}}
+                        <div id="standardbedwrapper" class="standardbedwrapper">
+                            <div class="row row-xl">
+                                <div class="col-md-12 text-right">
+                                    <a id="standardbeddelete" href="javascript:Void(0);" class="text-default fs-lg"><i class="fa fa-times-circle fa-fw"></i></a>
+                                </div>
+                            </div>
+
+                            {{> field_repeat this type="standardbed" currentvalue="" key=""}}
+                        </div>
+                    {{/if}}
+                </div>
+                
+                <div class="col-md-12 m-lg-t">
+                    <p class="text-left">
+                        <button id="addstandardbed" class="btn btn-danger btn-rounded w-175 text-left">Add Another Bed<i class="fa fa-plus-circle pull-right fa-fw"></i></button>
+                    </p>
+                </div>
+            </div>
+            {{!-- End Standard Bed --}}
+
+            <hr class="m-xl-t m-xl-b">
+
+            {{!-- Begin Addon Bed --}}
+            <div class="row row-xl">
+                <div class="col-md-12">
+                    <h4 class="text-black fw-semi-thk fs-20">Add on Bed</h4>
+                </div>
+
+                <div class="col-md-12">
+                    {{#if requestBody.addon_bed_type}}
+                        {{#each requestBody.addon_bed_type}}
+                        <div id="addonbedwrapper" class="addonbedwrapper">
+                            <div class="row row-xl">
+                                <div class="col-md-12 text-right">
+                                    <a id="addonbeddelete" href="javascript:Void(0);" class="text-default fs-lg"><i class="fa fa-times-circle fa-fw"></i></a>
+                                </div>    
+                            </div>
+                            
+                            {{> field_repeat ../this type="addon_bed" currentvalue=this key=@key }}
+                        </div>
+                        {{/each}}
+                    {{else}}
+                        <div id="addonbedwrapper" class="addonbedwrapper">
+                            <div class="row row-xl">
+                                <div class="col-md-12 text-right">
+                                    <a id="addonbeddelete" href="javascript:Void(0);" class="text-default fa-fw"><i class="fa fa-times-circle fa-fw"></i></a>
+                                </div>    
+                            </div>
+                            
+                            {{> field_repeat this type="addon_bed" currentvalue="" key=""}}
+                        </div>
+                    {{/if}}
+                </div>
+                
+                <div class="col-md-12 m-lg-t">
+                    <p class="text-left">
+                        <button id="Addaddonbeb"class="btn btn-danger btn-rounded w-175 text-left">Add Another Bed<i class="fa fa-plus-circle pull-right fa-fw"></i></button>
+                    </p>
+                </div>
+            </div>
+            {{!-- End Addon Bed --}}
+
+            <hr class="m-xl-b m-xl-t">
+
+            {{!-- Begin Room Amenities --}}
+            <div class="row row-xl">
+                <div class="col-md-12 m-lg-b">
+                    <h4 class="text-black fw-semi-thk fs-20">Room amenities</h4>
+                </div>
+
+                <div class="col-md-12">
+                    {{>facilities_checkboxs checkboxarray=room_amenities salt="RA" colrender=4 requestsalt=requestBody.RA requestBody=requestBody}}
+
+                    <span class="text-danger">{{#if RA }}{{RA}}{{/if}}</span>
+        
+                </div>
+            </div>
+            {{!-- End Room Amenities --}}
+
+            <hr class="m-xl-b m-xl-t">
+
+            {{!-- Begin Bathroom Amenities --}}
+            <div class="row row-xl">
+                <div class="col-md-12 m-lg-b">
+                    <h4 class="text-black fw-semi-thk fs-20">Bathroom amenities</h4>
+                </div>
+
+                <div class="col-md-12">
+                    {{>facilities_checkboxs checkboxarray=bathroom_amenities salt="BA" colrender=4 requestsalt=requestBody.BA requestBody=requestBody}}
+                    <span class="text-danger">{{#if BA }}{{BA}}{{/if}}</span>
+                </div>
+            </div>
+            {{!-- End Bathroom Amenities --}}
+
+            <hr class="m-xl-b m-xl-t">
+
+            {{!-- Begin Media & Technology --}}
+            <div class="row row-xl">
+                <div class="col-md-12 m-lg-b">
+                    <h4 class="text-black fw-semi-thk fs-20">Media & Technology</h4>
+                </div>
+
+                <div class="col-md-12">
+                    {{>facilities_checkboxs checkboxarray=media_technology salt="MT" colrender=4 requestsalt=requestBody.MT requestBody=requestBody}}
+                    <span class="text-danger">{{#if MT }}{{MT}}{{/if}}</span>
+                </div>
+            </div>
+            {{!-- End Media & Technology --}}
+
+            <hr class="m-xl-b m-xl-t">
+
+            {{!-- Begin Food & Drink --}}
+            <div class="row row-xl">
+                <div class="col-md-12 m-lg-b">
+                    <h4 class="text-black fw-semi-thk fs-20">Food and Drink</h4>
+                </div>
+
+                <div class="col-md-12">
+                    {{>facilities_checkboxs checkboxarray=food_drink salt="FD" colrender=4 requestsalt=requestBody.FD requestBody=requestBody}}
+                    <span class="text-danger">{{#if FD }}{{FD}}{{/if}}</span>
+                </div>
+            </div>
+            {{!-- End Food & Drink --}}
+
+            <hr class="m-xl-b m-xl-t">
+
+            {{!-- Begin Services & Extra --}}
+            <div class="row row-xl">
+                <div class="col-md-12 m-lg-b">
+                    <h4 class="text-black fw-semi-thk fs-20">Services & Extras</h4>
+                </div>
+
+                <div class="col-md-12">
+                    {{>facilities_checkboxs checkboxarray=services_extras salt="SE" colrender=4 requestsalt=requestBody.SE requestBody=requestBody}}
+                    <span class="text-danger">{{#if SE }}{{SE}}{{/if}}</span>
+
+                </div>
+            </div>
+            {{!-- End Services & Extra --}}
+
+            <hr class="m-xl-b m-xl-t">
+
+            {{!-- Begin Outdoor & View --}}
+            <div class="row row-xl">
+                <div class="col-md-12 m-lg-b">
+                    <h4 class="text-black fw-semi-thk fs-20">Outdoor & View</h4>
+                </div>
+
+                <div class="col-md-12">
+                    {{>facilities_checkboxs checkboxarray=outdoor_view salt="OV" colrender=4 requestsalt=requestBody.OV requestBody=requestBody}}
+                    <span class="text-danger">{{#if OV }}{{OV}}{{/if}}</span>
+                </div>
+            </div>
+            {{!-- End Outdoor & View --}}
+
+            <hr class="m-xl-b m-xl-t">
+
+            {{!-- Begin Accessibility --}}
+            <div class="row row-xl">
+                <div class="col-md-12 m-lg-b">
+                    <h4 class="text-black fw-semi-thk fs-20">Accessibility</h4>
+                </div>
+
+                <div class="col-md-12">
+                    {{>facilities_checkboxs checkboxarray=accessibility salt="ACC" colrender=4 requestsalt=requestBody.acc requestBody=requestBody}}
+                    <span class="text-danger">{{#if ACC }}{{ACC}}{{/if}}</span>
+                </div>
+            </div>
+            {{!-- End Accessibility --}}
+
+            <hr class="m-xl-b m-xl-t">
+
+            {{!-- Begin Entertainment & Family Services --}}
+            <div class="row row-xl">
+                <div class="col-md-12 m-lg-b">
+                    <h4 class="text-black fw-semi-thk fs-20">Entertainment & Family Services</h4>
+                </div>
+
+                <div class="col-md-12">
+                    {{>facilities_checkboxs checkboxarray=entertainment_family_services salt="EFS" colrender=4 requestsalt=requestBody.EFS requestBody=requestBody}}
+                    <span class="text-danger">{{#if EFS }}{{EFS}}{{/if}}</span>
+                </div>
+            </div>
+            {{!-- End Entertainment & Family Services --}}
+
+            
+            <div class="row row-xl m-lg-t">
+                <div class="col-md-12">
+                    <input type="hidden" name="hotel_id" value="{{#if requestBody.hotel_id}}{{ requestBody.hotel_id}}{{/if}}"/>
+                    <span class="text-danger">{{#if hotel_id }}{{hotel_id}}{{/if}}</span>
+                    
+                    <p class="text-right">
+                        <button class="btn btn-danger btn-rounded w-150 m-md-b">Submit</button>
+                        <a href="#" class="btn btn-default btn-rounded w-150 m-md-b">Cancel</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {{!-- End Page Container --}}
+
+        </form>
+    {{/if}}
+</main>
+{{!-- End Page Content --}}
+{{>footer}}

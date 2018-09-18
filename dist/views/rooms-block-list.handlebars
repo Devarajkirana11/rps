@@ -1,0 +1,98 @@
+<script type="text/javascript">
+
+	jQuery(document).ready(function(){
+
+		$(".remove-block").click(function(){
+			var room_number = $(this).attr("data-roomnumber");
+			var hotel_id = $(this).attr("data-hotelid");
+			var reason = $(this).attr("data-reason");
+
+			var r = confirm("Are you sure want to remove the block?");
+			if (r == true) {
+			$.ajax({
+			url: "/inventory/front-desk/maintenance?hotel_uuid="+hotel_id,
+			type: "DELETE", 
+			data: { room_numbers:room_number, reason:reason },
+			success: function(response) { window.location.reload();	},
+			error: function(xhr) { }
+			});
+			} else {
+
+			}	
+		
+
+		});
+
+	});
+
+</script>
+
+{{> nav this}}
+
+{{> header}}
+
+<!-- Begin Page Content -->
+<main id="page-content">
+	<div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Maintainance Block List</h3>
+        </div>
+    </div>
+
+	<div class="page-container">
+		<div class="row row-xl">
+			<div class="col-md-12 m-lg-b">
+				<div class="add-button text-right">
+					<a href="/pms/maintenance/create?hotel_id={{ hotel_id }}" class="btn btn-danger btn-rounded w-150 btn-danger text-left">Add Room<i class="fa fa-plus-circle pull-right fa-fw"></i></a>
+				</div>
+			</div>
+		</div>
+
+		<!-- Begin Hotels View -->
+		<div class="row row-xl">
+			<div class="col-md-12">
+				{{#if errors}}
+					{{#each errors}}
+						<div class="alert alert-danger"> {{ msg }}</div>
+					{{/each}}
+				{{/if}}
+
+				<div class="table-view">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Room No</th>
+								<th>Block From</th>
+								<th>Block To</th>
+								<th>Blocked on</th>
+								<th>Blocked by</th>
+								<th>Blocked Reason</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							{{#each output }}
+							<tr>
+								<td>{{ this.roomNumber }}</td>
+								<td>{{ this.blockedFrom }}</td>
+								<td>{{ this.blockedTo }}</td>
+								<td>{{ this.blockedOn }}</td>
+								<td>{{ this.blockedByName }}</td>
+								<td>{{ this.reason }}</td>	
+								<td><span data-reason="{{ this.reason }}" data-roomnumber="{{this.roomNumber}}" data-hotelid="{{ ../hotel_id}}" class="remove-block btn btn-danger">Remove Block</span></td>								
+							</tr>
+							{{/each}}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<!-- End Hotels View -->
+
+	</div>
+</main>
+
+<!-- End Page Content -->
+
+
+{{> footer}}

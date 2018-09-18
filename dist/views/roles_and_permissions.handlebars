@@ -1,0 +1,82 @@
+{{> nav}}
+
+{{> header}}
+
+<script>
+    $(function(){
+        $('input[type="checkbox"]').click(function(){
+            var rp_status = false;
+            var $this = $(this)
+            var rp_field = $(this).attr('name');
+            var rp_id = $('input[name="rp_id"]').val();
+            if($(this).is(":checked")){
+                rp_status  = true;
+            }
+            $.ajax({url:'role_permission',dataType:'json',type:'post',data:{rp_field:rp_field,rp_status:rp_status,rp_id:rp_id},success:function(result){
+                //alert('successfully updated!');
+                $this.siblings('.message').html('updated!');
+            },
+            error:function(err){
+                alert('something went wrong while updating!')
+            }})
+        })
+    })
+</script>
+
+<main id="page-content">
+    <div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Roles and Permissions Management</h3>
+        </div>
+    </div>
+	
+    {{#if success }}
+    <div class="alert alert-success">{{ message}}</div>
+    {{else if message }}
+    <div class="alert alert-danger">{{ message}}</div>
+    {{/if}}
+	<div class="page-container">
+		<div class="row row-xl">
+			<div class="col-md-12 m-lg-b">
+				<h4 class="text-black fw-semi-thk fs-20">Roles and Permissions</h4>
+			</div>
+		</div>
+        <div class="row row-xl">
+            <div class="col-md-6">
+                <form name="createRole" action="/role_permission/create" method="post">
+                    <div class="form-group">
+                        <label>Add Access Url:</label>
+                        <input type="text"  class="form-control" name="accessurl"/>
+                        <span class="text-danger">{{accessurl}}</span>
+                    </div>
+                    <div class="form-group text-right">
+                        <input type="hidden" name="rp_id" value="rolePermission"/>
+                        <input type="submit"  class="form-control btn btn-primary btn-rounded w-150 m-md-b" name="saveAccessUrl" value="save"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row row-xl">
+            {{#if roles_and_permissions}}
+                {{#each roles_and_permissions.rp}}
+                    {{#notequal @key "_id"}}
+                    <div class="row row-xl well">
+                        <h3>{{@key}}</h3>
+                        <div class="row row-xl">
+                            {{#each this }}
+                                <h4>{{@key}}</h4>
+                                <div class="row row-xl ">
+                                    {{#each this}}
+                                        <div class="col-sm-2"><label>{{@key}}:</label> <span><input type="checkbox" name="{{@../../key}}.{{@../key}}.{{@key}}" {{#equal this 'true'}} checked="checked" {{/equal}}/><div class="message"></div></span></div>
+                                    {{/each}}
+                                </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/notequal}}
+                {{/each}}
+            {{/if}}
+        </div>
+	</div>
+</main>
+{{>footer}}

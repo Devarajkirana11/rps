@@ -1,0 +1,108 @@
+<main id="page-content" ng-init="location_details()">
+  <!-- Begin Fixed Search Bar -->
+  {{> fixed_search_bar}}
+  <!-- End Fixed Search Bar -->
+  <div class="content-container" ng-init="init('create')">
+    <div class="page-container p-md-b">
+      <div class="row">
+        <div class="col-md-12 p-n" id="banner-container">
+          <img src="{{ data._images.link }}" alt="Banner image" class="banner-image">
+          <div class="banner-content-container">
+            <h4 class="fw-thk fs-96 hidden-xs hidden-sm text-white m-n m-sm-b overlay-content">
+              {{ data._name }}</h4>
+            <h4 class="fw-thk fs-56 hidden-md hidden-lg text-white m-n m-sm-b overlay-content">
+              {{ data._name }}</h4>
+          </div>
+        </div>
+      </div>
+      <div class="row m-lg-t">
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-12 p-lg-b">
+              <p>{{{ data._description }}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="row row-xl text-danger text-center" ng-show="lsetResult == 2"
+                 id="no-res"> No Results
+              Found.
+            </div>
+            <div class="col-md-6 col-sm-6" style="width: 300px;" id="{[{ item._hotel_id }]}" ng-if="lsetResult == 1" ng-repeat="item in listContents">
+              <div class="card-container">
+                <div class="card-img">
+                  <ul class="bxslider" ng-if="item._image_links && item._image_fids.length > 0">
+                    <li ng-repeat="link in item._image_links">
+                      <img src="{[{link._thumbnail || '/images/default-image.png'}]}" alt="Hotel Image"/>
+                    </li>
+                  </ul>
+                  <img ng-if="item._image_links===undefined" src="/images/default-image.png" width="100%" alt="Hotel Image"/>
+                </div>
+
+                <div class="card-content">
+                  <h4 class="fw-thk text-black m-n m-sm-b"><a href="{[{item.page_link}]}">{[{item._nida_stay_name}]}</a></h4>
+                  <div class="m-lg-t">
+                    <a ng-if="item.currency && item.lowestRate && item.resStatus == 1" class="btn btn-danger btn-sm fw-thk text-uppercase"
+                       href="{[{item.page_link}]}">Book now</a>
+                    <span ng-if="item.lowestRate > 0" ng-bind="item.lowestRate | number: 2" class="pull-right fw-thk fs-xl"></span>
+                    &nbsp;
+                    <span ng-if="item.currency && item.lowestRate > 0" ng-bind="item.currency" class="pull-right fs-xs m-md-t"></span>
+                      <div class="notavailableclass badge" style="margin-top: 11px;"
+                            ng-if="(item.lowestRate === undefined || item.lowestRate == 0) && (item.resStatus == 1 || item.resStatus == 2)">
+                        <a href="{[{item.page_link}]}" class="text-center badge text-uppercase fw-nml"
+                            style="cursor: default; border-radius: 50px;">Sold Out</a>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="text-center sub-sections-preload" ng-if="lsetResult == 0">
+              <img src="/images/circle_loading.gif" width="20%" height="20%"/>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div id="map"></div>
+        </div>
+      </div>
+      <section ng-if="blog.length > 0">
+        <div class="page-container">
+          <div class="p-xl-t p-xl-b">
+            <div class="row">
+              <div class="col-md-12">
+                <h2 class="text-uppercase text-center m-lg-b text-black fw-lgt">Things to do</h2>
+              </div>
+            </div>
+            <div class="slider blogs-container row">
+              <div class="col-md-4" ng-repeat="article in blog">
+                <a href="{[{ article.link }]}" class="text-default" target="_blank">
+                  <div class="card-container">
+                    <div class="card-img">
+                      <img src="{[{ article.featured_image_src }]}" alt="Article Image" width="100%">
+                    </div>
+                    <div class="card-content">
+                      <h4 class="fw-lgt text-black m-n m-sm-b text-center text-uppercase"
+                          ng-bind-html="trustHtml(article.title.rendered)" style="line-height: 22px;"></h4>
+                      {{!--<p ng-bind-html="trustHtml(article.content.rendered)"></p>--}}
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="row text-center">
+              <a href="https://blog.hotelnida.com/" target="_blank" class="btn btn-danger btn-rounded">See more</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+<script>
+  let lat = "{{data._latitude}}";
+  let lng = "{{data._longitude}}";
+</script>
+{{#equal data._seo_type "3" }}
+  <script> var country_page_id = null;</script>
+{{else}}
+  <script> var country_page_id = "{{data._country_id}}";</script>
+{{/equal}}

@@ -1,0 +1,159 @@
+@media (max-width: 768px) {
+    .register-wrapper,
+    .login-wrapper {
+        height: 100%;
+        padding: 50px 15px;
+        display: block;
+		overflow-y: scroll;
+
+		.register-form,
+		.login-form {
+			width: 100% !important;
+		}
+    }
+    
+    body {
+        &.navbar-visible {
+            #page-wrapper {
+                overflow: hidden;
+                height: 100%;
+                width: 100%;
+
+                #page-sidebar {
+                    left: 0;
+                }
+
+                #page-content {
+                    margin-left: 250px;
+                    margin-right: -250px;
+                }
+            }
+        }
+
+        #page-wrapper {
+            #page-sidebar {
+                left: -250px;
+                @include transition(left 0.4s ease);
+            }
+    
+            #page-header {
+                .header-logo {
+                    width: 100%;
+                    text-align: center;
+                    position: fixed;
+                    top: 0;
+                    right: 0;
+                    left: 0;
+                    z-index: 999;
+                    height: 65px;
+                }
+
+                .nav-toggle {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    z-index: 1000;
+                    width: 50px;
+                    text-align: center;
+                    height: 65px;
+                    line-height: 65px;
+                }
+
+                .user-menu-toggle {
+                    position: fixed;
+                    right: 0;
+                    top: 0;
+                    z-index: 1000;
+                    width: 50px;
+                    text-align: center;
+                    height: 65px;
+                    line-height: 65px;
+                }
+
+                .header-nav-right {
+                    float: none !important;
+                    margin: 65px -15px 0 -15px;
+                    display: none;
+                    background: $white;
+
+                    &.user-menu-visible {
+                        display: block !important;
+                    }
+    
+                    .header-list-items {
+                        li {
+                            border-bottom: solid 1px #ddd;
+                            display: block;
+                            height: 65px;
+                            // padding: 20px 15px;
+                            text-align: left;
+                            width: 100%;
+
+                            .dropdown-menu {
+                                // display: block;
+                                width: 100%;
+
+                                li {
+                                    // display: block;
+                                    width: 100%;
+                                }
+                            }
+
+                            &:last-child {
+                                border-bottom: none;
+                            }
+                        }
+                    }
+                }
+            }
+    
+            #page-content {
+                margin-left: 0;
+                margin-right: 0;
+                width: 100%;
+                @include transition(margin-left 0.4s ease);
+                // padding: 20px;
+
+                .page-title {
+                    .breadcrumb-container {
+                        text-align: left !important;
+                    }
+
+                    .col-sm-6 {
+                        width: 100%;
+                    }
+                }
+            }
+    
+            #page-footer {
+                margin-left: 0;
+
+                .footer-top {
+                    .footer-list {
+                        margin-bottom: 50px;
+                    }
+                }
+            }
+        }
+        #powered-by {
+            display: none;
+        }
+    }
+}
+
+
+@media (max-width: 460px) {
+    .content-container {
+        margin-top: 70px;
+    }
+
+    .page-title {
+        .page-name-container {
+            
+        }
+
+        .breadcrumb-container {
+            text-align: left !important;
+        }
+    }
+}

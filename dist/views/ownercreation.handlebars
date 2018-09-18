@@ -1,0 +1,207 @@
+<script src="/js/jquery.validate.js"></script>
+
+<script type="text/javascript">
+
+	jQuery(document).ready(function(){
+
+		$("#user-management").validate({
+			rules: {
+				first_name: "required",
+				last_name: "required",
+				user_name: "required",
+				email: {
+					required: true,
+					email: true
+				},
+				status: "required",
+				roles: "required",
+			},
+			messages: {
+				first_name: "Please enter your firstname",
+				last_name: "Please enter your lastname",
+				user_name: "Please enter your user name",
+				email: "Please enter your email id",
+				status: "Please select the user status",
+				roles: "Please select the user roles",
+			}
+		});
+
+	});
+
+</script>
+
+{{> nav}}
+
+{{> header}}
+		
+<!-- Begin Page Content -->
+<main id="page-content">
+	<div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">User Management</h3>
+        </div>
+    </div>
+
+	<div class="page-container">
+		<div class="row row-xl">
+			<div class="col-md-12 m-lg-b">
+				<h4 class="text-black fw-semi-thk fs-20">Create New User</h4>
+			</div>
+		</div>
+
+		<div class="row row-xl">
+			<div class="col-md-12">
+				<form class="" id="user-management" action='/users/create' method="POST">
+					{{#if errors}}
+						{{#each errors}}
+							<div class="alert alert-danger"> {{ msg }}</div>
+						{{/each}}
+					{{/if}}
+					{{#if success }}
+					<div class="alert alert-success">{{ message}}</div>
+					{{else if message }}
+					<div class="alert alert-danger">{{ message}}</div>
+					{{/if}}
+					
+					<div class="row row-xl">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="username">First Name</label>
+								<input type="text" value="{{#if output.first_name }}{{ output.first_name }}{{/if}}" id="" name="first_name" placeholder="" class="form-control">
+							</div>	
+						</div>
+
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="username">Last Name</label>
+								<input type="text" value="{{#if output.last_name }}{{ output.last_name }}{{/if}}" id="" name="last_name" placeholder="" class="form-control">
+							</div>
+						</div>
+					</div>
+
+					<div class="row row-xl">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="username">User Name</label>
+								<input type="text" id="user_name" value="{{#if output.user_name }}{{ output.user_name }}{{/if}}" id="" name="user_name" placeholder="" class="form-control">
+							</div>	
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="hotel_name">Hotel Name</label>
+
+								<div class="select-wrapper">
+									<select name="hotel_name" class="form-group form-control">
+										<option value="">Select</option>
+										{{#each hotels }}
+										<option value="{{ this._hotel_id }}"{{#equal ../output._hotel_name this._hotel_id }} selected="selected" {{/equal}}>{{ this._nida_stay_name }}</option>
+										{{/each}}
+									</select>	
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row row-xl">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="" for="email">E-mail</label>
+								<input type="text" id="" value="{{#if output.email }}{{ output.email }}{{/if}}"  name="email" placeholder="" class="form-control">
+							</div>
+						</div>
+					</div>
+					
+					<div class="row row-xl">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="password">Password</label>
+								<input type="password" id="" name="password" placeholder="" class="form-control">
+							</div>	
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="password_confirm">Confirm Password</label>
+								<input type="password" id="" name="password2" placeholder="" class="form-control">
+							</div>	
+						</div>
+					</div>
+
+					<div class="row row-xl">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="status">Status</label>
+								<div class="select-wrapper">
+									<select name="status" class="form-control">
+										<option value="">Select</option>
+										<option value="Active" {{#equal output._status 'Active'}} selected="selected" {{/equal}}>Active</option>
+										<option value="InActive"  {{#equal output._status 'InActive'}} selected="selected" {{/equal}}>InActive</option>
+									</select>
+								</div>
+							</div>	
+						</div>
+					</div>
+
+					<div class="row row-xl">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="" for="roles">Roles</label>
+							</div>
+							
+							<div class="checkbox-inline">
+								<input type="checkbox" name="roles[]" value="4" id="user-create--owner">
+								<label for="user-create--owner">Owner</label>
+							</div>
+
+							<div class="checkbox-inline">
+								<input type="checkbox" name="roles[]" value="5" id="user-create--finance">
+								<label for="user-create--finance">Finance</label>
+							</div>
+
+							<div class="checkbox-inline">
+								<input type="checkbox" name="roles[]" value="6" id="user-create--manager">
+								<label for="user-create--manager">Manager</label>
+							</div>
+
+							<div class="checkbox-inline">
+								<input type="checkbox" name="roles[]" value="7" id="user-create--frontdesk">
+								<label for="user-create--frontdesk">Front Desk</label>
+							</div>	
+							<div class="checkbox-inline">
+								<input type="checkbox" name="roles[]" value="1" id="user-create--admin">
+								<label for="user-create--admin">Admin</label>
+							</div>	
+							<div class="checkbox-inline">
+								<input type="checkbox" name="roles[]" value="9" id="user-create--guest">
+								<label for="user-create--guest">Guest</label>
+							</div>
+							<div class="checkbox-inline">
+								<input type="checkbox" name="roles[]" value="10" id="user-create--hq-admin">
+								<label for="user-create--hq-admin">HQ Admin</label>
+							</div>
+							<div class="checkbox-inline">
+								<input type="checkbox" name="roles[]" value="2" id="user-create--hq-operation">
+								<label for="user-create--hq-operation">HQ Operation</label>
+							</div>
+							<div class="checkbox-inline">
+								<input type="checkbox" name="roles[]" value="3" id="user-create--hq-finance">
+								<label for="user-create--hq-finance">HQ Finance</label>
+							</div>
+						</div>
+					</div>
+
+					<div class="row row-xl">
+						<div class="col-md-12">
+							<div class="m-xl-t text-right">
+								<button class="btn btn-danger btn-rounded w-150"  name="Submit" value="Save" type="Submit">Submit</button> 
+								<button class="btn btn-default btn-rounded w-150" onclick="history.go(-1);">Cancel </button>
+							</div>	
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</main>
+<!-- End Page Content -->
+
+{{> footer}}

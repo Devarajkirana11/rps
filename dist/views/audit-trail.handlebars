@@ -1,0 +1,232 @@
+<link href="/css/jquery-ui.css" rel="stylesheet" />
+<script>
+    function getUrlVars() {
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for (var i = 0; i < hashes.length; i++) {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    }
+
+
+
+    $(function () {
+
+        var hoteluuid = getUrlVars()["hotel_id"];
+
+        if (hoteluuid) {
+            var hoteluuid = hoteluuid;
+        } else {
+            var hoteluuid = 'e7017613-42db-4748-a00a-21b3b41ca661';
+        }
+
+        var filtersFirstInitialized = false;
+        var oTable = $('#audit-trail').DataTable({
+            "search": { "hoteluuid": hoteluuid },
+            "order": [[2, "desc"]],
+            dom: '<"#add.row selectWrapper m-lg-b">frtlip',
+            processing: true,
+            serverSide: true,
+            autoWidth: true,
+            ajax: function (data, callback, settings) {
+                $.ajax({
+                    url: "/payment-manager/get-audit-details?hoteluuid=" + hoteluuid,
+                    type: "POST",
+                    data: data,
+                    dataType: 'json',
+                    success: function (res) {
+                        callback(res.Tabledata);
+                        if (filtersFirstInitialized === false) {
+                            //appendFilters();
+                        }
+                    }
+                })
+            },
+            columns: [
+                { data: 'transactionId', name: 'transactionId', searchable: true },
+                { data: 'bookingId', name: 'bookingId', searchable: true },
+                { data: 'transactionDate', name: 'transactionDate', searchable: false },
+                { data: 'collectionType', name: 'collectionType', searchable: true },
+                { data: 'paymentMethod', name: 'paymentMethod', searchable: true },
+                { data: 'bookingSource', name: 'bookingSource', searchable: true },
+                { data: 'transactedItems', name: 'transactedItems', searchable: true },
+                { data: 'amount', name: 'amount', searchable: true },
+                { data: 'pic', name: 'pic', searchable: false },
+                { data: 'shiftIncharge', name: 'shiftIncharge', searchable: true },
+            ]
+        })
+
+        $(document).on('click', "#Submit", function () {
+            //if(filtersFirstInitialized === true) {
+            var filterval = $("#bookingId").val();
+            var collectionType = $("#collectionType").val();
+            var paymentMethod = $("#paymentMethod").val();
+            var transactionDate = $("#transactionDate").val();
+            var transactedItems = $("#transactedItems").val();
+            var pic = $("#pic").val();
+            isAppend = false;
+            if (filterval) { oTable.column([1]).search(filterval).draw(); }
+            if (transactionDate) { oTable.column([2]).search(transactionDate).draw(); }
+            if (collectionType) { oTable.column([3]).search(collectionType).draw(); }
+            if (paymentMethod) { oTable.column([4]).search(paymentMethod).draw(); }
+            if (pic) { oTable.column([8]).search(pic).draw(); }
+            if (transactedItems) { oTable.column([6]).search(transactedItems).draw(); }
+
+
+
+            //}
+        });
+
+        $("#pic").autocomplete({
+            source: function (request, response) {
+                if (request.term && request.term == "") {
+                    oTable.column([8]).search("").draw();
+                } else {
+                    $.ajax({
+                        url: "/user-manager/getUserByName?name=" + request.term,
+                        dataType: "json",
+                        success: function (res) {
+                            response(res.data);
+                        }
+                    });
+                }
+            },
+            select: function (event, ui) {
+                event.preventDefault();
+                $("#pic").val(ui.item.label);
+                oTable.column([8]).search(ui.item.value).draw();
+            },
+            focus: function (event, ui) {
+                event.preventDefault();
+                $("#pic").val(ui.item.label);
+            }
+        });
+        $("#pic").blur(function () {
+            var search_data = $(this).val();
+            if (search_data.length == 0) {
+                oTable.column([8]).search("").draw();
+            }
+        });
+        $('#transactionDate').datepicker({
+            dateFormat: 'dd-mm-yy',
+            onSelect: function (dateText) {
+                var dateSel = moment(dateText, 'DD-MM-YYYY').format('DD-MM-YYYY');
+                oTable.column([2]).search(dateSel).draw();
+            }
+        });
+
+        $("#reset").click(function () {
+            window.location.reload();
+        });
+
+    })
+
+</script>
+
+{{> nav}} {{> header}}
+
+<main id="page-content">
+    <div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Audit Trail</h3>
+        </div>
+    </div>
+
+    <div class="page-container">
+        <div class="row row-xl">
+            <div class="col-md-12 m-lg-b">
+            </div>
+        </div>
+
+        <div class="row row-xl">
+
+            <div class="col-md-12">
+
+                <div class="row row-xl">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="" for="bookingId">Booking ID</label>
+                            <input type="text" id="bookingId" value="{{ inputs.bookingId }}" name="bookingId" placeholder="" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="" for="transactionDate">Transaction Date</label>
+                            <input type="text" id="transactionDate" value="{{ inputs.transactionDate }}" name="transactionDate" placeholder="" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="" for="collectionType">Collection Type</label>
+                            <select class="form-control" id="collectionType" name="collectionType">
+                                    <option value="">Select</option>
+                                    <option value="CREDIT" {{#equal inputs.collectionType 'CREDIT'}} selected="selected" {{/equal}}>CREDIT</option>
+                                    <option value="DEBIT" {{#equal inputs.collectionType 'DEBIT'}} selected="selected" {{/equal}}>DEBIT</option>
+                                </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="" for="transactedItems">Transacted Items</label>
+                            <input type="text" id="transactedItems" value="{{ inputs.transactedItems }}" name="transactedItems" placeholder="" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="" for="pic">PIC</label>
+                            <input type="text" id="pic" value="{{ inputs.pic }}" name="pic" placeholder="" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="" for="paymentMethod">Payment Method</label>
+                            <select class="form-control" id="paymentMethod" name="paymentMethod">
+                                    <option value="">Select</option>
+                                    <option value="CASH" {{#equal inputs.collectionType 'CASH'}} selected="selected" {{/equal}}>CASH</option>
+                                    <option value="POS" {{#equal inputs.collectionType 'POS'}} selected="selected" {{/equal}}>POS</option>
+                                    <option value="CREDIT_CARD" {{#equal inputs.collectionType 'CREDIT_CARD'}} selected="selected" {{/equal}}>CREDIT_CARD</option>
+                                </select>
+
+                        </div>
+                    </div>
+
+                    <div class="row row-xl m-xl-b">
+                        <div class="col-md-12 text-right">
+                            <button class="btn btn-danger btn-rounded w-150 text-left" name="Submit" value="Save" type="Submit" id="Submit">Search <i class="fa fa-search fa-fw pull-right"></i></button>
+                            <button class="btn btn-danger btn-rounded w-150 text-left" id="reset" type="button" value="Reset">Reset <i class="fa fa-refresh fa-fw pull-right" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <table id="audit-trail" class="table table-striped" border="1" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Transaction ID</th>
+                            <th>Booking ID</th>
+                            <th>Transaction Date</th>
+                            <th>Collection type</th>
+                            <th>Payment Method</th>
+                            <th>Booking Source</th>
+                            <th>Transacted Items</th>
+                            <th>Amount</th>
+                            <th>Person Incharge</th>
+                            <th>Shift Incharge</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="/js/jquery-ui.js"></script>
+{{> footer}}

@@ -1,0 +1,135 @@
+<script src="/js/jquery.dataTables.min.js"></script>
+<link href="/css/jquery-ui.css" rel="stylesheet" />
+<script>
+    var roomLinkable = "{{roomLinkable}}";
+    var hotel_id = "{{hotel_id}}";
+    var room_types = new Array();
+    var room_names = new Array();
+    {{#each masters.room_names}}
+        room_names.push({value:"{{this.value}}",text:"{{this.text}}"});
+    {{/each}}
+    {{#each masters.room_types}}
+        room_types.push({value:"{{this.value}}",text:"{{this.text}}"});
+    {{/each}}
+    $(function(){
+        hotel_id = (hotel_id==""?null:hotel_id);
+        var oTable = $('#rooms_list').DataTable( {
+        processing: true,
+		serverSide: true,
+        autoWidth: false,
+        dom:'<"#add.row row-xl">tlip',
+        ajax:function (data, callback, settings) {
+             $.ajax({url:"/room_manager/"+hotel_id+"/getAllRooms",type:"POST",data:data,dataType:'json',
+                success:function(res){
+                    if(res.success) {
+                        $.each(res.Tabledata.data,function(i,val){
+                            if(roomLinkable==1){
+                                //res.Tabledata.data[i]['_type'] = '<a href="/pms/maintainance/create?hid='+res.Tabledata.data[i]['_room_id']+'">'+res.Tabledata.data[i]['_type']+'</a>';
+                            }
+                        });
+                        callback(res.Tabledata);
+                    }
+                }
+            })
+        },
+        columns: [
+            { data: '_type',name: '_type' ,searchable:false},
+            { data: '_number',name: '_number',searchable:false},
+            { data: '_floorNumber',name: '_floorNumber',searchable:false},
+            { data: 'RoomType',name: 'RoomType',searchable:false},
+            { data: '_hotelId',name: '_hotelId',searchable:false},
+            { data: '_room_id', visible:false,searchable:false}
+        ]
+		
+		})
+        // Room Type filter field
+        let field = addNewFilterElement('select',{label:'Room Type',name:'room_type',id:'room_type'});
+        $.each(room_types,function(index,option){
+            $('<option/>').val(option.value).text(option.text).appendTo(field);    
+        })
+        // Room Name filter field
+        field = addNewFilterElement('select',{label:'Room Name',name:'room_name',id:'room_name'});
+        $.each(room_names,function(index,option){
+            $('<option/>').val(option.value).text(option.text).appendTo(field);    
+        })
+        // Room No filter field
+        addNewFilterElement('input',{label:'Room No',name:'room_no',id:'room_no'});
+        // Hotel Name filter field 
+        /*** hotel name filter currently hidden due to listing only relavant rooms, for future use just commenting **/
+        //addNewFilterElement('input',{label:'Hotel Name',name:'hotel_name',id:'hotel_name'});
+        $( "#hotel_name" ).autocomplete({
+            source: function( request, response ) {
+                $.ajax( {
+                    url: "/hotel_manager/getHotelByName?hotel_name="+request.term,
+                    dataType: "json",
+                    success: function( res ) {
+                        response( res.data );
+                    }
+                });
+            },
+            select: function( event, ui ) {
+                event.preventDefault();
+                $("#hotel_name").val(ui.item.label);
+                oTable.column([4]).search(ui.item.value).draw();
+            },
+            focus: function(event, ui) {
+                event.preventDefault();
+                $("#hotel_name").val(ui.item.label);
+            }
+        });
+        $(document).on('keydown', "#hotel_name",function(){
+            if($(this).val() == "")
+                oTable.column([4]).search('').draw();
+        })
+        // on change handlers
+        $(document).on('change',"#room_type,#room_name",function(){
+            var filterval = $(this).val()
+            if($(this).attr('id') == "room_name" || $(this).attr('id') == "room_type") {
+                var colno = ($(this).attr('id') == "room_name"?0:3);
+                if(filterval == "all")
+                    oTable.column([colno]).search('').draw();
+                else
+                    oTable.column([colno]).search(filterval).draw();
+            }
+        });
+        //on keyup handler
+        $(document).on('keyup','#room_no',function(){
+            var filterval = $(this).val()
+            if(filterval == "")
+                oTable.column([1]).search('').draw();
+            else
+                oTable.column([1]).search(filterval).draw();
+        });
+    })
+</script>
+{{> nav}}
+{{> header}}
+<main id="page-content">
+    <div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Rooms</h3>
+        </div>
+    </div>
+
+    {{#if success }}
+		<div class="alert alert-success">{{ message}}</div>
+	{{else if message }}
+		<div class="alert alert-danger">{{ message}}</div>
+	{{/if}}
+    <div class="page-container">
+        <div class="row row-xl">
+            <div class="col-md-12 m-lg-b">
+                <h4 class="text-black fw-semi-thk fs-20">Room List</h4>
+                <table  id="rooms_list" class="table table-striped" border="1" width="100%">
+                    <thead>
+                        <tr><th>Room Name</th><th>Room No.</th><th>Floor No.</th><th>Room Type</th><th>Hotel Name</th></tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="/js/jquery-ui.js"></script>
+{{> footer}}

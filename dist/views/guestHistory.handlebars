@@ -1,0 +1,194 @@
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="/scripts/plugins/jquery.bootstrap.wizard.min.js"></script>
+<script src="/js/jquery-ui.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        var searchMinDate = "m";
+        $("#reset").click(function () {
+            window.location.href = window.location.href;
+        });
+    });
+
+</script>
+{{> nav this}} {{> header}}
+<main id="page-content">
+    <div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Guest History</h3>
+        </div>
+    </div>
+    <div class="page-container">
+        {{#if success }}
+        <div class="alert alert-success">{{ message}}</div>
+        {{else if message }}
+        <div class="alert alert-danger">{{ message}}</div>
+        {{/if}} {{!-- {{#if data._bankdetails}} {{#each data._bankdetails}} --}} {{!-- Guest Details --}}
+        <div class="row row-xl">
+            <div class="col-md-12 m-lg-b m-xl-t">
+                <h4 class="text-black fw-semi-thk fs-20">Guest Details</h4>
+            </div>
+
+            <div class="col-md-6">
+                {{!-- Begin Guest Name --}}
+                <div class="row row-xl m-sm-b">
+                    <div class="col-md-5 col-sm-6 col-xs-12">
+                        <p>Guest Name:</p>
+                    </div>
+                    <div class="col-md-7 text-black fw-semi-thk">
+                        <p>{{#if this.username}}{{ this.username}}{{/if}}</p>
+                    </div>
+                </div>
+                {{!-- End Guest Name --}} {{!-- Begin Email --}}
+                <div class="row row-xl m-sm-b">
+                    <div class="col-md-5 col-sm-6 col-xs-12 text-capitalize">
+                        <p>Email Address:</p>
+                    </div>
+
+                    <div class="col-md-7 text-black fw-semi-thk">
+                        <p>{{#if this._email}}{{ this._email}}{{/if}}</p>
+                    </div>
+                </div>
+            </div>
+            {{!-- End Email --}}
+
+            <div class="col-md-6">
+                {{!-- Begin Mobile--}}
+                <div class="row row-xl m-sm-b">
+                    <div class="col-md-5 col-sm-6 col-xs-12 text-capitalize">
+                        <p>Mobile Number</p>
+                    </div>
+
+                    <div class="col-md-7 text-black fw-semi-thk">
+                        <p>{{#if this.mobile}}{{ this.mobile }}{{/if}}</p>
+                    </div>
+                </div>
+                {{!-- End Mobile --}} {{!-- Begin Nationality --}}
+                <div class="row row-xl m-sm-b">
+                    <div class="col-md-5 col-sm-6 col-xs-12 text-capitalize">
+                        <p>Nationality</p>
+                    </div>
+
+                    <div class="col-md-7 text-black fw-semi-thk">
+                        <p>{{#if this.nationality}}{{ this.nationality }}{{/if}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{!-- End Nationality --}}
+
+
+        <hr class="m-xl-t m-xl-b">
+
+        <div class="row row-xl page-title">
+            <div class="col-md-12">
+                <h3 class="text-black fw-semi-thk">GUEST BOOKINGS</h3>
+            </div>
+        </div>
+
+        <div class="row row-xl">
+            <div class="col-md-12">
+                <div class="filter-form">
+                    {{#if errors}} {{#each errors}}
+                    <div class="alert alert-danger"> {{ msg }}</div>
+                    {{/each}} {{/if}}
+                    <div class="table-responsive">
+                        <table class="table" id="report-table1">
+                            <thead>
+                                <tr>
+                                    <th>Hotel Name</th>
+                                    <th>ON_HOLD BOOKINGS</th>
+                                    <th>CONFIRMED BOOKINGS</th>
+                                    <th>CHECK IN BOOKINGS</th>
+                                    <th>OCCUPIED BOOKINGS </th>
+                                    <th>VACATED BOOKINGS</th>
+                                    <th>NO SHOW BOOKINGS</th>
+                                    <th>CANCELLED BOOKINGS</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="m-xl-t m-xl-b">
+
+        <div class="row row-xl page-title">
+            <div class="col-md-12">
+                <h3 class="text-black fw-semi-thk">GUEST EARNINGS</h3>
+            </div>
+        </div>
+
+        <div class="row row-xl">
+            <div class="col-md-12">
+                <div class="filter-form">
+                    {{#if errors}} {{#each errors}}
+                    <div class="alert alert-danger"> {{ msg }}</div>
+                    {{/each}} {{/if}}
+                    <div class="table-responsive">
+                        <table class="table" id="report-table2">
+                            <thead>
+                                <tr>
+                                    <th>Hotel Name</th>
+                                    <th>Upcoming Earnings</th>
+                                    <th>Total Earnings</th>
+                                    <th>No. Of Bookings</th>
+                                    <th>Link Open </th>
+                                    <th>Total Overall Bookings</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{{> footer}} {{!-- Datatable of GUEST Bookings Starts --}}
+
+<script>
+    $(document).ready(function () {
+        $('#report-table1').DataTable({
+
+            "ajax": {
+                "url": "/report-manager/manager/guest-history?_email={{_email}}",
+                "type": "GET"
+            },
+            "columns": [
+                { "data": "hotelName" },
+                { "data": "onHoldBookings" },
+                { "data": "confirmedBookings" },
+                { "data": "checkInBookings" },
+                { "data": "checkOutBookings" },
+                { "data": "vacatedBookings" },
+                { "data": "noShowBookings" },
+                { "data": "cancelledBookings" }
+            ]
+        });
+    });
+
+</script>
+{{!-- Datatable of GUEST Bookings Ends --}} {{!-- Datatable of GUEST Earnings Starts --}}
+<script>
+    $(document).ready(function () {
+        $('#report-table2').DataTable({
+
+            "ajax": {
+                "url": "/report-manager/manager/guest-history?_email={{_email}}",
+                "type": "GET"
+            },
+            "columns": [
+                { "data": "hotelName" },
+                { "data": "upcomingEarnings" },
+                { "data": "totals" },
+                { "data": "bookings" },
+                { "data": "linkedOpens" },
+                { "data": "overall" }
+            ]
+        });
+    });
+
+</script>
+
+{{!-- Datatable of GUEST Earnings Ends --}}

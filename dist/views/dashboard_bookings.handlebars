@@ -1,0 +1,185 @@
+<link rel="stylesheet" href="/scripts/plugins/nvd3/nv.d3.min.css">
+
+{{> nav this}}
+
+{{> header}}
+
+
+<main id="page-content">
+	<div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Booking Summary</h3>
+        </div>
+    </div>
+
+	<div class="page-container">
+        <div class="row">
+            <div class="col-md-12">
+                <input type="hidden" value="{{ hotel_uuid }}" id="hotel-uuid">
+            </div>
+        </div>
+        
+        {{!-- BEGIN OVERALL STATS --}}
+        <div class="row row-sm">
+            <div class="col-md-12">
+                <h5 class="fw-semi-thk text-uppercase text-black m-md-b">Month to Date Overview</h5>
+            </div>
+            <div class="col-md-3">
+                <div class="overall-bookings-container overall-stats-container">
+                    <h3 class="fw-semi-thk text-center text-black m-n overall-bookings"></h3>
+                    <p class="text-center"><small class="text-uppercase">Total Bookings</small></p>
+
+                    <div class="overall-source"></div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="overall-rooms-sold-container overall-stats-container">
+                    <h3 class="fw-semi-thk text-center text-black m-n overall-rooms-sold"></h3>
+                    <p class="text-center"><small class="text-uppercase">Rooms Sold</small></p>
+                    
+                    <div class="overall-source"></div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="overall-avg-stay-container overall-stats-container">
+                    <h3 class="fw-semi-thk text-center text-black m-n overall-avg-stay"></h3>
+                    <p class="text-center"><small class="text-uppercase">Avg Stay</small></p>
+                    
+                    <div class="overall-source"></div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="overall-room-nights-container overall-stats-container">
+                    <h3 class="fw-semi-thk text-center text-black m-n overall-room-nights"></h3>
+                    <p class="text-center"><small class="text-uppercase">Room Nights Per Day</small></p>
+                    
+                    <div class="overall-source"></div>
+                </div>
+            </div>
+        </div>
+        {{!-- END OVERALL STATS --}}
+
+        <hr class="m-lg-b m-lg-t">
+
+
+        {{!-- BEGIN SUMMARY TABLE --}}
+        <div class="row">
+            <div class="col-md-12">
+                <h5 class="fw-semi-thk text-uppercase text-black">Summary Table</h5>
+                <div class="summary-table">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{!-- END SUMMARY TABLE --}}
+
+        <hr class="m-lg-b m-lg-t">
+
+        {{!-- BEGIN METRIC TOGGLE --}}
+        <div class="row">
+            <div class="col-md-9">
+                <h5 class="fw-semi-thk text-uppercase text-black">Performance Trends</h5>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="">Metric</label>
+                    <div class="select-wrapper">
+                        <select name="" id="metric-toggle" class="form-control">
+                            <option value="bookings">Bookings</option>
+                            <option value="roomsSold">Rooms Sold</option>
+                            <option value="avgStay">Avg Stay</option>
+                            <option value="roomNightsPerDay">Room Nights Per Day</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{!-- END METRIC TOGGLE --}}
+
+        {{!-- BEGIN MONTH & WEEK CHART --}}
+        <div class="row m-md-b">
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h5 class="fw-semi-thk text-uppercase text-black m-n m-xs-t">Monthly Trend</h5>
+                        <hr>
+                        <div id="monthly-chart">
+                            <svg height="225"></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h5 class="fw-semi-thk text-uppercase text-black m-n m-xs-t">Weekly Trend</h5>
+                        <hr>
+
+                        <div id="weekly-chart">
+                            <svg height="225"></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{!-- END MONTH & WEEK CHART --}}
+
+
+        {{!-- BEGIN DAILY CHART --}}
+        <div class="row m-md-b">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h5 class="fw-semi-thk text-uppercase text-black m-n m-xs-t">Daily Trend</h5>
+                        <hr>
+
+                        <div id="daily-chart">
+                            <svg height="250"></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{!-- END DAILY CHART --}}
+
+        <hr class="m-lg-b m-lg-t">
+
+        {{!-- BEGIN SOURCE --}}
+        <div class="row m-md-b">
+            <div class="col-md-12">
+                <h5 class="fw-semi-thk text-uppercase text-black m-n m-md-b">Channel Wise Contribution</h5>
+                <div id="source-area">
+                    <svg height="300"></svg>
+                </div>
+            </div>
+        </div>
+
+        <hr class="m-lg-b m-lg-t">
+
+        <div class="row">
+            <div class="col-md-12">
+                <h5 class="fw-semi-thk text-uppercase text-black m-n m-md-b">Channel Wise Trend</h5>
+                <div id="source-line">
+                    <svg height="300"></svg>
+                </div>
+            </div>
+        </div>
+        {{!-- END SOURCE --}}
+    </div>
+</main>
+
+{{> footer}}
+
+
+<script src="/scripts/plugins/d3/d3.min.js"></script>
+<script src="/scripts/plugins/nvd3/nv.d3.min.js"></script>
+<script src="/js/dashboard_bookings.js"></script>

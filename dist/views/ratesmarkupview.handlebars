@@ -1,0 +1,171 @@
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+		$( "#start_date , #end_date" ).datepicker({dateFormat: "dd-mm-yy"});
+
+
+	});
+</script>		
+
+{{> nav}}
+
+{{> header}}
+
+
+<main id="page-content">
+
+	<div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">{{ others.room_type_name }}</h3>
+        </div>
+    </div>
+
+	{{#if errors}}
+
+	<div class="alert alert-danger"> {{ errors }}</div>
+
+	{{/if}}
+
+	<div class="page-container">
+
+		<div class="currency">{{ currency }}</div>
+
+		<form id="markup-form" action="" method="POST">
+			<input type="hidden" value="{{ inputs.hotel_id }}" id="hotel_id" name="hotel_id">
+			<input type="hidden" value="{{ inputs.room_type }}" id="room_type" name="room_type">
+			<div class="form-group">
+				<label for="">Markup type</label>
+				<select name="markup_type" class="form-control"  id="markup_type">
+					<option value="">Select Type</option>
+					<option value="0" {{#equal output.roomTypeMarkup.type '0'}} selected="selected" {{/equal}}>Percentage</option>
+					<option value="1" {{#equal output.roomTypeMarkup.type '1'}} selected="selected" {{/equal}}>Flat</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="">Incremental Type</label>
+				<select name="incremental_type" class="form-control"  id="incremental_type">
+					<option value="">Select</option>
+					<option value="0" {{#equal output.roomTypeMarkup.coating '0'}} selected="selected" {{/equal}}>+</option>
+					<option value="1" {{#equal output.roomTypeMarkup.coating '1'}} selected="selected" {{/equal}}>-</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<input type="text" value="{{ output.roomTypeMarkup.value }}" placeholder="Markup Value" class="form-control" name="markup_value" id="markup_value">
+			</div>
+			<div class="form-group">
+				<label for="">Default Cost Rate</label>
+				<input type="text" disabled="disabled" id="cost_rate" class="form-control" value="{{ output.defaultRate }}" placeholder="Default Cost Rate" name="cost_rate">
+			</div>
+			<input type="hidden" name="date_wise_cost" id="date-wise-cost-value" class="form-control" value='{{ others.date_wise_values }}'>
+
+			<div class="form-group">
+				<button type="submit" class="btn btn-success" value="Submit">Save</button>
+				<button type="reset"  class="btn btn-danger" value="Cancel">Cancel</button>
+			</div>
+		</form>
+
+
+						<div class="row row-xl">
+							<div class="col-md-12 m-lg-b">
+								<h4 class="text-black fw-semi-thk fs-20">Day Wise </i></h4>
+							</div>
+						</div>
+
+						<div class="row row-xl">
+							<div class="col-md-12">
+								<div class="table-responsive">
+									<form id="day-wise">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+											<tr>
+												<th>Monday</th>
+												<th>Tuesday</th>
+												<th>Wednesday</th>
+												<th>Thursday</th>
+												<th>Friday</th>
+												<th>Saturday</th>
+												<th>Sunday</th>
+											</tr>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>{{ output.dayWiseCost.monday }}</td>
+												<td>{{ output.dayWiseCost.tuesday }}</td>
+												<td>{{ output.dayWiseCost.wednesday }}</td>
+												<td>{{ output.dayWiseCost.thursday }}</td>
+												<td>{{ output.dayWiseCost.friday }}</td>
+												<td>{{ output.dayWiseCost.saturday }}</td>
+												<td>{{ output.dayWiseCost.sunday }}</td>
+											</tr>
+										</tbody>
+									</table>
+									</form>
+								</div>
+							</div>
+						</div>
+
+						<hr>
+
+						<div class="row row-xl">
+							<div class="col-md-12 m-lg-b">
+								<h4 class="text-black fw-semi-thk fs-20">Date Wise  </h4>
+							</div>
+						</div>
+
+						<div class="row row-xl">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for=""><i class="fa fa-calendar fa-fw m-xs-r"></i>Start Date</label>
+									<input type="text" class="form-control" name="start_date" id="start_date">
+								</div>
+							</div>
+
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for=""><i class="fa fa-calendar fa-fw m-xs-r"></i>End Date</label>
+									<input type="text" class="form-control" name="end_date" id="end_date">
+								</div>
+							</div>
+						</div>
+
+						<div class="row row-xl">
+							<div class="col-md-12 date-wise-display">
+								<div class="table-responsive">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th>Monday</th>
+												<th>Tuesday</th>
+												<th>Wednesday</th>
+												<th>Thursday</th>
+												<th>Friday</th>
+												<th>Saturday</th>
+												<th>Sunday</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+
+
+	</div>
+
+</main>
+
+{{> footer}}	

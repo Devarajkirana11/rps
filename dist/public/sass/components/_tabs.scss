@@ -1,0 +1,2315 @@
+.tab-container {
+    margin-bottom: 15px;
+    position: relative;
+
+    &.tab-top {
+        &.tab-arrow-down {
+            .nav-tabs-container {
+                height: 56px;
+                position: relative;
+                z-index: 999;
+            }
+
+            .tab-content {
+                position: relative;
+                top: -8px;
+            }
+        }
+    }
+
+    &.tab-bottom {
+        .nav-tabs-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            // overflow-x: scroll;
+            // overflow-y: hidden;
+            // height: 47px;
+            // width: 100%;
+
+            .nav-tabs {
+                // width: auto;
+                // white-space: nowrap;
+
+                // li {
+                //     display: inline-block;
+                //     float: inherit;
+                //     margin-right: -4px;
+                // }
+            }
+        }
+
+        &.tab-arrow-down {
+            .nav-tabs-container {
+                height: 56px;
+            }
+        }
+    }
+    
+    /* ============================
+        Over Ride Default Stlyes
+    ============================ */
+    .nav-tabs {
+        border: none;
+
+        > li {
+
+            > a {
+                margin: 0;
+                border: none;
+                border-radius: 0;
+                color: #757474;
+                font-family: $header-font-family;
+                font-size: 12px;
+                font-weight: 400;
+                padding: 15px 20px;
+                text-transform: uppercase;
+                @include transition(color 0.2s);
+
+                &:hover,
+                &:focus {
+                    color: $font-color;
+                    background: transparent;
+                }
+            }
+
+            &.active {
+
+                > a,
+                > a:hover,
+                > a:focus {
+                    color: $font-color;
+                    background: $white;
+                    border: none;
+                }
+            }
+        }
+    }
+
+    > .tab-content {
+        background: $white;
+        padding: 15px 25px;
+    }
+
+    /* --------------- Begin Tab Position Stlyes --------------- */
+    
+    /* ============================
+        Tab Position Top
+    ============================ */
+    &.tab-top {
+        .nav-tabs {
+            > li {
+                > a {
+                    margin: 0;
+                    position: relative;
+                    overflow: hidden;
+                }
+            }
+        }
+
+        > .tab-content {
+            overflow: auto;
+        }
+    }
+    
+    /* ============================
+        Tab Position Right
+    ============================ */
+    &.tab-right {
+        .nav-tabs {
+            float: right;
+
+            > li {
+                display: block;
+                float: none;
+
+                > a {
+                    margin: 0;
+                }
+            }
+        }
+
+        > .tab-content {
+            overflow: auto;
+        }
+    }
+    
+    /* ============================
+        Tab Position Bottom
+    ============================ */
+    &.tab-bottom {
+        &.tab-container {
+            overflow: hidden;
+
+            .nav-tabs {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+
+                > li {
+                    display: inline-block;
+
+                    > a {
+                        margin: 0;
+                    }
+                }
+            }
+
+            .tab-content {
+                margin-bottom: 46px;
+                overflow: auto;
+            }
+        }
+    }
+    
+    /* ============================
+        Tab Position Left
+    ============================ */
+    &.tab-left {
+        .nav-tabs {
+            float: left;
+
+            > li {
+                display: block;
+                float: none;
+
+                > a {
+                    margin: 0;
+                }
+            }
+        }
+
+        > .tab-content {
+            overflow: auto;
+        }
+    }
+
+    /* --------------- End Tab Position Stlyes --------------- */
+
+
+
+    /* --------------- Begin Tab Style - Border Top Styles --------------- */
+    
+    /* ============================
+        Tab Style Border Top
+    ============================ */
+    &.tab-border-top {
+        .nav-tabs {
+            > li {
+                > a {
+                    background: $white;
+                    overflow: hidden;
+                    position: relative;
+
+                    &:hover {
+                        background: $white !important;
+                    }
+                }
+
+                &.active {
+                    > a {
+                        &:after {
+                            @include transform(translate3d(0, 0, 0));
+                        }
+                    }
+                }
+            }
+        }
+        
+        /* --------------- Begin Tab Position for Border Top --------------- */
+
+        /* ============================
+            Tab Position Top
+        ============================ */
+        &.tab-top {
+            .nav-tabs {
+                > li {
+                    > a {
+                        &:after {
+                            height: 4px;
+                            width: 100%;
+                            position: absolute;
+                            content: '';
+                            top: 0;
+                            left: 0;
+                            @include transform(translate3d(0, -150%, 0));
+                            @include transition(transform 0.3s);
+                        }
+                    }
+
+                    &.active {
+                        > a {
+                            &:after {
+                                @include transform(translate3d(0, 0, 0));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        /* ============================
+            Tab Position Right
+        ============================ */
+        &.tab-right {
+            .nav-tabs {
+                > li {
+                    > a {
+                        &:after {
+                            height: 100%;
+                            width: 4px;
+                            position: absolute;
+                            content: '';
+                            top: 0;
+                            right: 0;
+                            @include transform(translate3d(150%, 0, 0));
+                            @include transition(transform 0.3s);
+                        }
+                    }
+
+                    &.active {
+                        > a {
+                            &:after {
+                                @include transform(translate3d(0, 0, 0));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        /* ============================
+            Tab Position bottom
+        ============================ */
+        &.tab-bottom {
+            .nav-tabs {
+                > li {
+                    > a {
+                        &:after {
+                            height: 4px;
+                            width: 100%;
+                            position: absolute;
+                            content: '';
+                            bottom: 1px;
+                            left: 0;
+                            @include transform(translate3d(0, 150%, 0));
+                            @include transition(transform 0.3s);
+                        }
+                    }
+
+                    &.active {
+                        > a {
+                            &:after {
+                                @include transform(translate3d(0, 0, 0));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        /* ============================
+            Tab Position Left
+        ============================ */
+        &.tab-left {
+            .nav-tabs {
+                > li {
+                    > a {
+                        &:after {
+                            height: 100%;
+                            width: 4px;
+                            position: absolute;
+                            content: '';
+                            top: 0;
+                            left: 0;
+                            @include transform(translate3d(-150%, 0, 0));
+                            @include transition(transform 0.3s);
+                        }
+                    }
+
+                    &.active {
+                        > a {
+                            &:after {
+                                @include transform(translate3d(0, 0, 0));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        /* --------------- End Tab Position for Border Top --------------- */
+
+
+        /* --------------- Begin Tab Colors for Border Top --------------- */
+
+        /* ============================
+            Tab Color Default
+        ============================ */
+        &.tab-default {
+            .nav-tabs {
+                > li {
+                    > a {
+                        color: $black;
+                    }
+
+                    &.active {
+                        > a {
+                            color: $font-color;
+
+                            &:after {
+                                background: $black;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        /* ============================
+            Tab Color Primary
+        ============================ */
+        &.tab-primary {
+            .nav-tabs {
+                > li {
+                    > a {
+                        color: $primary;
+                    }
+
+                    &.active {
+                        > a {
+                            color: $font-color;
+
+                            &:after {
+                                background: $primary;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        /* ============================
+            Tab Color Success
+        ============================ */
+        &.tab-success {
+            .nav-tabs {
+                > li {
+                    > a {
+                        color: $success;
+                    }
+
+                    &.active {
+                        > a {
+                            color: $font-color;
+
+                            &:after {
+                                background: $success;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        /* ============================
+            Tab Color Info
+        ============================ */
+        &.tab-info {
+            .nav-tabs {
+                > li {
+                    > a {
+                        color: $info;
+                    }
+
+                    &.active {
+                        > a {
+                            color: $font-color;
+
+                            &:after {
+                                background: $info;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        /* ============================
+            Tab Color Warning
+        ============================ */
+        &.tab-warning {
+            .nav-tabs {
+                > li {
+                    > a {
+                        color: $warning;
+                    }
+
+                    &.active {
+                        > a {
+                            color: $font-color;
+
+                            &:after {
+                                background: $warning;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        /* ============================
+            Tab Color Danger
+        ============================ */
+        &.tab-danger {
+            .nav-tabs {
+                > li {
+                    > a {
+                        color: $danger;
+                    }
+
+                    &.active {
+                        > a {
+                            color: $font-color;
+
+                            &:after {
+                                background: $danger;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /* --------------- End Tab Colors for Border Top --------------- */
+    }
+
+    /* --------------- End Tab Style - Border Top Styles --------------- */
+
+
+
+    /* --------------- Begin Tab Style - Border Bottom Styles --------------- */
+
+    /* ============================
+        Tab Style Border Bottom
+    ============================ */
+    &.tab-border-bottom {
+        .nav-tabs {
+            > li {
+                > a {
+                    background: $white;
+                    overflow: hidden;
+                    position: relative;
+
+                    &:hover {
+                        background: $white !important;
+                    }
+                }
+
+                &.active {
+                    > a {
+                        &:after {
+                            @include transform(translate3d(0, 0, 0));
+                        }
+                    }
+                }
+            }
+        }
+
+
+        /* --------------- Begin Tab Position for Border Bottom --------------- */
+
+        /* ============================
+            Tab Position Top
+        ============================ */
+        &.tab-top {
+            .nav-tabs {
+                > li {
+                    > a {
+                        &:after {
+                            height: 4px;
+                            width: 100%;
+                            position: absolute;
+                            content: '';
+                            bottom: 0;
+                            left: 0;
+                            @include transform(translate3d(0, 150%, 0));
+                            @include transition(transform 0.3s);
+                        }
+                    }
+
+                    &.active {
+                        > a {
+                            &:after {
+                                @include transform(translate3d(0, 0, 0));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /* ============================
+            Tab Position Right
+        ============================ */
+        &.tab-right {
+            .nav-tabs {
+                > li {
+                    > a {
+                        &:after {
+                            height: 100%;
+                            width: 4px;
+                            position: absolute;
+                            content: '';
+                            top: 0;
+                            left: 0;
+                            @include transform(translate3d(-150%, 0, 0));
+                            @include transition(transform 0.3s);
+                        }
+                    }
+
+                    &.active {
+                        > a {
+                            &:after {
+                                @include transform(translate3d(0, 0, 0));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /* ============================
+            Tab Position Bottom
+        ============================ */
+        &.tab-bottom {
+            .nav-tabs {
+                > li {
+                    > a {
+                        &:after {
+                            height: 4px;
+                            width: 100%;
+                            position: absolute;
+                            content: '';
+                            top: 0;
+                            left: 0;
+                            @include transform(translate3d(0, -150%, 0));
+                            @include transition(transform 0.3s);
+                        }
+                    }
+
+                    &.active {
+                        > a {
+                            &:after {
+                                @include transform(translate3d(0, 0, 0));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /* ============================
+            Tab Position Left
+        ============================ */
+        &.tab-left {
+            .nav-tabs {
+                > li {
+                    > a {
+                        &:after {
+                            height: 100%;
+                            width: 4px;
+                            position: absolute;
+                            content: '';
+                            top: 0;
+                            right: 0;
+                            @include transform(translate3d(150%, 0, 0));
+                            @include transition(transform 0.3s);
+                        }
+                    }
+
+                    &.active {
+                        > a {
+                            &:after {
+                                @include transform(translate3d(0, 0, 0));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /* --------------- End Tab Position for Border Bottom --------------- */
+
+
+        /* --------------- Begin Tab Colors for Border Bottom --------------- */
+
+        /* ============================
+            Tab Color Default
+        ============================ */
+        &.tab-default {
+            .nav-tabs {
+                > li {
+                    > a {
+                        color: $black;
+                    }
+
+                    &.active {
+                        > a {
+                            color: $font-color;
+
+                            &:after {
+                                background: $black;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /* ============================
+            Tab Color Primary
+        ============================ */
+        &.tab-primary {
+            .nav-tabs {
+                > li {
+                    > a {
+                        color: $primary;
+                    }
+
+                    &.active {
+                        > a {
+                            color: $font-color;
+
+                            &:after {
+                                background: $primary;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /* ============================
+            Tab Color Success
+        ============================ */
+        &.tab-success {
+            .nav-tabs {
+                > li {
+                    > a {
+                        color: $success;
+                    }
+
+                    &.active {
+                        > a {
+                            color: $font-color;
+
+                            &:after {
+                                background: $success;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /* ============================
+            Tab Color Info
+        ============================ */
+        &.tab-info {
+            .nav-tabs {
+                > li {
+                    > a {
+                        color: $info;
+                    }
+
+                    &.active {
+                        > a {
+                            color: $font-color;
+
+                            &:after {
+                                background: $info;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /* ============================
+            Tab Color Warning
+        ============================ */
+        &.tab-warning {
+            .nav-tabs {
+                > li {
+                    > a {
+                        color: $warning;
+                    }
+
+                    &.active {
+                        > a {
+                            color: $font-color;
+
+                            &:after {
+                                background: $warning;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /* ============================
+            Tab Color Danger
+        ============================ */
+        &.tab-danger {
+            .nav-tabs {
+                > li {
+                    > a {
+                        color: $danger;
+                    }
+
+                    &.active {
+                        > a {
+                            color: $font-color;
+
+                            &:after {
+                                background: $danger;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /* --------------- End Tab Colors for Border Bottom --------------- */
+    }
+
+    /* --------------- End Tab Style - Border Bottom Styles --------------- */
+
+
+    
+    /* --------------- Begin Tab Style - Arrow Down --------------- */
+
+    /* ============================
+        Tab Style Arrow Down
+    ============================ */
+    &.tab-arrow-down {
+        .nav-tabs {
+            > li {
+                > a {
+                    background: $white;
+                    position: relative;
+                    overflow: visible;
+                }
+            }
+        }
+        
+        /* --------------- Begin Tab Position for Arrow Down --------------- */
+
+        /* ============================
+            Tab Position Top
+        ============================ */
+        &.tab-top {
+            .nav-tabs {
+                > li {
+                    > a {
+                        border-bottom: solid 1px #ddd !important;
+                        background: $white;
+                        position: relative;
+                        overflow: visible;
+                    }
+
+                    &.active {
+                        > a {
+                            &:before {
+                                content: '';
+                                position: absolute;
+                                top: 100%;
+                                left: 50%;
+                                height: 0;
+                                width: 0;
+                                border: solid transparent;
+                                pointer-events: none;
+                                border-width: 8px;
+                                margin-left: -8px;
+                                border-top-color: rgba(0,0,0,0.2);
+                            }
+
+                            &:after {
+                                content: '';
+                                position: absolute;
+                                top: 100%;
+                                left: 50%;
+                                width: 0;
+                                height: 0;
+                                border: solid transparent;
+                                pointer-events: none;
+                                margin-left: -7px;
+                                border-width: 7px;
+                                border-top-color: $white;
+                            }   
+                        }
+                    }
+                }
+            }
+        }
+
+        /* ============================
+            Tab Position Right
+        ============================ */
+        &.tab-right {
+            .nav-tabs {
+                > li {
+                    > a {
+                        border-left: solid 1px #ddd !important;
+                        background: $white;
+                        position: relative;
+                        overflow: visible;
+                    }
+
+                    &.active {
+                        > a {
+                            &:before {
+                                content: '';
+                                position: absolute;
+                                right: 100%;
+                                top: 50%;
+                                height: 0;
+                                width: 0;
+                                border: solid transparent;
+                                pointer-events: none;
+                                border-width: 8px;
+                                margin-top: -8px;
+                                border-right-color: rgba(0,0,0,0.2);
+                            }
+
+                            &:after {
+                                content: '';
+                                position: absolute;
+                                right: 100%;
+                                top: 50%;
+                                height: 0;
+                                width: 0;
+                                border: solid transparent;
+                                pointer-events: none;
+                                margin-top: -7px;
+                                border-width: 7px;
+                                border-right-color: $white;
+                            }   
+                        }
+                    }
+                }
+            }
+        }
+
+        /* ============================
+            Tab Position Bottom
+        ============================ */
+        &.tab-bottom {
+            .nav-tabs {
+                > li {
+                    > a {
+                        border-top: solid 1px #ddd !important;
+                        background: $white;
+                        position: relative;
+                        overflow: visible;
+                    }
+
+                    &.active {
+                        > a {
+                            &:before {
+                                content: '';
+                                position: absolute;
+                                bottom: 100%;
+                                left: 50%;
+                                height: 0;
+                                width: 0;
+                                border: solid transparent;
+                                pointer-events: none;
+                                border-width: 8px;
+                                margin-left: -8px;
+                                border-bottom-color: rgba(0,0,0,0.2);
+                            }
+
+                            &:after {
+                                content: '';
+                                position: absolute;
+                                bottom: 100%;
+                                left: 50%;
+                                height: 0;
+                                width: 0;
+                                border: solid transparent;
+                                pointer-events: none;
+                                margin-left: -7px;
+                                border-width: 7px;
+                                border-bottom-color: $white;
+                            }   
+                        }
+                    }
+                }
+            }
+        }
+
+        /* ============================
+            Tab Position Left
+        ============================ */
+        &.tab-left {
+            .nav-tabs {
+                > li {
+                    > a {
+                        border-right: solid 1px #ddd !important;
+                        background: $white;
+                        position: relative;
+                        overflow: visible;
+                    }
+
+                    &.active {
+                        > a {
+                            &:before {
+                                content: '';
+                                position: absolute;
+                                left: 100%;
+                                top: 50%;
+                                height: 0;
+                                width: 0;
+                                border: solid transparent;
+                                pointer-events: none;
+                                border-width: 8px;
+                                margin-top: -8px;
+                                border-left-color: rgba(0,0,0,0.2);
+                            }
+
+                            &:after {
+                                content: '';
+                                position: absolute;
+                                left: 100%;
+                                top: 50%;
+                                height: 0;
+                                width: 0;
+                                border: solid transparent;
+                                pointer-events: none;
+                                margin-top: -7px;
+                                border-width: 7px;
+                                border-left-color: $white;
+                            }   
+                        }
+                    }
+                }
+            }
+        }
+
+        /* --------------- End Tab Position for Arrow Down --------------- */
+
+        /* --------------- Begin Tab Color for Arrow Down --------------- */
+
+        /* ============================
+            Tab Color Default
+        ============================ */
+        &.tab-default {
+            .nav-tabs {
+                > li {
+                    > a {
+                        color: $black;
+                    }
+
+                    &.active {
+                        > a {
+                            color: $font-color;
+                        }
+                    }
+                }
+            }
+        }
+        
+        /* ============================
+            Tab Color Primary
+        ============================ */
+        &.tab-primary {
+            .nav-tabs {
+                > li {
+                    > a {
+                        color: $primary;
+                    }
+
+                    &.active {
+                        > a {
+                            color: $font-color;
+                        }
+                    }
+                }
+            }
+        }
+        
+        /* ============================
+            Tab Color Success
+        ============================ */
+        &.tab-success {
+            .nav-tabs {
+                > li {
+                    > a {
+                        color: $success;
+                    }
+
+                    &.active {
+                        > a {
+                            color: $font-color;
+                        }
+                    }
+                }
+            }
+        }
+        
+        /* ============================
+            Tab Color Info
+        ============================ */
+        &.tab-info {
+            .nav-tabs {
+                > li {
+                    > a {
+                        color: $info;
+                    }
+
+                    &.active {
+                        > a {
+                            color: $font-color;
+                        }
+                    }
+                }
+            }
+        }
+        
+        /* ============================
+            Tab Color Warning
+        ============================ */
+        &.tab-warning {
+            .nav-tabs {
+                > li {
+                    > a {
+                        color: $warning;
+                    }
+
+                    &.active {
+                        > a {
+                            color: $font-color;
+                        }
+                    }
+                }
+            }
+        }
+        
+        /* ============================
+            Tab Color Danger
+        ============================ */
+        &.tab-danger {
+            .nav-tabs {
+                > li {
+                    > a {
+                        color: $danger;
+                    }
+
+                    &.active {
+                        > a {
+                            color: $font-color;
+                        }
+                    }
+                }
+            }
+        }
+
+        /* --------------- End Tab Color for Arrow Down --------------- */
+    }
+
+    /* --------------- End Tab Style - Arrow Down --------------- */    
+
+    
+
+    /* --------------- Begin Tab Style - Colored Arrow Down --------------- */
+
+    /* ============================
+        Tab Style Colored Arrow Down
+    ============================ */
+    &.tab-colored-arrow-down {
+        .nav-tabs {
+            > li {
+                > a {
+                    position: relative;
+                    overflow: visible;
+                }
+            }
+        }
+
+        /* --------------- Begin Tab Position for Colored Arrow Down --------------- */
+
+        /* ============================
+            Tab Position Top
+        ============================ */
+        &.tab-top {
+            .nav-tabs {
+                > li {
+                    &.active {
+                        > a {
+                            &:before {
+                                content: '';
+                                position: absolute;
+                                top: 100%;
+                                left: 50%;
+                                height: 0;
+                                width: 0;
+                                border: solid transparent;
+                                pointer-events: none;
+                                border-width: 8px;
+                                margin-left: -8px;
+                                border-top-color: $white;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /* --------------- Begin Tab Color for Colored Arrow Down --------------- */
+
+            /* ============================
+                Tab Color Default
+            ============================ */
+            &.tab-default {
+                .nav-tabs {
+                    > li {
+                        &.active {
+                            > a {
+                                background: $black;
+                                color: $white;
+
+                                &:before {
+                                    border-top-color: $black;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            /* ============================
+                Tab Color Primary
+            ============================ */
+            &.tab-primary {
+                .nav-tabs {
+                    > li {
+                        &.active {
+                            > a {
+                                background: $primary;
+                                color: $white;
+
+                                &:before {
+                                    border-top-color: $primary;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            /* ============================
+                Tab Color Success
+            ============================ */
+            &.tab-success {
+                .nav-tabs {
+                    > li {
+                        &.active {
+                            > a {
+                                background: $success;
+                                color: $white;
+
+                                &:before {
+                                    border-top-color: $success;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            /* ============================
+                Tab Color Info
+            ============================ */
+            &.tab-info {
+                .nav-tabs {
+                    > li {
+                        &.active {
+                            > a {
+                                background: $info;
+                                color: $white;
+
+                                &:before {
+                                    border-top-color: $info;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            /* ============================
+                Tab Color Warning
+            ============================ */
+            &.tab-warning {
+                .nav-tabs {
+                    > li {
+                        &.active {
+                            > a {
+                                background: $warning;
+                                color: $white;
+
+                                &:before {
+                                    border-top-color: $warning;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            /* ============================
+                Tab Color Danger
+            ============================ */
+            &.tab-danger {
+                .nav-tabs {
+                    > li {
+                        &.active {
+                            > a {
+                                background: $danger;
+                                color: $white;
+
+                                &:before {
+                                    border-top-color: $danger;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            /* --------------- End Tab Color for Colored Arrow Down --------------- */
+        }
+        
+        /* ============================
+            Tab Position Right
+        ============================ */
+        &.tab-right {
+            .nav-tabs {
+                > li {
+                    &.active {
+                        > a {
+                            &:before {
+                                content: '';
+                                position: absolute;
+                                right: 100%;
+                                top: 50%;
+                                height: 0;
+                                width: 0;
+                                border: solid transparent;
+                                pointer-events: none;
+                                border-width: 8px;
+                                margin-top: -8px;
+                                border-right-color: $white;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            /* --------------- Begin Tab Color for Colored Arrow Down --------------- */
+
+            /* ============================
+                Tab Color Default
+            ============================ */
+            &.tab-default {
+                .nav-tabs {
+                    > li {
+                        &.active {
+                            > a {
+                                background: $black;
+                                color: $white;
+
+                                &:before {
+                                    border-right-color: $black;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            /* ============================
+                Tab Color Primary
+            ============================ */
+            &.tab-primary {
+                .nav-tabs {
+                    > li {
+                        &.active {
+                            > a {
+                                background: $primary;
+                                color: $white;
+
+                                &:before {
+                                    border-right-color: $primary;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            /* ============================
+                Tab Color Success
+            ============================ */
+            &.tab-success {
+                .nav-tabs {
+                    > li {
+                        &.active {
+                            > a {
+                                background: $success;
+                                color: $white;
+
+                                &:before {
+                                    border-right-color: $success;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            /* ============================
+                Tab Color Info
+            ============================ */
+            &.tab-info {
+                .nav-tabs {
+                    > li {
+                        &.active {
+                            > a {
+                                background: $info;
+                                color: $white;
+
+                                &:before {
+                                    border-right-color: $info;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            /* ============================
+                Tab Color Warning
+            ============================ */
+            &.tab-warning {
+                .nav-tabs {
+                    > li {
+                        &.active {
+                            > a {
+                                background: $warning;
+                                color: $white;
+
+                                &:before {
+                                    border-right-color: $warning;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            /* ============================
+                Tab Color Danger
+            ============================ */
+            &.tab-danger {
+                .nav-tabs {
+                    > li {
+                        &.active {
+                            > a {
+                                background: $danger;
+                                color: $white;
+
+                                &:before {
+                                    border-right-color: $danger;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            /* --------------- End Tab Color for Colored Arrow Down --------------- */
+        }
+
+        /* ============================
+            Tab Position Bottom
+        ============================ */
+        &.tab-bottom {
+            .nav-tabs {
+                > li {
+                    &.active {
+                        > a {
+                            &:before {
+                                content: '';
+                                position: absolute;
+                                bottom: 100%;
+                                left: 50%;
+                                height: 0;
+                                width: 0;
+                                border: solid transparent;
+                                pointer-events: none;
+                                border-width: 8px;
+                                margin-left: -8px;
+                                border-bottom-color: $white;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /* --------------- Begin Tab Color for Colored Arrow Down --------------- */
+
+            /* ============================
+                Tab Color Default
+            ============================ */
+            &.tab-default {
+                .nav-tabs {
+                    > li {
+                        &.active {
+                            > a {
+                                background: $black;
+                                color: $white;
+
+                                &:before {
+                                    border-bottom-color: $black;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            /* ============================
+                Tab Color Primary
+            ============================ */
+            &.tab-primary {
+                .nav-tabs {
+                    > li {
+                        &.active {
+                            > a {
+                                background: $primary;
+                                color: $white;
+
+                                &:before {
+                                    border-bottom-color: $primary;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            /* ============================
+                Tab Color Success
+            ============================ */
+            &.tab-success {
+                .nav-tabs {
+                    > li {
+                        &.active {
+                            > a {
+                                background: $success;
+                                color: $white;
+
+                                &:before {
+                                    border-bottom-color: $success;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            /* ============================
+                Tab Color Info
+            ============================ */
+            &.tab-info {
+                .nav-tabs {
+                    > li {
+                        &.active {
+                            > a {
+                                background: $info;
+                                color: $white;
+
+                                &:before {
+                                    border-bottom-color: $info;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            /* ============================
+                Tab Color Warning
+            ============================ */
+            &.tab-warning {
+                .nav-tabs {
+                    > li {
+                        &.active {
+                            > a {
+                                background: $warning;
+                                color: $white;
+
+                                &:before {
+                                    border-bottom-color: $warning;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            /* ============================
+                Tab Color Danger
+            ============================ */
+            &.tab-danger {
+                .nav-tabs {
+                    > li {
+                        &.active {
+                            > a {
+                                background: $danger;
+                                color: $white;
+
+                                &:before {
+                                    border-bottom-color: $danger;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            /* --------------- End Tab Color for Colored Arrow Down --------------- */
+        }
+
+        /* ============================
+            Tab Position Left
+        ============================ */
+        &.tab-left {
+            .nav-tabs {
+                > li {
+                    &.active {
+                        > a {
+                            &:before {
+                                content: '';
+                                position: absolute;
+                                left: 100%;
+                                top: 50%;
+                                height: 0;
+                                width: 0;
+                                border: solid transparent;
+                                pointer-events: none;
+                                border-width: 8px;
+                                margin-top: -8px;
+                                border-left-color: $white;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /* --------------- Begin Tab Color for Colored Arrow Down --------------- */
+
+            /* ============================
+                Tab Color Default
+            ============================ */
+            &.tab-default {
+                .nav-tabs {
+                    > li {
+                        &.active {
+                            > a {
+                                background: $black;
+                                color: $white;
+
+                                &:before {
+                                    border-left-color: $black;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            /* ============================
+                Tab Color Primary
+            ============================ */
+            &.tab-primary {
+                .nav-tabs {
+                    > li {
+                        &.active {
+                            > a {
+                                background: $primary;
+                                color: $white;
+
+                                &:before {
+                                    border-left-color: $primary;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            /* ============================
+                Tab Color Success
+            ============================ */
+            &.tab-success {
+                .nav-tabs {
+                    > li {
+                        &.active {
+                            > a {
+                                background: $success;
+                                color: $white;
+
+                                &:before {
+                                    border-left-color: $success;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            /* ============================
+                Tab Color Info
+            ============================ */
+            &.tab-info {
+                .nav-tabs {
+                    > li {
+                        &.active {
+                            > a {
+                                background: $info;
+                                color: $white;
+
+                                &:before {
+                                    border-left-color: $info;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            /* ============================
+                Tab Color Warning
+            ============================ */
+            &.tab-warning {
+                .nav-tabs {
+                    > li {
+                        &.active {
+                            > a {
+                                background: $warning;
+                                color: $white;
+
+                                &:before {
+                                    border-left-color: $warning;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            /* ============================
+                Tab Color Danger
+            ============================ */
+            &.tab-danger {
+                .nav-tabs {
+                    > li {
+                        &.active {
+                            > a {
+                                background: $danger;
+                                color: $white;
+
+                                &:before {
+                                    border-left-color: $danger;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            /* --------------- End Tab Color for Colored Arrow Down --------------- */
+        }
+
+        /* --------------- End Tab Position for Colored Arrow Down --------------- */
+    }
+
+    /* --------------- End Tab Style - Colored Arrow Down --------------- */
+
+
+
+    /* --------------- Begin Tab Style - Box Line --------------- */
+
+    /* ============================
+        Tab Style Box Line
+    ============================ */
+    &.tab-box-line {
+        .nav-tabs {
+            > li {
+                > a {
+                    position: relative;
+                    z-index: 1;
+                    margin-right: 5px;
+
+                    &:after {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        z-index: -1;
+                        height: 100%;
+                        width: 100%;
+                        background: #d2d8d6;
+                        -webkit-transition: background-color 0.3s, -webkit-transform 0.3s;
+                        transition: background-color 0.3s, transform 0.3s;
+                        -webkit-transition-timing-function: ease, cubic-bezier(0.7,0,0.3,1);
+                        transition-timing-function: ease, cubic-bezier(0.7,0,0.3,1);
+                        -webkit-transform: translate3d(0,100%,0) translate3d(0,-3px,0);
+                        transform: translate3d(0,100%,0) translate3d(0,-3px,0);
+                    }
+                }
+
+                &.active {
+                    > a {
+                        color: $white !important;
+
+                        &:after {
+                            background: #2CC185;
+                            -webkit-transform: translate3d(0,0,0);
+                            transform: translate3d(0,0,0);
+                        }
+                    }
+                }
+            }
+        }
+
+        /* --------------- Begin Tab Color for Box Line --------------- */
+        
+        /* ============================
+            Tab Color Default
+        ============================ */
+        &.tab-default {
+            .nav-tabs {
+                > li {
+                    &.active {
+                        > a {
+                            &:after {
+                                background: $black;
+                            }   
+                        }
+                    }
+                }
+            }
+        }
+        
+        /* ============================
+            Tab Color Primary
+        ============================ */
+        &.tab-primary {
+            .nav-tabs {
+                > li {
+                    &.active {
+                        > a {
+                            &:after {
+                                background: $primary;
+                            }   
+                        }
+                    }
+                }
+            }
+        }
+        
+        /* ============================
+            Tab Color Success
+        ============================ */
+        &.tab-success {
+            .nav-tabs {
+                > li {
+                    &.active {
+                        > a {
+                            &:after {
+                                background: $success;
+                            }   
+                        }
+                    }
+                }
+            }
+        }
+        
+        /* ============================
+            Tab Color Info
+        ============================ */
+        &.tab-info {
+            .nav-tabs {
+                > li {
+                    &.active {
+                        > a {
+                            &:after {
+                                background: $info;
+                            }   
+                        }
+                    }
+                }
+            }
+        }
+        
+        /* ============================
+            Tab Color Warning
+        ============================ */
+        &.tab-warning {
+            .nav-tabs {
+                > li {
+                    &.active {
+                        > a {
+                            &:after {
+                                background: $warning;
+                            }   
+                        }
+                    }
+                }
+            }
+        }
+        
+        /* ============================
+            Tab Color Danger
+        ============================ */
+        &.tab-danger {
+            .nav-tabs {
+                > li {
+                    &.active {
+                        > a {
+                            &:after {
+                                background: $danger;
+                            }   
+                        }
+                    }
+                }
+            }
+        }
+
+        /* --------------- End Tab Color for Box Line --------------- */
+    }
+
+    /* --------------- End Tab Style - Box Line --------------- */
+}
+
+/* ------------------------- End Tabs ------------------------- */
+
+
+
+/* ------------------------- Begin Accordion ------------------------- */
+
+/* ============================
+    Accordion Default
+============================ */
+.accordion-default {
+    margin-bottom: 20px;
+
+    .panel {
+        margin-bottom: 5px;
+        background-color: $white;
+        border: 1px solid;
+        border-color: rgba(0, 0, 0, 0.07);
+
+        > .panel-heading {
+            padding: 0;
+            background: $white;
+            text-transform: uppercase;
+            border-color: transparent;
+
+            > .panel-title {
+                font-size: 13px;
+                font-weight: 700;
+
+                a {
+                    text-decoration: none;
+                    position: relative;
+                    display: block;
+                    padding: 15px;
+
+                    &:hover,
+                    &:focus {
+                        text-decoration: none;
+                    }
+
+                    &.collapsed {
+                        &:after {
+                            content: "\f055";
+                        }
+                    }
+
+                    &:after {
+                        font-family: "FontAwesome";
+                        content: "\f056";
+                        position: absolute;
+                        right: 15px;
+                    }
+                }
+            }
+        }
+
+        &.panel-default {
+            > .panel-heading {
+                background: $white;
+                color: $font-color;
+            }
+        }
+
+        &.panel-primary {
+            > .panel-heading {
+                background: $primary;
+                color: $white;
+            }
+        }
+
+        &.panel-success {
+            > .panel-heading {
+                background: $success;
+                color: $white;
+            }
+        }
+
+        &.panel-info {
+            > .panel-heading {
+                background: $info;
+                color: $white;
+            }
+        }
+
+        &.panel-warning {
+            > .panel-heading {
+                background: $warning;
+                color: $white;
+            }
+        }
+
+        &.panel-danger {
+            > .panel-heading {
+                background: $danger;
+                color: $white;
+            }
+        }
+    }
+}
+
+/* ============================
+    Accordion Sticked
+============================ */
+.accordion-sticked {
+    margin-bottom: 20px;
+
+    .panel {
+        margin-bottom: 0px;
+        background-color: $white;
+        border: 1px solid;
+        border-color: rgba(0, 0, 0, 0.07);
+
+        > .panel-heading {
+            padding: 0;
+            background: $white;
+            text-transform: uppercase;
+            border-color: transparent;
+
+            > .panel-title {
+                font-size: 13px;
+                font-weight: 700;
+
+                a {
+                    text-decoration: none;
+                    position: relative;
+                    display: block;
+                    padding: 15px;
+
+                    &:hover,
+                    &:focus {
+                        text-decoration: none;
+                    }
+
+                    &.collapsed {
+                        &:after {
+                            content: "\f055";
+                        }
+                    }
+
+                    &:after {
+                        font-family: "FontAwesome";
+                        content: "\f056";
+                        position: absolute;
+                        right: 15px;
+                    }
+                }
+            }
+        }
+
+        &.panel-default {
+            > .panel-heading {
+                background: $white;
+                color: $font-color;
+            }
+        }
+
+        &.panel-primary {
+            > .panel-heading {
+                background: $primary;
+                color: $white;
+            }
+        }
+
+        &.panel-success {
+            > .panel-heading {
+                background: $success;
+                color: $white;
+            }
+        }
+
+        &.panel-info {
+            > .panel-heading {
+                background: $info;
+                color: $white;
+            }
+        }
+
+        &.panel-warning {
+            > .panel-heading {
+                background: $warning;
+                color: $white;
+            }
+        }
+
+        &.panel-danger {
+            > .panel-heading {
+                background: $danger;
+                color: $white;
+            }
+        }
+    }
+}
+
+/* ============================
+    Accordion Centered Title
+============================ */
+.accordion-centered-title {
+    margin-bottom: 20px;
+    
+    .panel {
+        margin-bottom: 0px;
+        background-color: $white;
+        border: 1px solid;
+        border-color: rgba(0, 0, 0, 0.07);
+
+        > .panel-heading {
+            padding: 0;
+            background: $white;
+            text-align: center;
+            text-transform: uppercase;
+            border-color: transparent;
+
+            > .panel-title {
+                font-size: 13px;
+                font-weight: 700;
+
+                a {
+                    text-decoration: none;
+                    position: relative;
+                    display: block;
+                    padding: 15px;
+
+                    &:hover,
+                    &:focus {
+                        text-decoration: none;
+                    }
+
+                    &.collapsed {
+                        &:after {
+                            content: "\f055";
+                        }
+                    }
+
+                    &:after {
+                        font-family: "FontAwesome";
+                        content: "\f056";
+                        position: absolute;
+                        left: 15px;
+                    }
+                }
+            }
+        }
+
+        &.panel-default {
+            > .panel-heading {
+                background: $white;
+                color: $font-color;
+            }
+        }
+
+        &.panel-primary {
+            > .panel-heading {
+                background: $primary;
+                color: $white;
+            }
+        }
+
+        &.panel-success {
+            > .panel-heading {
+                background: $success;
+                color: $white;
+            }
+        }
+
+        &.panel-info {
+            > .panel-heading {
+                background: $info;
+                color: $white;
+            }
+        }
+
+        &.panel-warning {
+            > .panel-heading {
+                background: $warning;
+                color: $white;
+            }
+        }
+
+        &.panel-danger {
+            > .panel-heading {
+                background: $danger;
+                color: $white;
+            }
+        }
+    }
+}
+
+/* ============================
+    Accordion Colored Icon
+============================ */
+.accordion-colored-icon {
+    margin-bottom: 20px;
+    
+    .panel {
+        margin-bottom: 0px;
+        background-color: $white;
+        border: 1px solid;
+        border-color: rgba(0, 0, 0, 0.07);
+
+        > .panel-heading {
+            padding: 0;
+            background: $white;
+            text-align: center;
+            text-transform: uppercase;
+            border: none;
+
+            > .panel-title {
+                font-size: 13px;
+                font-weight: 700;
+
+                a {
+                    text-decoration: none;
+                    position: relative;
+                    display: block;
+                    color: $font-color;
+                    padding: 15px;
+                    border-bottom: solid 1px #ddd;
+
+                    &:hover,
+                    &:focus {
+                        text-decoration: none;
+                    }
+
+                    &.collapsed {
+                        &:after {
+                            content: "\f055";
+                        }
+                    }
+
+                    &:after {
+                        font-family: "FontAwesome";
+                        content: "\f056";
+                        position: absolute;
+                        left: 0px;
+                        top: 0;
+                        bottom: -1px;
+                        font-size: 16px;
+                        background: $grey;
+                        color: $white;
+                        padding: 15px 20px;
+                    }
+                }
+            }
+        }
+
+        &.panel-default {
+            > .panel-heading {
+                a {
+                    &:after {
+                        background: $grey;
+                    }
+                }
+            }
+        }
+
+        &.panel-primary {
+            > .panel-heading {
+                a {
+                    &:after {
+                        background: $primary;
+                    }
+                }
+            }
+        }
+
+        &.panel-success {
+            > .panel-heading {
+                a {
+                    &:after {
+                        background: $success;
+                    }
+                }
+            }
+        }
+
+        &.panel-info {
+            > .panel-heading {
+                a {
+                    &:after {
+                        background: $info;
+                    }
+                }
+            }
+        }
+
+        &.panel-warning {
+            > .panel-heading {
+                a {
+                    &:after {
+                        background: $warning;
+                    }
+                }
+            }
+        }
+
+        &.panel-danger {
+            > .panel-heading {
+                a {
+                    &:after {
+                        background: $danger;
+                    }
+                }
+            }
+        }
+    }
+}

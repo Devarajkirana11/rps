@@ -1,0 +1,294 @@
+{{!--
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="/scripts/plugins/jquery.bootstrap.wizard.min.js"></script>
+<script src="/js/jquery-ui.js"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function () {
+		var searchMinDate = "m";
+		$("#checkin_from").datepicker({
+			dateFormat: "dd-mm-yy",
+			onClose: function (selectedDate) {
+				$("#checkin_from").datepicker('setDate', selectedDate);
+				$("#checkin_to").datepicker("option", "minDate", selectedDate);
+			}
+		});
+
+		$("#checkout_from").datepicker({
+			dateFormat: "dd-mm-yy",
+			onClose: function (selectedDate) {
+				$("#checkout_from").datepicker('setDate', selectedDate);
+				$("#checkout_to").datepicker("option", "minDate", selectedDate);
+			}
+		});
+
+		$("#checkin_to").datepicker({ dateFormat: "dd-mm-yy" });
+		$("#checkout_to").datepicker({ dateFormat: "dd-mm-yy" });
+
+		$("#reset").click(function () {
+			checkin_from
+			window.location.href = window.location.href;
+		});
+	});
+
+</script>
+
+{{> nav this}} {{> header}}
+<main id="page-content">
+	<div class="row row-xl page-title">
+		<div class="col-md-12">
+			<h3 class="text-black fw-semi-thk">Check In List</h3>
+		</div>
+	</div>
+	<div class="page-container">
+		<div class="row row-xl">
+			<div class="col-md-12">
+				<div class="filter-form">
+					{{#if errors}} {{#each errors}}
+					<div class="alert alert-danger"> {{ msg }}</div>
+					{{/each}} {{/if}}
+
+
+					<div class="table-responsive">
+						<table class="table" id="report-table">
+							<thead>
+								<tr>
+									<th>Booking ID </th>
+									<th>Guest Name</th>
+									<th>No.Of Guests</th>
+									<th>Check In </th>
+									<th>Check Out </th>
+									<th>Room No </th>
+									<th>Status </th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+{{> footer}}
+
+<script type="text/javascript">
+	$(function () {
+		var url = '/report-manager/manager/check-in?hotel_id={{hotel_id}}'
+		// INITIALIZE DATA TABLE
+		updateTable(url);
+
+		var table;
+
+		// CREATE DATA TABLE
+		function updateTable(url) {
+			table = $('#report-table').DataTable({
+				ajax: url,
+				buttons: [
+					{
+						extend: 'excelHtml5',
+						text: 'Download',
+						footer: true,
+					},
+					{
+						extend: 'print',
+						text: 'Print',
+						footer: true,
+					}
+				],
+				dom: 'Bfrtip',
+				paging: true,
+				footerCallback: function (row, data, start, end, display) {
+					var api = this.api(), data;
+					// Remove the formatting to get integer data for summation
+					var intVal = function (i) {
+						return typeof i === 'string' ?
+							i.replace(/[\$,]/g, '') * 1 :
+							typeof i === 'number' ?
+								i : 0;
+					};
+				}
+			});
+		}
+
+		// UPDATE DATATABLE ON DATE CHANGE
+		$("#Submit").click(function () {
+
+
+			var reference_id = $('#booking_reference_id').val();
+			var checkin_from = $('#checkin_from').val();
+			var checkin_to = $('#checkin_to').val();
+
+			if (reference_id) {
+				'reference_id=' + reference_id;
+			}
+			if (checkin_from) { '&checkin_from=' + checkin_from; }
+			if (checkin_to) { '&checkin_to=' + checkin_to; }
+
+
+			var url = '/report-manager/manager/check-in?hotel_id={{hotel_id}}'
+
+			table.destroy();
+
+			updateTable(url);
+		});
+	});
+
+</script> --}}
+
+
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="/scripts/plugins/jquery.bootstrap.wizard.min.js"></script>
+<script src="/js/jquery-ui.js"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function () {
+		var searchMinDate = "m";
+		$("#checkin_from").datepicker({
+			dateFormat: "dd-mm-yy",
+			onClose: function (selectedDate) {
+				$("#checkin_from").datepicker('setDate', selectedDate);
+				$("#checkin_to").datepicker("option", "minDate", selectedDate);
+			}
+		});
+
+
+		$("#checkin_to").datepicker({ dateFormat: "dd-mm-yy" });
+
+
+		$("#reset").click(function () {
+			checkin_from
+			window.location.href = window.location.href;
+		});
+	});
+
+</script>
+{{> nav this}} {{> header}}
+<main id="page-content">
+	<div class="row row-xl page-title">
+		<div class="col-md-12">
+			<h3 class="text-black fw-semi-thk">CHECK IN LIST</h3>
+		</div>
+	</div>
+	<div class="page-container">
+		<div class="row row-xl">
+			<div class="col-md-12">
+				<div class="filter-form">
+					{{#if errors}} {{#each errors}}
+					<div class="alert alert-danger"> {{ msg }}</div>
+					{{/each}} {{/if}}
+					<div class="row row-xl">
+						<div class="col-md-2">
+							<div class="form-group">
+								<label class="" for="booking_reference_id">Reference ID</label>
+								<input type="text" id="booking_reference_id" value="{{ inputs.booking_reference_id }}" name="booking_reference_id" placeholder=""
+								 class="form-control">
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label class="" for="checkin_from">Check in From</label>
+								<input type="text" id="checkin_from" value="{{ inputs.checkin_from }}" name="checkin_from" placeholder="" class="form-control">
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label class="" for="checkin_to">Check in To</label>
+								<input type="text" id="checkin_to" value="{{ inputs.checkin_to }}" name="checkin_to" placeholder="" class="form-control">
+							</div>
+						</div>
+
+						<div class="row row-xl m-xl-b">
+							<div class="col-md-12 text-right">
+								<button class="btn btn-danger btn-rounded w-150 text-left" name="Submit" value="Save" type="Submit" id="Submit">Search <i class="fa fa-search fa-fw pull-right"></i></button>
+								<button class="btn btn-danger btn-rounded w-150 text-left" id="reset" type="reset" value="Reset">Reset <i class="fa fa-refresh fa-fw pull-right" aria-hidden="true"></i></button>
+							</div>
+						</div>
+
+					</div>
+					<div class="table-responsive">
+						<table class="table" id="report-table">
+							<thead>
+								<tr>
+									<th>Booking ID </th>
+									<th>Guest Name</th>
+									<th>No.Of Guests</th>
+									<th>Check In </th>
+									<th>Check Out </th>
+									<th>Room No </th>
+									<th>Status </th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+</main>
+{{> footer}}
+
+<script type="text/javascript">
+	$(function () {
+
+		var url = '/report-manager/manager/check-in?hotel_id={{hotel_id}}'
+		// INITIALIZE DATA TABLE
+		updateTable(url);
+
+		var table;
+
+		// CREATE DATA TABLE
+		function updateTable(url) {
+			table = $('#report-table').DataTable({
+				ajax: url,
+				buttons: [
+					{
+						extend: 'excelHtml5',
+						text: 'Download',
+						footer: true,
+					},
+					{
+						extend: 'print',
+						text: 'Print',
+						footer: true,
+					}
+				],
+				dom: 'Bfrtip',
+				paging: true,
+				footerCallback: function (row, data, start, end, display) {
+					var api = this.api(), data;
+					// Remove the formatting to get integer data for summation
+					var intVal = function (i) {
+						return typeof i === 'string' ?
+							i.replace(/[\$,]/g, '') * 1 :
+							typeof i === 'number' ?
+								i : 0;
+					};
+				}
+			});
+		}
+
+		// UPDATE DATATABLE ON DATE CHANGE
+
+		$("#Submit").click(function () {
+
+
+			var reference_id = $('#booking_reference_id').val();
+			var checkin_from = $('#checkin_from').val();
+			var checkin_to = $('#checkin_to').val();
+
+
+			if (reference_id) {
+				'&reference_id=' + reference_id;
+			}
+			if (checkin_from) { '&checkin_from=' + checkin_from; }
+			if (checkin_to) { '&checkin_to=' + checkin_to; }
+
+
+			var url = '/report-manager/manager/check-in?hotel_id={{hotel_id}}'
+
+			table.destroy();
+
+			updateTable(url);
+		});
+	});
+
+</script>

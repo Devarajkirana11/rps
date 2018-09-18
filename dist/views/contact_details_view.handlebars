@@ -1,0 +1,370 @@
+{{> nav}}
+
+{{> header}}
+
+
+<main id="page-content">
+    <div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Contact Details</h3>
+        </div>
+    </div>
+
+    <div class="page-container">
+        <div class="row row-xl">
+            <div class="col-md-12">
+                {{#if success }}
+                    <div class="alert alert-success">{{ message}}</div>
+                {{else if message }}
+                    <div class="alert alert-danger">{{ message}}</div>
+                {{/if}}
+            </div>
+        </div>
+
+        <div class="row row-xl">
+            <div class="col-md-12 text-right">
+                <a href="/contact_details/{{data._contact_id}}/edit" class="btn btn-danger btn-rounded w-150 text-left">Edit <i class="fa fa-edit fa-fw pull-right"></i></a>                
+            </div>
+        </div>
+
+        <div class="row row-xl">
+            <div class="col-md-12">
+                {{#if data._OwnerContactDetails}}   
+                    {{#each data._OwnerContactDetails}}
+                        <div class="row row-xl">
+                            <div class="col-md-12 m-lg-b m-xl-t">
+                                <h4 class="text-black fw-semi-thk fs-20">Owner Contact Details {{#checkCount ../data._OwnerContactDetails.length '>' 1 }} {{#increment @key 1 }} {{/increment }} {{/checkCount }}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row row-xl">
+                            <div class="col-md-6">
+                                {{!-- Begin User Name --}}
+                                <div class="row row-xl m-sm-b">
+                                    <div class="col-md-5 col-sm-6 col-xs-12">
+                                        <p>Username / Login ID:</p>
+                                    </div>
+
+                                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                                        <p>{{#if this._username}} {{this._username}} {{/if}}</p>
+                                    </div>
+                                </div>
+                                {{!-- End User Name --}}
+
+                                {{!-- Begin Contact Name --}}
+                                <div class="row row-xl m-sm-b">
+                                    <div class="col-md-5 col-sm-6 col-xs-12">
+                                        <p>Contact Name:</p>
+                                    </div>
+
+                                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                                        <p>{{#if this._contactname }} {{ this._contactname }} {{/if}}</p>
+                                    </div>
+                                </div>
+                                {{!-- End Contact Name --}}
+
+                                {{!-- Begin Contact Email --}}
+                                <div class="row row-xl m-sm-b">
+                                    <div class="col-md-5 col-sm-6 col-xs-12">
+                                        <p>Contact Email:</p>
+                                    </div>
+
+                                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                                        <p>{{#if this._username }} {{ this._contactemail }} {{/if}}</p>
+                                    </div>
+                                </div>
+                                {{!-- End Contact Email --}}
+
+                                {{!-- Begin Contact Number --}}
+                                <div class="row row-xl m-sm-b">
+                                    <div class="col-md-5 col-sm-6 col-xs-12">
+                                        <p>Contact Number (L):</p>
+                                    </div>
+
+                                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                                        <p>{{#if this._contactnumberl }} +{{ this._countrycodel }} {{ this._contactnumberl }} {{/if}}</p>
+                                    </div>
+                                </div>
+                                {{!-- End Contact Number --}}
+
+                                {{!-- Begin Contact Number --}}
+                                <div class="row row-xl m-sm-b">
+                                    <div class="col-md-5 col-sm-6 col-xs-12">
+                                        <p>Contact Number (M):</p>
+                                    </div>
+
+                                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                                        <p>{{#if this._contactnumberl }} +{{ this._countrycodem }} {{ this._contactnumberm }} {{/if}}</p>
+                                    </div>
+                                </div>
+                                {{!-- End Contact Number --}}
+
+
+                            </div>
+
+                            <div class="col-md-6">
+                                {{!-- Begin Country --}}
+                                <div class="row row-xl m-sm-b">
+                                    <div class="col-md-5 col-sm-6 col-xs-12">
+                                        <p>Country:</p>
+                                    </div>
+
+                                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                                        <p>{{#if this._country }} {{ this._country }} {{/if}}</p>
+                                    </div>
+                                </div>
+                                {{!-- End Country --}}
+
+                                {{!-- Begin State --}}
+                                <div class="row row-xl m-sm-b">
+                                    <div class="col-md-5 col-sm-6 col-xs-12">
+                                        <p>State:</p>
+                                    </div>
+
+                                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                                        <p>{{#if this._state }} {{ this._state }} {{/if}}</p>
+                                    </div>
+                                </div>
+                                {{!-- End State --}}
+
+                                {{!-- Begin City --}}
+                                <div class="row row-xl m-sm-b">
+                                    <div class="col-md-5 col-sm-6 col-xs-12">
+                                        <p>City:</p>
+                                    </div>
+
+                                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                                        <p>{{#if this._city }} {{ this._city }} {{/if}}</p>
+                                    </div>
+                                </div>
+                                {{!-- End City --}}
+
+                                {{!-- Begin Address Line 1 --}}
+                                <div class="row row-xl m-sm-b">
+                                    <div class="col-md-5 col-sm-6 col-xs-12">
+                                        <p>Address Line 1:</p>
+                                    </div>
+
+                                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                                        <p>{{#if this._address_line1 }} {{ this._address_line2 }} {{/if}}</p>
+                                    </div>
+                                </div>
+                                {{!-- End Address Line 1 --}}
+
+                                {{!-- Begin Address Line 2 --}}
+                                <div class="row row-xl m-sm-b">
+                                    <div class="col-md-5 col-sm-6 col-xs-12">
+                                        <p>Address Line 2:</p>
+                                    </div>
+
+                                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                                        <p>{{#if this._address_line2 }} {{ this._address_line2 }} {{/if}}</p>
+                                    </div>
+                                </div>
+                                {{!-- End Address Line 2 --}}
+
+                                {{!-- Begin Zip / Postal Code --}}
+                                <div class="row row-xl m-sm-b">
+                                    <div class="col-md-5 col-sm-6 col-xs-12">
+                                        <p>Zip / Postal Code:</p>
+                                    </div>
+
+                                    <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                                        <p>{{#if this._zipcode }} {{ this._zipcode }} {{/if}}</p>
+                                    </div>
+                                </div>
+                                {{!-- End Zip / Postal Code --}}
+                            </div>
+                        </div>
+
+                        <hr class="m-xl-t m-xl-b">
+                    {{/each}}
+                {{/if}}
+            </div>
+        </div>
+
+        <div class="row row-xl">
+            <div class="col-md-12">
+                {{#if data._ManagerContactDetails }}
+                    {{#each data._ManagerContactDetails }}
+                        <div class="row row-xl">
+                            <div class="col-md-12 m-lg-b m-xl-t">
+                                <h4 class="text-black fw-semi-thk fs-20">Manager Contact Details {{#checkCount ../data._ManagerContactDetails.length '>' 1 }} {{#increment @key 1 }} {{/increment }} {{/checkCount }}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row row-xl">
+                            <div class="col-md-6">
+                                <div class="row m-sm-b">
+                                    <div class="col-md-5 col-sm-6 col-xs-12"><p>First Name:</p></div>
+                                    <div class="col-md-7 fw-semi-thk text-black text-capitalize"><p>{{#if this._firstname }} {{ this._firstname }} {{/if}}</p></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="row m-sm-b">
+                                    <div class="col-md-5 col-sm-6 col-xs-12"><p>Last Name:</p></div>
+                                    <div class="col-md-7 fw-semi-thk text-black text-capitalize"><p>{{#if this._lastname }} {{ this._lastname }} {{/if}}</p></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-xl">
+                            <div class="col-md-6">
+                                <div class="row m-sm-b">
+                                    <div class="col-md-5 col-sm-6 col-xs-12"><p>Landline Number:</p></div>
+                                    <div class="col-md-7 fw-semi-thk text-black text-capitalize"><p>{{#if this._landline_number}} +{{ this._landline_stdcode}} {{ this._landline_number }} {{/if}}</p></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="row m-sm-b">
+                                    <div class="col-md-5 col-sm-6 col-xs-12"><p>Mobile Number:</p></div>
+                                    <div class="col-md-7 fw-semi-thk text-black text-capitalize"><p>{{#if this._mobileno}} +{{ this._mobileno_stdcode }} {{ this._mobileno }} {{/if}}</p></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-xl">
+                            <div class="col-md-6">
+                                <div class="row m-sm-b">
+                                    <div class="col-md-5 col-sm-6 col-xs-12"><p>Email:</p></div>
+                                    <div class="col-md-7 fw-semi-thk text-black text-capitalize"><p>{{#if this._email }} {{ this._email }} {{/if}}</p></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="m-xl-t m-xl-b">
+                    {{/each}}
+                {{/if}}
+            </div>
+        </div>
+
+        <div class="row row-xl">
+            <div class="col-md-12">
+                {{#if data._FrontDeskContactDetails }}
+                    {{#each data._FrontDeskContactDetails }}
+                        <div class="row row-xl">
+                            <div class="col-md-12 m-lg-b m-xl-t">
+                                <h4 class="text-black fw-semi-thk fs-20">Front Desk Contact Details {{#checkCount ../data._FrontDeskContactDetails.length '>' 1 }} {{#increment @key 1 }} {{/increment }} {{/checkCount }}</h4>  
+                            </div>
+                        </div>
+
+                        <div class="row row-xl">
+                            <div class="col-md-6">
+                                <div class="row m-sm-b">
+                                    <div class="col-md-5 col-sm-6 col-xs-12 text-capitalize"><p>First Name:</p></div>
+                                    <div class="col-md-7 fw-semi-thk text-black text-capitalize"><p>{{#if this._firstname }} {{ this._firstname }} {{/if}}</p></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="row m-sm-b">
+                                    <div class="col-md-5 col-sm-6 col-xs-12 text-capitalize"><p>Last Name:</p></div>
+                                    <div class="col-md-7 fw-semi-thk text-black text-capitalize"><p>{{#if this._lastname }} {{ this._lastname }} {{/if}}</p></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-xl">
+                            <div class="col-md-6">
+                                <div class="row m-sm-b">
+                                    <div class="col-md-5 col-sm-6 col-xs-12 text-capitalize"><p>Landline Number:</p></div>
+                                    <div class="col-md-7 fw-semi-thk text-black text-capitalize"><p>{{#if this._landline_number}} +{{ this._landline_stdcode}} {{ this._landline_number }} {{/if}}</p></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="row m-sm-b">
+                                    <div class="col-md-5 col-sm-6 col-xs-12 text-capitalize"><p>Mobile Number:</p></div>
+                                    <div class="col-md-7 fw-semi-thk text-black text-capitalize"><p>{{#if this._mobileno}} +{{ this._mobileno_stdcode }} {{ this._mobileno }} {{/if}}</p></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-xl">
+                            <div class="col-md-6">
+                                <div class="row m-sm-b">
+                                    <div class="col-md-5 col-sm-6 col-xs-12 text-capitalize"><p>Email:</p></div>
+                                    <div class="col-md-7 fw-semi-thk text-black text-capitalize"><p>{{#if this._email }} {{ this._email }} {{/if}}</p></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="m-xl-t m-xl-b">
+                    {{/each}}
+                {{/if}}
+            </div>
+        </div>
+
+        <div class="row row-xl">
+            <div class="col-md-12">
+                {{#if data._FinanceContactDetails }}
+                    {{#each data._FinanceContactDetails }}
+                        <div class="row row-xl">
+                            <div class="col-md-12 m-lg-b m-xl-t">
+                                <h4 class="text-black fw-semi-thk fs-20">Finance Contact Details {{#checkCount ../data._FinanceContactDetails.length '>' 1 }} {{#increment @key 1 }} {{/increment }} {{/checkCount }}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row row-xl">
+                            <div class="col-md-6">
+                                <div class="row m-sm-b">
+                                    <div class="col-md-5 col-sm-6 col-xs-12 text-capitalize"><p>First Name:</p></div>
+                                    <div class="col-md-7 fw-semi-thk text-black text-capitalize"><p>{{#if this._firstname }} {{ this._firstname }} {{/if}}</p></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="row m-sm-b">
+                                    <div class="col-md-5 col-sm-6 col-xs-12 text-capitalize"><p>Last Name:</p></div>
+                                    <div class="col-md-7 fw-semi-thk text-black text-capitalize"><p>{{#if this._lastname }} {{ this._lastname }} {{/if}}</p></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-xl">
+                            <div class="col-md-6">
+                                <div class="row m-sm-b">
+                                    <div class="col-md-5 col-sm-6 col-xs-12 text-capitalize"><p>Landline Number:</p></div>
+                                    <div class="col-md-7 fw-semi-thk text-black text-capitalize"><p>{{#if this._landline_number}} +{{ this._landline_stdcode}} {{ this._landline_number }} {{/if}}</p></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="row m-sm-b">
+                                    <div class="col-md-5 col-sm-6 col-xs-12 text-capitalize"><p>Mobile Number:</p></div>
+                                    <div class="col-md-7 fw-semi-thk text-black text-capitalize"><p>{{#if this._mobileno}} +{{ this._mobileno_stdcode }} {{ this._mobileno }} {{/if}}</p></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-xl">
+                            <div class="col-md-6">
+                                <div class="row m-sm-b">
+                                    <div class="col-md-5 col-sm-6 col-xs-12 text-capitalize"><p>Email:</p></div>
+                                    <div class="col-md-7 fw-semi-thk text-black text-capitalize"><p>{{#if this._email }} {{ this._email }} {{/if}}</p></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="m-xl-t m-xl-b">
+                    {{/each}}
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+
+{{> footer}}
+
+<script>
+    var errors = {};
+    var counts = {};
+    var reqBody = {};
+</script>
+
+<script src="/js/contact_details.js"></script>

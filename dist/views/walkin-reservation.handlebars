@@ -1,0 +1,784 @@
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+
+{{> nav this}}
+
+{{> header}}
+
+<main id="page-content">
+    <div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Walk In / New Reservation</h3>
+        </div>
+    </div>
+
+    <div class="page-container">
+        <div class="row row-xl">
+            <div class="col-md-12 selectWrapper">
+                <form id="walkin-reservation-form" class="walkin_reservation" action='/pms/walkin-reservation?hotel_id={{ hotel_id }}' method="POST">
+                    <input type="hidden" name="hotel_id" value="{{ hotel_id }}" id="hotel_id">
+                    <input type="hidden" name="hotel_country_code" value="{{ hotel_country_code }}" id="hotel_country_code">
+                    <input type="hidden" name="user_uuid" value="{{ user_uuid }}" id="user_uuid">
+        
+                    {{#if errors}}
+                        {{#each errors}}
+                            <div class="alert alert-danger"> {{ msg }}</div>
+                        {{/each}}
+                    {{/if}}
+                    
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div id="walkin-wizard" class="tab-container tab-colored-arrow-down tab-top tab-danger">
+                                <div class="nav-tabs-container">
+                                    <ul class="nav nav-tabs nav-justified" role="tablist">
+                                        <li role="presentation" class="active">
+                                            <a href="#stay-information" aria-controls="stay-information" role="tab" data-toggle="tab"><i class="fa fa-home fa-fw m-xs-r"></i>Stay Information</a>
+                                        </li>
+                                        <li role="presentation">
+                                            <a href="#guest-information" aria-controls="guest-information" role="tab" data-toggle="tab"><i class="fa fa-home fa-fw m-xs-r"></i>Guest Information</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="stay-information">
+                                        <div class="row row-sm">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                <label class="" for="checkin">Check in *</label>
+                                                <input type="text" readonly="true" id="check_in" value="{{ inputs.check_in }}" name="check_in" placeholder="" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                <label class="" for="checkout">Check out *</label>
+                                                <input type="text" readonly="true" id="check_out" value="{{ inputs.check_out }}" name="check_out" placeholder="" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Row -->
+
+                                        <div class="row row-sm">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                <label class="" for="adults">Adults *</label>
+                                                <input type="text" id="adults" value="{{ inputs.adults }}" name="adults" placeholder="" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                <label class="" for="child">Child *</label>
+                                                <input type="text" id="kids" value="0" name="child" placeholder="" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row row-sm">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="" for="ota_name">No of rooms</label>
+                                                    <div class="select-wrapper">
+                                                        <select id="noofrooms" name="no_of_rooms" class="form-control">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="noofrooms_values" value="{{ inputs.no_of_rooms}}" id="noofrooms_values">
+                                            <div class="room-details" id="room_details">
+                                            {{#each inputs.room_type as |valuer key|}}
+                                                <div class="row row-sm room-details-items">
+                                                    
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="" for="type">Type</label>
+                                                            <div class="select-wrapper">
+                                                                <select data-id="{{ key }}" id="room_type" name="room_type[]" class="form-control room-type-item room_types{{ key }}">
+                                                                    <option value="">Select</option>
+                                                                    {{#each ../rooms as |value key|}}
+                                                                    <option value="{{ value._type._type }}" {{#equal valuer value._type._type }} selected="selected" {{/equal}}>{{#getRoomTypeName value._type._type }}{{/getRoomTypeName}}</option>
+                                                                    {{/each}}
+                                                                </select>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="" for="type">Room Number</label>
+                                                            <div class="select-wrapper">
+                                                                <select id="room_no{{ key }}" name="room_number[]" class="form-control">
+                                                                    <option value="">Select</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <input type="hidden" id="room_price{{ key }}" name="room_price[]" class="room_price form-control">
+                                                    </div>
+
+
+                                                </div>
+                                            {{/each}}
+                                            </div>
+                                        {{!-- </div> --}}
+                                        <input type="hidden" id="room_number_values" name="room_number_values" value="{{ inputs.room_no }}">
+
+                                        <div class="row row-sm m-md-b">
+                                            <div class="col-md-12">
+                                                <div id="booking_channel">
+                                                    <div class="form-group">
+                                                        <label class="" for="booking_channel"></label>
+                                                    </div>
+
+                                                    <div class="radio-inline p-n">
+                                                        <div class="radio-default danger">
+                                                            <input type="radio" class="booking-channel" id="booking-channel-walk-in" name="booking_channel" value="WALK_IN" {{#equal inputs.booking_channel 'WALK_IN'}} checked="checked" {{/equal}}> 
+                                                            <label for="booking-channel-walk-in">Walk In</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="radio-inline p-n">
+                                                        <div class="radio-default danger">
+                                                            <input type="radio" class="booking-channel" id="booking-channel-ota" name="booking_channel" value="OTA" {{#equal inputs.booking_channel 'OTA'}} checked="checked" {{/equal}}>
+                                                            <label for="booking-channel-ota">OTA / Channels</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="radio-inline p-n">
+                                                        <div class="radio-default danger">
+                                                            <input type="radio" class="booking-channel" id="booking-channel-corporate" name="booking_channel" value="CORPORATE" {{#equal inputs.booking_channel 'CORPORATE'}} checked="checked" {{/equal}}>
+                                                            <label for="booking-channel-corporate">Corporate</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="radio-inline p-n">
+                                                        <div class="radio-default danger">
+                                                            <input type="radio" class="booking-channel" id="booking-channel-agent" name="booking_channel" value="AGENT" {{#equal inputs.booking_channel 'CORPORATE'}} checked="checked" {{/equal}}>
+                                                            <label for="booking-channel-agent">Agent</label>
+                                                        </div>
+                                                    </div>
+                                                </div>                            
+                                            </div>
+                                        </div>
+
+                                        <div class="agent-values row row-sm">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="" for="channel_name">Agent Name</label>
+                                                        <input type="text" id="agent_name" value="{{ inputs.agent_name }}" name="agent_name" placeholder="" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="corporate-values row row-sm">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="" for="channel_name">Corporate Name</label>
+                                                    <div class="select-wrapper">
+                                                        <select name="corporate_name" class="form-control">
+                                                            <option value="">Select</option>
+                                                            <option value="Elatrip Thailand Co., Ltd." {{#equal inputs.channel_name 'Elatrip Thailand Co., Ltd.'}} selected="selected" {{/equal}}>Elatrip Thailand Co., Ltd.</option>
+                                                            <option value="Able Sanoh" {{#equal inputs.channel_name 'Able Sanoh'}} selected="selected" {{/equal}}>Able Sanoh</option>
+                                                            <option value="7 Sisters Holiday" {{#equal inputs.channel_name '7 Sisters Holiday'}} selected="selected" {{/equal}}>7 Sisters Holiday</option>
+                                                            <option value="7 Star Travel Co., Ltd" {{#equal inputs.channel_name '7 Star Travel Co., Ltd'}} selected="selected" {{/equal}}>7 Star Travel Co., Ltd</option>
+                                                            <option value="A.T.S" {{#equal inputs.channel_name 'A.T.S'}} selected="selected" {{/equal}}>A.T.S</option>
+                                                            <option value="Able Progress Industry Co., Ltd" {{#equal inputs.channel_name 'Able Progress Industry Co., Ltd'}} selected="selected" {{/equal}}>Able Progress Industry Co., Ltd</option>
+                                                            <option value="Absolute Asia Journeys Co., Ltd" {{#equal inputs.channel_name 'Absolute Asia Journeys Co., Ltd'}} selected="selected" {{/equal}}>Absolute Asia Journeys Co., Ltd</option>
+                                                            <option value="AK Marketing" {{#equal inputs.channel_name 'AK Marketing'}} selected="selected" {{/equal}}>AK Marketing</option>
+                                                            <option value="Apollo Holidays" {{#equal inputs.channel_name 'Apollo Holidays'}} selected="selected" {{/equal}}>Apollo Holidays</option>
+                                                            <option value="Antares Groop" {{#equal inputs.channel_name 'Antares Groop'}} selected="selected" {{/equal}}>Antares Groop</option>
+                                                            <option value="Airport Flight Center" {{#equal inputs.channel_name 'Airport Flight Center'}} selected="selected" {{/equal}}>Airport Flight Center</option>
+                                                            <option value="Asia Travel.com" {{#equal inputs.channel_name 'Asia Travel.com'}} selected="selected" {{/equal}}>Asia Travel.com</option>
+                                                            <option value="DDK Thailand Co., Ltd" {{#equal inputs.channel_name 'DDK Thailand Co., Ltd'}} selected="selected" {{/equal}}>DDK Thailand Co., Ltd</option>
+                                                            <option value="Denso Group" {{#equal inputs.channel_name 'Denso Group'}} selected="selected" {{/equal}}>Denso Group</option>
+                                                            <option value="H.I.S. Tours Co., Ltd" {{#equal inputs.channel_name 'H.I.S. Tours Co., Ltd'}} selected="selected" {{/equal}}>H.I.S. Tours Co., Ltd</option>
+                                                            <option value="HRS Group" {{#equal inputs.channel_name 'HRS Group'}} selected="selected" {{/equal}}>HRS Group</option>
+                                                            <option value="Indian Social Club of Thailand" {{#equal inputs.channel_name 'Indian Social Club of Thailand'}} selected="selected" {{/equal}}>Indian Social Club of Thailand</option>
+                                                            <option value="Indo Bangkok Films Co., Ltd" {{#equal inputs.channel_name 'Indo Bangkok Films Co'}} selected="selected" {{/equal}}>Indo Bangkok Films Co</option>
+                                                            <option value="KGK Engineering (Thai) Co., Ltd" {{#equal inputs.channel_name 'KGK Engineering (Thai) Co., Ltd'}} selected="selected" {{/equal}}>KGK Engineering (Thai) Co., Ltd</option>
+                                                            <option value="NV Tour & Travel" {{#equal inputs.channel_name 'NV Tour & Travel'}} selected="selected" {{/equal}}>NV Tour & Travel</option>
+                                                            <option value="Prabhirarb Co., Ltd" {{#equal inputs.channel_name 'Prabhirarb Co., Ltd'}} selected="selected" {{/equal}}>Prabhirarb Co., Ltd</option>
+                                                            <option value="Skyline Management Co., Ltd" {{#equal inputs.channel_name 'Skyline Management Co., Ltd'}} selected="selected" {{/equal}}>Skyline Management Co., Ltd</option>
+                                                            <option value="Naruo" {{#equal inputs.channel_name 'Naruo'}} selected="selected" {{/equal}}>Naruo</option>
+                                                            <option value="ThaiCredit" {{#equal inputs.channel_name 'ThaiCredit'}} selected="selected" {{/equal}}>ThaiCredit</option>
+                                                            <option value="EasyBuy" {{#equal inputs.channel_name 'EasyBuy'}} selected="selected" {{/equal}}>EasyBuy</option>
+                                                            <option value="World Camera" {{#equal inputs.channel_name 'World Camera'}} selected="selected" {{/equal}}>World Camera</option>
+                                                            <option value="Moungthai" {{#equal inputs.channel_name 'Moungthai'}} selected="selected" {{/equal}}>Moungthai</option>
+                                                            <option value="Sun series Travel" {{#equal inputs.channel_name 'Sun series Travel'}} selected="selected" {{/equal}}>Sun series Travel</option>
+                                                            <option value="Alibaba" {{#equal inputs.channel_name 'Alibaba'}} selected="selected" {{/equal}}>Alibaba</option>
+                                                            <option value="The little prince" {{#equal inputs.channel_name 'The little prince'}} selected="selected" {{/equal}}>The little prince</option>
+                                                            <option value="Travco" {{#equal inputs.channel_name 'Travco'}} selected="selected" {{/equal}}>Travco</option>
+                                                            <option value="Tourico holiday" {{#equal inputs.channel_name 'Tourico holiday'}} selected="selected" {{/equal}}>Tourico holiday</option>
+                                                            <option value="Thai Tour Info co., Ltd" {{#equal inputs.channel_name 'Thai Tour Info co., Ltd'}} selected="selected" {{/equal}}>Thai Tour Info co., Ltd</option>
+
+                                                        </select>
+                                                    </div>								
+                                                </div>	
+                                            </div>
+                                            </div>
+
+                                        <div class="ota-values row row-sm">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="" for="channel_name">OTA / Channels</label>
+                                                    <div class="select-wrapper">
+                                                        <select name="channel_name" class="form-control">
+                                                            <option value="">Select</option>
+                                                            <option value="Booking.com" {{#equal inputs.channel_name '`'}} selected="selected" {{/equal}}>Booking.com</option>
+                                                            <option value="Agoda" {{#equal inputs.channel_name '`'}} selected="selected" {{/equal}}>Agoda</option>
+                                                            <option value="Hotel Website" {{#equal inputs.channel_name '`'}} selected="selected" {{/equal}}>Hotel Website</option>
+                                                            <option value="Expedia" {{#equal inputs.channel_name 'Expedia'}} selected="selected" {{/equal}}>Expedia</option>
+                                                            <option value="Ctrip" {{#equal inputs.channel_name 'Ctrip'}} selected="selected" {{/equal}}>Ctrip</option>
+                                                            <option value="Makemytrip" {{#equal inputs.channel_name 'Makemytrip'}} selected="selected" {{/equal}}>Makemytrip</option>
+                                                            <option value="Pegipegi" {{#equal inputs.channel_name 'Pegipegi'}} selected="selected" {{/equal}}>Pegipegi</option>
+                                                            <option value="MisterAladin" {{#equal inputs.channel_name 'MisterAladin'}} selected="selected" {{/equal}}>MisterAladin</option>
+                                                            <option value="Travaloka" {{#equal inputs.channel_name 'Travaloka'}} selected="selected" {{/equal}}>Travaloka</option>
+                                                            <option value="OYO Rooms" {{#equal inputs.channel_name 'OYO Rooms'}} selected="selected" {{/equal}}>OYO Rooms</option>
+                                                            <option value="Zen Rooms" {{#equal inputs.channel_name 'Zen Rooms'}} selected="selected" {{/equal}}>Zen Rooms</option>
+                                                            <option value="HotelBeds" {{#equal inputs.channel_name 'HotelBeds'}} selected="selected" {{/equal}}>HotelBeds</option>
+                                                            <option value="1HotelRez" {{#equal inputs.channel_name '1HotelRez'}} selected="selected" {{/equal}}>1HotelRez</option>
+                                                            <option value="AisaTravel" {{#equal inputs.channel_name 'AisaTravel'}} selected="selected" {{/equal}}>AisaTravel</option>
+                                                            <option value="Goibibo" {{#equal inputs.channel_name 'Goibibo'}} selected="selected" {{/equal}}>Goibibo</option>
+                                                            <option value="GTA" {{#equal inputs.channel_name 'GTA'}} selected="selected" {{/equal}}>GTA</option>
+                                                            <option value="HRS" {{#equal inputs.channel_name 'HRS'}} selected="selected" {{/equal}}>HRS</option>
+                                                            <option value="Sawadee" {{#equal inputs.channel_name 'Sawadee'}} selected="selected" {{/equal}}>Sawadee</option>
+                                                            <option value="TripFactory" {{#equal inputs.channel_name 'TripFactory'}} selected="selected" {{/equal}}>TripFactory</option>
+                                                            <option value="Hua Min" {{#equal inputs.channel_name 'Hua Min'}} selected="selected" {{/equal}}>Hua Min</option>
+                                                            <option value="Sport Max" {{#equal inputs.channel_name 'Sport Max'}} selected="selected" {{/equal}}>Sport Max</option>
+                                                            <option value="HotelTravel.com" {{#equal inputs.channel_name 'HotelTravel.com'}} selected="selected" {{/equal}}>HotelTravel.com</option>
+                                                            <option value="Favstay" {{#equal inputs.channel_name 'Favstay'}} selected="selected" {{/equal}}>Favstay</option>
+                                                            <option value="Power Line Company" {{#equal inputs.channel_name 'Power Line Company'}} selected="selected" {{/equal}}>Power Line Company</option>
+                                                            <option value="Miki Travel" {{#equal inputs.channel_name 'Miki Travel'}} selected="selected" {{/equal}}>Miki Travel</option>
+                                                            <option value="Destination of world" {{#equal inputs.channel_name 'Destination of world'}} selected="selected" {{/equal}}>Destination of world</option>
+                                                        </select>
+                                                    </div>								
+                                                </div>	
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="" for="obid">OTA Booking ID</label>
+                                                    <input type="text" id="" value="{{ inputs.obid }}" name="obid" placeholder="" class="form-control">
+                                                </div>	
+                                            </div>
+                                        </div>
+
+                                        <div class="row row-sm">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="">Discount</label>
+                                                    <div class="select-wrapper">
+                                                        <select name="discount" id="discount-percentage" class="form-control">
+                                                            <option value="">No Discount</option>
+                                                            <option value="5" {{#equal inputs.discount '5'}} selected="selected" {{/equal}}>5%</option>
+                                                            <option value="10" {{#equal inputs.discount '10'}} selected="selected" {{/equal}}>10%</option>
+                                                            <option value="15" {{#equal inputs.discount '15'}} selected="selected" {{/equal}}>15%</option>
+                                                            <option value="20" {{#equal inputs.discount '20'}} selected="selected" {{/equal}}>20%</option>
+                                                            <option value="25" {{#equal inputs.discount '25'}} selected="selected" {{/equal}}>25%</option>
+                                                            <option value="30" {{#equal inputs.discount '30'}} selected="selected" {{/equal}}>30%</option>
+                                                            <option value="35" {{#equal inputs.discount '35'}} selected="selected" {{/equal}}>35%</option>
+                                                            <option value="38" {{#equal inputs.discount '38'}} selected="selected" {{/equal}}>38%</option>
+                                                            <option value="40" {{#equal inputs.discount '40'}} selected="selected" {{/equal}}>40%</option>
+                                                            <option value="45" {{#equal inputs.discount '45'}} selected="selected" {{/equal}}>45%</option>
+                                                            <option value="50" {{#equal inputs.discount '50'}} selected="selected" {{/equal}}>50%</option>
+                                                        </select>
+                                                    </div>	
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div role="tabpanel" class="tab-pane" id="guest-information">
+                                        <div class="row row-sm">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="" for="email">Email </label>
+                                                    <div class="input-group input-group-addon-right">
+                                                        <input type="text" id="email" value="{{ inputs.guest_email }}" name="guest_email" placeholder="" class="form-control">
+
+                                                        <span class="input-group-addon">
+                                                            <span id="search-details">
+                                                                <i class="fa fa-search fa-fw"></i>
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                <label class="" for="firstname">First Name *</label>
+                                                <input type="text" id="first_name" value="{{ inputs.guest_first_name }}" name="guest_first_name" placeholder="" class="validate[required] form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="" for="lastname">Last Name *</label>
+                                                    <input type="text" id="last_name" value="{{ inputs.guest_last_name }}" name="guest_last_name" placeholder="" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <!-- Begin Row -->
+                                                <div class="row row-sm">
+                                                    
+                                                </div>
+                                                <!-- End Row -->
+
+                                                <div class="row row-sm">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="">Mobile</label>
+                                                            <div class="select-wrapper">
+                                                                <select name="mobile_code" id="mobile_code" class="form-control">
+                                                                    <option value="">select</option>
+                                                                    {{#each country}}
+                                                                    <option value="{{ this.code }}">{{this.name }}(+{{this.code}})</option>
+                                                                    {{/each}}
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-8">
+                                                        <div class="form-group">
+                                                        <label class="" for="lastname">Mobile Number </label>
+                                                        <input type="text" id="mobile_number" value="{{ inputs.guest_mobile_number }}" name="guest_mobile_number" placeholder="" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row row-sm">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="">Phone</label>
+                                                            <div class="select-wrapper">
+                                                                <select name="phone_code" id="phone_code" class="form-control">
+                                                                    <option value="">select</option>
+                                                                    {{#each country}}
+                                                                    <option value="{{ this.code }}">{{this.name }}(+{{this.code}})</option>
+                                                                    {{/each}}
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-8">
+                                                        <div class="form-group">
+                                                        <label class="" for="lastname">Phone Number</label>
+                                                        <input type="text" id="phone_number" value="{{ inputs.guest_phone_number }}" name="guest_phone_number" placeholder="" class="form-control">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12 m-lg-b">
+                                                        <div class="form-group m-lg-b">
+                                                            <label class="" for="icno">Identification type *</label>
+                                                        </div>
+
+                                                        <div class="radio-inline">
+                                                            <div class="radio-default danger">
+                                                                <input type="radio" id="passport" name="identification_type" value="PASSPORT" {{#equal inputs.identification_type 'PASSPORT'}} checked="checked" {{/equal}}>
+                                                                <label for="passport">Passport</label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="radio-inline">
+                                                            <div class="radio-default danger">
+                                                                <input id="ic_number" type="radio" name="identification_type" value="IC_NUMBER" {{#equal inputs.identification_type 'IC_NUMBER'}} checked="checked" {{/equal}}>
+                                                                <label for="ic_number">IC Number</label>
+                                                            </div>
+                                                        </div>                                                    
+                                                    </div>
+
+                                                    <div class="col-md-8">
+                                                        <div class="form-group">
+                                                        <label class="" for="lastname">IC / Passport Number *</label>
+                                                        <input type="text" id="ic_numbers" value="{{ inputs.ic_number }}" name="ic_number" placeholder="" class="form-control">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <div class="file-uploader-new-room">
+                                                                <input type="file" id="ic_doc" multiple name="ic_doc" placeholder="" class="saveFile form-control" value="{{#if inputs.ic_doc }}{{ inputs.ic_doc }}{{/if}}"/>
+                                                                <span class="text-danger">{{#if ic_doc }}{{ic_doc }} {{/if}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label class="" for="guest_nationality">Nationality *</label>
+
+                                                            <div class="select-wrapper">
+                                                                <select id="nationality" name="guest_nationality" class="form-control">
+                                                                    <option value="">Select</option>
+                                                                    {{#each country}}
+                                                                    <option value="{{ this.name }}">{{this.name }}</option>
+                                                                    {{/each}}
+                                                                </select>
+                                                            </div>		
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        <div class="checkbox">
+                                                            <input type="checkbox" name="additional_identification" id="additional_identification">
+                                                            <label for="additional_identification">Employment Pass / Student Pass / Dependent Visa </label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        <div class="additional-identification-block">
+                                                            <label>ID : </label>
+                                                            <input type="textbox" class="form-control" value="" name="additional_identification_number" id="additional_identification_number">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="row row-sm">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                        <label class="" for="address">Address</label>
+                                                        <input type="text" id="address" value="{{ inputs.guest_address }}" name="guest_address" placeholder="" class="form-control">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                        <label class="" for="address2">Address 2</label>
+                                                        <input type="text" id="address2" value="{{ inputs.guest_address_2 }}" name="guest_address_2" placeholder="" class="form-control">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="">Country</label>
+
+                                                            <div class="select-wrapper">
+                                                                <select id="country" name="country" class="country form-control">
+                                                                    <option value="select" {{#equal inputs.country 'select'}} selected="selected" {{/equal}}>Country</option>
+                                                                    {{#if locationmasters }}
+                                                                    {{#each locationmasters }}
+                                                                    <option value="{{@key}}" {{#equal ../inputs.country @key}} selected="selected" {{/equal}}>{{ this.name }}</option>
+                                                                    {{/each}}
+                                                                    {{/if}}
+                                                                </select>
+                                                            </div>	
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="">State</label>
+
+                                                            <div class="select-wrapper">
+                                                                <select id="state"  name="state" placeholder="" class="state form-control">
+                                                                    <option value="select" {{#equal inputs.guest_state 'select'}} selected="selected" {{/equal}}>State</option>
+                                                                    {{#if locationmasters }}
+                                                                    {{#each locationmasters }}
+                                                                    {{#each this.states}}
+                                                                    <option value="{{@key}}" {{#equal ../../inputs.guest_state @key}} selected="selected" {{/equal}}>{{ this.name }}</option>
+                                                                    {{/each}}
+                                                                    {{/each}}
+                                                                    {{/if}}
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="">City</label>
+
+                                                            <div class="select-wrapper">
+                                                                <select id="city" name="city" placeholder="" class="city form-control">
+                                                                    <option value="select" {{#equal inputs.guest_city 'select'}} selected="selected" {{/equal}}>City</option>
+                                                                    {{#if locationmasters }}
+                                                                    {{#each locationmasters }}
+                                                                    {{#each this.states}}
+                                                                    {{#each this.cities}}
+                                                                    <option value="{{@key}}" {{#equal ../../../inputs.guest_city @key}} selected="selected" {{/equal}}>{{ this.name }}</option>
+                                                                    {{/each}}	
+                                                                    {{/each}}
+                                                                    {{/each}}
+                                                                    {{/if}}
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="" for="lastname">Postal Code</label>
+                                                            <input type="text" id="postal_code" value="{{ inputs.guest_postal_code }}" name="guest_postal_code" placeholder="" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row row-sm">
+                                                    <div class="col-md-12 m-lg-b">
+                                                        <div class="form-group">
+                                                            <label for="">Gender</label>
+                                                        </div>
+
+                                                        <div class="radio-inline">
+                                                            <div class="radio-default danger">
+                                                                <input type="radio" id="checkout-gender-male" name="guest_gender" value="Male" {{#equal inputs.guest_gender 'Male'}} checked="checked" {{/equal}}>
+                                                                <label for="checkout-gender-male">Male</label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="radio-inline">
+                                                            <div class="radio-default danger">
+                                                                <input id="checkout-gender-female" type="radio" name="guest_gender" value="Female" {{#equal inputs.guest_gender 'Female'}} checked="checked" {{/equal}}>
+                                                                <label for="checkout-gender-female">Female</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                    
+                                                <div class="row row-sm">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Remarks</label>
+                                                            <textarea class="form-control" rows="5" cols="100" name="guest_remarks" placeholder="Enter text here..."></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row row-sm">
+                                                    <div class="col-md-12">
+                                                        <div class="checkbox">
+                                                            <input type="checkbox" name="add_company_details" id="add-company-details">
+                                                            <label for="add-company-details"> Add Guest Company Information </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="company-information-block">
+                                                    <div class="row row-sm">
+                                                        <div class="form-group">
+                                                            <label class="" for="company_name">Company Name</label>
+                                                            <input type="text" id="company_name" value="{{ inputs.company_name }}" name="company_name" placeholder="" class="form-control">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="" for="company_address">Company Address</label>
+                                                            <input type="text" id="company_address" value="{{ inputs.company_address }}" name="company_address" placeholder="" class="form-control">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="" for="company_taxid">Tax ID</label>
+                                                            <input type="text" id="company_taxid" value="{{ inputs.company_taxid }}" name="company_taxid" placeholder="" class="form-control">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="" for="company_telephone">Tel</label>
+                                                            <input type="text" id="company_telephone" value="{{ inputs.company_telephone }}" name="company_telephone" placeholder="" class="form-control">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="" for="company_fax">Fax</label>
+                                                            <input type="text" id="company_fax" value="{{ inputs.company_fax }}" name="company_fax" placeholder="" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row row-sm">
+                                        <div class="col-md-12">
+                                        <!-- Begin Pager Wizard -->
+                                            <ul class="wizard-pager wizard list-inline">
+                                                <!-- Begin List -->
+                                                <li class="next">
+                                                    <a href="javascript:void(0)" class="btn btn-danger w-150 pull-right btn-rounded text-left">Next <i class="fa fa-long-arrow-right fa-fw pull-right"></i></a>
+                                                </li>
+                                                <!-- End List -->
+        
+                                                <!-- Begin List -->
+                                                <li class="next finish" style="display:none;">
+                                                    <a href="javascript:void(0)" class="btn btn-danger w-150 pull-right btn-rounded">Finish</a>
+                                                </li>
+                                                <!-- End List -->
+        
+                                                <!-- Begin List -->
+                                                <li class="previous">
+                                                    <a href="javascript:void(0)" class="btn btn-danger w-150 pull-left text-right btn-rounded"><i class="fa fa-long-arrow-left fa-fw pull-left"></i>Previous</a>
+                                                </li>
+                                                <!-- End List -->
+                                            </ul>
+                                            <!-- End Pager Wizard -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="walkin-summary">
+                                <h4 class="fw-semi-thk text-black text-center m-n-t">Summary</h4>
+                                <hr>
+
+                                <div class="row m-lg-b">
+                                    <div class="col-md-6">
+                                        <small class="text-uppercase fs-xs text-grey">Check In</small>
+                                        <p class="text-black fs-lg fw-semi-thk check-in-value"></p>
+                                    </div>
+                                    <div class="col-md-6 text-right">
+                                        <small class="text-uppercase fs-xs text-grey">Check Out</small>
+                                        <p class="text-black fs-lg fw-semi-thk check-out-value"></p>
+                                    </div>
+                                </div>
+                                <div class="row m-lg-b">
+                                    <div class="col-md-6 text-left">
+                                        <p><small class="text-uppercase">Adult(s)</small></p>
+                                        <p class="text-black fs-lg fw-semi-thk adults-value"></p>
+                                    </div>
+
+                                    <div class="col-md-6 text-right">
+                                        <p><small class="text-uppercase">Kid(s)</small></p>
+                                        <p class="text-black fs-lg fw-semi-thk kids-value"></p>
+                                    </div>
+                                </div>
+                                <div class="row m-lg-b">
+                                    <div class="col-md-12">
+                                        <p><small class="text-uppercase fs-xs text-grey">Room(s)</small></p>
+                                        <p class="text-black no-of-rooms-value"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label>Currency</label>
+                                    <input type="text" class="form-control" name="paymentCurrency" id="paymentCurrency" value="{{ currency }}" readonly="TRUE">
+                                </div>
+                                <div class="row">
+                                    <label>Total Room price</label>
+                                    <input type="text" class="form-control" name="total_room_price" id="total_room_price" value="{{ inputs.total_room_price }}">
+                                </div>
+                                <div class="row">
+                                    <label>Discount</label>
+                                    <input type="text" class="form-control" name="discountAmount" id="discountAmount" value="{{ inputs.discountAmount }}">
+                                </div>
+                                <div class="row">
+                                    <label>Price After Discount</label>
+                                    <input type="text" class="form-control" name="priceAfterDiscount" id="priceAfterDiscount" value="{{ inputs.priceAfterDiscount }}">
+                                </div>
+                                {{!--<div class="row" id="flexi_fee_wrapper" style="display:none;">
+                                    <label>Flexi Fee</label>
+                                    <input type="text" class="form-control" name="flexi_fee" id="flexi_fee" value="{{ inputs.flexi_fee }}"/>
+                                </div>--}}
+                                <div class="row">
+                                    <label>Service Fee</label>
+                                    <input type="text" class="form-control" name="service_fee" id="service_fee" value="{{ inputs.service_fee }}">
+                                </div>
+                                <div class="row">
+                                    <label>GST / VAT</label>  
+                                    <input type="text" class="form-control" name="total_tax" id="total_tax" value="{{ inputs.total_tax }}">
+                                </div>
+                                <div class="row">
+                                    <label>Tourism Tax</label>
+                                    <input type="text" class="form-control" name="tourismtax" id="tourismtax" value="{{ inputs.tourismtax }}">
+                                </div>
+                                <div class="row">
+                                    <label>Total</label>
+                                    <input type="text" class="form-control" name="final_total_amount" id="final_total_amount" value="{{ inputs.final_total_amount }}">
+                                </div>
+                                <div class="row">
+                                    <label></label>
+                                    <input type="hidden" class="form-control" name="noofnights" id="noofnights" value="{{ inputs.service_fee }}">
+                                </div>
+                                {{!--<div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="text-danger" id="flexiMessage"></div>
+                                        <p><input type="checkbox" name="flexiBox" id="flexiBox" /><span>FLEXI</span></p>
+                                        <p><small class="text-uppercase fs-xs text-grey m-n" >Flexi CheckIn & CheckOut</small></p>
+                                    </div>
+                                </div>--}}
+                                <span class="btn btn-success calculate-button">Calculate</span>
+                                <div class="row row-sm m-md-t m-md-b" style="display:none;">
+                                    <div class="col-md-12">
+                                        <p><small class="text-uppercase fs-xs text-grey m-n"><label>Payment Method *</label></small></p>
+                                                <select name="payment_type" id="payment_type" class="form-control">
+                                                    <option value="">Select</option>
+                                                    <option value="CASH" selected="selected">CASH</option>
+                                                </select>
+                                     </div>
+                                </div>
+                                <div class="row row-sm m-md-t m-md-b booking-status">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <p><small class="text-uppercase fs-xs text-grey m-n">Booking Status</small></p>
+                                            <div class="select-wrapper">
+                                                <select name="status" id="booking-status" class="form-control">
+                                                    <option value="">Select</option>
+                                                    <option value="ON_HOLD" selected="selected">ON HOLD</option>
+                                                </select>
+                                            </div>	
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row row-sm m-lg-t">
+                                    <div class="col-md-12">
+                                        <button type="submit" data-color="green" data-style="expand-right" class="ladda-button btn-default btn-block pull-left reserve-button">Reserve</button>
+                                    </div>
+                                </div>
+                                <div class="row row-sm m-lg-t">
+                                    <div class="col-md-12">
+                                        <span onclick="history.back();" class="btn btn-danger btn-default btn-block btn-rounded">Cancel</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- End Page Content -->
+
+{{> footer}}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="/scripts/plugins/jquery.bootstrap.wizard.min.js"></script>
+<script src="/js/walkin.js"></script>
+<link rel="stylesheet" href="/css/ladda.min.css">
+<script src="/js/spin.min.js"></script>
+<script src="/js/ladda.min.js"></script>
+<script>
+    $('#walkin-wizard').bootstrapWizard({onTabShow: function(tab, navigation, index) {
+        var $total = navigation.find('li').length;
+        var $current = index+1;
+        var $percent = ($current/$total) * 100;
+        $('#walkin-wizard').find('.bar').css({width:$percent+'%'});
+        if($current >= $total) {
+            $('#walkin-wizard').find('.wizard-pager .next').hide();
+            $('#walkin-wizard').find('.wizard-pager .finish').removeClass('disabled');
+        } else {
+            $('#walkin-wizard').find('.wizard-pager .next').show();
+        }
+        if($current == 1) {
+            $('#walkin-wizard').find('.wizard-pager .previous').hide();
+        } else  {
+            $('#walkin-wizard').find('.wizard-pager .previous').show();
+        }
+    }});
+
+    Ladda.bind( 'button', {
+    callback: function( instance ) {
+        var progress = 0;
+        var interval = setInterval( function() {
+        progress = Math.min( progress + Math.random() * 0.1, 1 );
+        instance.setProgress( progress );
+        if( progress === 1 ) {
+            instance.stop();
+            clearInterval( interval );
+        }
+        }, 200 );
+    }
+    } );
+</script>

@@ -1,0 +1,28 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var Type;
+(function (Type) {
+    Type["BOOKING_CREATE"] = "BOOKING_CREATE";
+    Type["BOOKING_STATUS"] = "BOOKING_STATUS";
+    Type["ROOM_RESERVATION"] = "ROOM_RESERVATION";
+    Type["CHECK_IN"] = "CHECK_IN";
+    Type["RESERVE"] = "RESERVE";
+    Type["CHECK_OUT"] = "CHECK_OUT";
+    Type["PAYMENT"] = "PAYMENT";
+    Type["PAYMENT_DEPOSIT"] = "PAYMENT_DEPOSIT";
+    Type["PAYMENT_DEPOSIT_REFUND"] = "PAYMENT_DEPOSIT_REFUND";
+    Type["DEFAULT_RATES"] = "DEFAULT_RATES";
+    Type["MARKUP_RATES"] = "MARKUP_RATES";
+    Type["RATES_PLAN"] = "RATES_PLAN";
+    Type["ROOMTYPE_MARKUP"] = "ROOMTYPE_MARKUP";
+    Type["SHIFT_OPENING"] = "SHIFT_OPENING";
+    Type["SHIFT_CLOSING"] = "SHIFT_CLOSING";
+    Type["ROOM_CLEANING"] = "ROOM_CLEANING";
+    Type["MAINTENANCE_CREATE"] = "MAINTENANCE_CREATE";
+    Type["MAINTENANCE_DELETE"] = "MAINTENANCE_DELETE";
+    Type["CHECK_IN_WALK_IN"] = "CHECK_IN_WALK_IN";
+    Type["NIGHT_AUDIT"] = "NIGHT_AUDIT";
+    Type["REFER_EARN"] = "REFER_EARN";
+    Type["USER_OPS"] = "USER_OPS";
+    Type["REFERRALS"] = "REFERRALS";
+})(Type = exports.Type || (exports.Type = {}));

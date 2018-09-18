@@ -1,0 +1,102 @@
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="/scripts/plugins/jquery.bootstrap.wizard.min.js"></script>
+<script src="/js/jquery-ui.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        var searchMinDate = "m";
+        $("#reset").click(function () {
+            window.location.href = window.location.href;
+        });
+    });
+
+</script>
+{{> nav this}} {{> header}}
+<main id="page-content">
+    <div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">USER PERFORMANCE</h3>
+        </div>
+    </div>
+    <div class="page-container">
+        <div class="row row-xl">
+            <div class="col-md-12">
+                <div class="filter-form">
+                    {{#if errors}} {{#each errors}}
+                    <div class="alert alert-danger"> {{ msg }}</div>
+                    {{/each}} {{/if}}
+                    <div class="table-responsive">
+                        <table class="table" id="report-table">
+                            <thead>
+                                <tr>
+                                    <th>User Name</th>
+                                    <th>User Email</th>
+                                    <th>Upcoming Earnings</th>
+                                    <th>Total Earnings</th>
+                                    <th>No. Of Bookings</th>
+                                    <th>Link Open </th>
+                                    <th>Total Overall Bookings</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+</main>
+{{> footer}}
+
+<script type="text/javascript">
+    $(function () {
+        var url = '/report-manager/manager/user-performance'
+        // INITIALIZE DATA TABLE
+        updateTable(url);
+
+        var table;
+
+        // CREATE DATA TABLE
+        function updateTable(url) {
+            table = $('#report-table').DataTable({
+                ajax: url,
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: 'Download',
+                        footer: true,
+                    },
+                    {
+                        extend: 'print',
+                        text: 'Print',
+                        footer: true,
+                    }
+                ],
+                dom: 'Bfrtip',
+                paging: true,
+                footerCallback: function (row, data, start, end, display) {
+                    var api = this.api(), data;
+                    // Remove the formatting to get integer data for summation
+                    var intVal = function (i) {
+                        return typeof i === 'string' ?
+                            i.replace(/[\$,]/g, '') * 1 :
+                            typeof i === 'number' ?
+                                i : 0;
+                    };
+                }
+            });
+        }
+
+
+
+        $("#Submit").click(function () {
+
+
+            var url = '/report-manager/manager/user-performance';
+
+            table.destroy();
+
+            updateTable(url);
+        });
+
+    });
+
+</script>

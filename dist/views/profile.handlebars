@@ -1,0 +1,107 @@
+{{> nav}}
+
+{{> header}}
+
+<!-- Begin Page Content -->
+<main id="page-content">
+	<div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">My Profile</h3>
+        </div>
+    </div>
+
+	<div class="page-container">
+
+		<div class="row row-xl">
+			<div class="col-md-12">
+				<form class="" action='/users/profile' method="POST">
+					<input type="hidden" value="{{ output._user_id }}" id="" name="user_id" placeholder="" class="form-control">
+					{{#if success }}
+					<div class="alert alert-success">{{ message}}</div>
+					{{else if message }}
+					<div class="alert alert-danger">{{ message}}</div>
+					{{/if}}
+					{{#if errors}}
+						{{#each errors}}
+							<div class="alert alert-danger"> {{ msg }}</div>
+						{{/each}}
+					{{/if}}
+					<div class="row row-xl">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="username">First Name</label>
+								<input type="text" value="{{ output._first_name }}" id="" name="first_name" placeholder="" class="form-control">
+							</div>	
+						</div>
+
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="username">Last Name</label>
+								<input type="text" value="{{ output._last_name }}" id="" name="last_name" placeholder="" class="form-control">
+							</div>	
+						</div>
+					</div>
+
+					<div class="row row-xl">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="username">User Name</label>
+								<input type="text" value="{{ output._username }}" id="" name="user_name" placeholder="" class="form-control">
+							</div>	
+						</div>
+						
+						<div class="col-md-6">
+							<div class="form-group">
+							<label class="" for="email">E-mail</label>
+							<input type="text" value="{{ output._email }}" id="" name="email" placeholder="" class="form-control">
+						</div>
+					</div>
+					</div>
+
+					<div class="row row-xl">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="password">Password</label>
+								<input type="password" id="" name="password" placeholder="" class="form-control">
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="password_confirm">Confirm Password</label>
+								<input type="password" id="" name="password2" placeholder="" class="form-control">
+								<input type="hidden" id="" value="{{ output._password}}" name="pass_hidden" placeholder="" class="form-control">
+							</div>	
+						</div>
+					</div>
+
+					
+					<div class="row row-xl">
+						<div class="col-md-12">
+							<div class="m-xl-t text-right">
+								<button class="btn btn-danger btn-rounded w-150"  name="Submit" value="Save" type="Submit">Submit</button> 
+							</div>	
+						</div>
+					</div>
+				</form>
+
+				<div class="referral-message-container">
+					<div class="referral-header">
+                        <button type="button" class="close close-grandparent-div">&times;</button>
+                        <p class="m-n">Wasn't that just easy? <br> Spread the love and help us grow by referring to a friend!</p>
+					</div>
+					<div class="referral-body">
+                        <img src="/images/NIDACash Logo_Final.svg" alt="NIDACash - Share and Earn" width="200">
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Hotels View -->
+	</div>
+</main>
+<!-- End Page Content -->
+
+
+{{> footer}}
+
+

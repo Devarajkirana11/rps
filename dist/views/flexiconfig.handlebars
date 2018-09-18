@@ -1,0 +1,128 @@
+{{> nav}}
+
+{{> header}}
+
+<main id="page-content">
+	<div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Hotel Flexi Configuration</h3>
+        </div>
+    </div>
+
+	<div class="page-container">
+		<div class="row row-xl">
+			<div class="col-md-12 m-lg-b">
+				<h4 class="text-black fw-semi-thk fs-20">{{#equal mode 'new'}} New Configuration {{else}} Edit Configuration {{/equal}} </h4>
+			</div>
+		</div>
+
+		<div class="row row-xl">
+			<div class="col-md-12 selectWrapper">
+				{{#if flexi_id }}
+					<form class="" action='/flexi/config/create?id={{flexi_id}}&hotel_id={{hotel_id}}' method="POST">
+				{{else}}
+				<form class="" action='/flexi/config/create?hotel_id={{hotel_id}}' method="POST">
+				{{/if}}
+					{{#if errors}}
+					<ul>
+					{{#each errors}}	
+					<li>
+						<div class="text-danger"> {{ msg }}</div>
+					</li>
+					{{/each}}
+					</ul>
+					{{/if}}
+
+					{{#if success }}
+					<div class="alert alert-success">{{ message}}</div>
+					{{else if message }}
+					<div class="alert alert-danger">{{ message}}</div>
+					{{/if}}
+
+					{{#if formstatus}}
+						<div class="row row-xl">
+							<div class="col-md-6">
+								<div class="row row-xl">
+									{{!-- Begin Flexi Allowed --}}
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class=""  for="flexiallowed">Flexi Allowed?</label>
+											<input type="checkbox" id="flexiallowed" name="flexiallowed" {{#equal requestBody.flexiallowed 'Yes'}} checked {{/equal}} />
+											<span class="text-danger">{{#if flexiallowed }}{{#trim flexiallowed}}{{/trim}} {{/if}}</span>
+										</div>
+									</div>
+									{{!-- Begin Last Check In Time --}}
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class=""  for="lastchecktime">Last Check In Time</label>
+											<select name="lastcheckintime" id="lastcheckintime" class="form-control"/>
+												{{#times 24}} 
+													<option value="{{this}}" {{#equal ../requestBody.lastcheckintime this}} selected {{/equal}}>{{#concat this ':00'}}{{/concat}}</option>
+												{{/times}}
+												<span class="text-danger">{{#if lastchecktime }}{{#trim lastchecktime}}{{/trim}} {{/if}}</span>
+											</select>
+										</div>
+									</div>
+									{{!-- End Flexi Allowed --}}
+									{{!-- Begin Room price markukp --}}
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class=""  for="pricemarkup">Room Price Mark Up(%)</label>
+											<input type="text" id="pricemarkup" name="pricemarkup" placeholder="" class="form-control" value="{{#if requestBody.pricemarkup }}{{ requestBody.pricemarkup }}{{/if}}" >
+											<span class="text-danger">{{#if pricemarkup }}{{#trim pricemarkup}}{{/trim}} {{/if}}</span>
+										</div>
+									</div>
+									{{!-- End om price markukp --}}
+									{{!-- Begin Occupancy level--}}
+									<div class="col-md-12">
+										<h3>Occupancy Level</h3>
+										{{#if requestBody.room_level_occupancy }}
+											{{#each requestBody.room_level_occupancy}}
+													<div class="form-group">
+														{{#each ../requestBody.room_type_names}}
+															{{#equal @index  @../index}}
+																<label class="" > {{this}} </label>
+																<input type="hidden" name="room_type_names[]" value="{{this}} "/>
+															{{/equal}}
+														{{/each}}
+														<input type="number"  name="room_level_occupancy[]" placeholder="" class="form-control" value="{{ this }}" >
+														{{#each ../requestBody.room_type_ids}}
+															{{#equal @index  @../index}}<input type="hidden" name="room_type_ids[]" value="{{this}}"/> {{/equal}}
+														{{/each}}
+														<span class="text-danger">{{#if ../room_level_occupancy }}{{#checkArrErrValidation ../requestBody.room_level_occupancy this @index 'numeric'}}{{#trim ../room_level_occupancy}}{{/trim}}{{/checkArrErrValidation}}{{/if}}</span>
+													</div>
+											{{/each}}
+										{{ else }}
+											{{#if data}}
+												{{#each data}}
+													<div class="form-group">
+														<label class=""  for="room_type_{{ this.room_type_id}}">{{ this._type }}</label>
+														<input type="number" id="room_type_{{ this.room_type_id}}" name="room_level_occupancy[]" placeholder="" class="form-control" value="{{#if requestBody.room_level_occupancy }}{{ requestBody.room_level_occupancy }}{{/if}}" >
+														<input type="hidden" name="room_type_ids[]" value="{{this.room_type_id}}"/>
+														<input type="hidden" name="room_type_names[]" value="{{this._type }}"/>
+														<span class="text-danger">{{#if ../room_level_occupancy }}{{#trim ../room_level_occupancy}}{{/trim}} {{/if}}</span>
+													</div>
+												{{/each}}
+											{{/if}}
+										{{/if}}
+									</div>	
+									{{!-- End Occupancy level--}}
+								</div>
+							</div>
+						</div>
+							
+						<div class="row row-xl m-xl-t">
+							<div class="col-md-12 text-right">
+								<input type="hidden" name="hotel_id" value="{{hotel_id}}"/>
+								<input type="submit" name="save" value="Save" class = "btn btn-danger btn-rounded w-150 m-md-b"/> 
+								<a href="#" class="btn btn-default btn-rounded w-150 m-md-b">Cancel</a>
+							</div>
+						</div>
+					{{/if}}	
+				</form>
+			</div>
+		</div>
+	</div>
+</main>
+
+{{> footer}}

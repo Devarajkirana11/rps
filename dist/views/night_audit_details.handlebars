@@ -1,0 +1,254 @@
+{{> nav this}}
+
+{{> header}}
+
+<!-- Begin Page Content -->
+<main id="page-content">
+	<div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Night Audit</h3>
+        </div>
+    </div>
+
+	<div class="page-container">
+		<div class="row row-xl">
+			<div class="col-md-12 m-lg-b">
+			</div>
+		</div>
+	<div class="col-md-12">	
+		<a href="/pms/night/audit/list?hotel_id={{ hotel_id }}" class="btn btn-danger">Back</a>
+	</div>
+	{{#if message}} <div class="alert alert-success"> {{ message }}</div> {{/if}}
+	{{#if errors}} <div class="alert alert-danger"> {{ errors }}</div> {{/if}}
+
+		{{#if output }}
+
+		<!-- Begin Hotels View -->
+		<div class="row row-xl">
+			<div class="col-md-12">
+				<div class="filter-form">
+
+					<div class="night-audit-block">
+
+						<div class="front-desk--container front-desk--week-view">
+							<div class="front-desk--content">
+
+								<div class="front-desk--left">
+									<ul class="front-desk--menu">
+										{{#each output.shifts }}
+										<div class="left-block">
+										<li>
+											<a href="javascript:void(0)" class="accordion--parent" data-accordion-toggle="accordion-{{ this.number }}-child">Shift {{ this.number }} : {{ this.userName }} </a>
+											<ul class="front-desk--child">
+												<li><a href="javascript:void(0)">Opening Balance</a></li>
+												<li><a href="javascript:void(0)">Top Up</a></li>
+												<li><a href="javascript:void(0)">Opening Float</a></li>
+												<li><a href="javascript:void(0)">Walk In / Pay At Hotel</a></li>
+												<li><a href="javascript:void(0)">Deposit Collected</a></li>
+												<li><a href="javascript:void(0)">Deposit Refund</a></li>
+												<li><a href="javascript:void(0)">Booking Refund</a></li>
+												<li><a href="javascript:void(0)">Tourism Tax</a></li>
+												<li><a href="javascript:void(0)">Loss & Damage Fee</a></li>
+												
+											</ul>
+										</li>
+										<li><a href="javascript:void(0)">Miscellaneous <span data-toggle="modal" data-target="#miscellaneous-display-{{ this.number }}" id="display"><i>Expenses</i></span> </a> </li>
+										<li><a href="javascript:void(0)">Final Closing Balance</a></li>
+										</div>
+										{{/each}}
+									</ul>
+								</div>
+
+								<div class="front-desk--right">
+									<div class="front-desk--day-container">
+										<div class="front-desk--day-header-container">
+
+											<div class="front-desk-day-header">
+												<p class="m-n fs-xl fw-semi-thk text-black">&nbsp;&nbsp;</p>
+												<small class="text-uppercase">CASH</small>
+											</div>
+											<div class="front-desk-day-header">
+												<p class="m-n fs-xl fw-semi-thk text-black"></p>
+												<small class="text-uppercase"></small>
+											</div>		
+											<div class="front-desk-day-header">
+												<p class="m-n fs-xl fw-semi-thk text-black">&nbsp;&nbsp;</p>
+												<small class="text-uppercase">ONLINE</small>
+											</div>
+											<div class="front-desk-day-header">
+												<p class="m-n fs-xl fw-semi-thk text-black"></p>
+												<small class="text-uppercase"></small>
+											</div>		
+											<div class="front-desk-day-header">
+												<p class="m-n fs-xl fw-semi-thk text-black">&nbsp;&nbsp;</p>
+												<small class="text-uppercase">POS</small>
+											</div>
+											<div class="front-desk-day-header">
+												<p class="m-n fs-xl fw-semi-thk text-black"></p>
+												<small class="text-uppercase"></small>
+											</div>											
+											<div class="front-desk-day-header">
+												<p class="m-n fs-xl fw-semi-thk text-black">&nbsp;&nbsp;</p>
+												<small class="text-uppercase">TOTAL</small>
+											</div>
+
+										</div>
+										{{#each output.shifts }}
+										<div class="left-block">
+										<div class="front-desk--count-container accordion--parent accordion-{{ this.number }}-total">
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count"></div>
+										</div>
+										<div class="front-desk--count-container accordion-{{ this.number }}-child">
+											<div class="front-desk--day-count">{{#round this.openingBalance }}{{/round}}</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">0</div>
+											<div class="front-desk--day-count"></div>
+																						<div class="front-desk--day-count">0</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">{{#round this.openingBalance }}{{/round}}</div>
+										</div>
+										<div class="front-desk--count-container accordion-{{ this.number }}-child">
+											<div class="front-desk--day-count">{{#round this.topUpFloat }}{{/round}}</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">0</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">0</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">{{#round this.topUpFloat }}{{/round}}</div>
+										</div>
+										<div class="front-desk--count-container accordion-{{ this.number }}-child">
+											<div class="front-desk--day-count">{{#round this.openingFloat }}{{/round}}</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">0</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">0</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">{{#round this.openingFloat }}{{/round}}</div>
+										</div>
+										<div class="front-desk--count-container accordion-{{ this.number }}-child">
+											<div class="front-desk--day-count">{{#round this.walkIn.cash }}{{/round}}</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">{{#round this.walkIn.creditCard }}{{/round}}</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">{{#round this.walkIn.pos }}{{/round}}</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">{{#round this.walkIn.total }}{{/round}}</div>
+										</div>
+										<div class="front-desk--count-container accordion-{{ this.number }}-child">
+											<div class="front-desk--day-count">{{#round this.depositCollected.cash }}{{/round}}</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">{{#round this.depositCollected.creditCard }}{{/round}}</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">{{#round this.depositCollected.pos }}{{/round}}</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">{{#round this.depositCollected.total }}{{/round}}</div>
+										</div>
+										<div class="front-desk--count-container accordion-{{ this.number }}-child">
+											<div class="front-desk--day-count">{{#round this.depositRefund }}{{/round}}</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">0</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">0</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">{{#round this.depositRefund }}{{/round}}</div>
+										</div>
+										<div class="front-desk--count-container accordion-{{ this.number }}-child">
+											<div class="front-desk--day-count">{{#round this.bookingRefund }}{{/round}}</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">0</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">0</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">{{#round this.bookingRefund }}{{/round}}</div>
+										</div>
+										<div class="front-desk--count-container accordion-{{ this.number }}-child">
+											<div class="front-desk--day-count">{{#round this.tourismTax.cash }}{{/round}}</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">{{#round this.tourismTax.creditCard }}{{/round}}</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">{{#round this.tourismTax.pos }}{{/round}}</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">{{#round this.tourismTax.total }}{{/round}}</div>
+										</div>	
+										<div class="front-desk--count-container accordion-{{ this.number }}-child">
+											<div class="front-desk--day-count">{{#round this.lossDamageFee }}{{/round}}</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">0</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">0</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">{{#round this.lossDamageFee }}{{/round}}</div>
+										</div>										
+										<div class="front-desk--count-container accordion-{{ this.number }}-child">
+											<div class="front-desk--day-count">{{#round this.miscellaneous_total }}{{/round}}</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">0</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">0</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">0</div>
+										</div>
+										<div class="front-desk--count-container">
+											<div class="front-desk--day-count">{{#round this.actualClosingBalance }}{{/round}}</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">{{#round this.credit_card_total }}{{/round}}</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">{{#round this.pos_total }}{{/round}}</div>
+											<div class="front-desk--day-count"></div>
+											<div class="front-desk--day-count">{{#round this.all_total }}{{/round}}</div>
+										</div>
+										<div class="modal fade" id="miscellaneous-display-{{ this.number }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<div class="modal-header">
+														Miscellaneous
+													</div>
+													<div class="modal-body">
+														{{#if this.miscellaneous }}
+															<div class="table-view">
+															<table class="table table-striped">
+																<thead>
+																	<tr>
+																		<td>Amount</td>
+																		<td>Reason</td>
+																	</tr>
+																</thead>
+																<tbody>
+																	{{#each this.miscellaneous }}
+																	<tr>
+																	<td>{{ this.amount }}</td>
+																	<td>{{ this.reason }}</td>
+																	</tr>
+																	{{/each}}
+																</tbody>
+															</table>
+															</div>
+														{{ else }}
+														
+														{{/if}}
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+													</div>
+												</div>
+											</div>
+										</div>
+										</div>
+										{{/each}}
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{{/if}}
+		<!-- End Hotels View -->
+	</div>
+</main>
+
+{{> footer}}

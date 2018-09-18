@@ -1,0 +1,110 @@
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="/scripts/plugins/jquery.bootstrap.wizard.min.js"></script>
+<script src="/js/jquery-ui.js"></script>
+<script type="text/javascript">
+
+</script>
+{{> nav this}} {{> header}}
+<main id="page-content">
+	<div class="row row-xl page-title">
+		<div class="col-md-12">
+			<h3 class="text-black fw-semi-thk">Check Out List</h3>
+		</div>
+	</div>
+	<div class="page-container">
+		<div class="row row-xl">
+			<div class="col-md-12">
+				<div class="filter-form">
+					{{#if errors}} {{#each errors}}
+					<div class="alert alert-danger"> {{ msg }}</div>
+					{{/each}} {{/if}}
+
+					<div class="table-responsive">
+						<table class="table" id="report-table">
+							<thead>
+								<tr>
+									<th>Booking ID </th>
+									<th>Guest Name</th>
+									<th>No.Of Guests</th>
+									<th>Check In </th>
+									<th>Check Out </th>
+									<th>Room No </th>
+									<th>Status </th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+</main>
+{{> footer}}
+
+<script type="text/javascript">
+	$(function () {
+		var url = '/report-manager/manager/check-out?hotel_id={{hotel_id}}'
+		// INITIALIZE DATA TABLE
+		updateTable(url);
+
+		var table;
+
+		// CREATE DATA TABLE
+		function updateTable(url) {
+			table = $('#report-table').DataTable({
+				ajax: url,
+				buttons: [
+					{
+						extend: 'excelHtml5',
+						text: 'Download',
+						footer: true,
+					},
+					{
+						extend: 'print',
+						text: 'Print',
+						footer: true,
+					}
+				],
+				dom: 'Bfrtip',
+				paging: true,
+				footerCallback: function (row, data, start, end, display) {
+					var api = this.api(), data;
+					// Remove the formatting to get integer data for summation
+					var intVal = function (i) {
+						return typeof i === 'string' ?
+							i.replace(/[\$,]/g, '') * 1 :
+							typeof i === 'number' ?
+								i : 0;
+					};
+				}
+			});
+		}
+
+		// UPDATE DATATABLE ON DATE CHANGE
+		$("#Submit").click(function () {
+
+
+			var reference_id = $('#booking_reference_id').val();
+			var checkin_from = $('#checkin_from').val();
+			var checkin_to = $('#checkin_to').val();
+			var checkout_from = $('#checkout_from').val();
+			var checkout_to = $('#checkout_to').val();
+
+
+			if (reference_id) {
+				'reference_id=' + reference_id;
+			}
+			if (checkin_from) { params += '&checkin_from=' + checkin_from; }
+			if (checkin_to) { params += '&checkin_to=' + checkin_to; }
+			if (checkout_from) { params += '&checkout_from=' + checkout_from; }
+			if (checkout_to) { params += '&checkout_to=' + checkout_to; }
+
+			var url = '/report-manager/manager/check-out?hotel_id={{hotel_id}}'
+
+			table.destroy();
+
+			updateTable(url);
+		});
+	});
+
+</script>

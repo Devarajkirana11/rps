@@ -1,0 +1,142 @@
+
+{{> nav this}}
+
+{{> header}}
+
+<!-- Begin Page Content -->
+
+<main id="page-content">
+	<div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Cancellation Policies</h3>
+        </div>
+    </div>
+
+	<div class="page-container">
+		<form class="" action='/admin/cancellation-policies/add' method="POST">
+			<!-- Begin Hotels View -->
+			<div class="row row-xl">
+				<div class="col-md-12">
+					<div class="row row-xl">
+						<div class="col-md-12 m-lg-b">
+							<h4 class="text-black fw-semi-thk fs-20">Create</h4>
+						</div>
+					</div>
+
+					<div class="row row-xl">
+						<div class="col-md-12">
+							{{#if errors}}
+								{{#each errors}}
+									<div class="alert alert-danger"> {{ msg }}</div>
+								{{/each}}
+							{{/if}}
+						</div>
+					</div>
+
+
+					<div class="row row-xl">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class=""  for="name">Name</label>
+								<input type="text" id="" value="{{#if output.name }}{{ output.name }}{{/if}}" name="name" placeholder="" class="form-control">
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="" for="status">Status</label>
+								<div class="select-wrapper">
+									<select name="status" class="form-control">
+										<option value="">Select</option>
+										<option value="Active" {{#equal output.status 'Active'}} selected="selected" {{/equal}}>Active</option>
+										<option value="InActive"  {{#equal output.status 'InActive'}} selected="selected" {{/equal}}>InActive</option>
+									</select>
+								</div>
+							</div>	
+						</div>
+					</div>
+
+					<hr class="m-xl-t m-xl-b">
+
+					<div class="row row-xl">
+						<div class="col-md-12">
+							<div class="container1">
+								<div class="row row-xl">
+									<div class="col-md-12 m-lg-b">
+										<h4 class="text-black fw-semi-thk fs-20">Conditions</h4>
+									</div>
+								</div>
+
+								<div class="row row-xl">
+									<div class="col-md-12">
+										<p>Cancelled within</p>
+									</div>
+								</div>
+
+								<div class="row row-xl">
+									<div class="col-md-3">
+										<div class="form-group">
+											<label class=""  for="duration">Days</label>
+											<input type="text" value="{{#if input.duration }}{{ input.duration }}{{/if}}" id="" name="duration[]" placeholder="" class="form-control">
+										</div>
+									</div>	
+
+									<div class="col-md-3">
+										<div class="form-group">
+											<label class=""  for="duration_hours">Hours</label>
+											<input type="text" value="{{#if input.duration_hours }}{{ input.duration_hours }}{{/if}}" id="" name="duration_hours[]" placeholder="" class="form-control">
+										</div>
+									</div>
+
+									<div class="col-md-3">
+										<div class="form-group">
+											<label class="" for="email">Percentage of Refund</label>
+											<input type="text" value="{{#if input.value_percentage }}{{ input.value_percentage }}{{/if}}" id="" name="value_percentage[]" placeholder="" class="form-control">
+										</div>
+									</div>
+								</div>
+
+							
+								{{#each input.duration as |value key|}}
+								<div class="row">
+									<div class="col-md-3">
+										<input type="text" value="{{ value }}" id="" name="duration[]" placeholder="" class="form-control">
+									</div>
+									<div class="col-md-3">
+									{{#each ../input.value_percentage as |values keys|}}
+										{{#equal keys @key}}
+											<input type="text" value="{{ values }}" id="" name="value_percentage[]" placeholder="" class="form-control">
+										{{/equal}}
+									{{/each}}
+									</div>
+									<div class="col-md-3">
+										<a href="#" class="delete text-default"><i class="fa fa-times-circle fa-fw"></i></a>
+									</div>
+								</div>
+								{{/each}}
+
+							</div>
+						</div>
+
+						<div class="col-md-12 m-xl-t">
+							<button class="add_form_field btn btn-danger btn-rounded w-150 text-left">Add New Field <i class="fa fa-plus-circle fa-fw pull-right"></i></button>
+						</div>
+					</div>
+
+					<div class="row row-xl">
+						<div class="col-md-12 text-right m-xl-b m-xl-t">
+							<button class="btn btn-danger btn-rounded w-150 m-md-b"  name="Submit" value="Login" type="Submit">Save</button> 
+							<span class="btn btn-default w-150 btn-rounded m-md-b" onclick="history.go(-1);">Cancel </span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Hotels View -->
+		</form>
+
+	</div>
+</main>
+
+{{> footer }}
+
+<!-- End Page Content -->

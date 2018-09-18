@@ -1,0 +1,91 @@
+<script src="/js/jquery.dataTables.min.js"></script>
+<link href="/css/jquery-ui.css" rel="stylesheet" />
+<script>
+    var email = "{{email}}";
+    $(function(){
+        var oTable = $('#bookings_list').DataTable( {
+        language: {
+          "emptyTable": "No Bookings Available."
+        },
+        processing: true,
+		serverSide: true,
+        autoWidth: false,
+        dom:'<"#add.row row-xl">tlip',
+        ajax:function (data, callback, settings) {
+             $.ajax({url:"/booking/"+email+"/getAllBookings",type:"POST",data:data,dataType:'json',
+                success:function(res){
+                    if(res.success) {
+                        $.each(res.Tabledata.data,function(i,val){
+                            res.Tabledata.data[i]['ShortBookingId'] = '<a href="/search/booking-view?booking_uuid='+res.Tabledata.data[i]['bookingUuid']+'">'+res.Tabledata.data[i]['ShortBookingId']+'</a>';
+                            /*if(res.Tabledata.data[i]['invoiceurl'].length > 0){
+                                res.Tabledata.data[i]['invoiceurl'] = '<a href="'+res.Tabledata.data[i]['invoiceurl']+'">Download Invoice</a>';
+                            } else {
+                                res.Tabledata.data[i]['invoiceurl'] = 'Deva';  
+                            }*/
+                        });
+                        callback(res.Tabledata);
+                    }
+                }
+            })
+        },
+        columns: [
+            { data: 'ShortBookingId',name: 'ShortBookingId' ,searchable:false},
+            { data: 'checkIn',name: 'checkIn',searchable:false},
+            { data: 'checkOut',name: 'checkOut',searchable:false},
+            { data: 'totalAmount',name: 'totalAmont',searchable:false},
+            { data: 'BookingtStatus',name: 'BookingtStatus',searchable:false},
+            { data: 'bookingUuid',name: 'bookingUuid', visible: false, searchable:false},
+            { data: 'uuid', name: 'uuid', visible: false, searchable:false},
+            { data: 'status', name: 'status', visible: false, searchable:false},
+            { data: 'referenceId',name: 'referenceId', visible: false, searchable: false},
+            { data: 'invoiceurl',name: 'invoiceurl', searchable: false}
+        ]
+		
+		});
+        //addNewFilterElement('button',{label:'All Bookings',name:'all_bookings',id:'all_bookings', class:'btn btn-danger btn-rounded w-150'});
+        //addNewFilterElement('button',{label:'Past Bookings',name:'past_bookings',id:'past_bookings', class:'btn btn-danger btn-rounded w-150'});
+        //addNewFilterElement('button',{label:'Future Bookings',name:'future_bookings',id:'future_bookings', class:'btn btn-danger btn-rounded w-150'});
+
+        $(document).on('click','#past_bookings,#future_bookings,#all_bookings',function(){
+            var id = $(this).attr('id');
+            oTable.columns([1,2]).search('');
+            if(id == "past_bookings") {
+                oTable.column([2]).search(JSON.stringify({type:'checkOut',date:moment(new Date()).format('YYYY-MM-DD')})).draw();
+            } else if(id == "future_bookings") {
+                oTable.column([1]).search(JSON.stringify({type:'checkIn',date:moment(new Date()).format('YYYY-MM-DD')})).draw();
+            } else if(id == "all_bookings") {
+                oTable.column([1]).search(JSON.stringify({type:'all',date:moment(new Date()).format('YYYY-MM-DD')})).draw();
+            }  
+        });
+    })
+</script>
+{{> nav}}
+{{> header}}
+<main id="page-content">
+    <div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Bookings</h3>
+        </div>
+    </div>
+
+    {{#if success }}
+		<div class="alert alert-success">{{ message}}</div>
+	{{else if message }}
+		<div class="alert alert-danger">{{ message}}</div>
+	{{/if}}
+    <div class="page-container">
+        <div class="row row-xl">
+            <div class="col-md-12 m-lg-b">
+                <table  id="bookings_list" class="table table-striped" border="1" width="100%">
+                    <thead>
+                        <tr><th>Booking ID</th><th>Check IN</th><th>Check Out</th><th>Amount</th><th>Status</th><th>Download</th>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="/js/jquery-ui.js"></script>
+{{> footer}}

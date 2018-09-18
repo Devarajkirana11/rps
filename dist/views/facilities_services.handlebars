@@ -1,0 +1,593 @@
+{{> nav}}
+
+{{> header}}
+
+<main id="page-content">
+    <div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Facilities & Services</h3>
+        </div>
+    </div>
+
+    <script>
+        var errorExists = false;
+    </script>
+
+    {{#if formErrorExists }}
+        <script>  errorExists = true; </script>
+    {{/if}}
+
+    <script src="/js/facilities_services.js"></script>
+
+	{{#if errors}}
+		<ul>
+		{{#each errors}}
+			<li>
+				<div class="text-danger"> {{ msg }}</div>
+			</li>
+		{{/each}}
+		</ul>
+	{{/if}}
+
+	{{#if success }}
+		<div class="alert alert-success">{{ message}}</div>
+	{{else if message }}
+		<div class="alert alert-danger">{{ message}}</div>
+	{{/if}}
+
+    {{!-- Begin Page Container --}}
+    <div class="page-container">
+    {{#if formstatus}}
+        {{#if facility_id}}
+            <form class="" action='/facilities_services/create?facility_id={{facility_id}}' method="POST">
+        {{else}}
+            <form class="" action='/facilities_services/create?hotel_id={{#if requestBody.hotel_id }}{{requestBody.hotel_id}}{{/if}}' method="POST">
+        {{/if}}
+        
+        
+            <div class="row row-xl">
+                <div class="col-md-12 m-lg-b">
+                    <p class="lead">Edit the details of your property, such as bed options, on-site facilities, services and amenities.</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row row-xl">
+                        <div class="col-md-12 m-lg-b">
+                            <h4 class="text-black fw-semi-thk">Check In</h4>
+                        </div>
+                    </div>
+
+                    <div class="row row-xl">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>From</label>
+
+                                <div class="select-wrapper">
+                                    <select name="check_in_from" class="form-control">
+                                        <option value="select">Please Select</option>
+                                        {{#if hotel_checks }}
+                                            {{#each hotel_checks }}
+                                                    <option value = "{{ this.value }}" {{#equal this.value ../requestBody.check_in_from}} selected="selected" {{/equal}}>{{ this.text }}</option>
+                                            {{/each}}
+                                        {{/if}}
+                                    </select>
+                                </div>
+
+                                <span class="text-danger">{{#if check_in_from}} {{check_in_from}} {{/if}}</span>
+                            </div>  
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>To</label>
+
+                                <div class="select-wrapper">
+                                    <select name="check_in_to" class="form-control">
+                                        <option value="select">Please Select</option>
+                                        {{#if hotel_checks }}
+                                            {{#each hotel_checks }}
+                                                    <option value = "{{ this.value }}"{{#equal this.value ../requestBody.check_in_to}} selected="selected" {{/equal}}>{{ this.text }}</option>
+                                            {{/each}}
+                                        {{/if}}
+                                    </select>    
+                                </div>
+
+                                <span class="text-danger">{{#if check_in_to}} {{check_in_to}} {{/if}}</span>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="row row-xl">
+                        <div class="col-md-12 m-lg-b">
+                            <h4 class="text-black fw-semi-thk">Check Out</h4>        
+                        </div>
+                    </div>
+
+
+                    <div class="row row-xl">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>From</label>
+
+                                <div class="select-wrapper">
+                                    <select name="check_out_from" class="form-control">
+                                        <option value="select">Please Select</option>
+                                        {{#if hotel_checks }}
+                                            {{#each hotel_checks }}
+                                                    <option value = "{{ this.value }}" {{#equal this.value ../requestBody.check_out_from}} selected="selected" {{/equal}}>{{ this.text }}</option>
+                                            {{/each}}
+                                        {{/if}}
+                                    </select>    
+                                </div>
+
+                                <span class="text-danger">{{#if check_out_from}} {{check_out_from}} {{/if}}</span>
+                            </div>  
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>To</label>
+
+                                <div class="select-wrapper">
+                                    <select name="check_out_to" class="form-control">
+                                        <option value="select">Please Select</option>
+                                        {{#if hotel_checks }}
+                                            {{#each hotel_checks }}
+                                                    <option value = "{{ this.value }}" {{#equal this.value ../requestBody.check_out_to}} selected="selected" {{/equal}}>{{ this.text }}</option>
+                                            {{/each}}
+                                        {{/if}}
+                                    </select>
+                                </div>
+                                    
+                                <span class="text-danger">{{#if check_out_to}} {{check_out_to}} {{/if}}</span>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{!-- End Check In & Check Out --}}
+                
+            <hr class="m-xl-t m-xl-b">
+            
+            {{!-- Begin Internet --}}
+            <div class="row row-xl">
+                <div class="col-md-12 m-lg-b">
+                    <h4 class="text-black fw-semi-thk fs-20">Internet</h4>
+                </div>
+                
+                <div class="col-md-12">
+                    <div class="row row-xl">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>is Internet available to guests?</label>
+                                <div class="select-wrapper">
+                                    <select name="internet_to_guest" class="form-control">
+                                        <option value="select">Please Select</option>
+                                        {{#if availability }}
+                                            {{#each availability }}
+                                                    <option value = "{{ this.value }}" {{#equal this.value ../requestBody.internet_to_guest}} selected="selected" {{/equal}}>{{ this.text }}</option>
+                                            {{/each}}
+                                        {{/if}}
+                                    </select>
+                                    <span class="text-danger">{{#if internet_to_guest}} {{internet_to_guest}} {{/if}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Connection Type</label>
+                                <div class="select-wrapper">
+                                    <select name="internet_connection_type" class="form-control">
+                                        <option value="select">Please Select</option>
+                                        {{#if internetconnectiontypes }}
+                                            {{#each internetconnectiontypes }}
+                                                    <option value = "{{ this.value }}" {{#equal this.value ../requestBody.internet_connection_type}} selected="selected" {{/equal}}>{{ this.text }}</option>
+                                            {{/each}}
+                                        {{/if}}
+                                    </select>
+                                    <span class="text-danger">{{#if internet_connection_type}} {{internet_connection_type}} {{/if}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group m-n">
+                                <label>Connection Location</label>
+                            </div>
+
+                            <div class="p-sm-l">{{>facilities_checkboxs checkboxarray=internet_locations salt="IL" colrender=1 requestsalt=requestBody.IL requestBody=requestBody }}</div>
+                            <span class="text-danger">{{#if IL}} {{IL}} {{/if}}</span>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{!-- End Internet --}}
+            
+            <hr class="m-xl-t m-xl-b">
+            
+            {{!-- Begin Parking --}}
+            <div class="row row-xl">
+                <div class="col-md-12 m-lg-b">
+                    <h4 class="text-black fw-semi-thk fs-20">Parking</h4>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row row-xl">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>is Parking available to guests?</label>
+
+                                <div class="select-wrapper">
+                                    <select name="parking_to_guest" class="form-control">
+                                        <option value="select">Please Select</option>
+                                        {{#if availability }}
+                                            {{#each availability }}
+                                                    <option value = "{{ this.value }}" {{#equal this.value ../requestBody.parking_to_guest}} selected="selected" {{/equal}}>{{ this.text }}</option>
+                                            {{/each}}
+                                        {{/if}}
+                                    </select>
+                                    <span class="text-danger">{{#if parking_to_guest}} {{parking_to_guest}} {{/if}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="text-danger" for="">To be given</label>
+                                <div class="select-wrapper">
+                                    <select name="parking_security_types" class="form-control">
+                                        <option value="select" >Please Select</option>
+                                        {{#if security_types }}
+                                            {{#each security_types }}
+                                                    <option value = "{{ this.value }}" {{#equal this.value ../requestBody.parking_security_types}} selected="selected" {{/equal}}>{{ this.text }}</option>
+                                            {{/each}}
+                                        {{/if}}
+                                    </select>
+                                    <span class="text-danger">{{#if parking_security_types}} {{parking_security_types}} {{/if}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="" class="text-danger">To be given</label>
+
+                                <div class="select-wrapper">
+                                    <select name="parking_boarding_types" class="form-control">
+                                        <option value="select" >Please Select</option>
+                                        {{#if boarding_types }}
+                                            {{#each boarding_types }}
+                                                    <option value = "{{ this.value }}" {{#equal this.value ../requestBody.parking_boarding_types}} selected="selected" {{/equal}}>{{ this.text }}</option>
+                                            {{/each}}
+                                        {{/if}}
+                                    </select>
+                                    <span class="text-danger">{{#if parking_boarding_types}} {{parking_boarding_types}} {{/if}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-xl">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Do guests need to reserve a parking?</label>
+
+                                <div class="select-wrapper">
+                                    <select name="parking_reservation_to_guest" class="form-control">
+                                        <option value="select">Please Select</option>
+                                        {{#if reservation }}
+                                            {{#each reservation }}
+                                                <option value="{{ this.value }}"  {{#equal this.value ../requestBody.parking_reservation_to_guest}} selected="selected" {{/equal}}>{{ this.text }}</option>
+                                            {{/each}}
+                                        {{/if}}
+                                    </select>
+                                    <span class="text-danger">{{#if parking_reservation_to_guest}} {{parking_reservation_to_guest}} {{/if}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-xl">
+                        <div class="col-md-12">
+                            <div class="form-group m-n">
+                                <label>Please select the following</label>
+                            </div>
+
+                            <div class="p-sm-l">{{>facilities_checkboxs checkboxarray=parking_types salt="PT" colrender=4 requestsalt=requestBody.PT requestBody=requestBody}}</div>
+                            <span class="text-danger">{{#if PT}}{{PT}}{{/if}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{!-- End Parking --}}
+            
+
+            <hr class="m-xl-t m-xl-b">
+
+            {{!-- Begin Pets --}}
+            <div class="row row-xl">
+                <div class="col-md-12 m-lg-b">
+                    <h4 class="text-black fw-semi-thk fs-20">Pets</h4>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row row-xl">
+                        <div class="col-md-4">
+                            <div class="form-group m-n">
+                                <label>Do you allow pets?</label>
+
+                                <div class="select-wrapper">
+                                    <select name="pets_allowed_dropdown" class="form-control">
+                                        <option value="select">Please Select</option>
+                                        {{#if pets_allowed }}
+                                            {{#each pets_allowed }}
+                                                <option value="{{ this.value }}"  {{#equal this.value ../requestBody.pets_allowed_dropdown}} selected="selected" {{/equal}}>{{ this.text }}</option>
+                                            {{/each}}
+                                        {{/if}}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <span class="text-danger">{{#if pets_allowed_dropdown}}{{pets_allowed_dropdown}}{{/if}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{!-- End Pets --}}
+
+            <hr class="m-xl-t m-xl-b">
+
+            {{!-- Begin Languages --}}
+            <div class="row row-xl">
+                <div class="col-md-12 m-lg-b">
+                    <h4 class="text-black fw-semi-thk fs-20">Languages spoken by your staff</h4>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row row-xl">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="">to be given</label>
+
+                                {{#if requestBody.languages_spoken_staff }}
+                                    {{#each requestBody.languages_spoken_staff }}
+                                        <div class="language_wrapper inline" id="language_wrapper">
+                                            <div class="select-wrapper m-xl-b">
+                                                <select name="languages_spoken_staff[]" class="form-control">
+                                                    <option value="select">Please Select</option>
+                                                    {{#if ../languages_spoken }}
+                                                            {{#each ../languages_spoken }}
+                                                                    <option value = "{{ this.value }}" {{#equal this.value ../this}} selected="selected" {{/equal}}>{{ this.text }}</option>
+                                                            {{/each}}
+                                                    {{/if}}
+                                                </select>
+
+                                                <button type="button" id="deleteLanguage" class="btn delete-dropdown" style="position: absolute; top: -28px; right: 15px; background: transparent; border: none; padding: 0;" aria-label="Close"><i class="fa fa-times-circle fa-fw"></i></button>
+                                            </div>
+                                        </div>
+                                        {{/each}}
+                                    {{else}}
+                                    <div class="language_wrapper inline" id="language_wrapper">
+                                        <div class="select-wrapper m-xl-b">
+                                            <select name="languages_spoken_staff[]" class="form-control">
+                                                <option value="select">Please Select</option>
+                                                {{#if languages_spoken }}
+                                                        {{#each languages_spoken }}
+                                                                <option value = "{{ this.value }}" >{{ this.text }}</option>
+                                                        {{/each}}
+                                                {{/if}}
+                                            </select>
+
+                                            <button type="button" id="deleteLanguage" class="btn delete-dropdown" style="position: absolute; top: -28px; right: 15px; background: transparent; border: none; padding: 0;" aria-label="Close"><i class="fa fa-times-circle fa-fw"></i></button>
+                                        </div>
+                                    </div>
+                                    {{/if}}
+
+                                <span class="text-danger">{{#if languages_spoken_staff}}{{languages_spoken_staff}}{{/if}}</span>
+                            </div>
+
+                            <div class=""><button id="addnewLanguage" class="btn btn-danger btn-rounded w-150">Add Language</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{!-- End Languages --}}
+
+            <hr class="m-xl-t m-xl-b">
+
+            {{!-- Begin Activities --}}
+            <div class="row row-xl">
+                <div class="col-md-12 m-lg-b">
+                    <h4 class="text-black fw-semi-thk fs-20">Activities</h4>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row row-xl">
+                        {{>facilities_checkboxs checkboxarray=activities salt="FA" colrender=4 requestsalt=requestBody.FA requestBody=requestBody}}                        
+                    </div>
+                </div>
+
+                <span class="text-danger">{{#if FA}}{{FA}}{{/if}}</span>
+            </div>
+            {{!-- End Activities --}}
+
+            <hr class="m-xl-t m-xl-b">
+
+            {{!-- Begin Food & Drinks --}}
+            <div class="row row-xl">
+                <div class="col-md-12 m-lg-b">
+                    <h4 class="text-black fw-semi-thk fs-20">Food and Drinks</h4>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row row-xl">
+                        {{>facilities_checkboxs checkboxarray=food_drink salt="FD" colrender=4 requestsalt=requestBody.FD requestBody=requestBody}}    
+
+                        <span class="text-danger">{{#if FD}}{{FD}}{{/if}}</span>
+                    </div>
+                </div>
+            </div>
+            {{!-- End Food & Drinks --}}
+
+            <hr class="m-xl-t m-xl-b">
+
+            {{!-- Begin Pool and Spa --}}
+            <div class="row row-xl">
+                <div class="col-md-12 m-lg-b">
+                    <h4 class="text-black fw-semi-thk fs-20">Pool and Spa</h4>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row row-xl">
+                        {{>facilities_checkboxs checkboxarray=pool_spa salt="PS" colrender=4 requestsalt=requestBody.PS requestBody=requestBody}}
+                        <span class="text-danger">{{#if PS}}{{PS}}{{/if}}</span>
+                    </div>
+                </div>                        
+            </div>
+            {{!-- End Pool and Spa --}}
+
+            <hr class="m-xl-t m-xl-b">
+
+            {{!-- Begin Transportation --}}
+            <div class="row row-xl">
+                <div class="col-md-12 m-lg-b">
+                    <h4 class="text-black fw-semi-thk fs-20">Transportation</h4>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row row-xl">
+                        {{>facilities_checkboxs checkboxarray=transportation salt="TP" colrender=4 requestsalt=requestBody.TP requestBody=requestBody}}
+                        <span class="text-danger">{{#if TP}}{{TP}}{{/if}}</span>
+                    </div>
+                </div>
+            </div>
+            {{!-- End Transportation --}}
+
+            <hr class="m-xl-t m-xl-b">
+
+            {{!-- Begin Front Desk Services --}}
+            <div class="row row-xl">
+                <div class="col-md-12 m-lg-b">
+                    <h4 class="text-black fw-semi-thk fs-20">Front Desk Services</h4>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row row-xl">
+                        {{>facilities_checkboxs checkboxarray=frontdesk_services salt="FDS" colrender=4 requestsalt=requestBody.FDS requestBody=requestBody facilitiesOfcharge=facilitiesOfcharge}}
+                        <span class="text-danger">{{#if FDS}}{{FDS}}{{/if}}</span>
+                    </div>
+                </div>
+            </div>
+            {{!-- End Front Desk Services --}}
+
+            <hr class="m-xl-t m-xl-b">
+
+            {{!-- Begin Common Areas --}}
+            <div class="row row-xl">
+                <div class="col-md-12 m-lg-b">
+                    <h4 class="text-black fw-semi-thk fs-20">Common Areas</h4>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row row-xl">
+                        {{>facilities_checkboxs checkboxarray=common_areas salt="CA" colrender=4 requestsalt=requestBody.CA requestBody=requestBody}}
+                        <span class="text-danger">{{#if CA}}{{CA}}{{/if}}</span>
+                    </div>
+                </div>
+            </div>
+            {{!-- End Common Areas --}}
+
+            <hr class="m-xl-t m-xl-b">
+
+            {{!-- Begin Entertainment & Family Services --}}
+            <div class="row row-xl">
+                <div class="col-md-12 m-lg-b">
+                    <h4 class="text-black fw-semi-thk fs-20">Entertainment & Family services</h4>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row row-xl">
+                        {{>facilities_checkboxs checkboxarray=entertainment_family_services salt="EFS" colrender=4 requestsalt=requestBody.EFS requestBody=requestBody}}
+                        <span class="text-danger">{{#if EFS}}{{EFS}}{{/if}}</span>
+                    </div>
+                </div>
+            </div>
+            {{!-- End Entertainment & Family Services --}}
+
+            <hr class="m-xl-t m-xl-b">
+
+            {{!-- Begin Cleaning Services --}}
+            <div class="row row-xl">
+                <div class="col-md-12 m-lg-b">
+                    <h4 class="text-black fw-semi-thk fs-20">Cleaning Services</h4>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row row-xl">
+                        {{>facilities_checkboxs checkboxarray=cleaning_services salt="CS" colrender=4 requestsalt=requestBody.CS requestBody=requestBody facilitiesOfcharge=facilitiesOfcharge}}
+                        <span class="text-danger">{{#if CS}}{{CS}}{{/if}}</span>
+                    </div>
+                </div>
+            </div>
+            {{!-- End Cleaning Services --}}
+
+            <hr class="m-xl-t m-xl-b">
+
+            {{!-- Begin Business Facilities --}}
+            <div class="row row-xl">
+                <div class="col-md-12 m-lg-b">
+                    <h4 class="text-black fw-semi-thk fs-20">Business Facilities</h4>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row row-xl">
+                        {{>facilities_checkboxs checkboxarray=business_facilities salt="BF" colrender=4 requestsalt=requestBody.BF requestBody=requestBody facilitiesOfcharge=facilitiesOfcharge}}
+                        <span class="text-danger">{{#if BF}}{{BF}}{{/if}}</span>
+                    </div>
+                </div>
+            </div>
+            {{!-- End Business Facilities --}}
+
+            <hr class="m-xl-t m-xl-b">
+
+            {{!-- Begin Miscellaneous --}}
+            <div class="row row-xl">
+                <div class="col-md-12 m-lg-b">
+                    <h4 class="text-black fw-semi-thk fs-20">Miscellaneous</h4>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row row-xl">
+                        {{>facilities_checkboxs checkboxarray=miscellaneous salt="MSC" colrender=4 requestsalt=requestBody.MSC requestBody=requestBody facilitiesOfcharge=facilitiesOfcharge}}
+                        <span class="text-danger">{{#if MSC}}{{MSC}}{{/if}}</span>
+                    </div>
+                </div>
+            </div>
+            {{!-- End Miscellaneous --}}
+            
+
+            <div class="row row-xl">
+                <div class="col-md-12">
+                    <div class="text-right">
+                        <input type="hidden" name="hotel_id" value="{{#if requestBody.hotel_id }}{{requestBody.hotel_id}}{{/if}}"/>       
+
+                        <input type="submit" class="btn btn-danger w-150 btn-rounded m-md-b m-md-r" value="Submit"/>
+                        <a href="/facilities_services/create"  class="btn btn-default w-150 btn-rounded m-md-b">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        {{!-- </div> --}}
+        </form>
+    {{/if}}
+    </div>
+
+
+</main>
+
+{{>footer}}

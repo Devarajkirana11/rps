@@ -1,0 +1,83 @@
+{{> nav}}
+
+{{> header}}
+
+<main id="page-content">
+    <div class="row row-xl page-title">
+        <div class="col-md-12">Flexi Details</h3>
+        </div>
+    </div>
+
+    <div class="page-container">
+        {{#if errors}}
+        <ul>
+            {{#each errors}}
+            <li>
+                <div class="text-danger"> {{ msg }}</div>
+            </li>
+            {{/each}}
+        </ul>
+        {{/if}}
+        {{#if success }}
+            <div class="alert alert-success">{{ message}}</div>
+        {{else if message }}
+            <div class="alert alert-danger">{{ message}}</div>
+        {{/if}}
+        {{#if data}}
+            <div class="row">
+                <div class="col-md-12 text-right m-lg-b">
+                    <a href="/flexi/config/{{data._flexi_id}}/edit?hotel_id={{hotel_id}}" class="btn btn-danger btn-rounded w-150 text-left">Edit <i class="fa fa-edit fa-fw pull-right"></i></a>
+                </div>
+            </div>
+            <div class="row row-xl">
+                <div class="col-md-6">
+                    {{!-- Begin Hotel Nida Name --}}
+                    <div class="row m-sm-b">
+                        <div class="col-md-5 col-sm-6 col-xs-12">
+                            <p>Flexi Allowed</p>
+                        </div>
+
+                        <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                            <p>{{#if data._flexi_allowed }} {{ data._flexi_allowed }} {{/if}} </p>
+                        </div>
+                    </div>
+                    <div class="row m-sm-b">
+                        <div class="col-md-5 col-sm-6 col-xs-12">
+                            <p>Last checkIn time</p>
+                        </div>
+
+                        <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                            <p>{{#if data._last_checkin_time }} {{#concat data._last_checkin_time ':00'}}{{/concat}} {{/if}} </p>
+                        </div>
+                    </div>
+                    <div class="row m-sm-b">
+                        <div class="col-md-5 col-sm-6 col-xs-12">
+                            <p>Room Price Mark Up(%)</p>
+                        </div>
+
+                        <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                            <p>{{#if data._price_mark_up }} {{ data._price_mark_up}} {{/if}} </p>
+                        </div>
+                    </div>
+                    {{!-- End Hotel Nida Name --}}
+                    <h3>Occupany Level</h3>
+
+                    {{#if data._occupancy_level}}
+                        {{#each data._occupancy_level}}
+                            <div class="row m-sm-b">
+                                <div class="col-md-5 col-sm-6 col-xs-12">
+                                    <p>{{ this._room_type }}</p>
+                                </div>
+                                <div class="col-md-7 fw-semi-thk text-black text-capitalize">
+                                    <p>{{ this._occupancy_percentage }} </p>
+                                </div>
+                            </div>
+                        {{/each}}
+                    {{/if}}
+                </div>
+            </div>
+        {{/if}}
+    </div>
+</main>
+
+{{> footer}}

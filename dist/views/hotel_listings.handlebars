@@ -1,0 +1,149 @@
+<script>
+    $(function(){
+        var filtersFirstInitialized = false;
+        var oTable = $('#hotel_list').DataTable( {
+        "order": [[ 6, "desc" ]],
+        dom:'<"#add.row selectWrapper m-lg-b">frtlip',
+        processing: true,
+		serverSide: true,
+        autoWidth: true,
+        ajax:function (data, callback, settings) {
+             $.ajax({url:"/hotel_manager/getAllHotels",type:"POST",data:data,dataType:'json',
+                success:function(res){
+                    $.each(res.Tabledata.data,function(i,val){
+                        res.Tabledata.data[i]['_nida_stay_name'] = '<a href="/hotel_details/'+res.Tabledata.data[i]['_hotel_id']+'/view">'+res.Tabledata.data[i]['_nida_stay_name']+'</a>';
+                        res.Tabledata.data[i]['_action'] = '<a class="btn btn-xs btn-danger" href="/hotel_details/'+res.Tabledata.data[i]['_hotel_id']+'/edit">Edit</a>';
+                    });
+                    callback(res.Tabledata);
+                    if(filtersFirstInitialized === false) {
+                        // appending filters
+                        appendFilters();
+                    }
+                }
+            })
+        },
+        columns: [
+            { data: '_nida_stay_name',name: '_nida_stay_name',searchable:true},
+            { data: '_actual_hotel_name',name: '_actual_hotel_name',searchable:true},
+            { data: '_city_id',name: '_city_id',searchable:false },
+            { data: '_address_line1',name: '_address_line1',searchable:true},
+            { data: '_total_no_Of_rooms',name: '_total_no_Of_rooms',searchable:false},
+            { data: '_locality_id',name: '_locality_id',searchable:false},
+            { data: '_status',name:'_status',searchable:true},
+            { data: '_action',name:'_action',searchable:false},
+            { data: '_id',"visible": false,searchable:false},
+            { data: '_hotel_id',"visible": false,searchable:false},
+            { data: '_country_id',name: '_country_id',"visible": false,searchable:false},
+            { data: '_state_id',name: '_state_id',"visible": false,searchable:false},
+            
+        ]
+		})
+
+        
+        $(document).on('change',"#country,#state,#city,#locality",function(){
+            if(filtersFirstInitialized === true) {
+                var filterval = $(this).val()
+                isAppend = false;
+                if($(this).attr('id') == "city" || $(this).attr('id') == "locality") {
+                    var colno = ($(this).attr('id') == "city"?2:5);
+                    if(filterval == "all"){
+                        if($(this).attr('id') == "city" && $('#locality').val() == "all"){
+                            isAppend=true;               
+                            /*$(document).ajaxStop(function() {
+                                $.each(locality_master,function(index,option){
+                                    if(!$("select#locality option[value='"+option.value+"']").length && isAppend===true)
+                                        $('<option/>').val(option.value).text(option.text).appendTo(localityfield)
+                                })
+                            });*/
+                            oTable.column([2,5]).search('').draw();
+                        }else
+                            oTable.column([colno]).search('').draw();
+                    }else {
+                        isAppend=false;
+                        oTable.column([colno]).search(filterval).draw();
+                    }
+                }else if($(this).attr('id') == "country") {
+                    if(filterval == "all") {
+                        oTable.column([10]).search('').draw();
+                    }else {
+                        oTable.column([10]).search(filterval).draw();
+                    }
+                }else if($(this).attr('id') == "state") {
+                    if(filterval == "all") {
+                        oTable.column([11]).search('').draw();
+                    }else {
+                        oTable.column([11]).search(filterval).draw();
+                    }
+                }
+            }
+        });
+
+        /*** filters function ***/
+        function appendFilters() {
+            let Countryfield = addNewFilterElement('select',{label:'Country',name:'country',id:'country'});
+            $.ajax({url:"/location/getAllCountries",type:"GET",dataType:'json',
+                success:function(res){
+                    if(res.success) {
+                        res.data.forEach(function(option,index){
+                            $('<option/>').val(option.value).text(option.text).appendTo(Countryfield);    
+                        });
+                        if(filtersFirstInitialized===false) { 
+                            filtersFirstInitialized = true; // to avoid chain ajax call hell with datatable ajax and search change.
+                        }
+                    }
+                }
+            });
+            let Statefield = addNewFilterElement('select',{label:'State',name:'state',id:'state',class:'state'});
+            let field = addNewFilterElement('select',{label:'City',name:'city',id:'city',class:'city'});
+            var localityfield = addNewFilterElement('select',{label:'Locality',name:'locality',id:'locality', class:'locality'});
+        }
+        /*************************/
+    })
+</script>
+
+{{> nav}}
+
+{{> header}}
+
+<main id="page-content">
+    <div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Hotels</h3>
+        </div>
+    </div>
+
+    <div class="page-container">
+        <div class="row row-xl">
+            <div class="col-md-12 m-lg-b">
+                <div class="text-right"><a href="/hotel_details/create" class="btn btn-danger btn-rounded w-175 text-left">Create Hotel <i class="fa fa-plus-circle fa-fw pull-right"></i></a>
+            </div>
+        </div>
+
+        <div class="row row-xl">
+            <div class="col-md-12 m-lg-b">
+                <h4 class="text-black fw-semi-thk fs-20">Hotel List</h4>
+            </div>
+
+            <div class="col-md-12">
+                <table  id="hotel_list" class="table table-striped" border="1" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Hotel NIDA Name</th>
+                            <th>Acutal Hotel Name</th>
+                            <th>City</th>
+                            <th>Address</th>
+                            <th>Total No. of Rooms</th>
+                            <th>Locality</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+{{> footer}}

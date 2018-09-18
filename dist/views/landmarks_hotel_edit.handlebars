@@ -1,0 +1,111 @@
+{{> nav}}
+
+{{> header}}
+
+<main id="page-content">
+    <div class="row row-xl page-title">
+        <div class="pull-left">
+            <h3 class="text-black fw-semi-thk">Hotel Landmarks</h3>
+        </div>
+        <div class="pull-right">
+            <ol class="breadcrumb">
+                <li><a href="javascript:void(0)" class="text-default"><small><i class="fa fa-home fa-fw m-xs-r"></i>Home</small></a></li>
+                <li><a href="javascript:void(0)" class="text-danger"><small>Hotel Landmarks</small></a></li>
+            </ol>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <script>
+        var errorExists = false;
+    </script>
+
+    {{#if formErrorExists }}
+        <script>  errorExists = true; </script>
+    {{/if}}
+
+   
+	{{#if errors}}
+		<ul>
+		{{#each errors}}
+			<li>
+				<div class="text-danger"> {{ msg }}</div>
+			</li>
+		{{/each}}
+		</ul>
+	{{/if}}
+
+	{{#if success }}
+		<div class="alert alert-success">{{ message}}</div>
+	{{else if message }}
+		<div class="alert alert-danger">{{ message}}</div>
+	{{/if}}
+
+    {{!-- Begin Page Container --}}
+    <div class="page-container">
+    
+        {{#if landmark_id}}
+            <form class="" action='/hotel-landmarks/create/{{hotel_id}}/{{landmark_id}}' method="POST">
+        {{else}}
+            <form class="" action='/hotel-landmarks/create/{{hotel_id}}' method="POST">
+        {{/if}}
+        
+        
+            <div class="row row-xl">
+                <div class="col-md-12 m-lg-b">
+                    <p class="lead">Add/Edit the Nearby Landmarks From Hotel</p>
+                </div>
+            </div>
+           {{!-- Begin Landmarks --}}
+            <div class="row row-xl">
+                <div class="col-md-12 m-lg-b">
+                    <h4 class="text-black fw-semi-thk fs-20">Nearby Landmarks From Hotel</h4>
+                </div>
+                <div class="col-md-12">
+                    <div class="row row-xl">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="" class="text-danger">Landmarks</label>
+                                <div class="select-wrapper">
+                                    <select name="landmark_id" class="form-control">
+                                        <option value="select" {{#equal requestBody.landmark_id 'select'}} selected="selected" {{/equal}}>Select Landmark</option>
+                                        {{#if landmarks }}
+                                            {{#each landmarks }}
+                                                    <option value = "{{ this._landmark_id }}" {{#equal ../requestBody.landmark_id this._landmark_id}} selected="selected" {{/equal}}>{{ this._landmark_name }}</option>
+                                            {{/each}}
+                                        {{/if}}
+                                    </select>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class=""  for="distance">Distance  * (Km)</label>
+                                    <input type="text" id="distance" name="distance" placeholder="" class="form-control"  value="{{#if requestBody.distance }}{{#trim requestBody.distance }}{{/trim}}{{/if}}">
+                                    <span class="text-danger">{{#if distance }} {{ distance }} {{/if}}</span>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+            <div class="row row-xl">
+                <div class="col-md-12">
+                    <div class="text-right">
+                        <input type="hidden" name="hotel_id" value="{{#if requestBody.hotel_id }}{{requestBody.hotel_id}}{{/if}}"/>       
+
+                        <input type="submit" class="btn btn-danger w-150 btn-rounded m-md-b m-md-r" value="Submit"/>
+                       
+                    </div>
+                </div>
+            </div>
+        {{!-- </div> --}}
+        </form>
+  
+    </div>
+
+
+</main>
+
+{{>footer}}

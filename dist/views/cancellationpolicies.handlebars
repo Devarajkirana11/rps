@@ -1,0 +1,100 @@
+<!-- Begin Page Content -->
+
+{{> nav this}}
+
+{{> header}}
+
+<main id="page-content">
+	<div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Policies</h3>
+        </div>
+    </div>
+
+	<div class="page-container">
+		<div class="row row-xl">
+			<div class="col-md-12 m-lg-b">
+				<div class="add-button text-right">
+					<a href="/admin/cancellation-policies/add" class="btn btn-danger btn-rounded w-150 btn-danger text-left">Add New <i class="fa fa-plus-circle pull-right fa-fw"></i></a>
+				</div>
+			</div>
+		</div>
+
+		{{!-- <div class="row row-xl">
+			<div class="col-md-12 m-lg-b">
+				<h4 class="text-black fw-semi-thk fs-20">Policies List</h4>
+			</div>
+		</div> --}}
+
+		<!-- Begin Hotels View -->
+		<div class="row row-xl">
+			<div class="col-md-12">
+				<div class="filter-form">
+					<form class="" action='/admin/cancellation-policies' method="POST">
+						{{#if errors}}
+							{{#each errors}}
+								<div class="alert alert-danger"> {{ msg }}</div>
+							{{/each}}
+						{{/if}}
+						
+						<div class="row row-xl">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label class="" for="policyname">Policy Name</label>
+									<input type="text" id="" value="{{ inputs.name }}" name="name" placeholder="" class="form-control">
+								</div>	
+							</div>
+
+
+							<div class="col-md-4">
+								<div class="form-group">
+									<label class="" for="type">Status</label>
+									<div class="select-wrapper">
+										<select name="status" class="form-control">
+											<option value="">Select Type</option>
+											<option value="Active" {{#equal inputs.status 'Active'}} selected="selected" {{/equal}}>Active</option>
+											<option value="InActive" {{#equal inputs.status 'InActive'}} selected="selected" {{/equal}}>InActive</option>
+										</select>
+									</div>
+								</div>	
+							</div>
+						</div>
+
+						<div class="row row-xl m-lg-t m-xl-b">
+							<div class="col-md-12">
+								<button class="btn btn-danger btn-rounded w-150 text-left"  name="Submit" value="Save" type="Submit">Search <i class="fa fa-search fa-fw pull-right"></i></button>
+							</div>
+						</div>
+					</form>
+				</div>
+
+				<div class="table-view">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Policy Name</th>
+								<th>Status</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{{#each output.data}}
+							<tr>
+								<td>{{ this._name }}</td>
+								<td>{{ this._status }}</td>
+								<td><a href="/admin/cancellation-policies/{{ this._policy_id }}/edit" class="btn btn-success"><i class="fa fa-edit fa-fw m-xs-r"></i>Edit</a></td>
+							</tr>
+							{{/each}}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<!-- End Hotels View -->
+
+	</div>
+</main>
+
+{{> footer }}
+
+<!-- End Page Content -->

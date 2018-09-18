@@ -1,0 +1,132 @@
+{{> nav this}}
+
+{{> header}}
+
+<!-- Begin Page Content -->
+<main id="page-content">
+	<div class="row row-xl page-title">
+        <div class="col-md-12">
+            <h3 class="text-black fw-semi-thk">Tax & Service Fee</h3>
+        </div>
+    </div>
+
+	<div class="page-container">
+		<div class="row row-xl">
+			<div class="col-md-12 m-lg-b">
+				<div class="add-button text-right">
+					<a href="/admin/tax/create" class="btn btn-danger btn-rounded w-150 btn-danger text-left">Add New Tax<i class="fa fa-plus-circle pull-right fa-fw"></i></a>
+				</div>
+			</div>
+		</div>
+
+		{{!-- <div class="row row-xl">
+			<div class="col-md-12 m-lg-b">
+				<h4 class="text-black fw-semi-thk fs-20">Tax Master List</h4>
+			</div>
+		</div> --}}
+
+		<!-- Begin Hotels View -->
+		<div class="row row-xl">
+			<div class="col-md-12">
+				<div class="filter-form">
+					<form class="" action='/admin/tax' method="POST">
+						{{#if errors}}
+							{{#each errors}}
+								<div class="alert alert-danger"> {{ msg }}</div>
+							{{/each}}
+						{{/if}}
+						
+						<div class="row row-xl">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label class="" for="taxname">Tax Name</label>
+									<input type="text" id="" value="{{ inputs.tax_name }}" name="tax_name" placeholder="" class="form-control">
+								</div>	
+							</div>
+
+							<div class="col-md-4">
+							<div class="form-group">
+							<label for="">Country</label>
+							<div class="select-wrapper">
+							<select name="country" class="country form-control">
+							<option value="select" {{#equal inputs.country 'select'}} selected="selected" {{/equal}}>Choose Country</option>
+							{{#if locationmasters }}
+							{{#each locationmasters }}
+							<option value="{{@key}}" {{#equal ../inputs.country @key}} selected="selected" {{/equal}}>{{ this.name }}</option>
+							{{/each}}
+							{{/if}}
+							</select>								
+							</div>	
+							</div>
+							</div>
+
+							<div class="col-md-4">
+								<div class="form-group">
+									<label class="" for="status">Status</label>
+									<div class="select-wrapper">
+										<select name="status" class="form-control">
+											<option value="">Select</option>
+											<option value="Active" {{#equal inputs.status 'Active'}} selected="selected" {{/equal}}>Active</option>
+											<option value="InActive" {{#equal inputs.status 'InActive'}} selected="selected" {{/equal}}>InActive</option>
+										</select>
+									</div>
+								</div>	
+							</div>
+
+							<div class="col-md-4">
+								<div class="form-group">
+									<label class="" for="type">Type</label>
+									<div class="select-wrapper">
+										<select name="type" class="form-control">
+											<option value="">Select Type</option>
+											<option value="Service Fee" {{#equal inputs.type 'Service Fee'}} selected="selected" {{/equal}}>Service Fee</option>
+											<option value="Tax" {{#equal inputs.type 'Tax'}} selected="selected" {{/equal}}>Tax</option>
+										</select>
+									</div>
+								</div>	
+							</div>
+						</div>
+
+						<div class="row row-xl m-xl-b">
+							<div class="col-md-12 text-right">
+								<button class="btn btn-danger btn-rounded w-150 text-left"  name="Submit" value="Save" type="Submit">Search <i class="fa fa-search fa-fw pull-right"></i></button>
+							</div>
+						</div>
+					</form>
+				</div>
+
+				<div class="table-view">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Tax Name</th>
+								<th>Type</th>
+								<th>Value</th>
+								<th>Status</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+							{{#each output.data}}
+							<tr>
+								<td><a href="/admin/tax/{{ this._tax_id }}/edit" >{{ this._name }}</a></td>
+								<td>{{ this._type }}</td>
+								<td>{{ this._tax_value }}</td>
+								<td>{{ this._status }}</td>
+								
+							</tr>
+							{{/each}}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<!-- End Hotels View -->
+
+	</div>
+</main>
+
+<!-- End Page Content -->
+
+
+{{> footer}}

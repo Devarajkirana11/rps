@@ -1,0 +1,30 @@
+{{#if checkboxarray }}        
+       {{#equal colrender 1}}  <div class="row row-xl"> {{else}} <div class="row row-xl"> {{/equal}}
+            {{#each checkboxarray }}
+                {{#equal ../colrender 1}}  <div> {{else}} <div class="col-sm-6"> {{/equal}}
+                        <div class="checkbox">
+                            <input type="checkbox" name="{{ ../salt }}[]" value="{{ this.value }}" {{#in this.value ../requestsalt}} checked="checked" {{/in}} id="{{ ../salt }}[]__{{@index}}"/>
+                            <label for="{{ ../salt }}[]__{{@index}}">{{ this.text }}</label>
+                        </div>
+
+                        {{#if this.imageExists}}
+                            <input type="file" class="saveFile" multiple name="image_{{ ../salt }}_{{ this.value}}" value="{{#getChildProperty ../requestBody (concat 'image_' ../salt '_' this.value) true}} {{/getChildProperty}}"/>
+                        {{/if}}
+
+                        {{#if this.dropdownExists }}
+                            {{#if ../facilitiesOfcharge }}
+                                <div class="select-wrapper">
+                                    <select name="dropdown_{{ ../salt }}_{{ this.value}}">
+                                        <option value="select">Please Select</option>
+                                        {{#each ../facilitiesOfcharge }}
+                                            <option value="{{ this.value}}" {{#equal this.value (getChildProperty ../../requestBody (concat 'dropdown_' ../../salt '_' ../this.value)) }} selected="selected" {{/equal}} >{{ this.text }}</option> 
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            {{/if}}
+                        {{/if}}
+
+                {{#equal ../colrender 1}}  </div> {{else}} </div> {{/equal}}
+            {{/each}}
+       {{#equal colrender 1}}  </div> {{else}} </div> {{/equal}}
+{{/if}}
